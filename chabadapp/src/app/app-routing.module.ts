@@ -3,12 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthManagerPage } from './auth-manager/auth-manager.page';
 
 const routes: Routes = [
+  
   {
-    path: 'main',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'auth-manager',
+    path: 'main/auth-manager',
     loadChildren: () => import('./auth-manager/auth-manager.module').then( m => m.AuthManagerPageModule)
   },
   { path: '', redirectTo: 'main/auth-manager', pathMatch: 'full' },

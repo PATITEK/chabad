@@ -1,6 +1,9 @@
+.item .sc-ion-label-ios-h {
+    font-family: 'Poppins';
+}
 
 ion-content{
-    font-family: 'Poppins', sans-serif;
+   
     position: relative;
     --overflow: hidden;
     .image__background {
@@ -37,11 +40,11 @@ ion-content{
         background: #00B0B2;
         text-align: center;
         display: flex;
-        border-top-left-radius: 33px;
-        border-top-right-radius: 33px;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
         align-items: center;
         justify-content: center;
-        height: 228px;
+        height: 231px;
         .location__wrapper {
             .your__location {
                 z-index: 2;
@@ -64,51 +67,43 @@ ion-content{
                     padding: 6px;
                     border: 1px solid #fff;
                     margin-right: 7px;
-                    border-radius: 3px;
+                    border-radius: 5px;
                 }
                 &-flat {
                     display: inline-flex;
                     background-color: #5CC7C8;
                     border-radius: 6px;
-                    height: 24px;
+                    height: 26px;
                     img {
-                        width: 15px;
-                        height: 15px;
+                        width: 17px;
+                        height: 17px;
                         margin: auto 0px;
+                        padding: 2px;
                         border-radius: 50%;
                         margin-left: 3px;
                         background-size: cover;
                     }
-                   
                 }
-               
             }
             ion-select{
                 --placeholder-opacity: 1;
                 --background: #5CC7C8;
                 --padding-bottom: 0;
-                --padding-end: 0;
+                --padding-end: 6px;
                 --padding-top: 0;
                 --padding-start: 0;
-                margin-right: 3px;
-                
+                margin-left: -16px;
+                .select-icon {
+                    .select-icon-inner {
+                       color : red !important;
+                       opacity: 1 !important;
+                    }
+                  }
             }
-           
+            
+            // .scss ion-select { .select-icon { .select-icon-inner { color : red !important; } } }
         }
     }
-   
-   
-    //     ion-button{
-    //         position: fixed;
-    //         bottom: 0;
-    //         width: 92%;
-    //         height: 36px;
-    //         margin: 23px auto;
-    //         font-size: 17px;
-    //         left: 10px;
-    //         right: 10px;
-    //  }
-       
    }
    
 }

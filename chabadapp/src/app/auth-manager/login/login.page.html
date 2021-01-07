@@ -1,4 +1,109 @@
 <ion-content>
-  <img src="" alt="">
-
+  <img src="assets/img/login.png" alt="" />
+  <ion-item-group>
+    <ion-segment value="call">
+      <ion-segment-button (click)="clickBtnLogin()" value="call">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button (click)="clickBtnSign()" value="favorite">
+        <ion-label>Sign up</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-grid *ngIf="this.status==='login'">
+      <ion-row>
+        <ion-label>Enter phone number</ion-label>
+        <input part="" type="text" />
+      </ion-row>
+      <ion-row>
+        <ion-label>Password</ion-label>
+        <input type="{{type}}" />
+        <button (click)="showPass()">
+          <ion-icon name="{{name}}"></ion-icon>
+        </button>
+      </ion-row>
+      <ion-label class="forgot__pass" routerLink="/"
+        >Forgot Password?</ion-label
+      >
+      <ion-button type="submit">
+        <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
+      </ion-button>
+    </ion-grid>
+    <ion-grid *ngIf="this.status==='sign'" class="select__signup">
+      <form action="">
+        <ion-row class="select__signup-row">
+          <ion-label class="select__signup-row--name">Your name</ion-label>
+          <ion-label class="select__signup-row--group">
+            <input part="" type="text" />
+            <ion-select placeholder="Female" class="select">
+              <ion-select-option value="f">Viet Nam</ion-select-option>
+              <ion-select-option value="m">Singapore</ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-row>
+        <ion-row class="select__signup-row">
+          <ion-label class="select__signup-row--name">Phone number</ion-label>
+          <ion-label class="select__signup-row--label">Age</ion-label>
+          <ion-label class="select__signup-row--group select__signup-row--flag">
+            <ion-label class="your__select your__select-notmr">
+              <ion-label class="your__select-flat">
+                <img src="assets/img/flag-400.png" alt="" class="" />
+                <ion-select class="your__select-flat--country">
+                  <ion-select-option value="f">Viet Nam</ion-select-option>
+                  <ion-select-option value="m">Singapore</ion-select-option>
+                </ion-select>
+              </ion-label>
+            </ion-label>
+            <ion-label class="your__select-notmr your__select-padding"
+              >+84</ion-label
+            >
+            <input part="" type="text" placeholder="636 873 393" />
+          </ion-label>
+          <ion-label class="your__select-flat">
+            <ion-select class="select" placeholder="1991">
+              <ion-select-option value="f">1989</ion-select-option>
+              <ion-select-option value="m">2000</ion-select-option>
+            </ion-select>
+          </ion-label>
+        </ion-row>
+        <ion-row class="select__signup-row">
+          <ion-label class="select__signup-row--name">Your name</ion-label>
+          <ion-label class="select__signup-row--group display-sp-around">
+            <ion-label class="your__select your__select-notmr">
+              <ion-label class="your__select-flat">
+                <img src="assets/img/flag-400.png" alt="" class="" />
+                <ion-select class="your__select-flat--country">
+                  <ion-select-option value="f">Viet Nam</ion-select-option>
+                  <ion-select-option value="m">Singapore</ion-select-option>
+                </ion-select>
+              </ion-label>
+            </ion-label>
+            <ion-select placeholder="Ho Chi Minh" class="select">
+              <ion-select-option value="f">Thu Duc</ion-select-option>
+              <ion-select-option value="m">Tan Binh</ion-select-option>
+            </ion-select>
+            <ion-select placeholder="Binh Thanh" class="select">
+              <ion-select-option value="f">Viet Nam</ion-select-option>
+              <ion-select-option value="m">Singapore</ion-select-option>
+            </ion-select>
+          </ion-label>
+          <input
+            type="text"
+            class="select__signup-row--input"
+            placeholder="123 Pham Van Dong St, ward 12"
+          />
+        </ion-row>
+        <ion-row class="select__signup-row">
+          <ion-label class="select__signup-row--name">Password</ion-label>
+          <input  type="password"/>
+        </ion-row>
+        <ion-row class="select__signup-row">
+          <ion-label class="select__signup-row--name input-mr">Confirm password</ion-label>
+          <input  type="password"/>
+        </ion-row>
+        <ion-button type="submit" class="submit__signup">
+          <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
+        </ion-button>
+      </form>
+    </ion-grid>
+  </ion-item-group>
 </ion-content>

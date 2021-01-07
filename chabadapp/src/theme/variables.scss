@@ -230,3 +230,25 @@
     --ion-card-background: #1e1e1e;
   }
 }
+
+.active-effect {
+  transition: .15s;
+  
+  &:active {
+    filter: brightness(90%);
+  }
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.back-btn {
+  display: inline-block;
+  color: #00b0b2;
+  background: rgba(#feffff, 0.6);
+  border-radius: 18px;
+  width: 45px;
+  height: 45px;
+  margin: 17px;
+}

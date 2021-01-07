@@ -1,0 +1,21 @@
+<ion-content>
+  <div class="drop-back"></div>
+
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+
+  <ion-buttons class="top-block">
+    <h1 class="title">Verification</h1>
+    <p class="desc">Enter the verification code we just sent to your phone</p>
+    <img src="assets/icon/forget-password.svg">
+  </ion-buttons>
+
+  <ion-buttons class="bottom-block">
+    <p class="label-bottom">Code</p>
+    <input type="tel" inputmode="tel" maxlength="11" class="input-tel">
+    <p class="wrong-code" [ngClass]="{'visibility-hidden': wrongCode}">Wrong code! Try again</p>
+    <ion-buttons class="get-code-container">
+      <span class="get-code-label active-effect" (click)="resendCode()">Resend code ?</span>
+      <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()"></ion-icon>
+    </ion-buttons>
+  </ion-buttons>
+</ion-content>

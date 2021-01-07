@@ -32,13 +32,28 @@ ion-content{
         margin-left: 50%;
         margin-bottom: 28px;
         transform: translateX(-50%);
+        @media screen and (max-height :736px) {
+            margin-top: 93% !important;
+        }
+        @media screen and (max-height :667px) {
+            margin-top: 86% !important;
+        }
+        @media screen and (max-height :640px) {
+            margin-top: 83% !important;
+        }
+        @media screen and (max-height :568px) {
+            margin-top: 76% !important;
+        }
+        @media screen and (max-height : 480px) {
+            margin-top: 54% !important;
+        }
     }
     .location {
         background: #00B0B2;
         text-align: center;
         display: flex;
-        border-top-left-radius: 33px;
-        border-top-right-radius: 33px;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
         align-items: center;
         justify-content: center;
         height: 228px;
@@ -62,9 +77,10 @@ ion-content{
                     text-align: center;
                     flex: 1;
                     padding: 6px;
+                    height: 36px;
                     border: 1px solid #fff;
                     margin-right: 7px;
-                    border-radius: 3px;
+                    border-radius: 5px;
                 }
                 &-flat {
                     display: inline-flex;

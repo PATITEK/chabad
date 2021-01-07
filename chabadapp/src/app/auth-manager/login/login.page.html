@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <img src="assets/img/login.png" alt="">
+  <ion-item-group>
+    <ion-segment value="favorite">
+      <ion-segment-button value="call">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="favorite">
+        <ion-label>Sign up</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-grid>
+      <ion-row>
+          <ion-label >Enter phone number</ion-label>    
+          <input part="" type="text">
+      </ion-row>
+      <ion-row>
+        <ion-label>Password</ion-label>    
+        <input  type="{{type}}">
+        <button (click)="showPass()"> 
+        <ion-icon name="{{name}}"></ion-icon>
+        </button>
+    </ion-row>
+    <ion-label class="forgot__pass" routerLink="/">Forgot Password?</ion-label>
+    <ion-button type ="submit">
+      <ion-icon name="chevron-forward-outline" class="ion__next">
+    </ion-icon>
+  </ion-button>
+    </ion-grid>
+  </ion-item-group>
+ 
 </ion-content>

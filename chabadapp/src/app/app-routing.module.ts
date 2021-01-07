@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'main/auth-manager',
     loadChildren: () => import('./auth-manager/auth-manager.module').then( m => m.AuthManagerPageModule)
   },
+  {
+    path: 'main/page-noti',
+    loadChildren: () => import('./page-noti/page-noti-routing.module').then( m => m.PageNotiRoutingModule)
+  },
   { path: '', redirectTo: 'main/auth-manager', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/auth-manager' },
 ];

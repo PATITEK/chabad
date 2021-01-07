@@ -72,7 +72,7 @@ ion-content{
                     display: inline-flex;
                     background-color: #5CC7C8;
                     border-radius: 6px;
-                    height: 24px;
+                    height: 26px;
                     img {
                         width: 17px;
                         height: 17px;
@@ -82,9 +82,7 @@ ion-content{
                         margin-left: 3px;
                         background-size: cover;
                     }
-                   
                 }
-               
             }
             ion-select{
                 --placeholder-opacity: 1;
@@ -95,22 +93,10 @@ ion-content{
                 --padding-start: 0;
                 
             }
-           
+            
+            // .scss ion-select { .select-icon { .select-icon-inner { color : red !important; } } }
         }
     }
-   
-   
-    //     ion-button{
-    //         position: fixed;
-    //         bottom: 0;
-    //         width: 92%;
-    //         height: 36px;
-    //         margin: 23px auto;
-    //         font-size: 17px;
-    //         left: 10px;
-    //         right: 10px;
-    //  }
-       
    }
    
 }

@@ -7,7 +7,7 @@ ion-content {
     --background: #DCF7F8;
     ion-item-group {
         position: absolute;
-        top: 244px;
+        top: 234px;
         width: 100%;
         height: 100%;
         background: #00B0B2;
@@ -25,7 +25,6 @@ ion-content {
                 font-weight: 600;
                 font-family: 'Poppins';
                 color: #fff;
-                border: 1px solid transparent;
                 --border-radius: 40px;
                 --background: #0DB9BB;
                 --background-checked: #FAAE41!important;
@@ -39,9 +38,16 @@ ion-content {
              width: 70%;
              color: #fff;
              margin-top: 63px;
+             padding: 0;
+             @media screen and (max-height: 568px) {
+                margin-top: 3%;
+            }
              ion-row {
                  position: relative;
                  margin-bottom: 12px;
+                 @media screen and (max-height: 568px) {
+                    margin-bottom: 4px;
+                }
                  ion-label {
                      margin-bottom: 14px;
                  }
@@ -53,7 +59,7 @@ ion-content {
                     height: 36px;
                     outline: none;
                     border: 1px solid #30B9BB;
-                    width: 100%;
+                    width: 96.2%;
                     padding: 0 20px;
                     border-radius: 5px;
                     &:focus {
@@ -78,25 +84,154 @@ ion-content {
                         font-size: 16px;
                         color: #DBDBDB;
                     }
+                    
                 }
               
              }
              .forgot__pass {
                  text-align: end;
                  margin-top: 26px;
+                 @media screen and (max-height: 568px) {
+                    margin-top: 3%;
+                    min-height: 30px;
+                    min-width: 30px;
+                }
              }
              ion-button {
                 --background: #DCF7F8;
                 --color: #00B0B2;
-                min-height: 50px;
+                min-height: 45px;
+                min-width: 45px;
+
                 --border-radius: 24px;
                 margin-left: 81%;
                  margin-top: 15%;
                 ion-icon {
-                    font-size: 30px;
+                    font-size: 22px;
                 }
-
+                @media screen and (max-height: 667px) {
+                    margin-top: 5%;
+                }
+                @media screen and (max-height: 568px) {
+                    margin-top: 3%;
+                    min-height: 30px;
+                    min-width: 30px;
+                }
              }
+    }
+    .select__signup {
+        width: 88.6% ;
+        margin-top: 17px;
+        .submit__signup {
+            margin-top: 16px !important;
+        }
+        &-row {
+            .your__select-flat {
+                .select {
+                    background-color: #30B9BB;
+                    margin-left: 6px;
+                    height: 36px;
+                    border-radius: 5px;
+                }
+            }
+            .input-mr {
+                margin: 10px 0 !important;
+            }
+            margin-bottom: -7px !important;
+            .select__signup-row--name {
+                margin-bottom: 2px !important ;
+                line-height: 27px;
+            }
+            &--label {
+                margin-left: 37% ;
+                line-height: 27px;
+            }
+            &--group {
+                display: flex ;
+                .select {
+                    background-color: #30B9BB;
+                    margin-left: 6px;
+                    height: 36px;
+                    border-radius: 5px;
+                }
+                input {
+                    width: 69% !important;
+                }
+                .your__select-padding {
+                    padding: 0 0px 0px 6px;
+                }
+                .your__select {
+                    color:#fff;
+                    display: flex;
+                   
+                    align-items: center;
+                    font-size: 16px;
+                    z-index: 2;
+                    &-country {
+                        text-align: center;
+                        flex: 1;
+                        padding: 6px;
+                        border: 1px solid #fff;
+                        margin-right: 7px;
+                        border-radius: 5px;
+                    }
+                    &-flat {
+                        display: inline-flex;
+                        background-color: #5CC7C8;
+                        border-radius: 6px;
+                        height: 24px;
+                        margin: 0;
+                        margin-left: 10px;
+                        img {
+                            width: 17px;
+                            height: 17px;
+                            margin: auto 0px;
+                            padding: 2px;
+                            border-radius: 50%;
+                            margin-left: 3px;
+                            background-size: cover;
+                        }
+                        &--country {
+                            --padding-bottom: 0;
+                            --padding-end: 6px;
+                            --padding-top: 0;
+                            --padding-start: 0px;
+                            margin-left: -16px;
+                        }
+                      
+                    }
+                }
+                ion-select {
+                    font-size: 14px;
+                   
+                }
+                .your__select-notmr {
+                    margin-bottom:0 !important ;
+                }
+            }
+            &--flag {
+                display: flex;
+                align-items: center;
+                width: 67.18% !important;
+                border-radius: 5px;
+                background: #30B9BB !important;
+                input {
+                    width: 57.6% !important;
+                    padding: 0 !important;
+                    padding-left: 10px !important;
+                    margin-left: 10px !important;
+                }
+            }
+            .display-sp-around {
+                display: flex;
+                justify-content: space-around;
+            }
+            &--input {
+                margin-top: -7px !important;
+                margin-bottom: 14px !important;
+            }
+          
+        }
     }
 }
 }

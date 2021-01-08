@@ -11,11 +11,21 @@
 
   <ion-buttons class="bottom-block">
     <p class="label-bottom">Code</p>
-    <input type="tel" inputmode="tel" maxlength="11" class="input-tel">
-    <p class="wrong-code" [ngClass]="{'visibility-hidden': wrongCode}">Wrong code! Try again</p>
-    <ion-buttons class="get-code-container">
-      <span class="get-code-label active-effect" (click)="resendCode()">Resend code ?</span>
-      <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()"></ion-icon>
-    </ion-buttons>
+      <form [formGroup]="inputCode"(ngSubmit)="onSubmit()">
+        <ion-label class="block-input">
+        <input inputmode="tel" maxlength="11" class="input-tel" (keyup)="keytab($event, 'code1', 'code1', 'code2')" type="number" formControlName="code1">
+        <input inputmode="tel" maxlength="11" class="input-tel" (keyup)="keytab($event, 'code1', 'code1', 'code2')" type="number" formControlName="code2">
+        <input inputmode="tel" maxlength="11" class="input-tel" (keyup)="keytab($event, 'code1', 'code1', 'code2')" type="number" formControlName="code3">
+        <input inputmode="tel" maxlength="11" class="input-tel" (keyup)="keytab($event, 'code1', 'code1', 'code2')" type="number" formControlName="code4">
+        <input inputmode="tel" maxlength="11" class="input-tel" (keyup)="keytab($event, 'code1', 'code1', 'code2')" type="number" formControlName="code5">
+        <input inputmode="tel" maxlength="11" class="input-tel" (keyup)="keytab($event, 'code1', 'code1', 'code2')" type="number" formControlName="code6">
+      </ion-label>
+      <p class="wrong-code" [ngClass]="{'visibility-hidden': wrongCode}">Wrong code! Try again</p>
+      <ion-buttons class="get-code-container">
+        <span class="get-code-label active-effect" (click)="resendCode()">Resend code ?</span>
+        <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()"></ion-icon>
+      </ion-buttons>
+  </form>
   </ion-buttons>
+
 </ion-content>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { from } from 'rxjs';
+import { IDataNoti, PageNotiService } from 'src/app/@modular/page-noti/page-noti.service';
 
 @Component({
   selector: 'app-new-password',
@@ -8,11 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class NewPasswordPage implements OnInit {
   passwordValue = '444';
   confirmedPasswordValue = '';
-
+  
   invalidPassword = '';
   invalidConfirmedPassword = '';
-
-  constructor() { }
+  constructor(
+    private pageNotiService: PageNotiService,
+    private router: Router
+    ) { }
 
   ngOnInit() {}
 
@@ -22,7 +27,7 @@ export class NewPasswordPage implements OnInit {
     this.invalidConfirmedPassword = '';
   }
 
-  saveValue($event) {
+  saveValue(event) {
     if (event.target.name == 'password') {
       this.passwordValue = event.target.value;
     } else if (event.target.name == 'confirmedPassword') {
@@ -46,10 +51,20 @@ export class NewPasswordPage implements OnInit {
   }
 
   confirmPassword() {
+   
+    
+    const datapasing: IDataNoti = {
+      title: 'SUCCESSFUL!',
+      description: 'Change Password successful!',
+      routerLink: '/main/synagogue'
+    }
     this.invalidPassword = this.checkValidPassword('Password', this.passwordValue);
     this.invalidConfirmedPassword = this.checkValidPassword('Confirmed password', this.confirmedPasswordValue);
     if (this.invalidPassword == '' && this.invalidConfirmedPassword == '') {
+      this.pageNotiService.setdataStatusNoti(datapasing);
+      this.router.navigate(['/page-noti']);
       
     }
+    
   }
 }

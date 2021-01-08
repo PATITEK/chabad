@@ -9,6 +9,7 @@ export class LoginPage implements OnInit {
   public type = 'password';
   public showpass = false;
   public name = 'eye-outline';
+  public status='login';
   constructor() { }
   ngOnInit() {
   }
@@ -22,6 +23,12 @@ export class LoginPage implements OnInit {
       this.type = 'password';
       this.name = 'eye-outline'
     }
+  }
+  clickBtnLogin(){
+    this.status="login";
+  }
+  clickBtnSign(){
+    this.status="sign";
   }
 
 }

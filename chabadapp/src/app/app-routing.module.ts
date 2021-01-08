@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  
+  {
+    path: 'page-noti',
+    loadChildren: () => import('./@modular/page-noti/page-noti.module').then( m => m.PageNotiModule)
+  },
   {
     path: 'auth-manager',
-    loadChildren: () => import('./auth-manager/auth-manager.module').then( m => m.AuthManagerPageModule)
+    loadChildren: () => import('./auth-manager/auth-manager.module').then(m => m.AuthManagerPageModule)
   },
   {
     path: 'main',
-    loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
+    loadChildren: () => import('./main/main.module').then(m => m.MainPageModule)
   },
+  
   { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/synagogue' },
-
 ];
 @NgModule({
   imports: [
@@ -21,4 +24,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

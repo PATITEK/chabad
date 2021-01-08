@@ -46,14 +46,12 @@ export class VerificationPage implements OnInit {
 
     },);
    }
- 
   ngOnInit() {
   }
-
   resendCode() {
 
   }
-  keytab(event, prevInput, fieldInput, nextInput) {
+  keytab($event,prevInput, fieldInput, nextInput) {
     if(this.inputCode.value[fieldInput] !== null && this.inputCode.value[fieldInput] !== '' && this.inputCode.value[fieldInput].toString().length > 1) {
       const strSplit = this.inputCode.value[fieldInput].toString();
       this.inputCode.controls[fieldInput].setValue(strSplit[0]);
@@ -75,8 +73,6 @@ export class VerificationPage implements OnInit {
     var c5 = this.inputCode.get('code5').value;
     var c6 = this.inputCode.get('code6').value;
     var inputstring = `${c1}${c2}${c3}${c4}${c5}${c6}`;
-   
-  
 }
   confirmCode() {
     this.router.navigateByUrl('main/auth-manager/new-password')

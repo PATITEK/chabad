@@ -15,8 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./main/main.module').then(m => m.MainPageModule)
   },
   
-  { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main/synagogue' },
+  { path: '', redirectTo: 'main/synagogue/meeting', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main/synagogue/meeting' },
 ];
 @NgModule({
   imports: [

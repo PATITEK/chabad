@@ -17,7 +17,6 @@ ion-content {
   ion-avatar {
     width: 70px;
     height: 70px;
-    box-shadow: 0 4px 4px rgba(84, 84, 84, 0.25);
   }
 }
 
@@ -30,7 +29,6 @@ ion-content {
 
   .nav-bar-item {
     text-align: center;
-    box-shadow: 0 4px 4px rgba(84, 84, 84, 0.25);
     border-radius: 40px;
     border-bottom-left-radius: 27px;
     border-bottom-right-radius: 27px;
@@ -91,7 +89,6 @@ ion-content {
     height: 175px;
     overflow: hidden;
     border-radius: 30px;
-    box-shadow: 0px 4px 4px rgba(#000, 0.25);
     position: relative;
 
     .temple-distance {
@@ -103,7 +100,7 @@ ion-content {
       font-size: 14px;
       background: rgba(#fff, 0.8);
       padding: 10px 20px;
-      border-top-right-radius: 20px;
+      border-top-right-radius: 30px;
     }
   }
 
@@ -114,8 +111,9 @@ ion-content {
       color: #434141;
       font-size: 20px;
       font-weight: 600;
-      margin-right: 10px;
+      margin-right: 20px;
       margin-top: 0;
+      text-align: left;
     }
 
     .btn-go {
@@ -127,11 +125,11 @@ ion-content {
       background: #e1e1e1;
       border-radius: 8px;
     }
-  }
 
-  .temple-address {
-    color: #999393;
-    font-size: 14px;
-    margin: 0 0 0 8px;
+    .temple-address {
+      color: #999393;
+      font-size: 14px;
+      margin: 0 0 0 8px;
+    }
   }
 }

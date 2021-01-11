@@ -22,7 +22,7 @@ export class NewPasswordPage implements OnInit {
     this.invalidConfirmedPassword = '';
   }
 
-  saveValue($event) {
+  saveValue(event) {
     if (event.target.name == 'password') {
       this.passwordValue = event.target.value;
     } else if (event.target.name == 'confirmedPassword') {

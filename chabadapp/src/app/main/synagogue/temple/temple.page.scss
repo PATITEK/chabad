@@ -1,0 +1,283 @@
+ion-content {
+  --padding-bottom: 170px;
+  --background: #f5f5f5;
+}
+
+ion-backdrop {
+  opacity: .5;
+}
+
+ion-footer {
+  height: 186.67px;
+  position: absolute;
+  bottom: 0;
+  transition: .2s ease;
+}
+
+.high-footer {
+  height: calc(100% - 79px);
+}
+
+.text {
+  font-size: 14px;
+  line-height: 21px;
+  margin: 0;
+}
+
+.img-container {
+  height: 280px;
+  overflow: hidden;
+
+  @media screen and (max-height: 568px) {
+    height: 200px;
+  }
+}
+
+.temple-info-container {
+  padding: 28px;
+
+  @media screen and (max-width: 320px) {
+    padding: 20px 10px;
+  }
+
+  .temple-info {
+    margin: 7px 0;
+
+    .temple-name {
+      color: #434141;
+      font-size: 20px;
+      font-weight: 600;
+      margin-right: 20px;
+      margin-top: 0;
+      text-align: left;
+    }
+
+    .btn-go {
+      display: inline-block;
+      color: #7e7e7e;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 3px 7px;
+      background: #e1e1e1;
+      border-radius: 8px;
+    }
+
+    .temple-address {
+      color: #999393;
+      font-size: 14px;
+      margin: 0 0 0 8px;
+    }
+  }
+
+  .temple-distance {
+    display: inline-block;
+    color: #040404;
+    font-size: 14px;
+    background: #dcdada;
+    padding: 10px 20px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+
+  .btn {
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    min-width: 85px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 37px;
+    text-align: center;
+    padding: 0 10px;
+    margin-left: 9px;
+  }
+
+  .btn-pray {
+    background: #faae42;
+  }
+
+  .btn-donate {
+    background: #00b0b2;
+  }
+
+  .label {
+    color: #434141;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+
+  .temple-introduction {
+    color: #999393;
+    text-align: justify;
+  }
+}
+
+.segment {
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  text-align: center;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  overflow-y: auto;
+
+  .background-high {
+    position: absolute;
+    background: #EEEEEE;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(100% - 100px);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+  }
+
+  .line {
+    width: 40px;
+    height: 3px;
+    background: #bdbdbd;
+    display: inline-block;
+    border-radius: 12px;
+  }
+
+  ion-segment {
+    background: #ededed;
+    width: 220px;
+    margin: 10px auto;
+    border-radius: 40px;
+    padding: 1px;
+
+    .segment-btn {
+      border-radius: 40px;
+      height: 30px;
+      width: 50%;
+      justify-content: center;
+      transition: 0.2s;
+
+      .segment-label {
+        color: #727171;
+        font-size: 14p x;
+        margin-left: 10px;
+      }
+    }
+
+    .active-segment-btn {
+      background: #fff;
+    }
+  }
+
+  .date-list {
+    justify-content: space-around;
+  
+    .date-item {
+      flex-direction: column;
+      border-radius: 25px;
+      width: calc(100% / 7 - 10px);
+      padding: 10px 0;
+      color: #8A8A8A;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 19px;
+      transition: .15s;
+      border: 1px solid #fafafa;
+      position: relative;
+      background: #fff;
+
+      .date-item-note {
+        position: absolute;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #FAAE42;
+        border-radius: 50%;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, -50%);
+      }
+    }
+  
+    .active-date-item {
+      border-color:#00696a;
+    }
+
+    .active-date-time-high {
+      background: #EEEEEE;
+      border-color: #fff;
+      color: #00696A;
+    }
+  }
+  
+  .today {
+    color: #434141;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    position: relative;
+  }
+
+  .btn-all-list {
+    text-align: right;
+    margin-right: 19px;
+    position: relative;
+  }
+
+  .btn-join {
+    display: inline-block;
+    background: #eaeaea;
+    border-radius: 24px;
+    min-width: 44px;
+    height: 24px;
+    padding: 3px 6px;
+    font-size: 14px;
+    overflow: hidden;
+    text-align: center;
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+
+  .btn-join-all {
+    background: #fff;
+    color: #00696A;
+    min-width: 60px;
+    margin-right: -1px;
+  }
+  
+  .meeting {
+    background: blue;
+    color: #fff;
+    border-radius: 35px;
+    padding: 15px;
+    margin: 12px 10px;
+    
+    .meeting-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-right: 20px;
+      margin-top: 0;
+      text-align: left;
+    }
+
+    .meeting-time {
+      font-size: 14px;
+      text-align: left;
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    .meeting-reason {
+      margin-right: 43px;
+    }
+
+    .three-dots-icon {
+      display: block;
+      margin: 0 10px 0 auto;
+    }
+  }
+}

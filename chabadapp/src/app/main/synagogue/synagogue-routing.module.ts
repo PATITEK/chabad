@@ -7,11 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: SynagoguePage
-  },  {
+  },
+  {
+    path: 'meeting',
+    loadChildren: () => import('./meeting/meeting.module').then(m => m.MeetingPageModule)
+  },
+  {
     path: 'temple',
     loadChildren: () => import('./temple/temple.module').then( m => m.TemplePageModule)
   }
-
 ];
 
 @NgModule({

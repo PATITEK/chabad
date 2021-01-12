@@ -11,7 +11,7 @@ export class SynagoguePage implements OnInit {
     {
       name: 'synagogue',
       text: 'Synagogue',
-      iconUrl: 'assets/icon/location.svg',
+      iconUrl: 'assets/icon/location.svg'
     },
     {
       name: 'near-you',
@@ -32,16 +32,18 @@ export class SynagoguePage implements OnInit {
 
   temples = [
     {
+      id: 1,
       imgUrl: 'assets/img/temple.jpg',
       distance: '2,4',
       name: 'Chabad of Ho Chi Minh City',
-      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh'
+      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
     },
     {
+      id: 2,
       imgUrl: 'assets/img/temple.jpg',
       distance: '2,4',
       name: 'Chabad of Ho Chi Minh City',
-      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh'
+      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
     }
   ]
 
@@ -54,5 +56,16 @@ export class SynagoguePage implements OnInit {
 
   goToNavBarItem(navBarItem) {
     this.router.navigateByUrl(`main/${navBarItem.name}`);
+  }
+
+  goToTemple(temple) {
+    const data = {
+      id: temple.id
+    }
+    this.router.navigate(['/main/synagogue/temple'], {
+      queryParams: {
+        data: JSON.stringify(data)
+      }
+    })
   }
 }

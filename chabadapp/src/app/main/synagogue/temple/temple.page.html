@@ -1,0 +1,92 @@
+<ion-content>
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <img src="assets//icon/two-lines.svg" class="two-lines">
+
+  <ion-backdrop *ngIf="!hiddenDateList" (click)="hiddenDateList = true"></ion-backdrop>
+
+  <div class="img-container main-box-shadow">
+    <img [src]="temple.imgUrl">
+  </div>
+
+  <ion-item-group class="temple-info-container">
+    <ion-item-group class="temple-info">
+      <ion-buttons class="ion-align-items-start ion-justify-content-between">
+        <h3 class="temple-name">{{ temple.name }}</h3>
+        <span class="btn-go">Go</span>
+      </ion-buttons>
+      <ion-buttons class="ion-align-items-start">
+        <img src="assets/icon/location-lite.svg">
+        <p class="temple-address">{{ temple.address }}</p>
+      </ion-buttons>
+    </ion-item-group>
+
+    <ion-buttons class="ion-justify-content-between">
+      <span class="temple-distance">{{ temple.distance }}km</span>
+      <ion-buttons>
+        <span class="btn btn-pray active-effect">Pray</span>
+        <span class="btn btn-donate active-effect">Donate</span>
+      </ion-buttons>
+    </ion-buttons>
+
+    <ion-label class="label">Introduction</ion-label>
+    <p class="text temple-introduction">{{ temple.introduction }}</p>
+  </ion-item-group>
+</ion-content>
+
+<ion-footer [ngClass]="{'high-footer': !hiddenDateList}">
+  <ion-item-group class="segment">
+    <div *ngIf="!hiddenDateList" class="background-high"></div>
+
+    <span class="line"></span>
+
+    <ion-segment class="main-box-shadow">
+      <ion-buttons class="segment-btn" value="ceremony" [ngClass]="{'active-segment-btn': activeTab === 'ceremony'}"
+        (click)="changeTab('ceremony')">
+        <img src="assets/icon/book.svg">
+        <ion-label class="segment-label">Ceremony</ion-label>
+      </ion-buttons>
+      <ion-buttons class="segment-btn" value="event" [ngClass]="{'active-segment-btn': activeTab === 'event'}"
+        (click)="changeTab('event')">
+        <img src="assets/icon/fruit.svg">
+        <ion-label class="segment-label">Event</ion-label>
+      </ion-buttons>
+    </ion-segment>
+
+    <ion-buttons class="date-list">
+      <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
+        [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}" (click)="changeDateItem(dateItem)">
+        <span>{{ dateItem.day }}</span>
+        <span>{{ dateItem.date }}</span>
+        <span *ngIf="dateItem.meetings.length != 0" class="date-item-note"></span>
+      </ion-buttons>
+    </ion-buttons>
+
+    <p class="today">{{ getTodayString() }}</p>
+
+    <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
+      <ion-item-group *ngIf="dateItem.meetings.length != 0 && activeDateItem == dateItem.id"
+        class="btn-join btn-join-all active-effect" (click)="toggleJoiningAllMeeting(dateItem)">
+        <span *ngIf="!joinedAllMeetings(dateItem)">Join all</span>
+        <ion-icon *ngIf="joinedAllMeetings(dateItem)" name="checkmark-outline"></ion-icon>
+      </ion-item-group>
+    </ion-item-group>
+
+    <ion-list *ngIf="!hiddenDateList" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
+      <ion-item-group *ngFor="let meeting of dateList[activeDateItem].meetings" class="meeting"
+        [style.background]="meeting.color">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="meeting-name">{{ temple.name }}</h3>
+          <ion-item-group class="btn-join active-effect" [style.color]="meeting.color"
+            (click)="toggleJoiningMeeting(meeting)">
+            <span *ngIf="!meeting.joined">Join</span>
+            <ion-icon *ngIf="meeting.joined" name="checkmark-outline"></ion-icon>
+          </ion-item-group>
+        </ion-buttons>
+        <span class="meeting-time">{{ meeting.timeStart }} - {{ meeting.timeEnd }}</span>
+        <p class="text three-dots-2 meeting-reason">{{ meeting.reason }}</p>
+
+        <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+      </ion-item-group>
+    </ion-list>
+  </ion-item-group>
+</ion-footer>

@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: SynagoguePage
+  },  {
+    path: 'temple',
+    loadChildren: () => import('./temple/temple.module').then( m => m.TemplePageModule)
   }
+
 ];
 
 @NgModule({

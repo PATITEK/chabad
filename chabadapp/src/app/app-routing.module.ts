@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthManagerPage } from './auth-manager/auth-manager.page';
 
 const routes: Routes = [
-  
   {
-    path: 'main/auth-manager',
+    path: 'auth-manager',
     loadChildren: () => import('./auth-manager/auth-manager.module').then( m => m.AuthManagerPageModule)
   },
-  { path: '', redirectTo: 'main/auth-manager', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main/auth-manager' },
+  {
+    path: 'main',
+    loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
+  },
+  { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main/synagogue' },
+
 ];
 @NgModule({
   imports: [

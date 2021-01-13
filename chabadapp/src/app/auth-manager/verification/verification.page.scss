@@ -65,13 +65,19 @@ ion-content {
     background: #b8feff;
     color: #727272;
     font-size: 18px;
-    width: 280px;
+    width: 37px;
     height: 40px;
     border-radius: 9px;
     text-align: center;
     margin: 0 auto;
   }
-
+  .input-tel {
+    margin-right: 6px;
+    margin-left: 6px;
+  }
+  form {
+    margin: 0 auto;
+  }
   .wrong-code {
     color: #FFA9A9;
     font-size: 16px;

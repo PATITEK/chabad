@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'meeting',
     loadChildren: () => import('./meeting/meeting.module').then(m => m.MeetingPageModule)
   },
+  {
+    path: 'temple',
+    loadChildren: () => import('./temple/temple.module').then( m => m.TemplePageModule)
+  }
 ];
 
 @NgModule({

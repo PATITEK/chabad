@@ -1,54 +1,58 @@
 <ion-content>
   <img src="assets/img/temple.jpg" alt="" srcset="">
   <ion-item-group class="main-meeting">
+  
     <ion-item-group class="content-meeting">
-      <ion-label class="text-title">
-        Meeting Symnaguge
-      </ion-label>
-      <div *ngIf="this.activeCheck===true" class="icon-check">
-        <ion-icon name="checkmark" ></ion-icon>
-
-      </div>
-      <ion-item-group class="date-meeting">
-        <ion-label>Monday</ion-label>
-        <ion-label>From: 18:00</ion-label>
-        <ion-label>To: 20:00</ion-label>
+      <ion-item-group class="meeting-des"> 
+        <ion-label class="text-title">
+          Meeting Symnaguge
+        </ion-label>
+        <div *ngIf="this.activeCheck===true" class="icon-check">
+          <ion-icon name="checkmark" ></ion-icon>
+  
+        </div>
+        <ion-item-group class="date-meeting">
+          <ion-label>Monday</ion-label>
+          <ion-label>From: 18:00</ion-label>
+          <ion-label>To: 20:00</ion-label>
+        </ion-item-group>
+        <p>
+          The Temple in Jerusalem was any of a series of structures which were located on the Temple Mount in the Old
+          City of Jerusalem, the current site of the Dome of the Rock and Al-Aqsa Mosque. These successive temples stood
+          at this location and functioned as a site of ancient Israelite and later Jewish worship. at this location and functioned as a site of ancient Israelite and later Jewish worship.
+        </p>
+        <ion-label class="text-title">
+          Description
+        </ion-label>
+        <ul class="list-timer">
+          <li class="item-time">
+            <ion-label class="text-time">
+              - 18:00 these successive temples stood at this location and functioned as a site o
+            </ion-label>
+          </li>
+          <li class="item-time">
+            <ion-label class="text-time">
+              - 18:00 these successive temples stood at this location and functioned as a site o
+            </ion-label>
+          </li>
+          <li class="item-time">
+            <ion-label class="text-time">
+              - 18:00 these successive temples stood at this location and functioned as a site o
+            </ion-label>
+          </li>
+  
+        </ul>
       </ion-item-group>
-      <p>
-        The Temple in Jerusalem was any of a series of structures which were located on the Temple Mount in the Old
-        City of Jerusalem, the current site of the Dome of the Rock and Al-Aqsa Mosque. These successive temples stood
-        at this location and functioned as a site of ancient Israelite and later Jewish worship. at this location and functioned as a site of ancient Israelite and later Jewish worship.
-      </p>
-      <ion-label class="text-title">
-        Description
-      </ion-label>
-      <ul class="list-timer">
-        <li class="item-time">
-          <ion-label class="text-time">
-            - 18:00 these successive temples stood at this location and functioned as a site o
-          </ion-label>
-        </li>
-        <li class="item-time">
-          <ion-label class="text-time">
-            - 18:00 these successive temples stood at this location and functioned as a site o
-          </ion-label>
-        </li>
-        <li class="item-time">
-          <ion-label class="text-time">
-            - 18:00 these successive temples stood at this location and functioned as a site o
-          </ion-label>
-        </li>
-
-      </ul>
+     
       <ion-label class="text-title">
         Donate
       </ion-label>
       <ion-grid class="main-donate">
-        <ion-row>
+        <ion-row text-center>
           <ion-col size="3" class="donate-info">
-            <ion-avatar class="avatar-img">
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-avatar>
+            <ion-card class="avatar-img">
+              <ion-img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"></ion-img>
+            </ion-card>
             <ion-label class="text-name">
               David
             </ion-label>
@@ -57,7 +61,7 @@
             <h5>Purpose</h5>
             <p class="text-detail">The Temple in Jerusalem was any of structures which were located</p>
             <ion-icon name="logo-usd" class="icon-money"></ion-icon>
-          <ion-lable class="text-money">20 USD</ion-lable>
+          <ion-label class="text-money">20 USD</ion-label>
           <ion-label class="text-tks">Thank member! (grateful sentence)</ion-label>
           </ion-col>
         </ion-row>

@@ -1,16 +1,17 @@
 <ion-content>
   <img src="assets/img/temple.jpg" alt="" srcset="">
   <ion-item-group class="main-meeting">
-  
+    <div *ngIf="this.activeCheck===true" class="icon-check">
+      <ion-icon name="checkmark" ></ion-icon>
+
+    </div>
     <ion-item-group class="content-meeting">
+      
       <ion-item-group class="meeting-des"> 
         <ion-label class="text-title">
           Meeting Symnaguge
         </ion-label>
-        <div *ngIf="this.activeCheck===true" class="icon-check">
-          <ion-icon name="checkmark" ></ion-icon>
-  
-        </div>
+        
         <ion-item-group class="date-meeting">
           <ion-label>Monday</ion-label>
           <ion-label>From: 18:00</ion-label>

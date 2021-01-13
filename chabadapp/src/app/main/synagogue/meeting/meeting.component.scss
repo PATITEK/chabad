@@ -4,6 +4,7 @@ ion-content {
     .main-meeting {
         background: #efefef;
         width: 100%;
+        position: relative;
         // height: 100%;
         position: absolute;
         top: 189px;
@@ -11,10 +12,27 @@ ion-content {
         @media screen and (max-height: 737px) {
             top: 125px;
         }
+        .icon-check {
+            position: absolute;
+            right: 25px;
+            top: 3px;
+            width: 40px;
+            height: 25px;
+            background: #eaeaea;
+            border-radius: 24px;
+            display: flex;
+            justify-content: center;
+            ion-icon {
+                color: #00b0b2;
+                font-size: 25px;
+            }
+        }
         .content-meeting {
             position: relative;
             margin: 0 36px;
-            margin-top: 26px;
+            margin-top: 16px;
+            padding-top: 20px;
+           
             .text-title {
                 font-weight: 600;
                 font-size: 20   px;
@@ -24,21 +42,7 @@ ion-content {
             .meeting-des{
                 overflow: scroll;
                 height: 300px;
-                .icon-check {
-                    position: absolute;
-                    right: 10px;
-                    top: 0;
-                    width: 40px;
-                    height: 25px;
-                    background: #eaeaea;
-                    border-radius: 24px;
-                    display: flex;
-                    justify-content: center;
-                    ion-icon {
-                        color: #00b0b2;
-                        font-size: 25px;
-                    }
-                }
+                
                 .date-meeting {
                     display: flex;
                     // margin: 5px 0;

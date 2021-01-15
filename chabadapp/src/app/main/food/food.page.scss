@@ -1,0 +1,80 @@
+ion-header {
+    ion-title {
+        text-align: left;
+        padding: 10px 50px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+    }
+    margin: 10px 0;
+}
+ion-content {
+    --padding: 0 50px;
+    .food-group {
+        overflow: scroll;
+        height: 95vh;
+        .list-foods {
+            padding-left: 15px;
+            padding-right: 15px;
+            z-index: 1;
+            .item-food {
+                position: relative;
+                box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+                border: 1px solid #d2d2d2;
+                border-radius: 10px;
+                overflow: visible;
+                z-index: 1;
+                margin-bottom: 15px;
+                padding: 3px;
+                ion-item {
+                    .detail-food {
+                        padding-left: 4vw;
+                        position: relative;
+                        h1 {
+                            margin: 0;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 18px;
+                            line-height: 27px;
+                            color: #434141;
+                        }
+                        p {
+                            margin: 0;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 12px;
+                            line-height: 18px;
+                            text-align: justify;
+                            color: #8a8a8a;
+                        }
+                    }
+                    img {
+                        margin-right: -2vw;
+                    }
+                }
+
+                .group-add-shop {
+                    position: absolute;
+                    right: -3vw;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    bottom: -2vh;
+                    overflow: visible;
+                    z-index: 10;
+                    .icon-add {
+                    }
+                    .text-price {
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 16px;
+                        line-height: 24px;
+                        margin-bottom: 5px;
+                        color: #434141;
+                    }
+                }
+            }
+        }
+    }
+}

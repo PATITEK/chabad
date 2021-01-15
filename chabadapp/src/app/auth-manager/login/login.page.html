@@ -1,36 +1,4 @@
 <ion-content>
-<<<<<<< HEAD
-  <img src="assets/img/login.png" alt="">
-  <ion-item-group>
-    <ion-segment value="favorite">
-      <ion-segment-button value="call">
-        <ion-label>Login</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="favorite">
-        <ion-label>Sign up</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-    <ion-grid>
-      <ion-row>
-          <ion-label >Enter phone number</ion-label>    
-          <input part="" type="text">
-      </ion-row>
-      <ion-row>
-        <ion-label>Password</ion-label>    
-        <input  type="{{type}}">
-        <button (click)="showPass()"> 
-        <ion-icon name="{{name}}"></ion-icon>
-        </button>
-    </ion-row>
-    <ion-label class="forgot__pass" routerLink="/">Forgot Password?</ion-label>
-    <ion-button type ="submit">
-      <ion-icon name="chevron-forward-outline" class="ion__next">
-    </ion-icon>
-  </ion-button>
-    </ion-grid>
-  </ion-item-group>
- 
-=======
   <img src="assets/img/login.png" alt="" />
   <ion-item-group>
     <ion-segment value="call">
@@ -41,6 +9,7 @@
         <ion-label>Sign up</ion-label>
       </ion-segment-button>
     </ion-segment>
+
     <ion-grid *ngIf="this.status==='login'">
       <ion-row>
         <ion-label>Enter phone number</ion-label>
@@ -53,13 +22,14 @@
           <ion-icon name="{{name}}"></ion-icon>
         </button>
       </ion-row>
-      <ion-label class="forgot__pass" routerLink="/"
+      <ion-label class="forgot__pass" routerLink="/" (click)="clickForgotPassword()"
         >Forgot Password?</ion-label
       >
-      <ion-button type="submit">
+      <ion-button type="submit" (click)="loginSuccess()">
         <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
       </ion-button>
     </ion-grid>
+
     <ion-grid *ngIf="this.status==='sign'" class="select__signup">
       <form action="">
         <ion-row class="select__signup-row">
@@ -138,5 +108,4 @@
       </form>
     </ion-grid>
   </ion-item-group>
->>>>>>> 11709c6346f4678a0b6e55b70ac71b20685d7c5b
 </ion-content>

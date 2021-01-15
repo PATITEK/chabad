@@ -3,10 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'page-noti',
-    loadChildren: () => import('./@modular/page-noti/page-noti.module').then( m => m.PageNotiModule)
-  },
-  {
     path: 'auth-manager',
     loadChildren: () => import('./auth-manager/auth-manager.module').then(m => m.AuthManagerPageModule)
   },
@@ -17,6 +13,10 @@ const routes: Routes = [
   {
     path: 'donate',
     loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
+  },
+  {
+    path: 'page-noti',
+    loadChildren: () => import('../app/@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
   },
   { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/synagogue' },

@@ -1,7 +1,7 @@
 <ion-content>
   <div class="drop-back"></div>
 
-  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn" (click)="back()"></ion-back-button>
 
   <ion-buttons class="top-block">
     <h1 class="title">Verification</h1>
@@ -11,7 +11,6 @@
 
   <ion-buttons class="bottom-block">
     <p class="label-bottom">Code</p>
-<<<<<<< HEAD
       <form [formGroup]="inputCode"(ngSubmit)="onSubmit()">
         <ion-label class="block-input">
         <input id="code1" class="input-tel" (keyup)="keytab($event,'code1', 'code1', 'code2')" type="number" formControlName="code1">
@@ -24,18 +23,9 @@
       <p class="wrong-code" [ngClass]="{'visibility-hidden': wrongCode}">Wrong code! Try again</p>
       <ion-buttons class="get-code-container">
         <span class="get-code-label active-effect" (click)="resendCode()">Resend code ?</span>
-        <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()"></ion-icon>
+        <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()" ></ion-icon>
       </ion-buttons>
   </form>
   </ion-buttons>
 
-=======
-    <input type="tel" inputmode="tel" maxlength="11" class="input-tel">
-    <p class="wrong-code" [ngClass]="{'visibility-hidden': wrongCode}">Wrong code! Try again</p>
-    <ion-buttons class="get-code-container">
-      <span class="get-code-label active-effect" (click)="resendCode()">Resend code ?</span>
-      <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()"></ion-icon>
-    </ion-buttons>
-  </ion-buttons>
->>>>>>> 11709c6346f4678a0b6e55b70ac71b20685d7c5b
 </ion-content>

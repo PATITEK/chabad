@@ -15,7 +15,10 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  back() {
+    this.router.navigateByUrl('auth-manager/login');
+  }
   goToVerification() {
-    this.router.navigateByUrl('main/auth-manager/verification')
+    this.router.navigateByUrl('auth-manager/verification')
   }
 }

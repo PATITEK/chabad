@@ -70,6 +70,7 @@
       .group__day {
         display: flex;
         height: auto !important;
+        width: 99%;
         .day {
           background-color: #fff;
           color: #8A8A8A;
@@ -83,6 +84,7 @@
           text-align: center;
           align-items: center;
           position: relative;
+          filter: drop-shadow(0px 4px 0px #008486);
           .new {
             position: absolute;
             top: -4px;
@@ -215,15 +217,43 @@
               height: 21px;
               font-size: 14px;
             }
+            // .btn__nameless_dis_pray {
+            //   --background: #EAEAEA;
+            //   --color: #AEAEAE;
+            // }
+            .btn__nameless_dis {
+              --background: #EAEAEA;
+              --color: #AEAEAE;
+              font-size: 14px;
+              width: 70px;
+              height: 21px;
+              display: block;
+              margin: 0 auto;
+            }
           }
         }
        }
       &__name {
+        font-size: 16px;
+        color: #434141;
+        display: block;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      &__name_dis {
         font-size: 18px;
         color: #434141;
         display: block;
         font-weight: bold;
         text-align: center;
+        background-color: #F2F2F2;
+        color: #f2f2f2;
+        width: 55%;
+        height: 15px;
+        margin-left: 22%;
+        margin-bottom: 5px;
+        border-radius: 30px;
       }
      
     }
@@ -256,7 +286,7 @@
         &__info {
           ion-row {
             ion-col {
-
+              
             }
           }
           bottom: 8px;

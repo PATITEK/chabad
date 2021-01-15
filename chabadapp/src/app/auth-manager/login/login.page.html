@@ -9,6 +9,7 @@
         <ion-label>Sign up</ion-label>
       </ion-segment-button>
     </ion-segment>
+
     <ion-grid *ngIf="this.status==='login'">
       <ion-row>
         <ion-label>Enter phone number</ion-label>
@@ -21,13 +22,14 @@
           <ion-icon name="{{name}}"></ion-icon>
         </button>
       </ion-row>
-      <ion-label class="forgot__pass" routerLink="/"
+      <ion-label class="forgot__pass" routerLink="/" (click)="clickForgotPassword()"
         >Forgot Password?</ion-label
       >
-      <ion-button type="submit">
+      <ion-button type="submit" (click)="loginSuccess()">
         <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
       </ion-button>
     </ion-grid>
+
     <ion-grid *ngIf="this.status==='sign'" class="select__signup">
       <form action="">
         <ion-row class="select__signup-row">

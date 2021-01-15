@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class FoodPage implements OnInit {
   listFood = [
   ]
+<<<<<<< HEAD
   amount:number=0 ;
+=======
+
+>>>>>>> 7e2c12916d64b30e5a4e0da32ae72bdecbdfcd15
   constructor() {
     for (let i = 0; i < 10; i++) {
       this.listFood.push({
@@ -23,6 +27,7 @@ export class FoodPage implements OnInit {
 
   ngOnInit() {
   }
+<<<<<<< HEAD
   clickAdd(){
     this.amount++;
     
@@ -40,4 +45,7 @@ export class FoodPage implements OnInit {
     document.querySelector<HTMLElement>('.btn-add').style.display="none";
     document.querySelector<HTMLElement>('.amount-cart').style.display="flex";
   }
+=======
+
+>>>>>>> 7e2c12916d64b30e5a4e0da32ae72bdecbdfcd15
 }

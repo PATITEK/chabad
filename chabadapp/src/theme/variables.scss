@@ -301,3 +301,11 @@
   overflow: hidden;
   text-align: left;
 }
+
+.three-dots-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left;
+}

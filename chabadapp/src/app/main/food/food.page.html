@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Food for you</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-item-group class="food-group">
+    <ion-list lines="none" class="list-foods">
+      <ion-item-group *ngFor="let foodItem of listFood" class="item-food">
+        <ion-item class="ion-align-items-start ion-no-padding">
+          <img [src]="foodItem.url">
+          <ion-item-group class="detail-food">
+            <h1>{{foodItem.name}}</h1>
+            <p class="three-dots-4">
+              {{foodItem.desc}}
+            </p>
+          </ion-item-group>
+        </ion-item>
+        <ion-item-group class="group-add-shop">
+          <ion-label class="text-price">
+            $ {{foodItem.price}}
+          </ion-label>
+          <img class="icon-add" src="assets/img/ion-add.svg" alt="">
+
+        </ion-item-group>
+      </ion-item-group>
+    </ion-list>
+  </ion-item-group>
+</ion-content>

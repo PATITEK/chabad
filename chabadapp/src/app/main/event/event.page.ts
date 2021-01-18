@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-near-you',
-  templateUrl: './near-you.page.html',
-  styleUrls: ['./near-you.page.scss'],
+  selector: 'app-event',
+  templateUrl: './event.page.html',
+  styleUrls: ['./event.page.scss'],
 })
-export class NearYouPage implements OnInit {
+export class EventPage implements OnInit {
 
   constructor() { }
 

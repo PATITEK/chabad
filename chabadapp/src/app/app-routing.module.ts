@@ -14,24 +14,12 @@ const routes: Routes = [
     path: 'donate',
     loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
   },
-<<<<<<< HEAD
-=======
   {
     path: 'page-noti',
     loadChildren: () => import('../app/@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
   },
->>>>>>> 7e2c12916d64b30e5a4e0da32ae72bdecbdfcd15
   { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/synagogue' },
-  // {
-  //   path: 'people',
-  //   loadChildren: () => import('./main/synagogue/people/people.module').then( m => m.PeoplePageModule)
-  // },
-
-
-
- 
-
 ];
 @NgModule({
   imports: [

@@ -51,8 +51,6 @@ export class NewPasswordPage implements OnInit {
   }
 
   confirmPassword() {
-   
-    
     const datapasing: IDataNoti = {
       title: 'SUCCESSFUL!',
       description: 'Change Password successful!',
@@ -62,9 +60,11 @@ export class NewPasswordPage implements OnInit {
     this.invalidConfirmedPassword = this.checkValidPassword('Confirmed password', this.confirmedPasswordValue);
     if (this.invalidPassword == '' && this.invalidConfirmedPassword == '') {
       this.pageNotiService.setdataStatusNoti(datapasing);
-      this.router.navigate(['/page-noti']);
-      
-    }
-    
+      this.router.navigateByUrl('/page-noti');
+    }    
+  }
+
+  back() {
+    this.router.navigateByUrl('/auth-manager/login');
   }
 }

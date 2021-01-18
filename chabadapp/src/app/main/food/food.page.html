@@ -21,10 +21,36 @@
           <ion-label class="text-price">
             $ {{foodItem.price}}
           </ion-label>
-          <img class="icon-add" src="assets/img/ion-add.svg" alt="">
+          <img class="icon-add" (click)="clickAdd()" src="assets/img/ion-add.svg" alt="">
 
         </ion-item-group>
       </ion-item-group>
     </ion-list>
   </ion-item-group>
+  
 </ion-content>
+<ion-footer class="cart-main">
+  <ion-item-group *ngIf="amount!=0" class="detal-cart">
+    <h1>Food name</h1>
+    <ion-item-group class="cart-info">
+      
+      <img (click)="clickRemove()" class="icon-add" src="assets/img/ion-remove.svg" alt="">
+      <ion-item-group class="count" >
+        <p >{{amount}}</p>
+      </ion-item-group>
+      <img (click)="clickAdd()" class="icon-add" src="assets/img/ion-add.svg" alt="">
+    </ion-item-group>
+
+  </ion-item-group>
+<ion-item-group class="cart-group" [ngClass]="{'add-cart-amount':amount!=0}">
+  <img class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
+    <ion-label *ngIf="amount!=0" class="amount-cart">
+          +{{amount}}
+    </ion-label>
+</ion-item-group>
+  <ion-item-group *ngIf="amount!=0" class="btn-add-group" >
+    <ion-button (click)="clickButtonAdd()" class="btn-add">
+      Add
+    </ion-button>
+  </ion-item-group>
+</ion-footer>

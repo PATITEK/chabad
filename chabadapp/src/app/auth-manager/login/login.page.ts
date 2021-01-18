@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginPage implements OnInit {
   public showpass = false;
   public name = 'eye-outline';
   public status='login';
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit() {
   }
   showPass(){
@@ -29,6 +30,12 @@ export class LoginPage implements OnInit {
   }
   clickBtnSign(){
     this.status="sign";
+  }
+  clickForgotPassword() {
+    this.router.navigate(['auth-manager/forgot-password']);
+  }
+  loginSuccess(){
+    this.router.navigate(['main/synagogue'])
   }
 
 }

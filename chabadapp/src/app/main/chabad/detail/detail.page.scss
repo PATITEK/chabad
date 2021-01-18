@@ -57,17 +57,17 @@ ion-footer {
   }
 }
 
-.temple-info-container {
+.chabad-info-container {
   padding: 28px;
 
   @media screen and (max-width: 320px) {
     padding: 20px 10px;
   }
 
-  .temple-info {
+  .chabad-info {
     margin: 7px 0;
 
-    .temple-name {
+    .chabad-name {
       color: #434141;
       font-size: 20px;
       font-weight: 600;
@@ -86,14 +86,14 @@ ion-footer {
       border-radius: 8px;
     }
 
-    .temple-address {
+    .chabad-address {
       color: #999393;
       font-size: 14px;
       margin: 0 0 0 8px;
     }
   }
 
-  .temple-distance {
+  .chabad-distance {
     display: inline-block;
     color: #040404;
     font-size: 14px;
@@ -131,7 +131,7 @@ ion-footer {
     margin: 10px 0;
   }
 
-  .temple-introduction {
+  .chabad-introduction {
     color: #999393;
     text-align: justify;
   }

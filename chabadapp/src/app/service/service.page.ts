@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-meeting',
-  templateUrl: './meeting.component.html',
-  styleUrls: ['./meeting.component.scss'],
+  selector: 'app-service',
+  templateUrl: './service.page.html',
+  styleUrls: ['./service.page.scss'],
 })
-export class MeetingComponent implements OnInit {
+export class ServicePage implements OnInit {
   activeCheck = false;
+  
   constructor() { }
 
   ngOnInit() { }
+
   clickJoin(value) {
     if (value === "yes") {
       this.activeCheck = true;
     }
-    else{
-      this.activeCheck=false;
+    else {
+      this.activeCheck = false;
     }
   }
 }
-

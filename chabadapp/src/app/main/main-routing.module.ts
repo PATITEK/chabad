@@ -9,8 +9,8 @@ const routes: Routes = [
     component: MainPage,
     children: [
       {
-        path: 'synagogue',
-        loadChildren: () => import('./synagogue/synagogue.module').then(m => m.SynagoguePageModule)
+        path: 'chabad',
+        loadChildren: () => import('./chabad/chabad.module').then(m => m.ChabadPageModule)
       },
       {
         path: 'people',
@@ -28,13 +28,9 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'main/synagogue',
+    redirectTo: 'main/chabad',
     pathMatch: 'full'
-  },
-  {
-    path: 'food',
-    loadChildren: () => import('./shopping/food/food.module').then( m => m.FoodPageModule)
-  },
+  }
 ];
 
 @NgModule({

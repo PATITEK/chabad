@@ -22,9 +22,12 @@ const routes: Routes = [
     path: 'page-noti',
     loadChildren: () => import('../app/@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
   },
-  { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main/synagogue' },
-
+  {
+    path: 'service',
+    loadChildren: () => import('./service/service.module').then( m => m.ServicePageModule)
+  },
+  { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main/chabad' },
 
 ];
 @NgModule({

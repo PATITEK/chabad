@@ -81,17 +81,17 @@ ion-content {
   margin: 10px 32px;
 }
 
-.template {
+.chabad {
   margin-bottom: 30px;
 
-  .template-img-container {
+  .chabad-img-container {
     margin: 0 15px;
     height: 175px;
     overflow: hidden;
     border-radius: 30px;
     position: relative;
 
-    .temple-distance {
+    .chabad-distance {
       display: inline-block;
       position: absolute;
       bottom: 0;
@@ -104,10 +104,10 @@ ion-content {
     }
   }
 
-  .temple-info {
+  .chabad-info {
     margin: 7px 28px;
 
-    .temple-name {
+    .chabad-name {
       color: #434141;
       font-size: 20px;
       font-weight: 600;
@@ -126,7 +126,7 @@ ion-content {
       border-radius: 8px;
     }
 
-    .temple-address {
+    .chabad-address {
       color: #999393;
       font-size: 14px;
       margin: 0 0 0 8px;

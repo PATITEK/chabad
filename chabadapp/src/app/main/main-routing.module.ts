@@ -7,18 +7,24 @@ const routes: Routes = [
   {
     path: '',
     component: MainPage,
-  },
-  {
-    path: 'synagogue',
-    loadChildren: () => import('./synagogue/synagogue.module').then(m => m.SynagoguePageModule)
-  },
-  {
-    path: 'near-you',
-    loadChildren: () => import('./near-you/near-you.module').then(m => m.NearYouPageModule)
-  },
-  {
-    path: 'shopping',
-    loadChildren: () => import('./shopping/shopping.module').then(m => m.ShoppingPageModule)
+    children: [
+      {
+        path: 'synagogue',
+        loadChildren: () => import('./synagogue/synagogue.module').then(m => m.SynagoguePageModule)
+      },
+      {
+        path: 'near-you',
+        loadChildren: () => import('./near-you/near-you.module').then(m => m.NearYouPageModule)
+      },
+      {
+        path: 'shopping',
+        loadChildren: () => import('./shopping/shopping.module').then(m => m.ShoppingPageModule)
+      },
+      {
+        path: 'event',
+        loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
+      },
+    ]
   },
   {
     path: '',
@@ -26,14 +32,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'news',
-    loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
-  },  {
     path: 'food',
     loadChildren: () => import('./food/food.module').then( m => m.FoodPageModule)
   },
-
-
 ];
 
 @NgModule({

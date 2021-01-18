@@ -52,7 +52,7 @@ export class TemplePage implements OnInit {
 
   constructor() {
     this.today = new Date();
-    for (let i = 0; i < 7; i++)  {
+    for (let i = 0; i < 7; i++) {
       let nextDay = new Date(this.today);
       nextDay.setDate(nextDay.getDate() + i);
 
@@ -83,6 +83,22 @@ export class TemplePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    const tabs = document.querySelectorAll('ion-tab-bar');
+    Object.keys(tabs).map((key) => {
+      tabs[key].style.display = 'none';
+    });
+
+    const tabs1 = document.querySelectorAll('ion-header');
+    Object.keys(tabs1).map((key) => {
+      tabs1[key].style.display = 'none';
+    });
+  }
+
+  ionViewWillLeave() {
+    
   }
 
   changeTab(name) {

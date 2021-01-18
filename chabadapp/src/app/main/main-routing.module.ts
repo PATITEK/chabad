@@ -13,8 +13,8 @@ const routes: Routes = [
         loadChildren: () => import('./synagogue/synagogue.module').then(m => m.SynagoguePageModule)
       },
       {
-        path: 'near-you',
-        loadChildren: () => import('./near-you/near-you.module').then(m => m.NearYouPageModule)
+        path: 'people',
+        loadChildren: () => import('./people/people.module').then(m => m.PeoplePageModule)
       },
       {
         path: 'shopping',
@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'food',
-    loadChildren: () => import('./food/food.module').then( m => m.FoodPageModule)
+    loadChildren: () => import('./shopping/food/food.module').then( m => m.FoodPageModule)
   },
 ];
 

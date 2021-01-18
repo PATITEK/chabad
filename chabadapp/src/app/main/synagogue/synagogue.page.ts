@@ -7,28 +7,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./synagogue.page.scss'],
 })
 export class SynagoguePage implements OnInit {
-  navBar = [
-    {
-      name: 'synagogue',
-      text: 'Synagogue',
-      iconUrl: 'assets/icon/location.svg'
-    },
-    {
-      name: 'near-you',
-      text: 'Near you',
-      iconUrl: 'assets/icon/person.svg'
-    },
-    {
-      name: 'shopping',
-      text: 'Shopping',
-      iconUrl: 'assets/icon/shop.svg'
-    },
-    {
-      name: 'news',
-      text: 'News',
-      iconUrl: 'assets/icon/newspapers.svg'
-    },
-  ];
+  // navBar = [
+  //   {
+  //     name: 'synagogue',
+  //     text: 'Synagogue',
+  //     iconUrl: 'assets/icon/location.svg'
+  //   },
+  //   {
+  //     name: 'near-you',
+  //     text: 'Near you',
+  //     iconUrl: 'assets/icon/person.svg'
+  //   },
+  //   {
+  //     name: 'shopping',
+  //     text: 'Shopping',
+  //     iconUrl: 'assets/icon/shop.svg'
+  //   },
+  //   {
+  //     name: 'news',
+  //     text: 'News',
+  //     iconUrl: 'assets/icon/newspapers.svg'
+  //   },
+  // ];
 
   temples = [
     {

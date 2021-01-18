@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NearYouPageRoutingModule } from './near-you-routing.module';
+import { PrayPageRoutingModule } from './pray-routing.module';
 
-import { NearYouPage } from './near-you.page';
+import { PrayPage } from './pray.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NearYouPageRoutingModule
+    PrayPageRoutingModule
   ],
-  declarations: [NearYouPage]
+  declarations: [PrayPage]
 })
-export class NearYouPageModule {}
+export class PrayPageModule {}

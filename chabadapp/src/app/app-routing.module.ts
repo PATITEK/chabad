@@ -15,11 +15,17 @@ const routes: Routes = [
     loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
   },
   {
+    path: 'pray',
+    loadChildren: () => import('./pray/pray.module').then( m => m.PrayPageModule)
+  },
+  {
     path: 'page-noti',
     loadChildren: () => import('../app/@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
   },
   { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/synagogue' },
+
+
 ];
 @NgModule({
   imports: [

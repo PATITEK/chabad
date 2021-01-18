@@ -9,7 +9,7 @@ ion-content {
         position: absolute;
         top: 244px;
         width: 100%;
-        height: 100%;
+        height: 78%;
         background: #00B0B2;
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
@@ -69,6 +69,7 @@ ion-content {
             }
          }
          ion-grid {
+             overflow: auto;
              width: 70%;
              color: #fff;
              margin-top: 63px;
@@ -210,7 +211,7 @@ ion-content {
                 }
                 .your__select-padding {
                     padding: 0 0px 0px 6px;
-                   
+                    
                 }
                 .your__select {
                     color:#fff;

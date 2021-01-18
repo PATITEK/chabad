@@ -74,8 +74,8 @@ ion-content {
                   list-style: none;
                   margin: 0;
                   padding: 0;
-                  height: 100px;
-                  overflow: scroll;
+                //   height: 100px;
+                //   overflow: scroll;
                   .item-time {
                       font-style: normal;
                       font-weight: normal;
@@ -267,7 +267,7 @@ ion-content {
 }
 @media screen and (max-height: 569px) {
   .main-meeting {
-      top: 130px !important;
+      top: 125px !important;
   }
   .meeting-des{
       height: 185px!important;

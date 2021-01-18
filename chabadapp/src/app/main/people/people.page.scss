@@ -1,109 +1,4 @@
 ion-content {
-    .page-people-main {
-        position: relative;
-
-        .page-people-header {
-            // position: relative;
-            // height: 100%;
-            // background-color: red;
-
-            .card-img {
-                position: relative;
-                position: fixed;
-                right: 20px;
-                top: 20px;
-                width: 35px;
-                height: 35px;
-                z-index: 2;
-                border-radius: 50%;
-                box-sizing: border-box;
-
-                .img-avatar {
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
-                    border: 1px solid #f3f3f3;
-                   
-                    // position: absolute;
-                   
-                }
-                &::before{
-                    position: absolute;
-                    content: " ";
-                    width: 7px;
-                        height: 7px;
-                        background-color: #faae42;
-                        z-index: 3;
-                        top: 0px;
-                        right: 3px;
-                        border-radius: 50%;
-                    
-                }
-                
-            }
-            // .circle-avatar {
-            //     width: 7px;
-            //     height: 7px;
-            //     background-color: #faae42;
-            //     position: fixed;
-            //     z-index: 3;
-            //     top: 25px;
-            //     right: 18px;
-            //     border-radius: 50%;
-            // }
-            .back-btn {
-                display: inline-block;
-                position: absolute;
-                color: #00b0b2;
-                background: rgba(#feffff, 0.6);
-                border-radius: 18px;
-                width: 45px;
-                height: 45px;
-                margin: 17px;
-                z-index: 2;
-                top: 0 !important;
-            }
-            .range-content {
-                position: absolute;
-                bottom: 10px;
-                left: 10px;
-                width: 88px;
-                height: 30px;
-                color: #040404;
-                padding: 0 10px;
-                background: #ffffff;
-                opacity: 0.8;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-bottom-left-radius: 40px;
-                border-top-right-radius: 40px;
-                .text-range {
-                    text-align: center;
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 14px;
-                    line-height: 21px;
-                }
-            }
-        }
-        .img-header {
-            height: 280px;
-            width: 100%;
-            border-radius: 40px;
-            box-shadow: (0px 4px 4px rgba(0, 0, 0, 0.25));
-            @media screen and (max-height: 569px) {
-                height: 230px !important;
-            }
-            @media screen and (max-height: 641px) {
-                height: 230px !important;
-            }
-            @media screen and (max-height: 481px) {
-                height: 180px !important;
-            }
-        }
-    }
     .people-page-detal {
         .text-title {
             font-style: normal;
@@ -122,6 +17,7 @@ ion-content {
             display: flex;
             text-align: center;
             align-items: center;
+            justify-content: center;
 
             .btn-go {
                 width: 35px;
@@ -132,24 +28,15 @@ ion-content {
                 text-align: center;
                 padding-left: 10px;
             }
+            .text-title {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 24px;
+                color: #434141;
+            }
         }
 
-        .people-page-info {
-            display: inline-flex;
-            align-items: center;
-            height: 40px;
-            margin-bottom: 15px;
-            .ion-localtion {
-                width: 25px;
-                height: 35px;
-                flex-basis: 7%;
-            }
-            .text-address {
-                flex-basis: 93%;
-                font-size: 12px;
-                padding-left: 10px;
-            }
-        }
         ion-grid {
             overflow: scroll;
             height: 340px;
@@ -193,4 +80,3 @@ ion-content {
         }
     }
 }
-

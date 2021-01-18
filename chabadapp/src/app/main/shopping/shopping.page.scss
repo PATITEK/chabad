@@ -1,0 +1,135 @@
+ion-content {
+    --background: transparent;
+  }
+  
+  .user-container {
+    justify-content: flex-end;
+    height: 106px;
+    margin: 0 20px;
+  
+    span {
+      margin-right: 15px;
+      color: #838383;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  
+    ion-avatar {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  
+  // .nav-bar {
+  //   background: #fff;
+  //   align-items: stretch;
+  //   justify-content: space-around;
+  //   border-radius: 30px;
+  //   padding-bottom: 20px;
+  
+  //   .nav-bar-item {
+  //     text-align: center;
+  //     border-radius: 40px;
+  //     border-bottom-left-radius: 27px;
+  //     border-bottom-right-radius: 27px;
+  //     padding: 4px;
+  //     background: #fff;
+  //     transition: 0.1s;
+  
+  //     &:first-child {
+  //       background: #00b0b2;
+  
+  //       .nav-bar-title {
+  //         color: #fff;
+  //       }
+  //     }
+  
+  //     &:active {
+  //       background: #00b0b2;
+  
+  //       .nav-bar-title {
+  //         color: #fff;
+  //       }
+  //     }
+  
+  //     .nav-bar-icon {
+  //       width: 70px;
+  //       height: 70px;
+  //       padding: 11px;
+  //       background: #f5f5f5;
+  //       border-radius: 50%;
+  
+  //       @media screen and (max-width: 320px) {
+  //         width: 60px;
+  //         height: 60px;
+  //       }
+  //     }
+  
+  //     .nav-bar-title {
+  //       margin: 5px 0 8px;
+  //       color: #727171;
+  //       font-size: 12px;
+  //     }
+  //   }
+  // }
+  
+  .heading {
+    color: #434141;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    margin: 10px 32px;
+  }
+  
+  .template {
+    margin-bottom: 30px;
+  
+    .template-img-container {
+      margin: 0 15px;
+      height: 175px;
+      overflow: hidden;
+      border-radius: 30px;
+      position: relative;
+  
+      .temple-distance {
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #040404;
+        font-size: 14px;
+        background: rgba(#fff, 0.8);
+        padding: 10px 20px;
+        border-top-right-radius: 30px;
+      }
+    }
+  
+    .temple-info {
+      margin: 7px 28px;
+  
+      .temple-name {
+        color: #434141;
+        font-size: 20px;
+        font-weight: 600;
+        margin-right: 20px;
+        margin-top: 0;
+        text-align: left;
+      }
+  
+      .btn-go {
+        display: inline-block;
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 3px 7px;
+        background: #e1e1e1;
+        border-radius: 8px;
+      }
+  
+      .temple-address {
+        color: #999393;
+        font-size: 14px;
+        margin: 0 0 0 8px;
+      }
+    }
+  }

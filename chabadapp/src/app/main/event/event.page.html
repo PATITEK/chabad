@@ -1,9 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>event</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <!-- <ion-buttons class="user-container">
+    <span>Hi Arena!</span>
+    <ion-avatar class="main-box-shadow">
+      <img src="assets/icon/person.svg" alt="">
+    </ion-avatar>
+  </ion-buttons>
 
+  <ion-buttons class="nav-bar">
+    <ion-item-group *ngFor="let navBarItem of navBar" class="nav-bar-item main-box-shadow"
+      (click)="goToNavBarItem(navBarItem)">
+      <img [src]="navBarItem.iconUrl" class="nav-bar-icon">
+      <p class="nav-bar-title">{{ navBarItem.text }}</p>
+    </ion-item-group>
+  </ion-buttons> -->
+
+  <h1 class="heading">
+    Choose your Chabad !
+   
+  </h1>
+
+  <ion-item-group *ngFor="let temple of temples" class="template" (click)="goToTemple(temple)">
+    <div class="template-img-container main-box-shadow">
+      <img [src]="temple.imgUrl">
+      <span class="temple-distance">{{ temple.distance }}km</span>
+    </div>
+
+    <ion-item-group class="temple-info">
+      <ion-buttons class="ion-align-items-start ion-justify-content-between">
+        <h3 class="temple-name">{{ temple.name }}</h3>
+        <span class="btn-go">Go</span>
+      </ion-buttons>
+      <ion-buttons class="ion-align-items-start">
+        <img src="assets/icon/location-lite.svg">
+        <p class="temple-address">{{ temple.address }}</p>
+      </ion-buttons>
+    </ion-item-group>
+  </ion-item-group>
 </ion-content>

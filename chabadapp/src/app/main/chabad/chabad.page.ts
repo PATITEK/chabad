@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IPageRequest, ChabadService } from 'src/app/@app-core/http';
 
 @Component({
-  selector: 'app-synagogue',
-  templateUrl: './synagogue.page.html',
-  styleUrls: ['./synagogue.page.scss'],
+  selector: 'app-chabad',
+  templateUrl: './chabad.page.html',
+  styleUrls: ['./chabad.page.scss'],
 })
-export class SynagoguePage implements OnInit {
-  // navBar = [
+export class ChabadPage implements OnInit {
+// navBar = [
   //   {
   //     name: 'synagogue',
   //     text: 'Synagogue',
@@ -30,7 +31,7 @@ export class SynagoguePage implements OnInit {
   //   },
   // ];
 
-  temples = [
+  chabads = [
     {
       id: 1,
       imgUrl: 'assets/img/temple.jpg',
@@ -45,13 +46,19 @@ export class SynagoguePage implements OnInit {
       name: 'Chabad of Ho Chi Minh City',
       address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
     }
-  ]
+  ];
+  pageRequest: IPageRequest = {
+    page: 1,
+    per_page: 5
+  }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private chabadService: ChabadService
   ) { }
 
   ngOnInit() {
+    this.getData();
   }
 
   ionViewWillEnter() {
@@ -66,15 +73,22 @@ export class SynagoguePage implements OnInit {
     });
   }
 
-  goToNavBarItem(navBarItem) {
-    this.router.navigateByUrl(`main/${navBarItem.name}`);
+  getData() {
+    this.chabadService.getAll(this.pageRequest).subscribe(data => {
+      this.chabads = data;
+      console.log(data);
+    })
   }
 
-  goToTemple(temple) {
+  // goToNavBarItem(navBarItem) {
+  //   this.router.navigateByUrl(`main/${navBarItem.name}`);
+  // }
+
+  goToChabadDetail(chabad) {
     const data = {
-      id: temple.id
+      id: chabad.id
     }
-    this.router.navigate(['/main/synagogue/temple'], {
+    this.router.navigate(['/main/chabad/detail'], {
       queryParams: {
         data: JSON.stringify(data)
       }

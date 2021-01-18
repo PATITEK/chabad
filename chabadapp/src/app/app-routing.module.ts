@@ -20,15 +20,6 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/synagogue' },
-  // {
-  //   path: 'people',
-  //   loadChildren: () => import('./main/synagogue/people/people.module').then( m => m.PeoplePageModule)
-  // },
-
-
-
- 
-
 ];
 @NgModule({
   imports: [

@@ -18,17 +18,8 @@ const routes: Routes = [
     path: 'donate',
     loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
   },
-  { path: '', redirectTo: 'main/synagogue', pathMatch: 'full' },
+  { path: '', redirectTo: 'main/', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/synagogue' },
-  // {
-  //   path: 'people',
-  //   loadChildren: () => import('./main/synagogue/people/people.module').then( m => m.PeoplePageModule)
-  // },
-
-
-
- 
-
 ];
 @NgModule({
   imports: [

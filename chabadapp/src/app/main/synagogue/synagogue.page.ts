@@ -54,6 +54,18 @@ export class SynagoguePage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    const tabs = document.querySelectorAll('ion-tab-bar');
+    Object.keys(tabs).map((key) => {
+      tabs[key].style.display = 'flex';
+    });
+
+    const tabs1 = document.querySelectorAll('ion-header');
+    Object.keys(tabs1).map((key) => {
+      tabs1[key].style.display = 'block';
+    });
+  }
+
   goToNavBarItem(navBarItem) {
     this.router.navigateByUrl(`main/${navBarItem.name}`);
   }

@@ -33,6 +33,15 @@ ion-footer {
   }
 }
 
+.circle {
+  position: absolute;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #faae42;
+  border-radius: 50%;
+}
+
 .avatar {
   width: 40px;
   height: 40px;
@@ -41,6 +50,11 @@ ion-footer {
   top: 22px;
   right: 17px;
   z-index: 10;
+
+  .avatar-note {
+    top: 0;
+    right: 0;
+  }
 }
 
 .temple-info-container {
@@ -199,12 +213,6 @@ ion-footer {
       background: #fff;
 
       .date-item-note {
-        position: absolute;
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #faae42;
-        border-radius: 50%;
         left: 50%;
         top: 0;
         transform: translate(-50%, -50%);
@@ -252,6 +260,11 @@ ion-footer {
     }
   }
 
+  .btn-join-event {
+    background: #eaeaea;
+    color:#7a7a7a
+  }
+
   .btn-join-all {
     background: #fff;
     color: #00696a;
@@ -284,6 +297,7 @@ ion-footer {
 
     .meeting-reason {
       margin-right: 43px;
+      color: #F8F8F8;
     }
 
     .three-dots-icon {
@@ -299,20 +313,20 @@ ion-footer {
     display: inline-flex;
     border-radius: 40px;
     padding: 5px 10px;
-    border: 1px solid rgba(#000, .1);
+    border: 1px solid rgba(#000, 0.1);
     position: relative;
-  
+
     .event-header-title {
       color: #727171;
       font-size: 14px;
       margin-left: 21px;
       margin-right: 13px;
     }
-  
+
     .triangle {
       border-width: 2px 3px;
       border-style: solid;
-      border-color: transparent transparent #A8A8A8 transparent;
+      border-color: transparent transparent #a8a8a8 transparent;
       transform: translateY(-1px);
     }
 
@@ -320,14 +334,24 @@ ion-footer {
       transform: translateY(1px) rotate(180deg);
     }
   }
-  
+
   .event-body {
     background: transparent;
     height: 0;
     transform: translateY(-20px);
+    padding: 0;
+
+    .event-item {
+      color: #A1A1A1;
+
+      .event-reason {
+        color: #A6A6A6;
+      }
+    }
   }
 
   .event-body-full-height {
     height: 100%;
   }
+
 }

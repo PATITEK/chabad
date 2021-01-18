@@ -2,6 +2,7 @@
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   <ion-avatar class="avatar active-effect">
     <img src="assets/img/avatar-people.svg">
+    <span class="circle avatar-note"></span>
   </ion-avatar>
   <!-- <img src="assets//icon/two-lines.svg" class="two-lines"> -->
 
@@ -27,7 +28,7 @@
       <span class="temple-distance">{{ temple.distance }}km</span>
       <ion-buttons>
         <span class="btn btn-pray active-effect">Pray</span>
-        <span class="btn btn-donate active-effect">Donate</span>
+        <span class="btn btn-donate active-effect" (click)="goToDonate()">Donate</span>
       </ion-buttons>
     </ion-buttons>
 
@@ -61,7 +62,7 @@
         (click)="changeDateItem(dateItem)">
         <span>{{ dateItem.day }}</span>
         <span>{{ dateItem.date }}</span>
-        <span *ngIf="dateItem.meetings.length != 0 || dateItem.events.length != 0" class="date-item-note"></span>
+        <span *ngIf="dateItem.meetings.length != 0 || dateItem.events.length != 0" class="circle date-item-note"></span>
       </ion-buttons>
     </ion-buttons>
 
@@ -70,7 +71,7 @@
     <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
       <ion-item-group
         *ngIf="(dateItem.meetings.length != 0 || dateItem.events.length != 0) && activeDateItem == dateItem.id"
-        class="btn-join btn-join-all active-effect" (click)="toggleJoiningAllMeeting(dateItem)">
+        class="btn-join btn-join-all active-effect" (click)="toggleJoiningAll(dateItem)">
         <span *ngIf="!joinedAll(dateItem)">Join all</span>
         <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
       </ion-item-group>
@@ -78,9 +79,9 @@
 
     <ion-list *ngIf="!hiddenDateList" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
       <ion-item-group *ngFor="let meeting of dateList[activeDateItem].meetings" class="meeting"
-        [style.background]="meeting.color" (click)="goToMeetingDetail(meeting)">
+        [style.background]="meeting.color" (click)="goToServiceDetail(meeting)">
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
-          <h3 class="meeting-name">{{ temple.name }}</h3>
+          <h3 class="meeting-name">{{ meeting.name }}</h3>
           <ion-item-group class="btn-join active-effect" [style.color]="meeting.color"
             (click)="toggleJoiningMeeting(meeting)">
             <span *ngIf="!meeting.joined">Join</span>
@@ -103,20 +104,19 @@
         </ion-buttons>
 
         <ion-list class="event-body" [ngClass]="{'event-body-full-height': !dateList[activeDateItem].hiddenEvents}">
-          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="meeting"
-            [style.background]="event.color">
+          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="meeting event-item"
+            [style.background]="event.color" (click)="goToEventDetail(event)">
             <ion-buttons class="ion-align-items-start ion-justify-content-between">
-              <h3 class="meeting-name">{{ temple.name }}</h3>
-              <ion-item-group class="btn-join active-effect" [style.color]="event.color"
-                (click)="toggleJoiningEvent(event)">
+              <h3 class="meeting-name">{{ event.name }}</h3>
+              <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">
                 <span *ngIf="!event.joined">Join</span>
                 <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
               </ion-item-group>
             </ion-buttons>
             <span class="meeting-time">{{ event.timeStart }} - {{ event.timeEnd }}</span>
-            <p class="text three-dots-2 meeting-reason">{{ event.reason }}</p>
+            <p class="text three-dots-2 meeting-reason event-reason">{{ event.reason }}</p>
 
-            <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+            <img src="assets/icon/three-dots-gray.svg" class="three-dots-icon">
           </ion-item-group>
         </ion-list>
       </ion-item-group>

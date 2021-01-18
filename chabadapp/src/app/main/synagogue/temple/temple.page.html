@@ -1,6 +1,9 @@
 <ion-content>
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
-  <img src="assets//icon/two-lines.svg" class="two-lines">
+  <ion-avatar class="avatar active-effect">
+    <img src="assets/img/avatar-people.svg">
+  </ion-avatar>
+  <!-- <img src="assets//icon/two-lines.svg" class="two-lines"> -->
 
   <ion-backdrop *ngIf="!hiddenDateList" (click)="hiddenDateList = true"></ion-backdrop>
 
@@ -37,9 +40,9 @@
   <ion-item-group class="segment">
     <div *ngIf="!hiddenDateList" class="background-high"></div>
 
-    <span class="line"></span>
+    <span *ngIf="hiddenDateList" class="line"></span>
 
-    <ion-segment class="main-box-shadow">
+    <!-- <ion-segment class="main-box-shadow">
       <ion-buttons class="segment-btn" value="ceremony" [ngClass]="{'active-segment-btn': activeTab === 'ceremony'}"
         (click)="changeTab('ceremony')">
         <img src="assets/icon/book.svg">
@@ -50,30 +53,32 @@
         <img src="assets/icon/fruit.svg">
         <ion-label class="segment-label">Event</ion-label>
       </ion-buttons>
-    </ion-segment>
+    </ion-segment> -->
 
     <ion-buttons class="date-list">
       <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
-        [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}" (click)="changeDateItem(dateItem)">
+        [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}"
+        (click)="changeDateItem(dateItem)">
         <span>{{ dateItem.day }}</span>
         <span>{{ dateItem.date }}</span>
-        <span *ngIf="dateItem.meetings.length != 0" class="date-item-note"></span>
+        <span *ngIf="dateItem.meetings.length != 0 || dateItem.events.length != 0" class="date-item-note"></span>
       </ion-buttons>
     </ion-buttons>
 
     <p class="today">{{ getTodayString() }}</p>
 
     <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
-      <ion-item-group *ngIf="dateItem.meetings.length != 0 && activeDateItem == dateItem.id"
+      <ion-item-group
+        *ngIf="(dateItem.meetings.length != 0 || dateItem.events.length != 0) && activeDateItem == dateItem.id"
         class="btn-join btn-join-all active-effect" (click)="toggleJoiningAllMeeting(dateItem)">
-        <span *ngIf="!joinedAllMeetings(dateItem)">Join all</span>
-        <ion-icon *ngIf="joinedAllMeetings(dateItem)" name="checkmark-outline"></ion-icon>
+        <span *ngIf="!joinedAll(dateItem)">Join all</span>
+        <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
       </ion-item-group>
     </ion-item-group>
 
     <ion-list *ngIf="!hiddenDateList" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
       <ion-item-group *ngFor="let meeting of dateList[activeDateItem].meetings" class="meeting"
-        [style.background]="meeting.color">
+        [style.background]="meeting.color" (click)="goToMeetingDetail(meeting)">
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
           <h3 class="meeting-name">{{ temple.name }}</h3>
           <ion-item-group class="btn-join active-effect" [style.color]="meeting.color"
@@ -86,6 +91,34 @@
         <p class="text three-dots-2 meeting-reason">{{ meeting.reason }}</p>
 
         <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+      </ion-item-group>
+
+      <ion-item-group *ngIf="dateList[activeDateItem].events.length != 0" class="event">
+        <ion-buttons class="event-header active-effect" (click)="toggleHiddenEvents(dateList[activeDateItem])">
+          <img src="assets/icon/fruit.svg">
+          <ion-buttons>
+            <ion-label class="event-header-title">Event</ion-label>
+            <span class="triangle" [ngClass]="{'active-triangle': !dateList[activeDateItem].hiddenEvents}"></span>
+          </ion-buttons>
+        </ion-buttons>
+
+        <ion-list class="event-body" [ngClass]="{'event-body-full-height': !dateList[activeDateItem].hiddenEvents}">
+          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="meeting"
+            [style.background]="event.color">
+            <ion-buttons class="ion-align-items-start ion-justify-content-between">
+              <h3 class="meeting-name">{{ temple.name }}</h3>
+              <ion-item-group class="btn-join active-effect" [style.color]="event.color"
+                (click)="toggleJoiningEvent(event)">
+                <span *ngIf="!event.joined">Join</span>
+                <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
+              </ion-item-group>
+            </ion-buttons>
+            <span class="meeting-time">{{ event.timeStart }} - {{ event.timeEnd }}</span>
+            <p class="text three-dots-2 meeting-reason">{{ event.reason }}</p>
+
+            <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+          </ion-item-group>
+        </ion-list>
       </ion-item-group>
     </ion-list>
   </ion-item-group>

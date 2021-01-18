@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {EventDetailComponent} from './detail/event-detail.component'
-import { EventPage } from './event.page';
+
+import { ChabadPage } from './chabad.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EventPage
+    component: ChabadPage
   },
   {
     path: 'detail',
-    component: EventPage
+    loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
   }
 ];
 
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EventPageRoutingModule {}
+export class ChabadPageRoutingModule {}

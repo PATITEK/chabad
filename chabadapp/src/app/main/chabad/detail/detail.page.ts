@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-temple',
-  templateUrl: './temple.page.html',
-  styleUrls: ['./temple.page.scss'],
+  selector: 'app-detail',
+  templateUrl: './detail.page.html',
+  styleUrls: ['./detail.page.scss'],
 })
-export class TemplePage implements OnInit {
-  temple = {
+export class DetailPage implements OnInit {
+  chabad = {
     id: 1,
     imgUrl: 'assets/img/temple.jpg',
     distance: '2,4',
@@ -39,7 +39,7 @@ export class TemplePage implements OnInit {
     'November',
     'December'
   ];
-  MEETING_COLOR = [
+  SERVICE_COLOR = [
     '#D7ADC2',
     '#E7D0AE',
     '#BAD4E3'
@@ -60,20 +60,20 @@ export class TemplePage implements OnInit {
       nextDay.setDate(nextDay.getDate() + i);
 
       const randomNumMeetings: number = Math.floor(Math.random() * 5);
-      let meetings = [];
-      let meetingColorIndex = 0;
+      let services = [];
+      let serviceColorIndex = 0;
 
       for (let j = 0; j < randomNumMeetings; j++) {
-        meetings.push({
+        services.push({
           id: j,
           name: `Service ${j + 1}`,
           timeStart: '8am',
           timeEnd: '10am',
           reason: 'The Temple in Jerusalem was any of a series of structures which were located on the Temple Mount in the Old City of Jerusalem, the current site of the Dome of the Rock and Al-Aqsa Mosque. These successive temples stood at this location and functioned as a site of ancient Israelite and later Jewish worship.',
-          color: this.MEETING_COLOR[meetingColorIndex],
+          color: this.SERVICE_COLOR[serviceColorIndex],
           joined: false,
         });
-        (meetingColorIndex++ >= this.MEETING_COLOR.length - 1) && (meetingColorIndex = 0);
+        (serviceColorIndex++ >= this.SERVICE_COLOR.length - 1) && (serviceColorIndex = 0);
       }
 
       const randomNumEvents: number = Math.floor(Math.random() * 5);
@@ -90,14 +90,14 @@ export class TemplePage implements OnInit {
           color: '#F5F5F5',
           joined: false,
         });
-        (eventColorIndex++ >= this.MEETING_COLOR.length - 1) && (eventColorIndex = 0);
+        (eventColorIndex++ >= this.SERVICE_COLOR.length - 1) && (eventColorIndex = 0);
       }
 
       this.dateList.push({
         id: i,
         day: this.DAY[nextDay.getDay()].substring(0, 3),
         date: nextDay.getDate(),
-        meetings: meetings,
+        meetings: services,
         events: events,
         hiddenEvents: true
       })
@@ -166,7 +166,7 @@ export class TemplePage implements OnInit {
       id: meeting.id,
       joined: meeting.joined
     }
-    this.router.navigate(['/main/synagogue/meeting'], {
+    this.router.navigate(['/service'], {
       queryParams: {
         data: JSON.stringify(data)
       }
@@ -178,7 +178,7 @@ export class TemplePage implements OnInit {
       id: event.id,
       joined: event.joined
     }
-    this.router.navigate(['/main/event/event-detail'], {
+    this.router.navigate(['/main/event/detail'], {
       queryParams: {
         data: JSON.stringify(data)
       }
@@ -187,7 +187,7 @@ export class TemplePage implements OnInit {
 
   goToDonate() {
     const data = {
-      id: this.temple.id
+      id: this.chabad.id
     }
     this.router.navigate(['/donate'], {
       queryParams: {

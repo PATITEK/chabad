@@ -9,23 +9,23 @@
   <ion-backdrop *ngIf="!hiddenDateList" (click)="hiddenDateList = true"></ion-backdrop>
 
   <div class="img-container main-box-shadow">
-    <img [src]="temple.imgUrl">
+    <img [src]="chabad.imgUrl">
   </div>
 
-  <ion-item-group class="temple-info-container">
-    <ion-item-group class="temple-info">
+  <ion-item-group class="chabad-info-container">
+    <ion-item-group class="chabad-info">
       <ion-buttons class="ion-align-items-start ion-justify-content-between">
-        <h3 class="temple-name">{{ temple.name }}</h3>
+        <h3 class="chabad-name">{{ chabad.name }}</h3>
         <span class="btn-go">Go</span>
       </ion-buttons>
       <ion-buttons class="ion-align-items-start">
         <img src="assets/icon/location-lite.svg">
-        <p class="temple-address">{{ temple.address }}</p>
+        <p class="chabad-address">{{ chabad.address }}</p>
       </ion-buttons>
     </ion-item-group>
 
     <ion-buttons class="ion-justify-content-between">
-      <span class="temple-distance">{{ temple.distance }}km</span>
+      <span class="chabad-distance">{{ chabad.distance }}km</span>
       <ion-buttons>
         <span class="btn btn-pray active-effect">Pray</span>
         <span class="btn btn-donate active-effect" (click)="goToDonate()">Donate</span>
@@ -33,11 +33,11 @@
     </ion-buttons>
 
     <ion-label class="label">Introduction</ion-label>
-    <p class="text temple-introduction">{{ temple.introduction }}</p>
+    <p class="text chabad-introduction">{{ chabad.introduction }}</p>
   </ion-item-group>
 </ion-content>
 
-<ion-footer [ngClass]="{'high-footer': !hiddenDateList}">
+<ion-footer class="ion-no-border" [ngClass]="{'high-footer': !hiddenDateList}">
   <ion-item-group class="segment">
     <div *ngIf="!hiddenDateList" class="background-high"></div>
 

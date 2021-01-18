@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SynagoguePageRoutingModule } from './synagogue-routing.module';
+import { DetailPageRoutingModule } from './detail-routing.module';
 
-import { SynagoguePage } from './synagogue.page';
+import { DetailPage } from './detail.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SynagoguePageRoutingModule
+    DetailPageRoutingModule
   ],
-  declarations: [SynagoguePage]
+  declarations: [DetailPage]
 })
-export class SynagoguePageModule {}
+export class DetailPageModule {}

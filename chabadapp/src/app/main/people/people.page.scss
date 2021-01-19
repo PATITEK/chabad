@@ -39,19 +39,7 @@ ion-content {
 
         ion-grid {
             overflow: scroll;
-            height: 340px;
-            @media screen and (max-height: 737px) {
-                height: 300px !important;
-            }
-            @media screen and (max-height: 668px) {
-                height: 230px !important;
-            }
-            @media screen and (max-height: 569px) {
-                height: 175px !important;
-            }
-            @media screen and (max-height: 481px) {
-                height: 150px !important;
-            }
+            height: 100%;
             ion-col {
                 .people-item {
                     background: #ffffff;

@@ -43,6 +43,15 @@ export class EventsService {
       catchError((errorRes: any) => {
         throw errorRes.error;
       }));
+  }
+   public cancelEvent(req) {
+    return this.http.post(`${APICONFIG.EVENTS.CANCEL}`, req).pipe(
+      map((result)=> {
+        return result;
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      }));
 
   }
 

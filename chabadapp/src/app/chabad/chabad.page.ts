@@ -154,13 +154,43 @@ export class ChabadPage implements OnInit {
   toggleJoiningService(service) {
     event.stopPropagation();
     service.joined = !service.joined;
+     var result =  {
+          "attention_log": {
+          "event_id": service.id
+          }
+      }
+    if(service.joined) {
+       this.eventService.joinEvent(result).subscribe((data)=> {
+         console.log(data);
+       })
+    }
+    else {
+       this.eventService.cancelEvent(result).subscribe((data)=> {
+         console.log(data);
+       })
+    }
   }
 
   toggleJoiningEvent(eventItem) {
     event.stopPropagation();
     eventItem.joined = !eventItem.joined;
+     var result =  {
+          "attention_log": {
+          "event_id": eventItem.id
+          }
+      }
+    if(eventItem.joined) {
+    
+       this.eventService.joinEvent(result).subscribe((data)=> {
+         console.log(data);
+       })
+    }
+    else {
+       this.eventService.cancelEvent(result).subscribe((data)=> {
+         console.log(data);
+       })
+    }
   }
-
   toggleHiddenEvents(dateItem) {
     dateItem.hiddenEvents = !dateItem.hiddenEvents;
   }

@@ -39,9 +39,19 @@ export class PrayPage implements OnInit {
     'November',
     'December'
   ];
-  today;
+  today: any;
   dateList = [];
-  DateObj;
+  DateObj = '';
+  fulldate: any;
+  date: any;
+  month :any;
+  year: any;
+  public tab = 'pray'
+  isHidden = false;
+  isChoose = false;
+  source_type: any;
+  source_id: any;
+  id_change :any;
   constructor(
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
@@ -60,22 +70,35 @@ export class PrayPage implements OnInit {
       this.dateList.push({
         "id": i,
         "day": this.DAY[nextDay.getDay()].substring(0, 3),
+        "fullday": this.DAY[nextDay.getDay()],
         "date": nextDay.getDate(),
+        "month": this.MONTH[this.today.getMonth()],
+        "year" : this.today.getFullYear(),
       })
     }
-    const month_ = this.MONTH[this.today.getMonth()];
-    const day_ = this.DAY[this.today.getDay()];
-    const date_ = String(this.today.getDate()).padStart(2, '0');
-    const year_ = this.today.getFullYear();
-     this.DateObj = `${day_}, ${date_} ${month_} ${year_}`
   }
-  public tab = 'pray'
-  isHidden = false;
-  isChoose = false;
-  source_type: any;
-  source_id: any;
-  ngOnInit(
-  ) {
+  displayDate(item) {
+    this.fulldate = item.fullday;
+      this.date = item.date;
+      this.month = item.month;
+      this.year = item.year;
+      this.DateObj = `${this.fulldate}, ${this.date} ${this.month} ${ this.year}`;
+      this.id_change = item.id;
+
+  }
+  ngOnInit() {
+  }
+  ionViewWillEnter() {
+    if(this.DateObj === '') {
+      this.fulldate = `${this.dateList[0].fullday}`;
+      this.date = `${this.dateList[0].date}`;
+      this.month = `${this.dateList[0].month}`;
+      this.year = `${this.dateList[0].year}`;
+      this.DateObj = `${this.fulldate}, ${this.date} ${this.month} ${ this.year}`;
+    }
+    else {
+      return
+    }
   }
   clickPray() {
     this.tab = 'pray';

@@ -11,8 +11,8 @@
          position: absolute;
           // border-top-left-radius: 40px;
           // border-top-right-radius: 40px;
-          // border-bottom-left-radius: 40px;
-          // border-bottom-right-radius: 40px;
+          border-bottom-left-radius: 40px;
+          border-bottom-right-radius: 40px;
           background-size: cover;
           box-shadow: 0 0 6px 4px rgba(0,0,0, 0.2);
         
@@ -25,9 +25,8 @@
         border-radius: 18px;
         width: 45px;
         height: 45px;
-        margin: 17px;
         z-index: 2;
-        top: 30px !important;
+        top: 17px !important;
       }
       
     }
@@ -69,13 +68,13 @@
       border-radius: 40px;
       margin-top: 32px;
       padding: 0;
-     
-     
       .group__day {
         display: flex;
         position: relative;
         height: auto !important;
         width: 99%;
+        padding-left: 8px;
+        margin: 0 auto;
         .label__donate {
             top: -17px;
             margin-left: 50%;
@@ -93,14 +92,16 @@
           width: 52px;
           height: 66px;
           border-radius: 25px;
+          margin-right: 8px;
           margin-top: 16px;
           font-size: 14px;
-          margin-left: 5px;
           position: relative;
+         
           ion-label {
             text-align: center;
             margin-top: 12px;
           }
+         
           filter: drop-shadow(0px 4px 0px #008486);
           .new {
             position: absolute;
@@ -113,11 +114,10 @@
             border-radius: 50%;
           }
         }
-        .day.first-day {
-        margin-left: 10px;
-        }
-        .day.last-day {
-          margin-right: 10px;
+        .change {
+          background-color: #00B0B2;
+          border: 1px solid #fff;
+          color: #fff;
         }
       }
       ion-select{
@@ -234,10 +234,6 @@
               height: 21px;
               font-size: 14px;
             }
-            // .btn__nameless_dis_pray {
-            //   --background: #EAEAEA;
-            //   --color: #AEAEAE;
-            // }
             .btn__nameless_dis {
               --background: #EAEAEA;
               --color: #AEAEAE;

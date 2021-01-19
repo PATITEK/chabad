@@ -21,7 +21,7 @@
       <ion-label class="label__donate">
         Pray
       </ion-label>
-      <ion-item-group class="day" *ngFor ="let item of dateList; index as i">
+      <ion-item-group class="day"[ngClass]="{'change': id_change === item.id}"*ngFor ="let item of dateList; index as i"(click)="displayDate(item)">
         <ion-label>
           {{item.day}}
         </ion-label>

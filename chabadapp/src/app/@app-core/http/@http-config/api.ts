@@ -33,6 +33,7 @@ export const APICONFIG = {
     // GET_WITH_CHABAD_ID: id => `app/events/${id}`,
     GET_DETAIL: (id) => `/app/events/${id}`,
     JOIN: `/app/attention_logs`,
+    CANCEL: `/app/attention_logs/cancel`
     // GET_HISTORY: `/app/history`,
     // CREATE: '/app/orders',
     // EDIT: (id) => `/app/orders${id}`,

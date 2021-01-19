@@ -92,10 +92,12 @@ export class AuthService {
     // this.router.navigateByUrl('/main/product-categories');
     window.location.assign('/');
   }
-  public signup(req) {
+  public signUpUser(req) {
     return this.http.post(`${APICONFIG.AUTH.SIGNUP}`, req).pipe(
+      
       map((result) => {
         // this.toastr.success(SUCCESS.AUTH.LOGIN);
+        console.log('auth-signup');
         return result;
       }),
       catchError((errorRes: any) => {

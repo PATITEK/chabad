@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { requestQuery } from '../../utils';
 import { APICONFIG } from '../@http-config';
-import { IPageRequest } from '../global';
+import { IPageEvent } from './event.DTO';
 
 @Injectable()
 export class EventsService {
@@ -12,7 +12,7 @@ export class EventsService {
     private http: HttpClient
   ) { }
 
-  public getEventes(request: IPageRequest) {
+  public getAll(request: IPageEvent) {
     return this.http.get<any>(`${APICONFIG.EVENTS.GET}?${(requestQuery(request))}`).pipe(
       map((result) => {
         return result;
@@ -20,8 +20,16 @@ export class EventsService {
       catchError((errorRes) => { throw errorRes.error; }));
   }
 
-  public getEventeDetail(request: IPageRequest, id: string) {
-    return this.http.get<any>(`${APICONFIG.EVENTS.GET_DETAIL(id)}?${(requestQuery(request))}`).pipe(
+  // public getAllWithChabadId(request: IPageEvent, id) {
+  //   return this.http.get<any>(`${APICONFIG.EVENTS.GET_WITH_CHABAD_ID(id)}?${(requestQuery(request))}`).pipe(
+  //     map((result) => {
+  //       return result;
+  //     }),
+  //     catchError((errorRes) => { throw errorRes.error; }));
+  // }
+
+  public getDetail(id: string) {
+    return this.http.get<any>(`${APICONFIG.EVENTS.GET_DETAIL(id)}`).pipe(
       map((result) => {
         return result;
       }),

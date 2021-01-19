@@ -3,8 +3,13 @@ ion-content {
   --background: #f5f5f5;
 }
 
-ion-backdrop {
-  opacity: 0.5;
+.backdrop-date-list {
+  opacity: .5;
+}
+
+.backdrop-chabad {
+  opacity: 1;
+  background: #f5f5f5;
 }
 
 ion-footer {
@@ -27,6 +32,13 @@ ion-footer {
 .img-container {
   height: 280px;
   overflow: hidden;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
 
   @media screen and (max-height: 568px) {
     height: 200px;
@@ -272,14 +284,13 @@ ion-footer {
     margin-right: -1px;
   }
 
-  .meeting {
-    background: blue;
+  .service {
     color: #fff;
     border-radius: 35px;
     padding: 15px;
     margin: 12px 10px;
 
-    .meeting-name {
+    .service-name {
       font-size: 20px;
       font-weight: 600;
       margin-right: 20px;
@@ -287,7 +298,7 @@ ion-footer {
       text-align: left;
     }
 
-    .meeting-time {
+    .service-time {
       font-size: 14px;
       text-align: left;
       display: block;
@@ -295,9 +306,10 @@ ion-footer {
       font-weight: 600;
     }
 
-    .meeting-reason {
+    .service-desc {
       margin-right: 43px;
       color: #F8F8F8;
+      text-align: left;
     }
 
     .three-dots-icon {
@@ -344,7 +356,7 @@ ion-footer {
     .event-item {
       color: #A1A1A1;
 
-      .event-reason {
+      .event-desc {
         color: #A6A6A6;
       }
     }
@@ -353,5 +365,4 @@ ion-footer {
   .event-body-full-height {
     height: 100%;
   }
-
 }

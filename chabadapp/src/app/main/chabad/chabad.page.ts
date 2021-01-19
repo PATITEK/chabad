@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IPageRequest, ChabadService } from 'src/app/@app-core/http';
 
@@ -8,7 +9,7 @@ import { IPageRequest, ChabadService } from 'src/app/@app-core/http';
   styleUrls: ['./chabad.page.scss'],
 })
 export class ChabadPage implements OnInit {
-// navBar = [
+  // navBar = [
   //   {
   //     name: 'synagogue',
   //     text: 'Synagogue',
@@ -31,30 +32,16 @@ export class ChabadPage implements OnInit {
   //   },
   // ];
 
-  chabads = [
-    {
-      id: 1,
-      imgUrl: 'assets/img/temple.jpg',
-      distance: '2,4',
-      name: 'Chabad of Ho Chi Minh City',
-      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
-    },
-    {
-      id: 2,
-      imgUrl: 'assets/img/temple.jpg',
-      distance: '2,4',
-      name: 'Chabad of Ho Chi Minh City',
-      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
-    }
-  ];
+  chabads = [];
   pageRequest: IPageRequest = {
     page: 1,
-    per_page: 5
+    per_page: 10
   }
 
   constructor(
     private router: Router,
-    private chabadService: ChabadService
+    private chabadService: ChabadService,
+    public sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -73,10 +60,10 @@ export class ChabadPage implements OnInit {
     });
   }
 
-  getData() {
+  getData(func?) {
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
       this.chabads = data;
-      console.log(data);
+      func && func();
     })
   }
 
@@ -93,5 +80,19 @@ export class ChabadPage implements OnInit {
         data: JSON.stringify(data)
       }
     })
+  }
+
+  goToMap() {
+    event.stopPropagation();
+  }
+
+  doRefresh(event) {
+    this.getData(() => {
+      event.target.complete();
+    });
+  }
+
+  getChabadImageString(chabad) {
+    return `url(${chabad.thumb_image})`;
   }
 }

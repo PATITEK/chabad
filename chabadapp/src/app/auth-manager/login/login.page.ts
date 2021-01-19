@@ -29,6 +29,7 @@ export class LoginPage implements OnInit {
     phone_number: '',
     password: '',
   }
+  
   constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder) { }
   ngOnInit() {
   }
@@ -52,18 +53,19 @@ export class LoginPage implements OnInit {
   clickForgotPassword() {
     this.router.navigate(['auth-manager/forgot-password']);
   }
-  // loginSuccess(){
-  //   this.router.navigate(['main/synagogue'])
-  // }
+
   signUp() {
-    this.authService.signup(this.dataSignUp).subscribe(data =>{
-      console.log(data);
-    });
-    console.log(this.dataSignUp);
+    this.authService.signUpUser(this.dataSignUp).subscribe((data:any) =>{
+      localStorage.setItem('Authorization', data.token);
+      this.router.navigate(['auth-manager/login']);
+    })
   }
 
   loginSuccess() {
     this.authService.login(this.dataLogin).subscribe(data =>{
+      console.log(this.dataLogin);
+      localStorage.setItem('Authorization', data.token);
+      this.router.navigate(['main/chabad']);
       console.log(data);
     });
   }
@@ -103,14 +105,14 @@ export class LoginPage implements OnInit {
 
   getFullnameSignup(event) {
     this.dataSignUp.full_name = event.target.value;
-    console.log(this.dataSignUp.full_name);
+    // console.log(this.dataSignUp.full_name);
   }
   getSexSignup(event) {
     this.dataSignUp.sex = event.target.value;
   }
   getAgeSignup(event) {
     this.dataSignUp.age = event.target.value;
-    console.log(this.dataSignUp.age)
+    // console.log(this.dataSignUp.age)
   }
   getProvinceSignup(event) {
     this.dataSignUp.province = event.target.value;
@@ -120,17 +122,17 @@ export class LoginPage implements OnInit {
   }
   getFulladdressSignup(event) {
     this.dataSignUp.full_address = event.target.value;
-    console.log(this.dataSignUp.full_address)
+    // console.log(this.dataSignUp.full_address)
   }
   getPhonenumberSignup(event) {
     this.dataSignUp.phone_number = event.target.value;
     this.dataLogin.phone_number = event.target.value;
-    console.log(this.dataSignUp.phone_number);
+    // console.log(this.dataSignUp.phone_number);
   }
   getPasswordSignup(event) {
     this.dataSignUp.password = event.target.value;
     this.dataLogin.password = event.target.value;
-    console.log(this.dataSignUp.password);
+    // console.log(this.dataSignUp.password);
   }
   // signup() {
   //   console.log(this.dataSignUp);

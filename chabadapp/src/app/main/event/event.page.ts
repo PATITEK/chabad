@@ -66,10 +66,10 @@ export class EventPage implements OnInit {
     })
   }
   getItems(){
-    this.eventService.getEventes(this.pageReuest).subscribe(data => {
-      console.log(data);
+    // this.eventService.getEventes(this.pageReuest).subscribe(data => {
+    //   console.log(data);
       
-    })
+    // })
   }
   goToOrderDetail(item) {
     const data = {

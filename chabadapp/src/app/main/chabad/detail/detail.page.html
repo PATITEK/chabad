@@ -1,4 +1,8 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   <ion-avatar class="avatar active-effect">
     <img src="assets/img/avatar-people.svg">
@@ -6,17 +10,20 @@
   </ion-avatar>
   <!-- <img src="assets//icon/two-lines.svg" class="two-lines"> -->
 
-  <ion-backdrop *ngIf="!hiddenDateList" (click)="hiddenDateList = true"></ion-backdrop>
+  <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hiddenDateList = true"></ion-backdrop>
+  <ion-backdrop *ngIf="!loadedChabad" class="backdrop-chabad"></ion-backdrop>
 
-  <div class="img-container main-box-shadow">
-    <img [src]="chabad.imgUrl">
+  <div class="img-container img-wrapper main-box-shadow"
+    [style.background-image]="sanitizer.bypassSecurityTrustStyle(getChabadImageString())">
+    <!-- <img [src]="chabad.thumb_image"> -->
+    <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
   </div>
 
   <ion-item-group class="chabad-info-container">
     <ion-item-group class="chabad-info">
       <ion-buttons class="ion-align-items-start ion-justify-content-between">
         <h3 class="chabad-name">{{ chabad.name }}</h3>
-        <span class="btn-go">Go</span>
+        <span class="btn-go active-effect">Go</span>
       </ion-buttons>
       <ion-buttons class="ion-align-items-start">
         <img src="assets/icon/location-lite.svg">
@@ -25,15 +32,15 @@
     </ion-item-group>
 
     <ion-buttons class="ion-justify-content-between">
-      <span class="chabad-distance">{{ chabad.distance }}km</span>
+      <span class="chabad-distance">No km</span>
       <ion-buttons>
-        <span class="btn btn-pray active-effect">Pray</span>
+        <span class="btn btn-pray active-effect" (click)="goToPray()">Pray</span>
         <span class="btn btn-donate active-effect" (click)="goToDonate()">Donate</span>
       </ion-buttons>
     </ion-buttons>
 
     <ion-label class="label">Introduction</ion-label>
-    <p class="text chabad-introduction">{{ chabad.introduction }}</p>
+    <p class="text chabad-introduction">No description</p>
   </ion-item-group>
 </ion-content>
 
@@ -60,17 +67,17 @@
       <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
         [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}"
         (click)="changeDateItem(dateItem)">
-        <span>{{ dateItem.day }}</span>
-        <span>{{ dateItem.date }}</span>
-        <span *ngIf="dateItem.meetings.length != 0 || dateItem.events.length != 0" class="circle date-item-note"></span>
+        <span>{{ DAY[dateItem.day.getDay()].substring(0, 3) }}</span>
+        <span>{{ dateItem.day.getDate() }}</span>
+        <span *ngIf="dateItem.services.length != 0 || dateItem.events.length != 0" class="circle date-item-note"></span>
       </ion-buttons>
     </ion-buttons>
 
-    <p class="today">{{ getTodayString() }}</p>
+    <p class="today">{{ getDayString(currentDay) }}</p>
 
     <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
       <ion-item-group
-        *ngIf="(dateItem.meetings.length != 0 || dateItem.events.length != 0) && activeDateItem == dateItem.id"
+        *ngIf="(dateItem.services.length != 0 || dateItem.events.length != 0) && activeDateItem == dateItem.id"
         class="btn-join btn-join-all active-effect" (click)="toggleJoiningAll(dateItem)">
         <span *ngIf="!joinedAll(dateItem)">Join all</span>
         <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
@@ -78,18 +85,19 @@
     </ion-item-group>
 
     <ion-list *ngIf="!hiddenDateList" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
-      <ion-item-group *ngFor="let meeting of dateList[activeDateItem].meetings" class="meeting"
-        [style.background]="meeting.color" (click)="goToServiceDetail(meeting)">
+      <ion-item-group *ngFor="let service of dateList[activeDateItem].services" class="service"
+        [style.background]="service.color" (click)="goToEventDetail(service)">
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
-          <h3 class="meeting-name">{{ meeting.name }}</h3>
-          <ion-item-group class="btn-join active-effect" [style.color]="meeting.color"
-            (click)="toggleJoiningMeeting(meeting)">
-            <span *ngIf="!meeting.joined">Join</span>
-            <ion-icon *ngIf="meeting.joined" name="checkmark-outline"></ion-icon>
+          <h3 class="service-name">Service {{ service.id }}</h3>
+          <ion-item-group class="btn-join active-effect" [style.color]="service.color"
+            (click)="toggleJoiningService(service)">
+            <span *ngIf="!service.joined">Join</span>
+            <ion-icon *ngIf="service.joined" name="checkmark-outline"></ion-icon>
           </ion-item-group>
         </ion-buttons>
-        <span class="meeting-time">{{ meeting.timeStart }} - {{ meeting.timeEnd }}</span>
-        <p class="text three-dots-2 meeting-reason">{{ meeting.reason }}</p>
+        <span class="service-time">{{ service.range_time.substring(0, 5) }} - {{ service.range_time.substring(7, 13)
+          }}</span>
+        <p class="text three-dots-2 service-desc">{{ service.description }}</p>
 
         <img src="assets/icon/three-dots.svg" class="three-dots-icon">
       </ion-item-group>
@@ -104,17 +112,18 @@
         </ion-buttons>
 
         <ion-list class="event-body" [ngClass]="{'event-body-full-height': !dateList[activeDateItem].hiddenEvents}">
-          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="meeting event-item"
+          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="service event-item"
             [style.background]="event.color" (click)="goToEventDetail(event)">
             <ion-buttons class="ion-align-items-start ion-justify-content-between">
-              <h3 class="meeting-name">{{ event.name }}</h3>
+              <h3 class="service-name">Event {{ event.id }}</h3>
               <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">
                 <span *ngIf="!event.joined">Join</span>
                 <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
               </ion-item-group>
             </ion-buttons>
-            <span class="meeting-time">{{ event.timeStart }} - {{ event.timeEnd }}</span>
-            <p class="text three-dots-2 meeting-reason event-reason">{{ event.reason }}</p>
+            <span class="service-time">{{ event.range_time.substring(0, 5) }} - {{ event.range_time.substring(7, 13)
+              }}</span>
+            <p class="text three-dots-2 service-desc event-desc">{{ event.description }}</p>
 
             <img src="assets/icon/three-dots-gray.svg" class="three-dots-icon">
           </ion-item-group>

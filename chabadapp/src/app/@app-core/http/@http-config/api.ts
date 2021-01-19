@@ -30,6 +30,7 @@ export const APICONFIG = {
   },
   EVENTS: {
     GET: `/app/events`,
+    // GET_WITH_CHABAD_ID: id => `app/events/${id}`,
     GET_DETAIL: (id) => `/app/events/${id}`,
     // GET_HISTORY: `/app/history`,
     // CREATE: '/app/orders',

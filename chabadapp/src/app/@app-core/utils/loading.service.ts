@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoadingService {
 
   isLoading = false;
@@ -15,14 +13,15 @@ export class LoadingService {
   async present(text?) {
     this.isLoading = true;
     return await this.loadingController.create({
-      message: text
-    })
-      .then(a => a.present()
-        .then(() => {
-          if (!this.isLoading) {
-            a.dismiss();
-          }
-        }));
+      message: text,
+      mode: 'ios',
+    }).then(a => {
+      a.present().then(() => {
+        if (!this.isLoading) {
+          a.dismiss();
+        }
+      })
+    });
   }
 
   async dismiss() {

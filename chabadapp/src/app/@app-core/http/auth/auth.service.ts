@@ -71,7 +71,7 @@ export class AuthService {
         this.storage.clear();
         console.log(result);
         localStorage.setItem('Authorization', result.token);
-        localStorage.setItem('fullname', result.fullname);
+        localStorage.setItem('fullname', result.full_name);
         this.storage.setInfoAccount();
         
         //  this.toastr.success(SUCCESS.AUTH.LOGIN);

@@ -23,7 +23,6 @@ import { AuthGuard } from './@app-core/auth-guard.service';
     BrowserModule, 
     FormsModule, 
     ReactiveFormsModule,
-    
   ],
   providers: [
     StatusBar,

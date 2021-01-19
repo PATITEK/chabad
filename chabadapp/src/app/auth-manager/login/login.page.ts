@@ -61,12 +61,16 @@ export class LoginPage implements OnInit {
     })
   }
 
-  loginSuccess() {
+  login() {
+    this.dataLogin.phone_number = '+84'+this.dataLogin.phone_number.slice(1,10);
+    // console.log(this.dataLogin.phone_number);
     this.authService.login(this.dataLogin).subscribe(data =>{
       console.log(this.dataLogin);
       localStorage.setItem('Authorization', data.token);
-      this.router.navigate(['main/chabad']);
-      console.log(data);
+      // console.log(data);
+      if(this.authService.checkLogin() == true) {
+        this.router.navigate(['main/chabad']);
+      }
     });
   }
 

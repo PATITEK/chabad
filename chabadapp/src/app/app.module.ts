@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './@app-core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './@app-core/auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,12 +22,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoreModule.forRoot(),
     BrowserModule, 
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -25,7 +25,7 @@
       <ion-label class="forgot__pass" routerLink="/" (click)="clickForgotPassword()"
         >Forgot Password?</ion-label
       >
-      <ion-button type="submit" (click)="login()">
+      <ion-button [disabled]="dataLogin.phone_number == '' && dataLogin.password == '' " type="submit" (click)="login()">
         <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
       </ion-button>
     </ion-grid>
@@ -51,8 +51,8 @@
               <ion-label class="your__select-flat">
                 <img src="assets/img/flag-400.png" alt="" class="" />
                 <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
-                  <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
-                  <ion-select-option value="Nine">Nine</ion-select-option>
+                  <!-- <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
+                  <ion-select-option value="Nine">Nine</ion-select-option> -->
                 </ion-select>
               </ion-label>
             </ion-label>
@@ -76,8 +76,8 @@
               <ion-label class="your__select-flat">
                 <img src="assets/img/flag-400.png" alt="" class="" />
                 <ion-select class="your__select-flat--country">
-                  <ion-select-option value="f">Viet Nam</ion-select-option>
-                  <ion-select-option value="m">Singapore</ion-select-option>
+                  <!-- <ion-select-option value="f">Viet Nam</ion-select-option>
+                  <ion-select-option value="m">Singapore</ion-select-option> -->
                 </ion-select>
               </ion-label>
             </ion-label>
@@ -102,9 +102,18 @@
         </ion-row>
         <ion-row class="select__signup-row">
           <ion-label class="select__signup-row--name input-mr">Confirm password</ion-label>
-          <input  type="password"/>
+          <input (keyup)="getConfirmPasswordSignup($event)" type="password"/>
         </ion-row>
-        <ion-button type="submit" class="submit__signup" (click)="signUp()">
+        <ion-button [disabled]="this.dataSignUp.full_name === '' || 
+                                this.dataSignUp.sex === '' || 
+                                this.dataSignUp.age == 0 || 
+                                this.dataSignUp.province === '' || 
+                                this.dataSignUp.district === '' ||
+                                this.dataSignUp.full_address === '' ||
+                                this.dataSignUp.phone_number === '' || 
+                                this.dataSignUp.password === '' || 
+                                this.confirmPassword === '' " 
+                                type="submit" class="submit__signup" (click)="signUp()">
           <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
         </ion-button>
       </form>

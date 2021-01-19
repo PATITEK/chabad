@@ -95,15 +95,17 @@ export class AuthService {
     // this.router.navigateByUrl('/main/product-categories');
     window.location.assign('/');
   }
-  public signUpUser(req) {
+  public signup(req) {
     return this.http.post(`${APICONFIG.AUTH.SIGNUP}`, req).pipe(
       
       map((result) => {
         // this.toastr.success(SUCCESS.AUTH.LOGIN);
         console.log('auth-signup');
+        this.router.navigate(['main/chabad']);
         return result;
       }),
       catchError((errorRes: any) => {
+        this.presentToast('Error, please try again!');
         throw errorRes.error;
       }));
   }

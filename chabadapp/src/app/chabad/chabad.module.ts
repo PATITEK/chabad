@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetailPageRoutingModule } from './detail-routing.module';
+import { ChabadPageRoutingModule } from './chabad-routing.module';
 
-import { DetailPage } from './detail.page';
+import { ChabadPage } from './chabad.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetailPageRoutingModule
+    ChabadPageRoutingModule
   ],
-  declarations: [DetailPage]
+  declarations: [ChabadPage]
 })
-export class DetailPageModule {}
+export class ChabadPageModule {}

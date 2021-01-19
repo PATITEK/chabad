@@ -15,7 +15,6 @@
 
   <div class="img-container img-wrapper main-box-shadow"
     [style.background-image]="sanitizer.bypassSecurityTrustStyle(getChabadImageString())">
-    <!-- <img [src]="chabad.thumb_image"> -->
     <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
   </div>
 
@@ -49,19 +48,6 @@
     <div *ngIf="!hiddenDateList" class="background-high"></div>
 
     <span *ngIf="hiddenDateList" class="line"></span>
-
-    <!-- <ion-segment class="main-box-shadow">
-      <ion-buttons class="segment-btn" value="ceremony" [ngClass]="{'active-segment-btn': activeTab === 'ceremony'}"
-        (click)="changeTab('ceremony')">
-        <img src="assets/icon/book.svg">
-        <ion-label class="segment-label">Ceremony</ion-label>
-      </ion-buttons>
-      <ion-buttons class="segment-btn" value="event" [ngClass]="{'active-segment-btn': activeTab === 'event'}"
-        (click)="changeTab('event')">
-        <img src="assets/icon/fruit.svg">
-        <ion-label class="segment-label">Event</ion-label>
-      </ion-buttons>
-    </ion-segment> -->
 
     <ion-buttons class="date-list">
       <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"

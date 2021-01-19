@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { EventsService, IPageRequest } from 'src/app/@app-core/http';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { ChabadService, EventsService, IPageRequest } from 'src/app/@app-core/http';
 
 @Component({
   selector: 'app-event',
@@ -8,77 +10,69 @@ import { EventsService, IPageRequest } from 'src/app/@app-core/http';
   styleUrls: ['./event.page.scss'],
 })
 export class EventPage implements OnInit {
-  public pageReuest: IPageRequest = {
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  chabads = [];
+  pageRequest: IPageRequest = {
     page: 1,
-    per_page: 10,
-    total_objects: 0,
+    per_page: 10
   }
-  temples = [
-    {
-      id: 1,
-      imgUrl: 'assets/img/temple.jpg',
-      distance: '2,4',
-      name: 'Chabad of Ho Chi Minh City',
-      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
-    },
-    {
-      id: 2,
-      imgUrl: 'assets/img/temple.jpg',
-      distance: '2,4',
-      name: 'Chabad of Ho Chi Minh City',
-      address: '5a (villa) Nguyen Dinh Chieu, Phuong Dakao, District 1 Thành phố Hồ Chí Minh',
-    }
-  ]
+
   constructor(
     private router: Router,
-    private eventService:EventsService
-    
-    ) { }
+    private chabadService: ChabadService,
+    public sanitizer: DomSanitizer,
+  ) { }
 
   ngOnInit() {
-    this.getItems();
+    this.getData();
   }
 
-  ionViewWillEnter() {
-    const tabs = document.querySelectorAll('ion-tab-bar');
-    Object.keys(tabs).map((key) => {
-      tabs[key].style.display = 'flex';
-    });
+  getData(func?) {
+    this.chabadService.getAll(this.pageRequest).subscribe(data => {
+      this.chabads = this.chabads.concat(data.chabads);
+      func && func();
+      this.pageRequest.page++;
 
-    const tabs1 = document.querySelectorAll('ion-header');
-    Object.keys(tabs1).map((key) => {
-      tabs1[key].style.display = 'block';
-    });
+      if (this.chabads.length >= data.meta.pagination.total_objects) {
+        this.infiniteScroll.disabled = true;
+      }
+    })
   }
 
-  goToNavBarItem(navBarItem) {
-    this.router.navigateByUrl(`main/${navBarItem.name}`);
-  }
-
-  goToTemple(temple) {
+  goToEvent(chabad) {
     const data = {
-      id: temple.id
+      id: chabad.id
     }
-    this.router.navigate(['/main/synagogue/temple'], {
+    this.router.navigate(['event'], {
       queryParams: {
         data: JSON.stringify(data)
       }
     })
   }
-  getItems(){
-    // this.eventService.getEventes(this.pageReuest).subscribe(data => {
-    //   console.log(data);
-      
-    // })
+
+  goToMap() {
+    event.stopPropagation();
   }
-  goToOrderDetail(item) {
-    const data = {
-      id: item.id
-    }
-    this.router.navigate(['main/event/detail'], {
-      queryParams: {
-        data: JSON.stringify(data)
-      }
-    })
+
+  doRefresh(event) {
+    // reset
+    this.chabads = [];
+    this.pageRequest.page = 1;
+    this.infiniteScroll.disabled = false;
+
+    this.getData(() => {
+      event.target.complete();
+    });
+  }
+
+  getChabadImageString(chabad) {
+    return `url(${chabad.thumb_image})`;
+  }
+
+  loadMoreData(event) {
+    this.getData(() => {
+      event.target.complete();
+    });
   }
 }

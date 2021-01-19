@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { ChabadPage } from './chabad.page';
 
 const routes: Routes = [
   {
     path: '',
     component: ChabadPage
-  },
-  {
-    path: 'detail',
-    loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule)
   }
 ];
 

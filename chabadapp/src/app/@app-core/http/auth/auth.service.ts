@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/@app-core/storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
     // private toastr: ToastrService,
     private router: Router,
     private storage: StorageService,
+    public toastController: ToastController
   ) { }
 
   public get receiveData(): Observable<any> {
@@ -80,6 +82,7 @@ export class AuthService {
       catchError((errorRes: any) => {
         localStorage.clear();
         this.storage.clear();
+        this.presentToast(errorRes.error.error);
         throw errorRes.error;
       })
       );
@@ -117,5 +120,13 @@ export class AuthService {
     localStorage.setItem('Authorization', data.token);
     localStorage.setItem('fullname', data.fullname);
     localStorage.setItem('exp', data.exp);
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500
+    });
+    toast.present();
   }
 }

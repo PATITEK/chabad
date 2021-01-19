@@ -35,6 +35,16 @@ export class EventsService {
       }),
       catchError((errorRes) => { throw errorRes.error; }));
   }
+  public joinEvent(req) {
+    return this.http.post(`${APICONFIG.EVENTS.JOIN}`, req).pipe(
+      map((result)=> {
+        return result;
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      }));
+
+  }
 
 //   public getAccessoryDetail(id: string) {
 //     return this.http.get<any>(`${APICONFIG.ACCESSORIES.GET_DETAIL(id)}`).pipe(

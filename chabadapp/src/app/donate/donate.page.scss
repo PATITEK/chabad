@@ -9,10 +9,10 @@
           height: 281px;
           width: 100%;
          position: absolute;
-          border-top-left-radius: 40px;
-          border-top-right-radius: 40px;
-          border-bottom-left-radius: 40px;
-          border-bottom-right-radius: 40px;
+          // border-top-left-radius: 40px;
+          // border-top-right-radius: 40px;
+          // border-bottom-left-radius: 40px;
+          // border-bottom-right-radius: 40px;
           background-size: cover;
           box-shadow: 0 0 6px 4px rgba(0,0,0, 0.2);
         
@@ -165,7 +165,7 @@
          }
          .edit {
            position: absolute;
-           top: -5px;
+           top: -7px;
            left: 66px;
            padding: 4px;
            background-color: #03C1C3;

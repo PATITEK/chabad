@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ChabadService, EventsService, IPageEvent } from 'src/app/@app-core/http';
-import { LoadingService } from 'src/app/@app-core/utils';
+import { Router, ActivatedRoute } from '@angular/router';
+import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
+import { LoadingService } from '../@app-core/utils';
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.page.html',
-  styleUrls: ['./detail.page.scss'],
+  selector: 'app-chabad',
+  templateUrl: './chabad.page.html',
+  styleUrls: ['./chabad.page.scss'],
 })
-export class DetailPage implements OnInit {
+export class ChabadPage implements OnInit {
   chabad = {
     id: '',
     name: '',
@@ -90,7 +90,7 @@ export class DetailPage implements OnInit {
 
   getDataChabad(id, isDismissLoading?: boolean, func?) {
     this.chabadService.getDetail(id).subscribe(data => {
-      this.chabad = data;
+      this.chabad = data.chabad;
       func && func();
       this.loadedChabad = true;
       isDismissLoading && this.loadingService.dismiss();
@@ -109,7 +109,7 @@ export class DetailPage implements OnInit {
 
       this.eventService.getAll(this.pageRequestEvent).subscribe(data => {
         let serviceColorIndex = 0;
-        data.forEach(d => {
+        data.events.forEach(d => {
           if (d.event_type == 'both') {
             this.dateList[i].events.push(d);
             this.dateList[i].events[this.dateList[i].events.length - 1].color ='#F5F5F5';
@@ -130,22 +130,6 @@ export class DetailPage implements OnInit {
       this.getDataEvents();
     })
   }
-
-  ionViewWillEnter() {
-    const tabs = document.querySelectorAll('ion-tab-bar');
-    Object.keys(tabs).map((key) => {
-      tabs[key].style.display = 'none';
-    });
-
-    const tabs1 = document.querySelectorAll('ion-header');
-    Object.keys(tabs1).map((key) => {
-      tabs1[key].style.display = 'none';
-    });
-  }
-
-  // changeTab(name) {
-  //   this.activeTab = name;
-  // }
 
   changeDateItem(dateItem) {
     this.activeDateItem = dateItem.id;
@@ -194,7 +178,7 @@ export class DetailPage implements OnInit {
       id: event.id,
       joined: event.joined
     }
-    this.router.navigate(['/main/event/detail'], {
+    this.router.navigate(['service'], {
       queryParams: {
         data: JSON.stringify(data)
       }

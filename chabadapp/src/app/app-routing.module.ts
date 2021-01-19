@@ -32,9 +32,20 @@ const routes: Routes = [
     loadChildren: () => import('./service/service.module').then( m => m.ServicePageModule)
     ,canActivate : [AuthGuard],
   },
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main' },
-
+  {
+    path: 'chabad',
+    loadChildren: () => import('./chabad/chabad.module').then( m => m.ChabadPageModule)
+  },
+  {
+    path: 'event',
+    loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
+  },
+  {
+    path: 'food',
+    loadChildren: () => import('./food/food.module').then( m => m.FoodPageModule)
+  },
+  { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main/chabad' },
 ];
 @NgModule({
   imports: [

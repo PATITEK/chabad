@@ -1,146 +1,20 @@
 <ion-content>
-  <ion-item-group class="page-people-main">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item-group class="fixed">
+    <ion-label class="date">{{ getDateString() }}</ion-label>
+    <ion-label class="title">People match</ion-label>
   </ion-item-group>
-  <ion-item-group class="people-page-detal">
-    <ion-item-group class="title-head">
-      <ion-label class="text-title">Thursday, 03 January 2021</ion-label>
-    </ion-item-group>
-    <ion-label class="text-title">People Match</ion-label>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-group class="people-item">
-            <ion-card class="avatar-people">
-              <ion-img src="assets/img/avatar-people.svg"></ion-img>
-
-            </ion-card>
-            <ion-label class="name-people">Card Title</ion-label>
-          </ion-item-group>
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item-group>
+  <ion-grid>
+    <ion-row *ngFor="let row of people">
+      <ion-col *ngFor="let col of row" size="4">
+        <ion-item-group class="col-inner main-box-shadow active-effect">
+          <img [src]="col.thumb_image">
+        <p class="person-name">{{ col.name }}</p>
+        </ion-item-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

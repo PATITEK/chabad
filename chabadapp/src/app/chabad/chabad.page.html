@@ -8,7 +8,6 @@
     <img src="assets/img/avatar-people.svg">
     <span class="circle avatar-note"></span>
   </ion-avatar>
-  <!-- <img src="assets//icon/two-lines.svg" class="two-lines"> -->
 
   <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hiddenDateList = true"></ion-backdrop>
   <ion-backdrop *ngIf="!loadedChabad" class="backdrop-chabad"></ion-backdrop>
@@ -53,13 +52,13 @@
       <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
         [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}"
         (click)="changeDateItem(dateItem)">
-        <span>{{ DAY[dateItem.day.getDay()].substring(0, 3) }}</span>
+        <span>{{ dateTimeService.DAY[dateItem.day.getDay()].substring(0, 3) }}</span>
         <span>{{ dateItem.day.getDate() }}</span>
         <span *ngIf="dateItem.services.length != 0 || dateItem.events.length != 0" class="circle date-item-note"></span>
       </ion-buttons>
     </ion-buttons>
 
-    <p class="today">{{ getDayString(currentDay) }}</p>
+    <p class="today">{{ dateTimeService.getDayString(currentDay) }}</p>
 
     <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
       <ion-item-group

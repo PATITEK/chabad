@@ -159,7 +159,6 @@ ion-footer {
   right: 0;
   bottom: 0;
   height: 100%;
-  overflow-y: auto;
 
   .background-high {
     position: absolute;
@@ -179,32 +178,6 @@ ion-footer {
     display: inline-block;
     border-radius: 12px;
   }
-
-  // ion-segment {
-  //   background: #ededed;
-  //   width: 220px;
-  //   margin: 10px auto;
-  //   border-radius: 40px;
-  //   padding: 1px;
-
-  //   .segment-btn {
-  //     border-radius: 40px;
-  //     height: 30px;
-  //     width: 50%;
-  //     justify-content: center;
-  //     transition: 0.2s;
-
-  //     .segment-label {
-  //       color: #727171;
-  //       font-size: 14p x;
-  //       margin-left: 10px;
-  //     }
-  //   }
-
-  //   .active-segment-btn {
-  //     background: #fff;
-  //   }
-  // }
 
   .date-list {
     justify-content: space-around;
@@ -252,7 +225,7 @@ ion-footer {
 
   .btn-all-list {
     text-align: right;
-    margin-right: 19px;
+    margin: 0 19px 5px 0;
     position: relative;
   }
 
@@ -288,7 +261,7 @@ ion-footer {
     color: #fff;
     border-radius: 35px;
     padding: 15px;
-    margin: 12px 10px;
+    margin: 0 10px 12px;
 
     .service-name {
       font-size: 20px;
@@ -325,6 +298,7 @@ ion-footer {
     display: inline-flex;
     border-radius: 40px;
     padding: 5px 10px;
+    margin-bottom: 15px;
     border: 1px solid rgba(#000, 0.1);
     position: relative;
 
@@ -350,7 +324,7 @@ ion-footer {
   .event-body {
     background: transparent;
     height: 0;
-    transform: translateY(-20px);
+    transform: translateY(-27px);
     padding: 0;
 
     .event-item {
@@ -365,4 +339,10 @@ ion-footer {
   .event-body-full-height {
     height: 100%;
   }
+}
+
+.service-list {
+  overflow: scroll;
+  height: calc(100% - 146px);
+  padding: 0;
 }

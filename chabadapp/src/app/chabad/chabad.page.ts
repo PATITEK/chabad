@@ -14,6 +14,7 @@ export class ChabadPage implements OnInit {
     id: '',
     name: '',
     address: '',
+    description: '',
     thumb_image: ''
   };
   loadedChabad = false;

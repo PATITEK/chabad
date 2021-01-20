@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
-import { LoadingService } from '../@app-core/utils';
+import { DateTimeService, LoadingService } from '../@app-core/utils';
 
 @Component({
   selector: 'app-chabad',
@@ -18,29 +18,6 @@ export class ChabadPage implements OnInit {
   };
   loadedChabad = false;
 
-  DAY = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-  MONTH = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
   SERVICE_COLOR = [
     '#D7ADC2',
     '#E7D0AE',
@@ -65,7 +42,8 @@ export class ChabadPage implements OnInit {
     private chabadService: ChabadService,
     private loadingService: LoadingService,
     public sanitizer: DomSanitizer,
-    private eventService: EventsService
+    private eventService: EventsService,
+    public dateTimeService: DateTimeService 
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {
@@ -105,7 +83,7 @@ export class ChabadPage implements OnInit {
       
       let nextDay = new Date();
       nextDay.setDate(nextDay.getDate() + i);
-      this.pageRequestEvent.cal_date = this.getDayString2(nextDay);
+      this.pageRequestEvent.cal_date = this.dateTimeService.getDayString2(nextDay);
 
       this.eventService.getAll(this.pageRequestEvent).subscribe(data => {
         let serviceColorIndex = 0;
@@ -163,14 +141,6 @@ export class ChabadPage implements OnInit {
 
   toggleHiddenEvents(dateItem) {
     dateItem.hiddenEvents = !dateItem.hiddenEvents;
-  }
-
-  getDayString(day) {
-    return `${this.DAY[day.getDay()]}, ${day.getDate()} ${this.MONTH[day.getMonth()]} ${day.getFullYear()}`;
-  }
-
-  getDayString2(day) {
-    return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`;
   }
 
   goToEventDetail(event) {

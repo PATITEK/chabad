@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
 import { environment } from 'src/environments/environment.prod';
 import { GlobalErrorHandler } from './GlobalErrorHandler';
 import { ConnectivityService } from './utils/connectivity.service';
-import { LoadingService } from './utils';
+import { DateTimeService, LoadingService } from './utils';
 
 @NgModule({
   declarations: [],
@@ -32,7 +32,8 @@ export class CoreModule {
         GlobalService,
         ConnectivityService,
         ChabadService,
-        LoadingService
+        LoadingService,
+        DateTimeService
       ]
     };
   }

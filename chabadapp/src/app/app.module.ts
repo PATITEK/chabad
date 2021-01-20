@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './@app-core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './@app-core/auth-guard.service';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,6 +22,7 @@ import { AuthGuard } from './@app-core/auth-guard.service';
     BrowserModule, 
     FormsModule, 
     ReactiveFormsModule,
+   
   ],
   providers: [
     StatusBar,

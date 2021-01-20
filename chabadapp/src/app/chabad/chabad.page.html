@@ -38,7 +38,7 @@
     </ion-buttons>
 
     <ion-label class="label">Introduction</ion-label>
-    <p class="text chabad-introduction">No description</p>
+    <p class="text chabad-introduction">{{ chabad.description }}</p>
   </ion-item-group>
 </ion-content>
 
@@ -69,11 +69,11 @@
       </ion-item-group>
     </ion-item-group>
 
-    <ion-list *ngIf="!hiddenDateList" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
+    <ion-list *ngIf="!hiddenDateList" class="service-list" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
       <ion-item-group *ngFor="let service of dateList[activeDateItem].services" class="service"
         [style.background]="service.color" (click)="goToEventDetail(service)">
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
-          <h3 class="service-name">Service {{ service.id }}</h3>
+          <h3 class="service-name">{{ service.name }}</h3>
           <ion-item-group class="btn-join active-effect" [style.color]="service.color"
             (click)="toggleJoiningService(service)">
             <span *ngIf="!service.joined">Join</span>
@@ -100,7 +100,7 @@
           <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="service event-item"
             [style.background]="event.color" (click)="goToEventDetail(event)">
             <ion-buttons class="ion-align-items-start ion-justify-content-between">
-              <h3 class="service-name">Event {{ event.id }}</h3>
+              <h3 class="service-name">{{ event.name }}</h3>
               <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">
                 <span *ngIf="!event.joined">Join</span>
                 <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>

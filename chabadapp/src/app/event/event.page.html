@@ -22,8 +22,8 @@
     <div class="background-high"></div>
 
     <ion-buttons class="date-list">
-      <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow" [ngClass]="{'active-date-item': activeDateItem == dateItem.id}"
-        (click)="changeDateItem(dateItem)">
+      <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
+        [ngClass]="{'active-date-item': activeDateItem == dateItem.id}" (click)="changeDateItem(dateItem)">
         <span>{{ DAY[dateItem.day.getDay()].substring(0, 3) }}</span>
         <span>{{ dateItem.day.getDate() }}</span>
         <span *ngIf="dateItem.events.length != 0" class="circle date-item-note"></span>
@@ -40,25 +40,22 @@
       </ion-item-group>
     </ion-item-group>
 
-    <ion-list style="background: '#eee';">
-      <ion-item-group *ngIf="dateList[activeDateItem].events.length != 0">
-        <ion-list class="event-body">
-          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="event"
-            [style.background]="event.color" (click)="goToEventDetail(event)">
-            <ion-buttons class="ion-align-items-start ion-justify-content-between">
-              <h3 class="event-name">Event {{ event.id }}</h3>
-              <ion-item-group class="btn-join btn-join-event active-effect" [style.color]="event.color" (click)="toggleJoiningEvent(event)">
-                <span *ngIf="!event.joined">Join</span>
-                <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
-              </ion-item-group>
-            </ion-buttons>
-            <span class="event-time">{{ event.range_time.substring(0, 5) }} - {{ event.range_time.substring(7, 13)
-              }}</span>
-            <p class="text three-dots-2 event-desc">{{ event.description }}</p>
-
-            <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+    <ion-list class="event-list">
+      <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="event"
+        [style.background]="event.color" (click)="goToEventDetail(event)">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="event-name">dđ đ{{ event.name }}</h3>
+          <ion-item-group class="btn-join btn-join-event active-effect" [style.color]="event.color"
+            (click)="toggleJoiningEvent(event)">
+            <span *ngIf="!event.joined">Join</span>
+            <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
           </ion-item-group>
-        </ion-list>
+        </ion-buttons>
+        <span class="event-time">{{ event.range_time.substring(0, 5) }} - {{ event.range_time.substring(7, 13)
+          }}</span>
+        <p class="text three-dots-2 event-desc">{{ event.description }}</p>
+
+        <img src="assets/icon/three-dots.svg" class="three-dots-icon">
       </ion-item-group>
     </ion-list>
   </ion-item-group>

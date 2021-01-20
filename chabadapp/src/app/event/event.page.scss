@@ -75,7 +75,6 @@ ion-footer {
   right: 0;
   bottom: 0;
   height: 100%;
-  overflow-y: auto;
 
   .background-high {
     position: absolute;
@@ -130,7 +129,7 @@ ion-footer {
 
   .btn-all-list {
     text-align: right;
-    margin-right: 19px;
+    margin: 0 19px 5px 0  ;
     position: relative;
   }
 
@@ -166,7 +165,7 @@ ion-footer {
     color: #fff;
     border-radius: 35px;
     padding: 15px;
-    margin: 12px 10px;
+    margin: 0 10px 12px;
 
     .event-name {
       font-size: 20px;
@@ -197,10 +196,11 @@ ion-footer {
   }
 }
 
-.event-body {
+.event-list {
   background: #eeeeee;
-  height: 100%;
   padding: 0;
+  overflow: auto;
+  height: calc(100% - 146px);
 
   .event-item {
     color: #fff;

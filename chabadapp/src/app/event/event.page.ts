@@ -86,6 +86,7 @@ export class EventPage implements OnInit {
         data.events.forEach(d => {
           this.dateList[i].events.push(d);
           this.dateList[i].events[this.dateList[i].events.length - 1].color = this.EVENT_COLOR[eventColorIndex];
+          this.dateList[i].events[this.dateList[i].events.length - 1].isLoading = false;
           (eventColorIndex++ >= this.EVENT_COLOR.length - 1) && (eventColorIndex = 0);
         });
       })
@@ -110,18 +111,49 @@ export class EventPage implements OnInit {
   }
 
   toggleJoiningAll(dateItem) {
+    dateItem.events.forEach(event => event.isLoading = true);
     if (this.joinedAll(dateItem)) {
-      dateItem.events.forEach(event => event.joined = false);
+      dateItem.events.forEach(event => {
+        event.joined && this.eventService.cancelEvent(event).subscribe(() => {
+          event.joined = !event.joined;
+          event.isLoading = false;
+        });
+      });
     } else {
-      dateItem.events.forEach(event => event.joined = true);
+      dateItem.events.forEach(event => {
+        if (event.joined) {
+          event.isLoading = false;
+        } else this.eventService.joinEvent(event).subscribe(() => {
+          event.joined = !event.joined;
+          event.isLoading = false;
+        });
+      });
     }
   }
 
   toggleJoiningEvent(eventItem) {
     event.stopPropagation();
-    eventItem.joined = !eventItem.joined;
+    eventItem.isLoading = true;
+    this.toggleJoinedApi(eventItem);
   }
 
+  toggleJoinedApi(event) {
+    if (event.joined) {
+      this.eventService.cancelEvent(event).subscribe(() => {
+        event.joined = !event.joined;
+        event.isLoading = false;
+      });
+    } else {
+      this.eventService.joinEvent(event).subscribe(() => {
+        event.joined = !event.joined;
+        event.isLoading = false;
+      });
+    }
+  }
+
+  isSomeLoading(dateItem) {
+    return dateItem.events.some(event => event.isLoading == true);
+  }
 
   doRefresh(event) {
     this.getData(false, () => {

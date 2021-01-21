@@ -231,6 +231,7 @@ ion-footer {
     font-size: 14px;
     overflow: hidden;
     text-align: center;
+    position: relative;
 
     ion-icon {
       font-size: 18px;
@@ -337,4 +338,8 @@ ion-footer {
   overflow: scroll;
   height: calc(100% - 146px);
   padding: 0;
+}
+
+.spinner-event-join {
+  background: #eaeaea;
 }

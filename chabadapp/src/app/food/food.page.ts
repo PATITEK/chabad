@@ -10,6 +10,7 @@ import { ShoppingPage } from '../main/shopping/shopping.page';
   styleUrls: ['./food.page.scss'],
 })
 export class FoodPage implements OnInit {
+  totalAmount = 0;
   shop = [];
   currentItem: any = {
     id : 0,
@@ -64,8 +65,14 @@ export class FoodPage implements OnInit {
       this.shop.push({ id: this.currentItem.id, amount: this.currentItem.amount });
     }
     console.log(this.shop);
+
+    this.totalAmount = 0
+    for(let i = 0; i< this.shop.length; i++) {
+      this.totalAmount += this.shop[i].amount;
+    }
+
   }
   goToFoodDetail() {
-    this.router.navigate(['food/food-detail']);
+    this.router.navigate(['food/food-basket']);
   }
 }

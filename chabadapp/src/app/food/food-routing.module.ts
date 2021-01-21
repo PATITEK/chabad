@@ -7,13 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: FoodPage
-  },  {
-    path: 'food-detail',
-    loadChildren: () => import('./food-detail/food-detail.module').then( m => m.FoodDetailPageModule)
   },
   {
-    path: 'food-confirm',
-    loadChildren: () => import('./food-confirm/food-confirm.module').then( m => m.FoodConfirmPageModule)
+    path: 'food-checkout',
+    loadChildren: () => import('./food-checkout/food-checkout.module').then( m => m.FoodCheckoutPageModule)
+  },
+  {
+    path: 'food-basket',
+    loadChildren: () => import('./food-basket/food-basket.module').then( m => m.FoodBasketPageModule)
   },
 
 ];

@@ -44,11 +44,14 @@ ion-content {
                 border-radius: 10px;
                 padding-bottom: 15px;
                 ion-icon {
-                    width: 48px;
-                    height: 80px;
+                    width: 50px;
+                    height: 30px;
+                    transform: translateY(-10px);
                 }
                 span {
+                    margin-top: 10px;
                     font-size: 15px;
+                    height: 60px;
                 }
             }
         }
@@ -85,12 +88,18 @@ ion-content {
                     margin-left: 9%;
                     .icon-add {
                         width: 20px;
-                        margin-left: 8px;
-                        margin-right: 8px;
+                        // margin-left: 5px;
+                        // margin-right: 5px;
+                        display: block;
+                        margin: auto;
                     }
-                    ion-label {
+                    span {
                         font-weight: 600;
+                        width: 20px;
                         transform: translateY(2px);
+                        display: block;
+                        margin: auto;
+                        margin-left: 5px;
                     }
                 }
                 .price {

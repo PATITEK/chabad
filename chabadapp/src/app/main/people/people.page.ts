@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { IPageRequest, MatchUsersService } from 'src/app/@app-core/http';
 import { DateTimeService } from 'src/app/@app-core/utils';
 
 @Component({
@@ -7,32 +9,49 @@ import { DateTimeService } from 'src/app/@app-core/utils';
   styleUrls: ['./people.page.scss'],
 })
 export class PeoplePage implements OnInit {
-  people = [];
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  users = [];
+  pageRequest: IPageRequest = {
+    page: 1,
+    per_page: 9
+  }
 
   constructor(
-    public dateTimeService: DateTimeService
+    public dateTimeService: DateTimeService,
+    private matchUsersService: MatchUsersService
   ) { }
-
-  getData(func?) {
-    const rand = Math.floor(Math.random() * (10 - 0) + 0);
-    for (let i = 0; i < rand; i++) {
-      const person = {
-        id: i,
-        thumb_image: 'assets/img/avatar-people.svg',
-        name: `Person ${i + 1}`
-      }
-      if (i % 3 == 0) {
-        this.people.push([person]);
-      } else {
-        this.people[this.people.length - 1].push(person);
-      }
-    }
-
-    func && func();
-  }
 
   ngOnInit() {
     this.getData();
+  }
+
+  getData(func?) {
+    this.matchUsersService.getAll(this.pageRequest).subscribe(data => {
+      // if (!this.users.reduce((acc, cur) => acc.concat(cur), [])
+      //   .some(user => user.id == data.app_users[0].id)
+      // ) {
+      // }
+      data.app_users.forEach((d, i) => {
+        if (i % 3 == 0) {
+          this.users.push([d]);
+        } else {
+          this.users[this.users.length - 1].push(d);
+        }
+      })
+
+      func && func();
+      this.pageRequest.page++;
+
+      if (this.getUsersLength() >= data.meta.pagination.total_objects) {
+        console.log('object');
+        this.infiniteScroll.disabled = true;
+      }
+    })
+  }
+
+  getUsersLength() {
+    return this.users.reduce((acc, cur) => acc + cur.length, 0);
   }
 
   getDateString() {
@@ -41,10 +60,19 @@ export class PeoplePage implements OnInit {
 
   doRefresh(event) {
     // reset
-    this.people = [];
+    this.users = [];
+    this.pageRequest.page = 1;
+    this.infiniteScroll.disabled = false;
 
     this.getData(() => {
       event.target.complete();
     })
+  }
+
+  loadMoreData(event) {
+    console.log('load more');
+    this.getData(() => {
+      event.target.complete();
+    });
   }
 }

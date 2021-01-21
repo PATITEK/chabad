@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders, InjectionToken, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService, AccountService, GlobalService, ChabadService, EventsService} from './http';
+import { AuthService, AccountService, GlobalService, ChabadService, EventsService, MatchUsersService} from './http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IntercepterService } from './http-interceptor';
 import { API_URL } from './http/@http-config';
@@ -33,7 +33,8 @@ export class CoreModule {
         ConnectivityService,
         ChabadService,
         LoadingService,
-        DateTimeService
+        DateTimeService,
+        MatchUsersService
       ]
     };
   }

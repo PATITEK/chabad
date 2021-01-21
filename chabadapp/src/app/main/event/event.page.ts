@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { ChabadService, EventsService, IPageRequest } from 'src/app/@app-core/http';
+import { ChabadService, IPageRequest } from 'src/app/@app-core/http';
 
 @Component({
   selector: 'app-event',

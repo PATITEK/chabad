@@ -98,8 +98,10 @@ export class AuthService {
   public signup(req) {
     return this.http.post(`${APICONFIG.AUTH.SIGNUP}`, req).pipe(
       
-      map((result) => {
+      map((result: any) => {
         // this.toastr.success(SUCCESS.AUTH.LOGIN);
+        localStorage.setItem('Authorization', result.token);
+        localStorage.setItem('fullname', result.full_name);
         console.log('auth-signup');
         this.router.navigate(['main/chabad']);
         return result;

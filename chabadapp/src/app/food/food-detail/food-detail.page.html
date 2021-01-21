@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+    <ion-title>Your basket</ion-title>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-list class="group0"></ion-list>
+    <ion-list class="group1">
+      <ion-label class="group1-label">Destination:</ion-label>
+      <ion-item lines="none" class="group1-item">
+        <ion-icon name="location-outline"></ion-icon>
+        <span>5a (villa) Nguyen Dinh Chieu, Dakao, District 1, Ho Chi Minh</span>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="group2">
+      <ion-row class="group2-row-1">
+        <ion-label class="left-label">Your Order</ion-label>
+        <ion-label class="add-item">Add items</ion-label>
+      </ion-row>
+      <ion-row *ngFor="let food of data" class="group2-row-2" >
+        <ion-label class="food-name">{{food.name}}</ion-label>
+        <ion-row>
+          <img (click)="plusItem()" class="icon-add" src="assets/img/ion-add.svg" alt="">
+          <ion-label>{{food.amount}}</ion-label>
+          <img (click)="minusItem()" class="icon-add" src="assets/img/ion-remove.svg" alt="">
+        </ion-row>
+        <ion-label class="price">{{food.price}}</ion-label>
+        <ion-icon class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon>
+      </ion-row>
+      <ion-row class="group2-row-3">
+        <ion-icon name="add-circle"></ion-icon>
+        <ion-input placeholder="Notes"> </ion-input>
+      </ion-row>
+    </ion-list>
+
+    <ion-list class="group3">
+      <ion-row class="group3-row-1">
+        <ion-label class="group3-row1-total">Total (3 items)</ion-label>
+        <ion-label class="group3-row1-prices">$90</ion-label>
+      </ion-row>
+    </ion-list>
+    
+    <ion-button (click)="order()" class="main-button">Order</ion-button>
+    <ion-list class="group4"></ion-list>
+  </ion-item-group>
+</ion-content>

@@ -7,7 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: FoodPage
-  }
+  },  {
+    path: 'food-detail',
+    loadChildren: () => import('./food-detail/food-detail.module').then( m => m.FoodDetailPageModule)
+  },
+  {
+    path: 'food-confirm',
+    loadChildren: () => import('./food-confirm/food-confirm.module').then( m => m.FoodConfirmPageModule)
+  },
+
 ];
 
 @NgModule({

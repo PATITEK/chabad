@@ -35,14 +35,17 @@ const routes: Routes = [
   {
     path: 'chabad',
     loadChildren: () => import('./chabad/chabad.module').then( m => m.ChabadPageModule)
+    ,canActivate : [AuthGuard],
   },
   {
     path: 'event',
     loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
+    ,canActivate : [AuthGuard],
   },
   {
     path: 'food',
     loadChildren: () => import('./food/food.module').then( m => m.FoodPageModule)
+    ,canActivate : [AuthGuard],
   },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/chabad' },

@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'page-noti',
-    loadChildren: () => import('../app/@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
+    loadChildren: () => import('./@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
     ,canActivate : [AuthGuard],
   },
   {

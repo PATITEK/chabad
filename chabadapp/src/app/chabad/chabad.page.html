@@ -8,9 +8,8 @@
     <img src="assets/img/avatar-people.svg">
     <span class="circle avatar-note"></span>
   </ion-avatar>
-  <!-- <img src="assets//icon/two-lines.svg" class="two-lines"> -->
 
-  <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hiddenDateList = true"></ion-backdrop>
+  <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hideDateList()"></ion-backdrop>
   <ion-backdrop *ngIf="!loadedChabad" class="backdrop-chabad"></ion-backdrop>
 
   <div class="img-container img-wrapper main-box-shadow"
@@ -39,7 +38,7 @@
     </ion-buttons>
 
     <ion-label class="label">Introduction</ion-label>
-    <p class="text chabad-introduction">No description</p>
+    <p class="text chabad-introduction">{{ chabad.description }}</p>
   </ion-item-group>
 </ion-content>
 
@@ -53,13 +52,13 @@
       <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
         [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}"
         (click)="changeDateItem(dateItem)">
-        <span>{{ DAY[dateItem.day.getDay()].substring(0, 3) }}</span>
+        <span>{{ dateTimeService.DAYS[dateItem.day.getDay()].substring(0, 3) }}</span>
         <span>{{ dateItem.day.getDate() }}</span>
         <span *ngIf="dateItem.services.length != 0 || dateItem.events.length != 0" class="circle date-item-note"></span>
       </ion-buttons>
     </ion-buttons>
 
-    <p class="today">{{ getDayString(currentDay) }}</p>
+    <p class="today">{{ dateTimeService.getDateString(currentDay) }}</p>
 
     <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
       <ion-item-group
@@ -70,18 +69,18 @@
       </ion-item-group>
     </ion-item-group>
 
-    <ion-list *ngIf="!hiddenDateList" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
+    <ion-list *ngIf="!hiddenDateList" class="service-list" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
       <ion-item-group *ngFor="let service of dateList[activeDateItem].services" class="service"
-        [style.background]="service.color" (click)="goToEventDetail(service)">
+        [style.background]="service.color" (click)="openEventDetailModal(service)">
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
-          <h3 class="service-name">Service {{ service.id }}</h3>
+          <h3 class="service-name">{{ service.name }}</h3>
           <ion-item-group class="btn-join active-effect" [style.color]="service.color"
             (click)="toggleJoiningService(service)">
             <span *ngIf="!service.joined">Join</span>
             <ion-icon *ngIf="service.joined" name="checkmark-outline"></ion-icon>
           </ion-item-group>
         </ion-buttons>
-        <span class="service-time">{{ service.range_time.substring(0, 5) }} - {{ service.range_time.substring(7, 13)
+        <span class="service-time">{{ service.start_time.substring(11, 16) }} - {{ service.end_time.substring(11, 16)
           }}</span>
         <p class="text three-dots-2 service-desc">{{ service.description }}</p>
 
@@ -99,15 +98,15 @@
 
         <ion-list class="event-body" [ngClass]="{'event-body-full-height': !dateList[activeDateItem].hiddenEvents}">
           <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="service event-item"
-            [style.background]="event.color" (click)="goToEventDetail(event)">
+            [style.background]="event.color" (click)="openEventDetailModal(event)">
             <ion-buttons class="ion-align-items-start ion-justify-content-between">
-              <h3 class="service-name">Event {{ event.id }}</h3>
+              <h3 class="service-name">{{ event.name }}</h3>
               <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">
                 <span *ngIf="!event.joined">Join</span>
                 <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
               </ion-item-group>
             </ion-buttons>
-            <span class="service-time">{{ event.range_time.substring(0, 5) }} - {{ event.range_time.substring(7, 13)
+            <span class="service-time">{{ event.start_time.substring(11, 16) }} - {{ event.end_time.substring(11, 16)
               }}</span>
             <p class="text three-dots-2 service-desc event-desc">{{ event.description }}</p>
 

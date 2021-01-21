@@ -15,7 +15,7 @@ export class ChabadPage implements OnInit {
   chabads = [];
   pageRequest: IPageRequest = {
     page: 1,
-    per_page: 10
+    per_page: 3
   }
 
   constructor(

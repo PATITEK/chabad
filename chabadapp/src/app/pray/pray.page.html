@@ -16,72 +16,23 @@
   </ion-segment> -->
 
   <ion-grid >
+   <form [formGroup] ="frmPray">
     <ion-item-group class="group__day">
       <ion-label class="label__donate">
         Pray
       </ion-label>
-      <ion-item-group class="day first-day">
+      <ion-item-group class="day"[ngClass]="{'change': id_change === item.id}"*ngFor ="let item of dateList; index as i"(click)="displayDate(item)">
         <ion-label>
-          Mon
+          {{item.day}}
         </ion-label>
         <ion-label>
-          03
-        </ion-label>
-      </ion-item-group>
-      <ion-item-group class="day">
-        <ion-label class="new"></ion-label>
-        <ion-label>
-          Tue
-        </ion-label>
-        <ion-label>
-          04
+          {{item.date}}
         </ion-label>
       </ion-item-group>
-      <ion-item-group class="day">
-        <ion-label>
-          Wed
-        </ion-label>
-        <ion-label>
-          05
-        </ion-label>
-      </ion-item-group>
-      <ion-item-group class="day">
-        <ion-label class="new"></ion-label>
-        <ion-label>
-          Thu
-        </ion-label>
-        <ion-label>
-          06
-        </ion-label>
-      </ion-item-group>
-      <ion-item-group class="day">
-        <ion-label>
-          Fri
-        </ion-label>
-        <ion-label>
-          07
-        </ion-label>
-      </ion-item-group>
-      <ion-item-group class="day">
-        <ion-label class="new"></ion-label>
-        <ion-label>
-          Sat
-        </ion-label>
-        <ion-label>
-          08
-        </ion-label>
-      </ion-item-group>
-      <ion-item-group class="day last-day">
-        <ion-label>
-          Sun
-        </ion-label>
-        <ion-label>
-          09
-        </ion-label>
-      </ion-item-group>
+
     </ion-item-group>
     <ion-label class="time">
-      Wednesday, 05 January 2021
+        {{DateObj}}
     </ion-label>
     <ion-label class="time">
       Information:
@@ -89,7 +40,7 @@
     <ion-item-group class="time doladonate">
       <ion-img src="assets/img/pen.svg" class="edit"></ion-img>
       <ion-img src="assets/img/dola.svg"></ion-img>
-    <input type="text">
+    <input type="number" formControlName="amount">
     <ion-select value="dola">
       <ion-select-option value="dola">USD</ion-select-option>
       <ion-select-option value="vn">VNĐ</ion-select-option>
@@ -99,7 +50,7 @@
     <ion-item-group class="time purpose">
       <ion-img src="assets/img/edit2.svg" class="edit__big"></ion-img>
       <ion-label class="purpose__label">Purpose:</ion-label>
-      <textarea class="textarea" placeholder="Enter more information here..."></textarea>
+      <textarea class="textarea" placeholder="Enter more information here..." formControlName="note"></textarea>
     </ion-item-group>
     <ion-grid class="user__info">
       <ion-row>
@@ -113,12 +64,13 @@
           <ion-label class="thanks">Thank member!</ion-label>
         </ion-col>
         <ion-col size="7">
-          <ion-button class="btn">
+          <ion-button class="btn"type="button" (click)="onSubmit()">
             Confirm
           </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
+  </form>
   </ion-grid>
 
 
@@ -193,4 +145,5 @@
       </ion-row>
     </ion-grid>
   </ion-grid> -->
+  
 </ion-content>

@@ -25,11 +25,109 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-.selector-modal{
-    .modal-wrapper{
-        height: 210px;
-        top: 30%;
-        margin: 0 30px;
-        border-radius: 12px;
-    }
+
+.active-effect {
+  transition: 0.15s;
+
+  &:active {
+    filter: brightness(90%);
+  }
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.display-none {
+  display: none;
+}
+
+.over-flow-hidden {
+  overflow: hidden;
+}
+
+.over-flow-hidden-ion {
+  --overflow: hidden;
+}
+
+.back-btn {
+  display: inline-block;
+  color: #00b0b2;
+  background: rgba(#feffff, 0.6);
+  border-radius: 18px;
+  width: 45px;
+  height: 45px;
+  position: fixed;
+  top: 17px;
+  left: 17px;
+  z-index: 10;
+  background: #feffff;
+}
+
+.two-lines {
+  height: 45px;
+  padding: 17px;
+  position: absolute;
+  top: 17px;
+  right: 0;
+}
+
+.main-box-shadow {
+  box-shadow: 0 4px 4px rgba(#000, 0.25);
+}
+
+.three-dots-1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.three-dots-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.three-dots-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.three-dots-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-wrapper {
+  background-size: cover;
+  background-position: center center;
+}
+
+.line {
+  width: 40px;
+  height: 3px;
+  background: #bdbdbd;
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.event-detail-modal {      
+  .modal-wrapper {
+    background: transparent;
+    opacity: 0;
+    position: absolute;
+    top: 79px;
+  }
 }

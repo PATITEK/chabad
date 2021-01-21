@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DateTimeService {
-  public DAY = [
+  public DAYS = [
     'Sunday',
     'Monday',
     'Tuesday',
@@ -12,7 +12,7 @@ export class DateTimeService {
     'Saturday',
   ];
 
-  public MONTH = [
+  public MONTHS = [
     'January',
     'February',
     'March',
@@ -30,12 +30,12 @@ export class DateTimeService {
   constructor() { }
 
   // Thursday, 03 January 2021
-  public getDayString(day) {
-    return `${this.DAY[day.getDay()]}, ${day.getDate()} ${this.MONTH[day.getMonth()]} ${day.getFullYear()}`;
+  public getDateString(day) {
+    return `${this.DAYS[day.getDay()]}, ${day.getDate()} ${this.MONTHS[day.getMonth()]} ${day.getFullYear()}`;
   }
 
   // 2021-01-01
-  public getDayString2(day) {
+  public getDateString2(day) {
     return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`;
   }
 }

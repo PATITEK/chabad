@@ -8,13 +8,17 @@
     <ion-label class="title">People match</ion-label>
   </ion-item-group>
   <ion-grid>
-    <ion-row *ngFor="let row of people">
+    <ion-row *ngFor="let row of users">
       <ion-col *ngFor="let col of row" size="4">
         <ion-item-group class="col-inner main-box-shadow active-effect">
-          <img [src]="col.thumb_image">
-        <p class="person-name">{{ col.name }}</p>
+          <img src="assets/img/avatar-people.svg">
+        <p class="person-name">{{ col.full_name }}</p>
         </ion-item-group>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

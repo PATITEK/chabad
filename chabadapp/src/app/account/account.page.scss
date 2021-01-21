@@ -1,0 +1,136 @@
+ion-content {
+    position: relative;
+    .title-main{
+        display: flex;
+        margin-top: 27px;
+        justify-content: center;
+        .title-header {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 27px;
+            text-transform: uppercase;
+            color: #00b0b2;
+            z-index: 10;
+            
+        }
+    }
+   
+    .header-account {
+        padding: 80px 30px 0 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        @media screen and (max-height: 668px) {
+           padding-top: 0!important; 
+           padding-bottom: 0!important; 
+        }
+        .content-img {
+            position: relative;
+            @media screen and (max-height: 668px) {
+                width: 35%!important;
+            }
+
+            .card-img {
+                box-shadow: none;
+            }
+            .btn-edit {
+                position: absolute;
+                // margin-left: 80%;
+                --border-radius: 15px;
+                bottom: 3vh;
+                right: -15vw;
+
+                --border-color: #cbcbcb;
+                --border-style: solid;
+                --border-width: 2px;
+                font-size: 14px;
+                line-height: 24px;
+                text-align: center;
+                --color: #cbcbcb;
+                --background: none;
+                overflow: visible;
+                --padding-start: 10px;
+                --padding-end: 10px;
+                --padding-top: 10px;
+                --padding-bottom: 10px;
+                height: 10px;
+                // padding: 0 18px;
+                --background-activated: red;
+                @media screen and (max-height: 569px) {
+                    --padding-start: 10px !important;
+                    --padding-end: 10px !important;
+                    right: -17vw !important;
+                }
+            }
+
+            .icon-camera {
+                position: absolute;
+                right: 8vw;
+                bottom: 1vh;
+                font-weight: bold;
+                color: #cbcbcb;
+                background: #cbcbcb;
+                font-size: 35px;
+                border-radius: 10px;
+            }
+        }
+    }
+    .content-info {
+        padding: 0 60px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        .content-input {
+           
+
+            .title-info {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 27px;
+                color: #b0b0b0;
+                margin: 15px 0;
+                @media screen and (max-height: 641px) {
+                    font-size: 12px!important;
+                    margin: 10px 0!important;
+                }
+            }
+            .input-info {
+                border-bottom: 1px solid black;
+                --padding-bottom: 0;
+                ion-datetime {
+                    --padding-start: 40px;
+                    --padding-end: 40px;
+                }
+                @media screen and (max-height: 641px) {
+                    font-size: 12px!important;
+                }
+            }
+        }
+        .btn-update {
+            background: #cbcbcb;
+            border-radius: 15px;
+            width: 168px;
+            height: 39px;
+            transform: translateY(200%);
+            @media screen and (max-height: 737px){
+                transform: translateY(100%)!important;
+            }
+            @media screen and (max-height: 569px) {
+                transform: translateY(50%)!important;
+            }
+            @media screen and (max-height: 732px) {
+                transform: translateY(50%)!important;
+            }
+            @media screen and (max-height: 641px) {
+                transform: translateY(100%)!important;
+            }
+            @media screen and (max-height: 481px) {
+                transform: translateY(20%)!important;
+            }
+        }
+    }
+}

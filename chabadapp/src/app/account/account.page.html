@@ -1,0 +1,42 @@
+<ion-content>
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+ <ion-item-group class="title-main">
+  <ion-lable class="title-header">
+    account information
+  </ion-lable>
+ </ion-item-group>
+  <ion-item-group class="header-account">
+    
+    <ion-item-group class="content-img">
+      <ion-img class="card-img" src="assets/img/avatar-account.svg">
+      </ion-img>
+      <ion-img src="assets/img/icon-camera.svg" class="icon-camera"></ion-img>
+      <ion-button (click)="clickEdit()"  *ngIf="activeInput===false"class="btn-edit">Edit</ion-button>
+    </ion-item-group>
+  </ion-item-group>
+  <ion-item-group class="content-info">
+    <form>
+      <ion-item-group class="content-input">
+        
+        <ion-label class="title-info" position="floating">Your name</ion-label>
+        <ion-input class="input-info" [disabled]="activeInput===false" value="Nguyen Van A"></ion-input>
+        <ion-label class="title-info">Date of birth</ion-label>
+        <ion-datetime class="input-info" [disabled]="activeInput===false" value="2019-10-01T15:43:40.394Z"
+          display-timezone="utc">
+        </ion-datetime>
+
+
+        <ion-label type="tel" position="floating" class="title-info">Phone number</ion-label>
+        <ion-input class="input-info" [disabled]="activeInput===false" value="+84  912345678"></ion-input>
+
+
+        <ion-label class="title-info" position="floating">Address</ion-label>
+        <ion-input class="input-info" [disabled]="activeInput===false" value="123 Pham Van Dong St,  ward 12  ">
+        </ion-input>
+
+      </ion-item-group>
+      <button *ngIf="activeInput===true" class="btn-update" ion-button type="submit" block>Update</button>
+    </form>
+
+  </ion-item-group>
+</ion-content>

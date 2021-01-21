@@ -33,6 +33,10 @@ const routes: Routes = [
     ,canActivate : [AuthGuard],
   },
   {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
+  {
     path: 'event',
     loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
     ,canActivate : [AuthGuard],
@@ -44,6 +48,8 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/chabad' },
+  
+
 ];
 @NgModule({
   imports: [

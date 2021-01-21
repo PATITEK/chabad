@@ -1,0 +1,74 @@
+ion-header {
+    .btn-custom {
+        color: #ccc;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 2px solid;
+    }
+    background-color: #fff;
+}
+ion-content {
+    --background:#F5F5F5;
+    position: relative;
+    .marigin {
+    height: 204px;
+    background-color: #fff;
+    @media screen and (max-height: 569px){
+        height: 140px;
+    }
+    }
+    .account {
+        position: relative;
+        z-index: 10;
+        //border: 5px solid #fff;
+        // border-top-left-radius: 40px;
+        // --background:#F5F5F5;
+        // border-top-right-radius: 40px;
+        &_img {
+            border-radius: 50%;
+            border: 0px solid;
+            width: 160px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -111px;
+            position: absolute;
+            height: 160px;
+            @media screen and (max-height: 569px){
+                height: 100px;
+                width: 100px;
+                top: -54px;
+
+            }
+        }
+        &_btn-edit {
+            margin-left: 64vw;
+            margin-top: 2vh;
+        }
+        &_label {
+            position: absolute;
+            margin-left: 50%;
+            margin-top: 34px;
+            transform: translateX(-50%);
+        }
+
+    }
+    .account-setting {
+        margin-top: 100px;
+        display: block;
+        ion-label {
+            display: block;
+            text-align: left;
+            padding: 8px 38px;
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 10px;
+            border: 1px solid #fff;
+            position: relative;
+            border-radius: 10px;
+            .img_logout {
+                position: absolute;
+                right: 10px;
+            }
+        }
+    }
+}

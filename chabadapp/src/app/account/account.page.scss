@@ -1,4 +1,5 @@
 ion-content {
+    --overflow: hidden;
     position: relative;
     .title-main{
         display: flex;
@@ -12,10 +13,8 @@ ion-content {
             text-transform: uppercase;
             color: #00b0b2;
             z-index: 10;
-            
         }
     }
-   
     .header-account {
         padding: 80px 30px 0 30px;
         display: flex;
@@ -23,49 +22,68 @@ ion-content {
         justify-content: center;
         align-items: center;
         position: relative;
+        @media screen and (max-height: 737px) {
+           padding-top: 40px;
+        }
         @media screen and (max-height: 668px) {
-           padding-top: 0!important; 
+           padding-top: 35px!important; 
            padding-bottom: 0!important; 
         }
+        @media screen and (max-height: 568px) {
+            padding-top: 20px!important; 
+            padding-bottom: 0!important; 
+         }
         .content-img {
             position: relative;
             @media screen and (max-height: 668px) {
                 width: 35%!important;
             }
-
             .card-img {
                 box-shadow: none;
+                width: 160px;
+                height: 160px;
+                border-radius: 50%;
+                @media screen and (max-height: 737px) {
+                width: 140px;
+                height: 140px;
+                }
+                @media screen and (max-height: 668px) {
+                    width: 120px;
+                    height: 110px;
+                }
+                @media screen and (max-height: 569px) {
+                    width: 90px;
+                    height: 90px;
+                }
             }
             .btn-edit {
                 position: absolute;
-                // margin-left: 80%;
                 --border-radius: 15px;
-                bottom: 3vh;
+                bottom: 2vh;
                 right: -15vw;
-
                 --border-color: #cbcbcb;
                 --border-style: solid;
-                --border-width: 2px;
+                --border-width: 1px;
                 font-size: 14px;
                 line-height: 24px;
                 text-align: center;
                 --color: #cbcbcb;
+                width: 39px;
                 --background: none;
                 overflow: visible;
-                --padding-start: 10px;
-                --padding-end: 10px;
-                --padding-top: 10px;
-                --padding-bottom: 10px;
+                --padding-start: 12px;
+                --padding-end: 12px;
+                --padding-top: 10.5px;
+                --padding-bottom: 10.5px;
                 height: 10px;
-                // padding: 0 18px;
                 --background-activated: red;
+               
                 @media screen and (max-height: 569px) {
                     --padding-start: 10px !important;
                     --padding-end: 10px !important;
                     right: -17vw !important;
                 }
             }
-
             .icon-camera {
                 position: absolute;
                 right: 8vw;
@@ -75,6 +93,18 @@ ion-content {
                 background: #cbcbcb;
                 font-size: 35px;
                 border-radius: 10px;
+                
+                @media screen and (max-height: 737px) {
+                    right: 7vw;
+                }
+                @media screen and (max-height: 668px) {
+                    right: 6vw;
+                    bottom: 0.8vh;
+                }
+                @media screen and (max-height: 569px) {
+                    right: 6vw;
+                    bottom: 0.3vh;
+                }
             }
         }
     }
@@ -84,23 +114,34 @@ ion-content {
         display: flex;
         justify-content: center;
         .content-input {
-           
-
+           .group-input {
+               margin-bottom: 30px;
+               @media screen and (max-height: 737px){
+                margin-bottom: 20px;
+            }
+            @media screen and (max-height: 568px){
+                margin-bottom: 16px;
+            }
             .title-info {
                 font-style: normal;
                 font-weight: 500;
-                font-size: 18px;
-                line-height: 27px;
+                font-size: 14px;
+                line-height: 17px;
                 color: #b0b0b0;
-                margin: 15px 0;
+                margin-bottom: 20px;
                 @media screen and (max-height: 641px) {
                     font-size: 12px!important;
                     margin: 10px 0!important;
                 }
             }
+            .title-datetime {
+                margin-bottom: 0;
+            }
             .input-info {
-                border-bottom: 1px solid black;
+                line-height: 24px;
+                border-bottom: 1px solid #e9e6e6;
                 --padding-bottom: 0;
+                --padding-top: 14px;
                 ion-datetime {
                     --padding-start: 40px;
                     --padding-end: 40px;
@@ -109,27 +150,24 @@ ion-content {
                     font-size: 12px!important;
                 }
             }
+            .datetime {
+                padding-top: 0;
+            }
+           }
         }
         .btn-update {
             background: #cbcbcb;
             border-radius: 15px;
             width: 168px;
+            color:#fff;
             height: 39px;
-            transform: translateY(200%);
-            @media screen and (max-height: 737px){
-                transform: translateY(100%)!important;
-            }
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 18px;
+            margin-top: 60px;
             @media screen and (max-height: 569px) {
-                transform: translateY(50%)!important;
-            }
-            @media screen and (max-height: 732px) {
-                transform: translateY(50%)!important;
-            }
-            @media screen and (max-height: 641px) {
-                transform: translateY(100%)!important;
-            }
-            @media screen and (max-height: 481px) {
-                transform: translateY(20%)!important;
+                margin-top: 36px;
             }
         }
     }

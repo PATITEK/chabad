@@ -35,7 +35,11 @@
     <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list">
       <ion-item-group *ngIf="dateItem.events.length != 0 && activeDateItem == dateItem.id"
         class="btn-join btn-join-all active-effect" (click)="toggleJoiningAll(dateItem)">
-        <span *ngIf="!joinedAll(dateItem)">Join all</span>
+        <span *ngIf="!joinedAll(dateItem)">
+          <ion-spinner *ngIf="isSomeLoading(dateItem)" name="lines" class="spinner-max spinner-event-join"
+            (click)="$event.stopPropagation()"></ion-spinner>
+          Join all
+        </span>
         <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
       </ion-item-group>
     </ion-item-group>
@@ -47,6 +51,8 @@
           <h3 class="event-name">{{ event.name }}</h3>
           <ion-item-group class="btn-join btn-join-event active-effect" [style.color]="event.color"
             (click)="toggleJoiningEvent(event)">
+            <ion-spinner *ngIf="event.isLoading" name="lines" class="spinner-max spinner-event-join"
+              (click)="$event.stopPropagation()"></ion-spinner>
             <span *ngIf="!event.joined">Join</span>
             <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
           </ion-item-group>

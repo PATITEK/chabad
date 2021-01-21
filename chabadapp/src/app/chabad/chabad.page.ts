@@ -94,11 +94,11 @@ export class ChabadPage implements OnInit {
           if (d.event_type == 'both') {
             this.dateList[i].events.push(d);
             this.dateList[i].events[this.dateList[i].events.length - 1].color = '#F5F5F5';
-            this.dateList[i].events[this.dateList[i].events.length - 1].joined = false;
+            this.dateList[i].events[this.dateList[i].events.length - 1].isLoading = false;
           } else {
             this.dateList[i].services.push(d);
             this.dateList[i].services[this.dateList[i].services.length - 1].color = this.SERVICE_COLOR[serviceColorIndex];
-            this.dateList[i].services[this.dateList[i].services.length - 1].joined = false;
+            this.dateList[i].services[this.dateList[i].services.length - 1].isLoading = false;
             (serviceColorIndex++ >= this.SERVICE_COLOR.length - 1) && (serviceColorIndex = 0);
           }
         });
@@ -124,56 +124,66 @@ export class ChabadPage implements OnInit {
     return dateItem.services.every(service => service.joined == true) && dateItem.events.every(event => event.joined == true);
   }
 
-  toggleJoiningAll(dateItem) {
-    if (this.joinedAll(dateItem)) {
-      dateItem.services.forEach(service => service.joined = false);
-      dateItem.events.forEach(event => event.joined = false);
-    } else {
-      dateItem.services.forEach(service => service.joined = true);
-      dateItem.events.forEach(event => event.joined = true);
-    }
+  isSomeLoading(dateItem) {
+    return dateItem.events.some(event => event.isLoading == true) || dateItem.services.some(event => event.isLoading == true);
   }
 
-  toggleJoiningService(service) {
-    event.stopPropagation();
-    service.joined = !service.joined;
-    var result = {
-      "attention_log": {
-        "event_id": service.id
-      }
-    }
-    if (service.joined) {
-      this.eventService.joinEvent(result).subscribe((data) => {
-        console.log(data);
-      })
-    }
-    else {
-      this.eventService.cancelEvent(result).subscribe((data) => {
-        console.log(data);
-      })
+  toggleJoiningAll(dateItem) {
+    dateItem.services.forEach(event => event.isLoading = true);
+    dateItem.events.forEach(event => event.isLoading = true);
+    if (this.joinedAll(dateItem)) {
+      dateItem.services.forEach(event => {
+        event.joined && this.eventService.cancelEvent(event).subscribe(() => {
+          event.joined = !event.joined;
+          event.isLoading = false;
+        });
+      });
+      dateItem.events.forEach(event => {
+        event.joined && this.eventService.cancelEvent(event).subscribe(() => {
+          event.joined = !event.joined;
+          event.isLoading = false;
+        });
+      });
+    } else {
+      dateItem.services.forEach(event => {
+        if (event.joined) {
+          event.isLoading = false;
+        } else this.eventService.joinEvent(event).subscribe(() => {
+          event.joined = !event.joined;
+          event.isLoading = false;
+        });
+      });
+      dateItem.events.forEach(event => {
+        if (event.joined) {
+          event.isLoading = false;
+        } else this.eventService.joinEvent(event).subscribe(() => {
+          event.joined = !event.joined;
+          event.isLoading = false;
+        });
+      });
     }
   }
 
   toggleJoiningEvent(eventItem) {
     event.stopPropagation();
-    eventItem.joined = !eventItem.joined;
-    var result = {
-      "attention_log": {
-        "event_id": eventItem.id
-      }
-    }
-    if (eventItem.joined) {
+    eventItem.isLoading = true;
+    this.toggleJoinedApi(eventItem);
+  }
 
-      this.eventService.joinEvent(result).subscribe((data) => {
-        console.log(data);
-      })
-    }
-    else {
-      this.eventService.cancelEvent(result).subscribe((data) => {
-        console.log(data);
-      })
+  toggleJoinedApi(event) {
+    if (event.joined) {
+      this.eventService.cancelEvent(event).subscribe(() => {
+        event.joined = !event.joined;
+        event.isLoading = false;
+      });
+    } else {
+      this.eventService.joinEvent(event).subscribe(() => {
+        event.joined = !event.joined;
+        event.isLoading = false;
+      });
     }
   }
+
   toggleHiddenEvents(dateItem) {
     dateItem.hiddenEvents = !dateItem.hiddenEvents;
   }

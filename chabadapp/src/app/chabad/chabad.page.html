@@ -64,7 +64,11 @@
       <ion-item-group
         *ngIf="(dateItem.services.length != 0 || dateItem.events.length != 0) && activeDateItem == dateItem.id"
         class="btn-join btn-join-all active-effect" (click)="toggleJoiningAll(dateItem)">
-        <span *ngIf="!joinedAll(dateItem)">Join all</span>
+        <span *ngIf="!joinedAll(dateItem)">
+          <ion-spinner *ngIf="isSomeLoading(dateItem)" name="lines" class="spinner-max spinner-event-join"
+            (click)="$event.stopPropagation()"></ion-spinner>
+            Join all
+          </span>
         <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
       </ion-item-group>
     </ion-item-group>
@@ -75,7 +79,9 @@
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
           <h3 class="service-name">{{ service.name }}</h3>
           <ion-item-group class="btn-join active-effect" [style.color]="service.color"
-            (click)="toggleJoiningService(service)">
+            (click)="toggleJoiningEvent(service)">
+            <ion-spinner *ngIf="service.isLoading" name="lines" class="spinner-max spinner-event-join"
+              (click)="$event.stopPropagation()"></ion-spinner>
             <span *ngIf="!service.joined">Join</span>
             <ion-icon *ngIf="service.joined" name="checkmark-outline"></ion-icon>
           </ion-item-group>
@@ -102,6 +108,8 @@
             <ion-buttons class="ion-align-items-start ion-justify-content-between">
               <h3 class="service-name">{{ event.name }}</h3>
               <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">
+                <ion-spinner *ngIf="event.isLoading" name="lines" class="spinner-max spinner-event-join"
+                  (click)="$event.stopPropagation()"></ion-spinner>
                 <span *ngIf="!event.joined">Join</span>
                 <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
               </ion-item-group>

@@ -28,11 +28,6 @@ const routes: Routes = [
     ,canActivate : [AuthGuard],
   },
   {
-    path: 'service',
-    loadChildren: () => import('./service/service.module').then( m => m.ServicePageModule)
-    ,canActivate : [AuthGuard],
-  },
-  {
     path: 'chabad',
     loadChildren: () => import('./chabad/chabad.module').then( m => m.ChabadPageModule)
     ,canActivate : [AuthGuard],

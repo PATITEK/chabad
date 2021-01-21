@@ -1,4 +1,4 @@
-$height: 82vh;
+// $height: 82vh;
 ion-header {
     height: 50px;
     ion-title {
@@ -16,6 +16,7 @@ ion-header {
     margin: 10px 0;
 }
 ion-content {
+    --overflow: hidden;
     h1 {
         margin: 0;
         font-style: normal;
@@ -94,17 +95,18 @@ ion-content {
     }
 }
 .cart-main {
-    height: 9%;
+    
     border-radius: 40px;
     position: relative;
     display: flex;
     justify-content: center;
     z-index: 11;
-    height: 95px;
+    // height: 80px;
     // height: 10px;
     background: #ffffff;
     // height: 10vh;
     align-items: center;
+    height: 10%;
     img {
         height: 48px;
     }
@@ -161,7 +163,7 @@ ion-content {
             text-align: center;
             font-style: normal;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
             align-items: center;
             justify-content: center;
         }
@@ -211,5 +213,10 @@ ion-content {
 @media screen and (max-height: 732px) {
     .cart-main {
         height: 87px !important;
+    }
+    ion-content {
+        .food-group {
+            height: 70vh;
+        }
     }
 }

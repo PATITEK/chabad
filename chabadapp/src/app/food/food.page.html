@@ -42,7 +42,7 @@
   
   <ion-item-group class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
     <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
-      <ion-label *ngIf="shop.length > 0"  class="amount-cart">+{{shop.length}}</ion-label>
+      <span *ngIf="totalAmount > 0"  class="amount-cart">+{{totalAmount}}</span>
   </ion-item-group>
   <ion-item-group *ngIf="anmCart === true" class="btn-add-group" >
     <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>

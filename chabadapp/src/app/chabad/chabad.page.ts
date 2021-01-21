@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
+import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
 
 @Component({
   selector: 'app-chabad',
@@ -25,7 +27,6 @@ export class ChabadPage implements OnInit {
     '#BAD4E3'
   ];
 
-  // activeTab = 'ceremony';
   currentDay;
   dateList = [];
   activeDateItem;
@@ -44,7 +45,8 @@ export class ChabadPage implements OnInit {
     private loadingService: LoadingService,
     public sanitizer: DomSanitizer,
     private eventService: EventsService,
-    public dateTimeService: DateTimeService 
+    public dateTimeService: DateTimeService,
+    public modalController: ModalController
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {
@@ -81,20 +83,22 @@ export class ChabadPage implements OnInit {
       // reset
       this.dateList[i].services = [];
       this.dateList[i].events = [];
-      
+
       let nextDay = new Date();
       nextDay.setDate(nextDay.getDate() + i);
-      this.pageRequestEvent.cal_date = this.dateTimeService.getDayString2(nextDay);
+      this.pageRequestEvent.cal_date = this.dateTimeService.getDateString2(nextDay);
 
       this.eventService.getAll(this.pageRequestEvent).subscribe(data => {
         let serviceColorIndex = 0;
         data.events.forEach(d => {
           if (d.event_type == 'both') {
             this.dateList[i].events.push(d);
-            this.dateList[i].events[this.dateList[i].events.length - 1].color ='#F5F5F5';
+            this.dateList[i].events[this.dateList[i].events.length - 1].color = '#F5F5F5';
+            this.dateList[i].events[this.dateList[i].events.length - 1].joined = false;
           } else {
-            this.dateList[i].services.push(d); 
+            this.dateList[i].services.push(d);
             this.dateList[i].services[this.dateList[i].services.length - 1].color = this.SERVICE_COLOR[serviceColorIndex];
+            this.dateList[i].services[this.dateList[i].services.length - 1].joined = false;
             (serviceColorIndex++ >= this.SERVICE_COLOR.length - 1) && (serviceColorIndex = 0);
           }
         });
@@ -133,57 +137,45 @@ export class ChabadPage implements OnInit {
   toggleJoiningService(service) {
     event.stopPropagation();
     service.joined = !service.joined;
-     var result =  {
-          "attention_log": {
-          "event_id": service.id
-          }
+    var result = {
+      "attention_log": {
+        "event_id": service.id
       }
-    if(service.joined) {
-       this.eventService.joinEvent(result).subscribe((data)=> {
-         console.log(data);
-       })
+    }
+    if (service.joined) {
+      this.eventService.joinEvent(result).subscribe((data) => {
+        console.log(data);
+      })
     }
     else {
-       this.eventService.cancelEvent(result).subscribe((data)=> {
-         console.log(data);
-       })
+      this.eventService.cancelEvent(result).subscribe((data) => {
+        console.log(data);
+      })
     }
   }
 
   toggleJoiningEvent(eventItem) {
     event.stopPropagation();
     eventItem.joined = !eventItem.joined;
-     var result =  {
-          "attention_log": {
-          "event_id": eventItem.id
-          }
+    var result = {
+      "attention_log": {
+        "event_id": eventItem.id
       }
-    if(eventItem.joined) {
-    
-       this.eventService.joinEvent(result).subscribe((data)=> {
-         console.log(data);
-       })
+    }
+    if (eventItem.joined) {
+
+      this.eventService.joinEvent(result).subscribe((data) => {
+        console.log(data);
+      })
     }
     else {
-       this.eventService.cancelEvent(result).subscribe((data)=> {
-         console.log(data);
-       })
+      this.eventService.cancelEvent(result).subscribe((data) => {
+        console.log(data);
+      })
     }
   }
   toggleHiddenEvents(dateItem) {
     dateItem.hiddenEvents = !dateItem.hiddenEvents;
-  }
-
-  goToEventDetail(event) {
-    const data = {
-      id: event.id,
-      joined: event.joined
-    }
-    this.router.navigate(['service'], {
-      queryParams: {
-        data: JSON.stringify(data)
-      }
-    })
   }
 
   goToPray() {
@@ -216,5 +208,33 @@ export class ChabadPage implements OnInit {
 
   getChabadImageString() {
     return `url(${this.chabad.thumb_image})`;
+  }
+
+  async openEventDetailModal(event) {
+    const modal = await this.modalController.create({
+      component: EventDetailComponent,
+      cssClass: 'event-detail-modal',
+      componentProps: {
+        data: {
+          event: {
+            id: event.id,
+            joined: event.joined
+          },
+          chabad: {
+            id: this.chabad.id
+          }
+        }
+      }
+    });
+    await modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role == 'cancel') {
+      this.hideDateList();
+    }
+  }
+
+  hideDateList() {
+    this.hiddenDateList = true;
   }
 }

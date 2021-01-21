@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
-import { LoadingService } from '../@app-core/utils';
+import { DateTimeService, LoadingService } from '../@app-core/utils';
+import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
 
 @Component({
   selector: 'app-event',
@@ -16,29 +18,6 @@ export class EventPage implements OnInit {
   };
   loadedChabad = false;
 
-  DAY = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-  MONTH = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
   EVENT_COLOR = [
     '#D7ADC2',
     '#E7D0AE',
@@ -57,12 +36,13 @@ export class EventPage implements OnInit {
   }
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private chabadService: ChabadService,
     private loadingService: LoadingService,
     public sanitizer: DomSanitizer,
-    private eventService: EventsService
+    private eventService: EventsService,
+    public dateTimeService: DateTimeService,
+    public modalController: ModalController
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {
@@ -99,7 +79,7 @@ export class EventPage implements OnInit {
 
       let nextDay = new Date();
       nextDay.setDate(nextDay.getDate() + i);
-      this.pageRequestEvent.cal_date = this.getDayString2(nextDay);
+      this.pageRequestEvent.cal_date = this.dateTimeService.getDateString2(nextDay);
 
       this.eventService.getAll(this.pageRequestEvent).subscribe(data => {
         let eventColorIndex = 0;
@@ -142,25 +122,6 @@ export class EventPage implements OnInit {
     eventItem.joined = !eventItem.joined;
   }
 
-  getDayString(day) {
-    return `${this.DAY[day.getDay()]}, ${day.getDate()} ${this.MONTH[day.getMonth()]} ${day.getFullYear()}`;
-  }
-
-  getDayString2(day) {
-    return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`;
-  }
-
-  goToEventDetail(event) {
-    const data = {
-      id: event.id,
-      joined: event.joined
-    }
-    this.router.navigate(['event/detail'], {
-      queryParams: {
-        data: JSON.stringify(data)
-      }
-    })
-  }
 
   doRefresh(event) {
     this.getData(false, () => {
@@ -170,5 +131,24 @@ export class EventPage implements OnInit {
 
   getChabadImageString() {
     return `url(${this.chabad.thumb_image})`;
+  }
+
+  async openEventDetailModal(event) {
+    const modal = await this.modalController.create({
+      component: EventDetailComponent,
+      cssClass: 'event-detail-modal',
+      componentProps: {
+        data: {
+          event: {
+            id: event.id,
+            joined: event.joined
+          },
+          chabad: {
+            id: this.chabad.id
+          }
+        }
+      }
+    });
+    await modal.present();
   }
 }

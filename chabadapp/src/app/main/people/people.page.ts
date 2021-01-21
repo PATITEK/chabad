@@ -36,7 +36,7 @@ export class PeoplePage implements OnInit {
   }
 
   getDateString() {
-    return this.dateTimeService.getDayString(new Date());
+    return this.dateTimeService.getDateString(new Date());
   }
 
   doRefresh(event) {

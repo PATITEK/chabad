@@ -9,46 +9,46 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    loadChildren: () => import('./main/main.module').then(m => m.MainPageModule)
-    ,canActivate : [AuthGuard],
+    loadChildren: () => import('./main/main.module').then(m => m.MainPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'donate',
-    loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
-   ,canActivate : [AuthGuard],
+    loadChildren: () => import('./donate/donate.module').then(m => m.DonatePageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'pray',
-    loadChildren: () => import('./pray/pray.module').then( m => m.PrayPageModule)
-   ,canActivate : [AuthGuard],
+    loadChildren: () => import('./pray/pray.module').then(m => m.PrayPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'page-noti',
-    loadChildren: () => import('./@modular/page-noti/page-noti-routing.module').then( m=>m.PageNotiRoutingModule)
-    ,canActivate : [AuthGuard],
+    loadChildren: () => import('./@modular/page-noti/page-noti-routing.module').then(m => m.PageNotiRoutingModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'chabad',
-    loadChildren: () => import('./chabad/chabad.module').then( m => m.ChabadPageModule)
-    ,canActivate : [AuthGuard],
+    loadChildren: () => import('./chabad/chabad.module').then(m => m.ChabadPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'account',
-    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+    loadChildren: () => import('./account/account.module').then(m => m.AccountPageModule)
   },
   {
     path: 'event',
-    loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
-    ,canActivate : [AuthGuard],
+    loadChildren: () => import('./event/event.module').then(m => m.EventPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'food',
-    loadChildren: () => import('./food/food.module').then( m => m.FoodPageModule)
-    ,canActivate : [AuthGuard],
+    loadChildren: () => import('./food/food.module').then(m => m.FoodPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'account-setting',
-    loadChildren: () => import('./account-setting/account-setting.module').then( m => m.AccountSettingPageModule)
+    loadChildren: () => import('./account-setting/account-setting.module').then(m => m.AccountSettingPageModule)
   },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/chabad' },

@@ -66,9 +66,11 @@ export class FoodPage implements OnInit {
     }
     console.log(this.shop);
 
-    this.totalAmount = 0
+    this.totalAmount = 0;
     for(let i = 0; i< this.shop.length; i++) {
-      this.totalAmount += this.shop[i].amount;
+      if(this.totalAmount < 99) {
+        this.totalAmount += this.shop[i].amount;
+      }
     }
 
   }

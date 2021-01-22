@@ -3,12 +3,10 @@ ion-header {
     height: 70px;
     ion-title {
         text-align: center;
-        padding: 10px 50px;
+        padding: 30px 50px;
         font-style: normal;
         font-weight: 600;
         font-size: 20px;
-        line-height: 30px;
-        margin-left: 15px;
     }
     .back-food-btn {
         background-color: #d9d9d9;
@@ -17,20 +15,18 @@ ion-header {
 
 ion-content {
     ion-item-group {
+        padding-top: 20px;
+        padding-bottom: 50px;
         background-color: rgba(0, 176, 178, 0.1);
         height: auto;
         border-radius: 40px;
         width: 96%;
         margin-left: 2%;
         margin-bottom: 50px;
-        .group0 {
-            width: 92%;
-            margin-left: 2%;
-            border-radius: 20px;
-        }
         .group1 {
-            margin-top: 18%;
-            width: 96%;
+            transform: translateY(15px);
+            // margin-top: 18%;
+            width : 96%;
             margin-left: 2%;
             border-radius: 20px;
             .group1-label {
@@ -39,6 +35,7 @@ ion-content {
             }
             .group1-item {
                 --background: #F8F8F8;
+                overflow: auto;
                 width: 92%;
                 margin-left: 4%;
                 border-radius: 10px;
@@ -56,57 +53,58 @@ ion-content {
             }
         }
         .group2 {
+            transform: translateY(15px);
             margin-top: 4%;
             width: 96%;
             margin-left: 2%;
             border-radius: 20px;
 
             .group2-row-1 {
-                .left-label {
-                    margin-left: 20px;
-                    margin-top: 10px;
-                }
+                justify-content: space-between;
+                padding: 15px 20px 10px;
                 .add-item {
-                    position: absolute;
-                    right: 20px;
-                    top: 10px;
                     color: #02CDCF;
                 }
             }
             .group2-row-2 {
-                position: relative;
-                margin-top: 30px;
-                margin-left: 40px;
+                max-width: 320px;
+                margin: auto;
                 border-bottom: 2px solid #F8F8F8;
+                padding: 18px 0px;
+                // margin-left: 40px;
+                // background-color: #00B0B2;
                 .food-name {
-                    margin-left: -20px;
+                    margin-left: 20px;
                     font-size: 16px;
                     font-weight: 600;
+                    width: 125px;
                 }
-                ion-row {
+                ion-buttons {
                     margin: auto;
-                    margin-left: 9%;
                     .icon-add {
                         width: 20px;
-                        // margin-left: 5px;
-                        // margin-right: 5px;
-                        display: block;
+                        display: inline-block;
                         margin: auto;
                     }
-                    span {
-                        font-weight: 600;
-                        width: 20px;
-                        transform: translateY(2px);
-                        display: block;
-                        margin: auto;
-                        margin-left: 5px;
+                    .amount {
+                        width: 30px;
+                        justify-content: center;
+                        span {
+                            font-weight: 600;
+                            // justify-content: center;
+                            transform: translateY(2px);
+                            // text-align: center;
+                            
+                        }
                     }
                 }
                 .price {
                     margin-right: 15px;
+                    width: 80px;
+                    text-align: right;
                 }
                 .icon-remove {
-                    margin-right: 45px;
+                    margin-right: 20px;
                 }
 
             }
@@ -123,7 +121,7 @@ ion-content {
             }
         }
         .group3 {   
-            margin-top: 4%;
+            margin-top: 10%;
             width: 96%;
             margin-left: 2%;
             border-radius: 20px;
@@ -149,10 +147,9 @@ ion-content {
             --border-radius: 15px;
             --background: #00B0B2;
         }
-        .group4 {
-            margin-top: 15%;
-            width: 96%;
-            margin-left: 2%;
-        }
     }
+}
+
+.group2-row-2-deleted {
+    // background-color: red;
 }

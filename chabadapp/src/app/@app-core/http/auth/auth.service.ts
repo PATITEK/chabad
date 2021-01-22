@@ -80,7 +80,7 @@ export class AuthService {
       catchError((errorRes: any) => {
         localStorage.clear();
         this.storage.clear();
-        this.presentToast(errorRes.error.error);
+        this.presentToast('Password or Email is invalid!');
         throw errorRes.error;
       })
       );

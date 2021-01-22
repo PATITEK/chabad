@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
     full_address: '',
     phone_number: '',
     password: '',
+    email: '',
   }
   checkSignUpVar = false;
   confirmPassword = '';
@@ -118,5 +119,10 @@ export class LoginPage implements OnInit {
   }
   getConfirmPasswordSignup(event) {
     this.confirmPassword = event.target.value;
+  }
+  getEmailSignup(event) {
+    this.dataSignUp.email = event.target.value;
+    this.dataLogin.email = event.target.value;
+    // console.log(this.dataLogin.email);
   }
 }

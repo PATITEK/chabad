@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,7 +24,6 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
 
 .active-effect {
   transition: 0.15s;
@@ -123,12 +122,16 @@
   border-radius: 12px;
 }
 
-.event-detail-modal {      
-  .modal-wrapper {
-    background: transparent;
-    opacity: 0;
-    position: absolute;
+.event-detail-modal {
+  padding-top: 79px;
+
+  .modal-shadow.sc-ion-modal-ios {
     top: 79px;
+  }
+
+  .modal-wrapper {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
   }
 }
 

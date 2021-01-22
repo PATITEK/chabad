@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { EventsService } from 'src/app/@app-core/http';
 import { DateTimeService, LoadingService } from 'src/app/@app-core/utils';
 
@@ -12,6 +12,10 @@ import { DateTimeService, LoadingService } from 'src/app/@app-core/utils';
 export class EventDetailComponent implements OnInit {
   @Input() data;
 
+  setEventItemId() {
+    localStorage.setItem('eventItemId', this.data.event.id);
+  }
+
   event = {
     id: '',
     name: '',
@@ -20,7 +24,7 @@ export class EventDetailComponent implements OnInit {
     end_time: '',
     cal_time: ''
   }
-  btnJoin;
+  btnJoinElement;
   disabledBtn = false;
   loadedData = false;
 
@@ -29,22 +33,21 @@ export class EventDetailComponent implements OnInit {
     private eventService: EventsService,
     private dateTimeService: DateTimeService,
     public modalController: ModalController,
-    private loadingService: LoadingService,
-    public platform: Platform
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
     this.loadingService.present();
     this.getData(this.data.event.id);
-    this.btnJoin = document.querySelectorAll('.btn-join-with-us');
+    this.btnJoinElement = document.querySelectorAll('.btn-join-with-us');
     this.data.event.joined && this.disableButtons();
   }
 
   disableButtons() {
     this.disabledBtn = true;
-    for (let i = 0; i < this.btnJoin.length; i++) {
-      this.btnJoin[i].classList.remove('active-effect');
-      this.btnJoin[i].classList.add('disabled-btn');
+    for (let i = 0; i < this.btnJoinElement.length; i++) {
+      this.btnJoinElement[i].classList.remove('active-effect');
+      this.btnJoinElement[i].classList.add('disabled-btn');
     }
   }
 
@@ -77,14 +80,14 @@ export class EventDetailComponent implements OnInit {
 
   chooseJoinSelection(selection) {
     if (this.disabledBtn) return;
+
     this.disableButtons();
     if (selection) {
-      const result = {
-        attention_log: {
-          event_id: this.event.id
-        }
-      }
-      this.eventService.joinEvent(result).subscribe();
+      this.loadingService.present();
+      this.setEventItemId();
+      this.eventService.joinEvent(this.event).subscribe(() => {
+        this.loadingService.dismiss();
+      });
     }
   }
 }

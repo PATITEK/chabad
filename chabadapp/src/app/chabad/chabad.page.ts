@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -224,6 +224,7 @@ export class ChabadPage implements OnInit {
     const modal = await this.modalController.create({
       component: EventDetailComponent,
       cssClass: 'event-detail-modal',
+      swipeToClose: true,
       componentProps: {
         data: {
           event: {
@@ -238,10 +239,29 @@ export class ChabadPage implements OnInit {
     });
     await modal.present();
 
-    const { data, role } = await modal.onWillDismiss();
-    if (role == 'cancel') {
-      this.hideDateList();
-    }
+    modal.onWillDismiss().then(data => {
+      if (data.role == 'cancel') {
+        this.hideDateList();
+      } else { 
+        let eventItemId = localStorage.getItem('eventItemId');
+        eventItemId && this.setJoiningEventLocal(eventItemId);
+      }
+    })
+  }
+
+  setJoiningEventLocal(eventItemId) {
+    this.dateList[this.activeDateItem].services.forEach(service => {
+      if (service.id == eventItemId) {
+        service.joined = true;
+        localStorage.removeItem('eventItemId');
+      }
+    });
+    this.dateList[this.activeDateItem].events.forEach(service => {
+      if (service.id == eventItemId) {
+        service.joined = true;
+        localStorage.removeItem('eventItemId');
+      }
+    });
   }
 
   hideDateList() {

@@ -1,8 +1,5 @@
 ion-content {
   --background: #eee;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  overflow: hidden;
 }
 
 .backdrop-event-detail {
@@ -12,7 +9,7 @@ ion-content {
 
 .body {
   padding: 5px 28px 28px;
-  height: calc(100% - 353px);
+  height: calc(100% - 291px);
   overflow: scroll;
 
   @media screen and (max-width: 320px) {
@@ -73,7 +70,7 @@ ion-content {
 
 .fixed-bottom {
   position: fixed;
-  bottom: 79px;
+  bottom: 0;
   left: 0;
   right: 0;
 }

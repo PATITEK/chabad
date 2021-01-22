@@ -182,5 +182,21 @@ export class EventPage implements OnInit {
       }
     });
     await modal.present();
+
+    modal.onWillDismiss().then(data => {
+      if (data.role != 'cancel') { 
+        let eventItemId = localStorage.getItem('eventItemId');
+        eventItemId && this.setJoiningEventLocal(eventItemId);
+      }
+    })
+  }
+
+  setJoiningEventLocal(eventItemId) {
+    this.dateList[this.activeDateItem].events.forEach(service => {
+      if (service.id == eventItemId) {
+        service.joined = true;
+        localStorage.removeItem('eventItemId');
+      }
+    });
   }
 }

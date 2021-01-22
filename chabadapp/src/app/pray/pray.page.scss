@@ -119,6 +119,12 @@
           border: 1px solid #fff;
           color: #fff;
         }
+        .changeactive {
+          background-color: #00B0B2;
+          border: 1px solid #fff;
+          color: #fff;
+        }
+      
       }
       ion-select{
         padding: 0 10px 0 0;
@@ -407,7 +413,7 @@
       }
     }
     .title__chabad {
-      top: 3px;
+      top: 84px;
     }
     ion-grid { 
       margin-top: 27px;

@@ -52,6 +52,7 @@ export class PrayPage implements OnInit {
   source_type: any;
   source_id: any;
   id_change :any;
+  clicked = false;
   constructor(
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
@@ -84,6 +85,7 @@ export class PrayPage implements OnInit {
       this.year = item.year;
       this.DateObj = `${this.fulldate}, ${this.date} ${this.month} ${ this.year}`;
       this.id_change = item.id;
+      this.clicked = true;
 
   }
   ngOnInit() {

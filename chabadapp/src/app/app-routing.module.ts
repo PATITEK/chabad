@@ -15,12 +15,12 @@ const routes: Routes = [
   {
     path: 'donate',
     loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
-    ,canActivate : [AuthGuard],
+   ,canActivate : [AuthGuard],
   },
   {
     path: 'pray',
     loadChildren: () => import('./pray/pray.module').then( m => m.PrayPageModule)
-    ,canActivate : [AuthGuard],
+   ,canActivate : [AuthGuard],
   },
   {
     path: 'page-noti',
@@ -33,6 +33,10 @@ const routes: Routes = [
     ,canActivate : [AuthGuard],
   },
   {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
+  {
     path: 'event',
     loadChildren: () => import('./event/event.module').then( m => m.EventPageModule)
     ,canActivate : [AuthGuard],
@@ -42,8 +46,13 @@ const routes: Routes = [
     loadChildren: () => import('./food/food.module').then( m => m.FoodPageModule)
     ,canActivate : [AuthGuard],
   },
+  {
+    path: 'account-setting',
+    loadChildren: () => import('./account-setting/account-setting.module').then( m => m.AccountSettingPageModule)
+  },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/chabad' },
+
 ];
 @NgModule({
   imports: [

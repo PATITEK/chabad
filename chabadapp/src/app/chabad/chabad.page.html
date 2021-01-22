@@ -67,8 +67,8 @@
         <span *ngIf="!joinedAll(dateItem)">
           <ion-spinner *ngIf="isSomeLoading(dateItem)" name="lines" class="spinner-max spinner-event-join"
             (click)="$event.stopPropagation()"></ion-spinner>
-            Join all
-          </span>
+          Join all
+        </span>
         <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
       </ion-item-group>
     </ion-item-group>
@@ -76,6 +76,8 @@
     <ion-list *ngIf="!hiddenDateList" class="service-list" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
       <ion-item-group *ngFor="let service of dateList[activeDateItem].services" class="service"
         [style.background]="service.color" (click)="openEventDetailModal(service)">
+        <ion-backdrop *ngIf="service.isLoading" class="service-backdrop"></ion-backdrop>
+
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
           <h3 class="service-name">{{ service.name }}</h3>
           <ion-item-group class="btn-join active-effect" [style.color]="service.color"
@@ -105,6 +107,8 @@
         <ion-list class="event-body" [ngClass]="{'event-body-full-height': !dateList[activeDateItem].hiddenEvents}">
           <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="service event-item"
             [style.background]="event.color" (click)="openEventDetailModal(event)">
+            <ion-backdrop *ngIf="event.isLoading" class="service-backdrop"></ion-backdrop>
+
             <ion-buttons class="ion-align-items-start ion-justify-content-between">
               <h3 class="service-name">{{ event.name }}</h3>
               <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">

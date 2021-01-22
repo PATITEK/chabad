@@ -162,6 +162,7 @@ ion-footer {
     border-radius: 35px;
     padding: 15px;
     margin: 0 10px 12px;
+    position: relative;
 
     .event-name {
       font-size: 20px;
@@ -209,4 +210,10 @@ ion-footer {
 
 .spinner-event-join {
   background: #eaeaea;
+}
+
+.event-backdrop {
+  opacity: .1;
+  border-radius: 35px;
+  outline: 0;
 }

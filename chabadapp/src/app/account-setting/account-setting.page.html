@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-back-button icon="chevron-back-outline" text="" class="back-btn btn-custom"></ion-back-button>
+</ion-header>
+
+<ion-content>
+  <ion-item-group class="marigin">
+   
+</ion-item-group>
+<ion-item-group class="account">
+      <img src="assets/img/user.png" alt="" class="account_img">
+      <img src="assets/img/edit2.svg" alt="" class="account_btn-edit">
+      <ion-label class="account_label">Arena</ion-label>
+</ion-item-group>
+  <ion-item-group class="account-setting">
+    <ion-label routerLink ="/account">
+      Account infomation
+    </ion-label>
+    <ion-label>
+      Your event
+    </ion-label>
+    <ion-label>
+     Help
+    </ion-label>
+    <ion-label>
+      Setting
+    </ion-label>
+    <ion-label>
+     About us
+    </ion-label>
+    <ion-label (click)="presentModal()">
+        Log out
+      <img src="assets/img/logout.svg" alt="" class="img_logout">
+    </ion-label>
+  </ion-item-group> 
+</ion-content>

@@ -1,11 +1,10 @@
 
 <ion-content>
   <ion-item-group>
-    <img src="assets/img/donate.png" class="img__header" alt="">
+    <img src="assets/img/bgnew.jpg" class="img__header" alt="">
     <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   </ion-item-group>
   <ion-label class="title__chabad">Chabad of Ho Chi Minh City</ion-label>
- 
   <!-- <ion-segment value="pray">
     <ion-segment-button value="pray"  (click)="clickPray()" >
       <ion-label>Pray</ion-label>
@@ -14,14 +13,13 @@
       <ion-label>Donate</ion-label>
     </ion-segment-button>
   </ion-segment> -->
-
   <ion-grid >
    <form [formGroup] ="frmPray">
     <ion-item-group class="group__day">
       <ion-label class="label__donate">
         Pray
       </ion-label>
-      <ion-item-group class="day"[ngClass]="{'change': id_change === item.id}"*ngFor ="let item of dateList; index as i"(click)="displayDate(item)">
+      <ion-item-group  class="day"[ngClass]="{'change': id_change === item.id}" [ngClass]="{'changeactive': item.id === 0 && this.clicked == false }" *ngFor ="let item of dateList; index as i"(click)="displayDate(item)">
         <ion-label>
           {{item.day}}
         </ion-label>

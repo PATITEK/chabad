@@ -71,11 +71,9 @@ export class AuthService {
     return this.http.post(`${APICONFIG.AUTH.LOGIN}`, req).pipe(
       map((result: any) => {
         this.storage.clear();
-        console.log(result);
         localStorage.setItem('Authorization', result.token);
         localStorage.setItem('fullname', result.full_name);
         this.storage.setInfoAccount();
-        
         //  this.toastr.success(SUCCESS.AUTH.LOGIN);
         return result;
       }),

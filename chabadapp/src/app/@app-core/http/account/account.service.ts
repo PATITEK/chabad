@@ -21,16 +21,14 @@ export class AccountService {
   public getAccounts() {
     return this.http.get(`${APICONFIG.ACCOUNT.PROFILE_USER}`).pipe(
       map((result: any) => {
-      localStorage.setItem('email', result['user']['email']);
-      localStorage.setItem('role', result['user']['role']);
         return result;
       }),
       catchError((errorRes) => { 
         throw errorRes.error; }));
   }
   
-  public updateName(name) {
-    return this.http.put(`${APICONFIG.ACCOUNT.UPDATE_NAME}`, name).pipe(
+  public updateProfile(data) {
+    return this.http.post(`${APICONFIG.ACCOUNT.UPDATE_PROFILE}`, data).pipe(
       map((result:any) => {
       
         return result;

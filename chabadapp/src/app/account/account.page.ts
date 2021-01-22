@@ -1,32 +1,25 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import {PopupComponent} from '../@modular/popup/popup.component';
-=======
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { checkAvailability } from '@ionic-native/core';
+import { PopoverController } from '@ionic/angular';
 import { AccountService } from '../@app-core/http';
+import {PopupComponent} from '../@modular/popup/popup.component';
 
->>>>>>> account fix
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-<<<<<<< HEAD
- activeInput = false;
-  constructor(public popoverController: PopoverController) { }
-=======
   activeInput = false;
   public form: FormGroup;
   checkUpdate=false;
   constructor(
     private fb: FormBuilder,
+    public popoverController: PopoverController,
     private accoutService: AccountService
   ) { }
->>>>>>> account fix
 
   ngOnInit() {
     this.addForm();
@@ -53,7 +46,6 @@ export class AccountPage implements OnInit {
 
     });
   }
-<<<<<<< HEAD
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopupComponent,
@@ -64,7 +56,6 @@ export class AccountPage implements OnInit {
     return await popover.present();
   }
 
-=======
   clickEdit() {
     this.activeInput = true;
   }
@@ -111,6 +102,5 @@ export class AccountPage implements OnInit {
  dosth(){
    
  }
->>>>>>> account fix
 }
 

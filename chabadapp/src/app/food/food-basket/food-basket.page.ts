@@ -12,6 +12,7 @@ export class FoodBasketPage implements OnInit {
     id : 0,
     amount : 0,
   }
+  isDel = false;
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -42,9 +43,13 @@ export class FoodBasketPage implements OnInit {
       this.currentItem.amount--;
     }
   }
-  // removeItem(item) {
-  //   this.currentItem = item;
-  //   this.data.splice(this.currentItem.id, 1);
-  //   console.log(this.currentItem.id)
-  // }
+  removeItem(food) {
+    for(let i = 0; i< this.data.length; i++) {
+      if(food.id === this.data[i].id) {
+        this.data.splice(i,1);
+        break;
+      }
+    }
+    this.isDel = true;
+  }
 }

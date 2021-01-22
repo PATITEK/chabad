@@ -1,11 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
-    <ion-title>Your basket</ion-title>
+  <ion-title>Your basket</ion-title>
 </ion-header>
 
 <ion-content>
   <ion-item-group>
-    <ion-list class="group0"></ion-list>
+    <!-- <ion-list class="group0"></ion-list> -->
     <ion-list class="group1">
       <ion-label class="group1-label">Destination:</ion-label>
       <ion-item lines="none" class="group1-item">
@@ -15,20 +15,22 @@
     </ion-list>
 
     <ion-list class="group2">
-      <ion-row class="group2-row-1">
+      <ion-buttons class="group2-row-1">
         <ion-label class="left-label">Your Order</ion-label>
         <ion-label (click)="addItem()" class="add-item">Add items</ion-label>
-      </ion-row>
-      <ion-row *ngFor="let food of data" class="group2-row-2" >
-        <ion-label class="food-name">{{food.name}}</ion-label>
-        <ion-row>
+      </ion-buttons>
+      <ion-buttons *ngFor="let food of data" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
+        <span class="food-name">{{food.name}}</span>
+        <ion-buttons>
           <img (click)="plusItem(food)" class="icon-add" src="assets/img/ion-add.svg" alt="">
-          <span>{{food.amount}}</span>
+          <ion-buttons class="amount" lines="none">
+            <span>{{food.amount}}</span>
+          </ion-buttons>
           <img (click)="minusItem(food)" class="icon-add" src="assets/img/ion-remove.svg" alt="">
-        </ion-row>
-        <ion-label class="price">{{food.price}}</ion-label>
+        </ion-buttons>
+        <span class="price">{{food.price}}</span>
         <ion-icon (click)="removeItem(food)" class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon>
-      </ion-row>
+      </ion-buttons>
       <ion-row class="group2-row-3">
         <ion-icon name="add-circle"></ion-icon>
         <ion-input placeholder="Notes"> </ion-input>
@@ -43,6 +45,6 @@
     </ion-list>
     
     <ion-button (click)="order()" class="main-button">Order</ion-button>
-    <ion-list class="group4"></ion-list>
+    <!-- <ion-list class="group4"></ion-list> -->
   </ion-item-group>
 </ion-content>

@@ -3,12 +3,11 @@ ion-header {
     height: 70px;
     ion-title {
         text-align: center;
-        padding: 10px 50px;
+        padding: 25px 50px;
         font-style: normal;
         font-weight: 600;
         font-size: 20px;
         line-height: 30px;
-        margin-left: 15px;
     }
     .back-food-btn {
         background-color: #d9d9d9;
@@ -17,18 +16,16 @@ ion-header {
 
 ion-content {
     ion-item-group {
+        padding-top: 20px;
+        padding-bottom: 50px;
         background-color: rgba(0, 176, 178, 0.1);
         height: auto;
         border-radius: 40px;
         width: 96%;
         margin-left: 2%;
         margin-bottom: 50px;
-        .group0 {
-            width: 92%;
-            margin-left: 2%;
-            border-radius: 20px;
-        }
         .group1 {
+            transform: translateY(15px);
             margin-top: 18%;
             width: 96%;
             margin-left: 2%;
@@ -56,6 +53,7 @@ ion-content {
             }
         }
         .group2 {
+            transform: translateY(15px);
             margin-top: 4%;
             width: 96%;
             margin-left: 2%;
@@ -108,7 +106,7 @@ ion-content {
             }
         }
         .group3 {   
-            margin-top: 4%;
+            margin-top: 10%;
             width: 96%;
             margin-left: 2%;
             border-radius: 20px;

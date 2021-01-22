@@ -12,8 +12,8 @@
 
     <ion-grid *ngIf="this.status==='login'">
       <ion-row>
-        <ion-label>Enter phone number</ion-label>
-        <input (keyup)="getPhonenumberSignup($event)" part="" type="text" />
+        <ion-label>Enter email</ion-label>
+        <input (keyup)="getEmailSignup($event)" part="" type="text" />
       </ion-row>
       <ion-row>
         <ion-label>Password</ion-label>
@@ -42,6 +42,10 @@
               <ion-select-option value="other">Other</ion-select-option>
             </ion-select>
           </ion-label>
+        </ion-row>
+        <ion-row class="select__signup-row">
+          <ion-label class="select__signup-row--name">Your email</ion-label>
+          <input  (keyup)="getEmailSignup($event)" part="" type="text" style="margin-bottom: 12px;"/>
         </ion-row>
         <ion-row class="select__signup-row">
           <ion-label class="select__signup-row--name">Phone number</ion-label>
@@ -93,8 +97,7 @@
           <input (keyup)="getFulladdressSignup($event)"
             type="text"
             class="select__signup-row--input"
-            placeholder="123 Pham Van Dong St, ward 12"
-          />
+            placeholder="123 Pham Van Dong St, ward 12"/>
         </ion-row>
         <ion-row class="select__signup-row">
           <ion-label class="select__signup-row--name">Password</ion-label>

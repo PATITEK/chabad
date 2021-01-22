@@ -22,11 +22,12 @@ export class LoginPage implements OnInit {
     full_address: '',
     phone_number: '',
     password: '',
+    email: '',
   }
   checkSignUpVar = false;
   confirmPassword = '';
   private dataLogin = {
-    phone_number: '',
+    email: '',
     password: '',
   }
   
@@ -71,7 +72,7 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.dataLogin.phone_number = '+84'+this.dataLogin.phone_number.slice(1,10);
+    // this.dataLogin.email = this.dataLogin.email;
     this.authService.login(this.dataLogin).subscribe(data =>{
       console.log(this.dataLogin);
       localStorage.setItem('Authorization', data.token);
@@ -109,7 +110,6 @@ export class LoginPage implements OnInit {
   }
   getPhonenumberSignup(event) {
     this.dataSignUp.phone_number = event.target.value;
-    this.dataLogin.phone_number = event.target.value;
   }
   getPasswordSignup(event) {
     this.dataSignUp.password = event.target.value;
@@ -117,5 +117,10 @@ export class LoginPage implements OnInit {
   }
   getConfirmPasswordSignup(event) {
     this.confirmPassword = event.target.value;
+  }
+  getEmailSignup(event) {
+    this.dataSignUp.email = event.target.value;
+    this.dataLogin.email = event.target.value;
+    // console.log(this.dataLogin.email);
   }
 }

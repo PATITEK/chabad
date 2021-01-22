@@ -28,10 +28,6 @@ export class PeoplePage implements OnInit {
 
   getData(func?) {
     this.matchUsersService.getAll(this.pageRequest).subscribe(data => {
-      // if (!this.users.reduce((acc, cur) => acc.concat(cur), [])
-      //   .some(user => user.id == data.app_users[0].id)
-      // ) {
-      // }
       data.app_users.forEach((d, i) => {
         if (i % 3 == 0) {
           this.users.push([d]);
@@ -44,7 +40,6 @@ export class PeoplePage implements OnInit {
       this.pageRequest.page++;
 
       if (this.getUsersLength() >= data.meta.pagination.total_objects) {
-        console.log('object');
         this.infiniteScroll.disabled = true;
       }
     })
@@ -70,7 +65,6 @@ export class PeoplePage implements OnInit {
   }
 
   loadMoreData(event) {
-    console.log('load more');
     this.getData(() => {
       event.target.complete();
     });

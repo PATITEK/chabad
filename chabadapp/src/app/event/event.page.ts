@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
@@ -24,7 +24,6 @@ export class EventPage implements OnInit {
     '#BAD4E3'
   ];
 
-  // activeTab = 'ceremony';
   currentDay;
   dateList = [];
   activeDateItem;
@@ -37,6 +36,7 @@ export class EventPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private chabadService: ChabadService,
     private loadingService: LoadingService,
     public sanitizer: DomSanitizer,
@@ -98,7 +98,7 @@ export class EventPage implements OnInit {
       this.pageRequestEvent.chabad_id = JSON.parse(params['data']).id;
       this.getDataChabad(JSON.parse(params['data']).id, isDismissLoading, func);
       this.getDataEvents();
-    })
+    }).unsubscribe();
   }
 
   changeDateItem(dateItem) {
@@ -169,6 +169,7 @@ export class EventPage implements OnInit {
     const modal = await this.modalController.create({
       component: EventDetailComponent,
       cssClass: 'event-detail-modal',
+      swipeToClose: true,
       componentProps: {
         data: {
           event: {
@@ -198,5 +199,9 @@ export class EventPage implements OnInit {
         localStorage.removeItem('eventItemId');
       }
     });
+  }
+
+  goToUserInfo() {
+    this.router.navigateByUrl('account');
   }
 }

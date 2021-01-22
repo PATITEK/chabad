@@ -111,7 +111,7 @@ export class ChabadPage implements OnInit {
       this.pageRequestEvent.chabad_id = JSON.parse(params['data']).id;
       this.getDataChabad(JSON.parse(params['data']).id, isDismissLoading, func);
       this.getDataEvents();
-    })
+    }).unsubscribe();
   }
 
   changeDateItem(dateItem) {
@@ -266,5 +266,10 @@ export class ChabadPage implements OnInit {
 
   hideDateList() {
     this.hiddenDateList = true;
+  }
+
+  goToUserInfo() {
+    this.router.navigateByUrl('account');
+    this.hideDateList();
   }
 }

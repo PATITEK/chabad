@@ -6,7 +6,7 @@
   </ion-label>
  </ion-item-group>
   <ion-item-group class="header-account">
-    
+
     <ion-item-group class="content-img">
       <img class="card-img" 
       src="https://adminbeauty.hvnet.vn/Upload/images/Hinh-1-thuc-hu-chuyen-beauty-garden-ban-hang-gia-hang-fake-kem-chat-luong.jpg">
@@ -17,30 +17,58 @@
     </ion-item-group>
   </ion-item-group>
   <ion-item-group class="content-info">
-    <form>
+    <form [formGroup]="form" (ngSubmit)="updadeInfo()">
       <ion-item-group class="content-input">
         <ion-item-group class="group-input">
           <ion-label class="title-info " position="floating">Your name</ion-label>
-          <ion-input class="input-info" [disabled]="activeInput === false" value="Nguyen Van A"></ion-input>
+          <ion-input class="input-info" formControlName="full_name" ></ion-input>
+          <div class="text-arlet">
+            <span *ngIf="f.full_name.errors?.required && f.full_name.touched">
+              Please enter your Name.
+            </span>
+          </div>
         </ion-item-group>
         <ion-item-group class="group-input">
           <ion-label class="title-info title-datetime">Date of birth</ion-label>
-          <ion-datetime class="input-info datetime" [disabled]="activeInput===false" value="2019-10-01T15:43:40.394Z"
+          <ion-datetime class="input-info datetime" formControlName="birthday"
             display-timezone="utc">
           </ion-datetime>
+          <div class="text-arlet">
+            <span *ngIf="f.birthday.errors?.required && f.birthday.touched">
+              Please enter your Birthday.
+            </span>
+          </div>
+        </ion-item-group>
+        <ion-item-group class="group-input">
+          <ion-label type="tel" position="floating" class="title-info">Email</ion-label>
+          <ion-input class="input-info"  formControlName="email"></ion-input>
+          <div class="text-arlet">
+            <span *ngIf="f.email.errors?.required && f.email.touched">
+              Please enter your Email.
+            </span>
+            <span *ngIf="f.email.errors?.email && f.email.touched">
+              Not Email.
+            </span>
+          </div>
         </ion-item-group>
         <ion-item-group class="group-input">
           <ion-label type="tel" position="floating" class="title-info">Phone number</ion-label>
-          <ion-input class="input-info" [disabled]="activeInput===false" value="+84  912345678"></ion-input>
+          <ion-input class="input-info"  formControlName="phone_number"></ion-input>
         </ion-item-group>
         <ion-item-group class="group-input">
           <ion-label class="title-info" position="floating">Address</ion-label>
-          <ion-input class="input-info" [disabled]="activeInput===false" value="123 Pham Van Dong St,  ward 12  ">
+          <ion-input class="input-info"  formControlName="full_address">
           </ion-input>
         </ion-item-group>
-       
+        <div class="text-arlet">
+          <span *ngIf="f.full_address.errors?.required && f.full_address.touched">
+
+            Please enter your Address
+          </span>
+
+        </div>
       </ion-item-group>
-      <button *ngIf="activeInput===true" class="btn-update" ion-button type="submit" block>Update</button>
+      <button *ngIf="activeInput===true" [ngClass]="{'checkUpdate':!checkUpdate}" class="btn-update" ion-button type="submit" block>Update</button>
     </form>
   </ion-item-group>
 </ion-content>

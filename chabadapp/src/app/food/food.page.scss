@@ -101,10 +101,9 @@ ion-footer {
     .cart-group {
         transition: all 0.3s;
         position: absolute;
-        // bottom: 5px;
-        left: 45%;
-        top: 35%;
-        // transform: translate(-50%, 0);
+        bottom: -3px;
+        left: 50%;
+        transform: translate(-50%, 0%);
         .amount-cart {
             position: absolute;
             width: 20px;
@@ -122,6 +121,12 @@ ion-footer {
             justify-content: center;
         }
     }
+
+    .add-cart-amount {
+        bottom: 100%;
+        transform: translate(-50%, 50%);
+    }
+
     .cart-main {
         background-color: rgba(0,0,0,0);
         border-radius: 40px;
@@ -192,14 +197,11 @@ ion-footer {
     }
 }
 
-.add-cart-amount {
-    transform: translateY(-100%);
-}
-.cart-main {
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-}
+// .cart-main {
+//     bottom: 50%;
+//     left: 150%;
+//     transform: translate(-150%, 50%);
+// }
 // .button-add{
 //     transform:translateY(0);
 // }

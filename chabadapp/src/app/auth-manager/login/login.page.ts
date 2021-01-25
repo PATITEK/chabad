@@ -15,14 +15,17 @@ export class LoginPage implements OnInit {
   public status='login';
   private dataSignUp = {
     full_name: '',
+    email: '',
     sex: '',
     age: 0,
+    country_code: '',
     province: '',
     district: '',
     full_address: '',
     phone_number: '',
     password: '',
-    email: '',
+    
+
   }
   checkSignUpVar = false;
   confirmPassword = '';
@@ -30,9 +33,13 @@ export class LoginPage implements OnInit {
     email: '',
     password: '',
   }
-  
+  countries:any;
   constructor(private router: Router, private authService: AuthService, public toastController: ToastController) { }
   ngOnInit() {
+    this.authService.countryCode().subscribe((data:any) => {
+      this.countries = data.country_codes;
+      // console.log(this.countries)
+    })
   }
   showPass(){
     this.showpass = !this.showpass;
@@ -90,6 +97,9 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+  showSelectValue = function(mySelect) {
+    console.log(mySelect);
+  }
 
   getFullnameSignup(event) {
     this.dataSignUp.full_name = event.target.value;
@@ -123,6 +133,5 @@ export class LoginPage implements OnInit {
   getEmailSignup(event) {
     this.dataSignUp.email = event.target.value;
     this.dataLogin.email = event.target.value;
-    // console.log(this.dataLogin.email);
   }
 }

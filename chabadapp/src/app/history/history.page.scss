@@ -1,5 +1,18 @@
 ion-content {
-  --overflow: hidden;
+  // --overflow: hidden;
+}
+
+ion-infinite-scroll {
+  // background: red;
+}
+
+.fixed {
+  position: fixed;
+  background: #fff;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .header {
@@ -16,7 +29,7 @@ ion-content {
   background: #ebebeb;
   border-top-left-radius: 35px;
   border-top-right-radius: 35px;
-  height: calc(100vh - 79px);
+  // height: calc(100vh - 79px);
   position: relative;
   margin-top: 25px;
   padding-top: 35px;
@@ -49,9 +62,15 @@ ion-segment {
   }
 }
 
+.event-list-container {
+  margin-top: 139px;
+  background: #ebebeb;
+  min-height: 100%;
+}
+
 .event-list {
   background: transparent;
-  height: calc(100% - 25px);
+  // height: calc(100% - 25px);
   overflow-y: auto;
 }
 

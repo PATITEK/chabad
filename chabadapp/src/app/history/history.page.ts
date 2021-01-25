@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonContent, IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { HistoryService } from '../@app-core/http';
+import { LoadingService } from '../@app-core/utils';
 import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
 
 @Component({
@@ -8,95 +10,104 @@ import { EventDetailComponent } from '../@modular/event-detail/event-detail.comp
   styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
+  @ViewChild(IonInfiniteScroll) infiniteScrollService: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll) infiniteScrollEvent: IonInfiniteScroll;
+  @ViewChild(IonContent) ionContent: IonContent;
+
   currentSegmentValue = 'service';
-  data = {
-    services: [
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-    ],
-    events: [
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-      {
-        name: 'name name name name name name name name name ',
-        start_time: '10:100000003333333',
-        end_time: '10:100000003333333',
-        description: 'abcd'
-      },
-    ]
-  }
+  lastScrollTop = 0;
+  data: any;
 
   constructor(
-    private modalController: ModalController
-  ) { }
+    private modalController: ModalController,
+    private loadingService: LoadingService,
+    private historyService: HistoryService
+  ) {
+    this.init();
+  }
 
   ngOnInit() {
+    this.loadingService.present();
+    this.getDataServices();
+    this.getDataEvents();
+  }
+
+  init() {
+    this.data = {
+      services: {
+        pageRequest: {
+          page: 1,
+          per_page: 5
+        },
+        array: []
+      },
+      events: {
+        pageRequest: {
+          page: 1,
+          per_page: 5
+        },
+        array: []
+      }
+    };
+
+    if (this.infiniteScrollService) {
+      this.infiniteScrollService.disabled = false;
+    }
+    if (this.infiniteScrollEvent) {
+      this.infiniteScrollEvent.disabled = false;
+    }
   }
 
   changedSegment(value) {
-    this.currentSegmentValue = value;
+    this.ionContent.getScrollElement().then(content => {
+      const scrollTop = content.scrollTop;
+      this.ionContent.scrollToTop().then(c => {
+        this.currentSegmentValue = value;
+        this.ionContent.scrollByPoint(0, this.lastScrollTop, 0);
+        this.lastScrollTop = scrollTop;
+      })
+    })
+  }
+
+  getDataServices(func?) {
+    let events = this.data.services;
+    this.historyService.getServices(events.pageRequest).subscribe(data => {
+      events.array = events.array.concat(data.events);
+      this.loadingService.dismiss();
+
+      func && func();
+      events.pageRequest.page++;
+
+      if (events.array.length >= data.meta.pagination.total_objects && this.infiniteScrollEvent) {
+        this.infiniteScrollEvent.disabled = true;
+      }
+    })
+  }
+
+  getDataEvents(func?) {
+    let events = this.data.events;
+    this.historyService.getServices(events.pageRequest).subscribe(data => {
+      events.array = events.array.concat(data.events);
+
+      func && func();
+      events.pageRequest.page++;
+
+      if (events.array.length >= data.meta.pagination.total_objects && this.infiniteScrollEvent) {
+        this.infiniteScrollEvent.disabled = true;
+      }
+    })
+  }
+
+  loadMoreDataServices(event) {
+    this.getDataServices(() => {
+      event.target.complete();
+    })
+  }
+
+  loadMoreDataEvents(event) {
+    this.getDataEvents(() => {
+      event.target.complete();
+    })
   }
 
   async openEventDetailModal(event) {
@@ -107,11 +118,29 @@ export class HistoryPage implements OnInit {
       componentProps: {
         data: {
           event: {
-            id: 1
+            id: event.id
           }
         }
       }
     });
     await modal.present();
+  }
+
+  doRefresh(event) {
+    this.init();
+
+    let count = 0;
+    this.getDataServices(() => {
+      count++;
+      count == 2 && event.target.complete();
+    })
+    this.getDataEvents(() => {
+      count++;
+      count == 2 && event.target.complete();
+    })
+  }
+
+  scrollToTop(event) {
+    event.target.value == this.currentSegmentValue && this.ionContent.scrollToTop(300);
   }
 }

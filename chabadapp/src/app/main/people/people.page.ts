@@ -39,7 +39,7 @@ export class PeoplePage implements OnInit {
       func && func();
       this.pageRequest.page++;
 
-      if (this.users.length > 0 && this.getUsersLength() >= data.meta.pagination.total_objects) {
+      if (this.getUsersLength() >= data.meta.pagination.total_objects && this.infiniteScroll) {
         this.infiniteScroll.disabled = true;
       }
     })

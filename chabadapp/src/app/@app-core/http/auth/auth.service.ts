@@ -109,6 +109,16 @@ export class AuthService {
         throw errorRes.error;
       }));
   }
+
+  public countryCode() {
+    return this.http.get(`${APICONFIG.AUTH.COUNTRY_CODE}`).pipe(
+      map((result: any) => {
+        return result;
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      }))
+  }
  
   checkLogin() {
     const token = localStorage.getItem('Authorization');

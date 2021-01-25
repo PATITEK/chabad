@@ -12,7 +12,7 @@ export const APICONFIG = {
     RESET_PASSWORD_EMAIL: `/app/reset_password/send_code`,
     CHECK_CODE_RESET: `/app/reset_password/check_code`,
     RESET_PASSWORD: `/app/reset_password/reset_password`,
-
+    COUNTRY_CODE: `/app/country_codes`,
   },
   ACCOUNT: {
     PROFILE_USER: `/app/app_users/profile`,
@@ -39,6 +39,9 @@ export const APICONFIG = {
   },
   MATCH_USERS: {
     GET: `/app/matches/match`
+  },
+  FOOD: {
+    GETFOOD: (id) => `/app/foods?page=${id}&per_page=${id}`
   }
 };
 

@@ -77,11 +77,10 @@
           <ion-label class="select__signup-row--name">Your address</ion-label>
           <ion-label class="select__signup-row--group display-sp-around">
             <ion-label class="your__select your__select-notmr">
-              <ion-label class="your__select-flat">
+              <ion-label class="your__select-flat" >
                 <img src="assets/img/flag-400.png" alt="" class="" />
-                <ion-select class="your__select-flat--country">
-                  <!-- <ion-select-option value="f">Viet Nam</ion-select-option>
-                  <ion-select-option value="m">Singapore</ion-select-option> -->
+                <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.country_code" name="Viet Nam">
+                  <ion-select-option [value]="country.iso_country" *ngFor="let country of countries">{{country.country}}</ion-select-option>
                 </ion-select>
               </ion-label>
             </ion-label>
@@ -108,7 +107,8 @@
           <input (keyup)="getConfirmPasswordSignup($event)" type="password"/>
         </ion-row>
         <ion-button [disabled]="this.dataSignUp.full_name === '' || 
-                                this.dataSignUp.sex === '' || 
+                                this.dataSignUp.email === '' ||
+                                 this.dataSignUp.sex === '' || 
                                 this.dataSignUp.age == 0 || 
                                 this.dataSignUp.province === '' || 
                                 this.dataSignUp.district === '' ||

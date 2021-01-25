@@ -30,11 +30,13 @@
 </ion-content>
 
 <ion-footer [ngClass]="{'ion-footer-add': anmCart === true }">
-  <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
+  <ion-item-group class="ion-no-border" class="cart-main" [ngClass]="{'add-cart-main': anmCart === true }" >
+
+    <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
       <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
         <span *ngIf="totalAmount > 0"  class="amount-cart">+{{totalAmount}}</span>
     </ion-item-group>
-  <ion-item-group class="ion-no-border" class="cart-main" [ngClass]="{'add-cart-main': anmCart === true }" >
+    
     <ion-item-group lines="none" class="detail-cart" >
       <h1 >{{currentItem.name}}</h1>
       <ion-item-group class="cart-info">

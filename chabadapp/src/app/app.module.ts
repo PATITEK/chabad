@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './@app-core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './@app-core/auth-guard.service';
+import { Camera } from '@ionic-native/camera/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +29,8 @@ import { AuthGuard } from './@app-core/auth-guard.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthGuard
+    AuthGuard,
+    Camera,
   ],
   bootstrap: [AppComponent]
 })

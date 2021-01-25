@@ -1,21 +1,24 @@
 // $height: 82vh;
 ion-header {
-    height: 50px;
-    ion-title {
-        text-align: center;
-        padding: 30px 50px;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 30px;
-        margin-left: 15px;
+    background-color: #f2f2f2;
+    .title-main{
+        display: flex;
+        margin-top: 27px;
+        justify-content: center;
+        margin-bottom: 15px;
+        .title-header {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 27px;
+            text-transform: uppercase;
+            color: #00b0b2;
+            z-index: 10;
+        }
     }
-    .back-food-btn {
-        background-color: #d9d9d9;
-    }
-    margin: 10px 0;
 }
 ion-content {
+    --background: #f2f2f2;
     --overflow: hidden;
     h1 {
         margin: 0;
@@ -28,7 +31,7 @@ ion-content {
     // --padding: 0 50px;
     .food-group {
         overflow: scroll;
-        border-radius: 20px;
+        // border-radius: 20px;
 
         height: 100%;
         // height: 91vh;
@@ -37,6 +40,7 @@ ion-content {
             padding-right: 15px;
             z-index: 1;
             margin-top: 15px;
+            background-color: #F8F8F8;
             // padding-bottom: 85px;
             .item-food {
                 position: relative;
@@ -97,7 +101,10 @@ ion-content {
 }
 
 ion-footer {
-    height: 80px;
+    transition: height 0.3s;
+    // height: 80px;
+    height: 0px;
+    background-color: rgba(0, 0, 0, 0);
     .cart-group {
         transition: all 0.3s;
         position: absolute;
@@ -128,23 +135,19 @@ ion-footer {
     }
 
     .cart-main {
+        transform: translateY(65px);
+        transition: all 0.3s;
         background-color: rgba(0,0,0,0);
         border-radius: 40px;
         position: relative;
         display: flex;
         justify-content: center;
         z-index: 11;
-        // height: 80px;
-        // height: 10px;
-        // background: #ffffff;
-        // height: 10vh;
         align-items: center;
-        height: 0%;
-        transition: height .3s;
         img {
             height: 48px;
         }
-        .detal-cart {
+        .detail-cart {
             position: absolute;
             top: 0;
             left: 20px;
@@ -195,6 +198,12 @@ ion-footer {
             }
         }
     }
+    .add-cart-main {
+        transform: translateY(-80%);
+    }
+}
+.ion-footer-add {
+    height: 12%;
 }
 
 // .cart-main {
@@ -228,13 +237,13 @@ ion-footer {
 //     }
 // }
 
-@media screen and (max-height: 732px) {
-    .cart-main {
-        height: 87px !important;
-    }
-    ion-content {
-        .food-group {
-            height: 100%;
-        }
-    }
-}
+// @media screen and (max-height: 732px) {
+//     .cart-main {
+//         height: 87px !important;
+//     }
+//     ion-content {
+//         .food-group {
+//             height: 100%;
+//         }
+//     }
+// }

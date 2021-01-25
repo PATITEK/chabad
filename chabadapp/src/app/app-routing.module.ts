@@ -50,9 +50,12 @@ const routes: Routes = [
     path: 'account-setting',
     loadChildren: () => import('./account-setting/account-setting.module').then(m => m.AccountSettingPageModule)
   },
+  {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
+  },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/chabad' },
-
 ];
 @NgModule({
   imports: [

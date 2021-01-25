@@ -175,9 +175,6 @@ export class EventPage implements OnInit {
           event: {
             id: event.id,
             joined: event.joined
-          },
-          chabad: {
-            id: this.chabad.id
           }
         }
       }

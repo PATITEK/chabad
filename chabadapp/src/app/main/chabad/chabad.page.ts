@@ -42,9 +42,9 @@ export class ChabadPage implements OnInit {
 
   goToChabadDetail(chabad) {
     const data = {
-      id: chabad.id
+      // id: chabad.id
     }
-    this.router.navigate(['chabad'], {
+    this.router.navigate(['history'], {
       queryParams: {
         data: JSON.stringify(data)
       }

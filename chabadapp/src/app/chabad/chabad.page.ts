@@ -230,9 +230,6 @@ export class ChabadPage implements OnInit {
           event: {
             id: event.id,
             joined: event.joined
-          },
-          chabad: {
-            id: this.chabad.id
           }
         }
       }

@@ -6,7 +6,7 @@
     <span class="line"></span>
   </ion-item-group>
 
-  <ion-item-group class="body">
+  <ion-item-group class="body" [style.height]="data.event.joined == false ? 'calc(100% - 291px)' : 'calc(100% - 291px + 110px)'">
     <ion-buttons class="ion-align-items-start ion-justify-content-between">
       <h3 class="title">{{ event.name }}</h3>
     </ion-buttons>
@@ -38,13 +38,13 @@
           <ion-label class="info-title">Purpose</ion-label>
           <p class="info-text">The Temple in Jerusalem was any of structures which were located</p>
           <span class="dollar">$</span>
-          <span class="money">20 USD</span>
+          <span class="money">18 USD</span>
           <span class="thank-sentence">Thank member!</span>
         </ion-item-group>
       </ion-buttons>
     </ion-item-group>
   
-    <ion-item-group class="join">
+    <ion-item-group [style.display]="data.event.joined == false ? 'block' : 'none'" class="join">
       <p class="join-title">Will you join with us?</p>
       <ion-buttons class="ion-justify-content-between">
         <span class="btn-join-with-us active-effect" (click)="chooseJoinSelection(false)">No</span>

@@ -9,7 +9,6 @@ ion-content {
 
 .body {
   padding: 5px 28px 28px;
-  height: calc(100% - 291px);
   overflow: scroll;
 
   @media screen and (max-width: 320px) {
@@ -66,6 +65,7 @@ ion-content {
   color: #999393;
   font-size: 14px;
   font-weight: 600;
+  margin-top: 5px;
 }
 
 .fixed-bottom {

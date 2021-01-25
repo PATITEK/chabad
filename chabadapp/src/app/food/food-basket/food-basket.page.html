@@ -1,6 +1,8 @@
 <ion-header class="ion-no-border">
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
-  <ion-title>Your basket</ion-title>
+  <ion-item-group class="title-main">
+    <ion-label class="title-header">Your basket</ion-label>
+ </ion-item-group>
 </ion-header>
 
 <ion-content>
@@ -19,7 +21,7 @@
         <ion-label class="left-label">Your Order</ion-label>
         <ion-label (click)="addItem()" class="add-item">Add items</ion-label>
       </ion-buttons>
-      <ion-buttons *ngFor="let food of data" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
+      <ion-buttons *ngFor="let food of dataBasket" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
         <span class="food-name">{{food.name}}</span>
         <ion-buttons>
           <img (click)="plusItem(food)" class="icon-add" src="assets/img/ion-add.svg" alt="">
@@ -28,7 +30,7 @@
           </ion-buttons>
           <img (click)="minusItem(food)" class="icon-add" src="assets/img/ion-remove.svg" alt="">
         </ion-buttons>
-        <span class="price">{{food.price}}</span>
+        <span class="price">{{food.price * food.amount}}</span>
         <ion-icon (click)="removeItem(food)" class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon>
       </ion-buttons>
       <ion-row class="group2-row-3">
@@ -39,8 +41,8 @@
 
     <ion-list class="group3">
       <ion-row class="group3-row-1">
-        <ion-label class="group3-row1-total">Total (3 items)</ion-label>
-        <ion-label class="group3-row1-prices">$90</ion-label>
+        <ion-label class="group3-row1-total">Total ({{totalItem}} items)</ion-label>
+        <ion-label class="group3-row1-prices" *ngFor="let food of dataBasket">${{food.amount}}</ion-label>
       </ion-row>
     </ion-list>
     

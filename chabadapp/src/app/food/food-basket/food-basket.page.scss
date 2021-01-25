@@ -1,15 +1,18 @@
 ion-header {
-    
-    height: 70px;
-    ion-title {
-        text-align: center;
-        padding: 30px 50px;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-    }
-    .back-food-btn {
-        background-color: #d9d9d9;
+    .title-main{
+        display: flex;
+        margin-top: 27px;
+        justify-content: center;
+        margin-bottom: 15px;
+        .title-header {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 27px;
+            text-transform: uppercase;
+            color: #00b0b2;
+            z-index: 10;
+        }
     }
 }
 
@@ -150,6 +153,6 @@ ion-content {
     }
 }
 
-.group2-row-2-deleted {
-    // background-color: red;
-}
+// .group2-row-2-deleted {
+//     // background-color: red;
+// }

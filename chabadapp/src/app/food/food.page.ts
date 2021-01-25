@@ -11,7 +11,7 @@ import { ShoppingPage } from '../main/shopping/shopping.page';
 })
 export class FoodPage implements OnInit {
   totalAmount = 0;
-  shop = [];
+  dataBasket = [];
   currentItem: any = {
     id : 0,
     amount : 0,
@@ -40,6 +40,9 @@ export class FoodPage implements OnInit {
     this.anmCart = true;
     this.currentItem = item;
     this.currentItem.amount = 1;
+    // if(this.currentItem.amount == undefined) {
+    //   this.currentItem.amount = 1;
+    // }
   }
   plusItem() {
     if(this.currentItem.amount < 99) {
@@ -54,27 +57,28 @@ export class FoodPage implements OnInit {
   clickButtonAdd(){
     this.anmCart = false;
     let duplicate = false;
-    for(let i = 0; i < this.shop.length; i++) {
-      if(this.shop[i].id == this.currentItem.id) {
-        this.shop[i].amount += this.currentItem.amount;
+    for(let i = 0; i < this.dataBasket.length; i++) {
+      if(this.dataBasket[i].id == this.currentItem.id) {
+        this.dataBasket[i].amount += this.currentItem.amount;
         duplicate = true;
         break;
       }
     }
     if(duplicate == false) {
-      this.shop.push({ id: this.currentItem.id, amount: this.currentItem.amount });
+      this.dataBasket.push({ id: this.currentItem.id, amount: this.currentItem.amount , name: this.currentItem.name, price: this.currentItem.price});
     }
-    console.log(this.shop);
+    console.log(this.dataBasket);
 
     this.totalAmount = 0;
-    for(let i = 0; i< this.shop.length; i++) {
+    for(let i = 0; i< this.dataBasket.length; i++) {
       if(this.totalAmount < 99) {
-        this.totalAmount += this.shop[i].amount;
+        this.totalAmount += this.dataBasket[i].amount;
       }
     }
 
   }
   goToFoodDetail() {
     this.router.navigate(['food/food-basket']);
+    localStorage["dataBasket"] = JSON.stringify(this.dataBasket);
   }
 }

@@ -1,14 +1,14 @@
 <ion-header class="ion-no-border">
-  <!-- <ion-toolbar>
-    
-  </ion-toolbar> -->
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
-    <ion-title>Food for you</ion-title>
+  <ion-item-group class="title-main">
+    <ion-label class="title-header">Food for you</ion-label>
+ </ion-item-group>
 </ion-header>
+
 <ion-content fullscreen>
   <ion-item-group class="food-group">
     <ion-list lines="none" class="list-foods">
-      <ion-item-group *ngFor="let foodItem of listFood" class="item-food">
+      <ion-item-group *ngFor="let foodItem of listFood" class="item-food" (click)="addItem(foodItem)">
         <ion-item lines="none" class="ion-align-items-start ion-no-padding">
           <img [src]="foodItem.url">
           <ion-item-group class="detail-food">
@@ -22,20 +22,20 @@
           <ion-label class="text-price">
             $ {{foodItem.price}}
           </ion-label>
-          <img class="icon-add" (click)="addItem(foodItem)" src="assets/img/ion-add.svg" alt="">
+          <img class="icon-add" src="assets/img/ion-add.svg" alt="">
         </ion-item-group>
       </ion-item-group>
     </ion-list>
   </ion-item-group>
 </ion-content>
 
-<ion-footer>
+<ion-footer [ngClass]="{'ion-footer-add': anmCart === true }">
   <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
       <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
         <span *ngIf="totalAmount > 0"  class="amount-cart">+{{totalAmount}}</span>
     </ion-item-group>
   <ion-item-group class="ion-no-border" class="cart-main" [ngClass]="{'add-cart-main': anmCart === true }" >
-    <ion-item-group lines="none" *ngIf="anmCart === true" class="detal-cart">
+    <ion-item-group lines="none" class="detail-cart" >
       <h1 >{{currentItem.name}}</h1>
       <ion-item-group class="cart-info">
         <img (click)="plusItem()" class="icon-add" src="assets/img/ion-add.svg" alt="">
@@ -47,7 +47,10 @@
     </ion-item-group>
     
     
-    <ion-item-group *ngIf="anmCart === true" class="btn-add-group" >
+    <!-- <ion-item-group *ngIf="anmCart === true" class="btn-add-group" >
+      <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>
+    </ion-item-group> -->
+    <ion-item-group class="btn-add-group" >
       <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>
     </ion-item-group>
     

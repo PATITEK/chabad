@@ -34,7 +34,7 @@ export class ShoppingPage implements OnInit {
       func && func();
       this.pageRequest.page++;
 
-      if (this.chabads.length >= data.meta.pagination.total_objects) {
+      if (this.chabads.length >= 0 && this.chabads.length >= data.meta.pagination.total_objects) {
         this.infiniteScroll.disabled = true;
       }
     })
@@ -59,7 +59,9 @@ export class ShoppingPage implements OnInit {
     // reset
     this.chabads = [];
     this.pageRequest.page = 1;
-    this.infiniteScroll.disabled = false;
+    if (this.infiniteScroll) {
+      this.infiniteScroll.disabled = false;
+    }
 
     this.getData(() => {
       event.target.complete();

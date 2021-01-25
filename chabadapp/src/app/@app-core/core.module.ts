@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 import { GlobalErrorHandler } from './GlobalErrorHandler';
 import { ConnectivityService } from './utils/connectivity.service';
 import { DateTimeService, LoadingService } from './utils';
+import { HistoryService } from './http/history';
 
 @NgModule({
   declarations: [],
@@ -34,7 +35,8 @@ export class CoreModule {
         ChabadService,
         LoadingService,
         DateTimeService,
-        MatchUsersService
+        MatchUsersService,
+        HistoryService
       ]
     };
   }

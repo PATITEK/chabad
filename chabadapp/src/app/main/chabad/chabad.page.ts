@@ -34,7 +34,7 @@ export class ChabadPage implements OnInit {
       func && func();
       this.pageRequest.page++;
 
-      if (this.chabads.length >= 0 && this.chabads.length >= data.meta.pagination.total_objects) {
+      if (this.chabads.length >= data.meta.pagination.total_objects && this.infiniteScroll) {
         this.infiniteScroll.disabled = true;
       }
     })
@@ -42,9 +42,9 @@ export class ChabadPage implements OnInit {
 
   goToChabadDetail(chabad) {
     const data = {
-      // id: chabad.id
+      id: chabad.id
     }
-    this.router.navigate(['history'], {
+    this.router.navigate(['chabad'], {
       queryParams: {
         data: JSON.stringify(data)
       }

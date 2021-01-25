@@ -41,7 +41,11 @@ export const APICONFIG = {
     GET: `/app/matches/match`
   },
   FOOD: {
-    GETFOOD: (id) => `/app/foods?page=${id}&per_page=${id}`
+    GET: (id) => `/app/foods/${id}`
+  },
+  HISTORY: {
+    GET_SERVICES: `/app/attention_logs/service_history`,
+    GET_EVENTS: `/app/attention_logs/event_history`
   }
 };
 

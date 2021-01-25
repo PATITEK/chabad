@@ -6,3 +6,4 @@ export * from './global';
 export * from './@http-config';
 export * from './chabad';
 export * from './match-users';
+export * from './history';

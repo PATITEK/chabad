@@ -22,7 +22,8 @@ export class EventDetailComponent implements OnInit {
     description: '',
     start_time: '',
     end_time: '',
-    cal_time: ''
+    cal_time: '',
+    chabad_id: ''
   }
   btnJoinElement;
   disabledBtn = false;
@@ -62,7 +63,7 @@ export class EventDetailComponent implements OnInit {
   goToDonate() {
     this.modalController.dismiss(null, 'cancel');
     const data = {
-      id: this.data.chabad.id
+      id: this.event.chabad_id
     }
     this.router.navigate(['/donate'], {
       queryParams: {

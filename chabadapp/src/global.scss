@@ -37,6 +37,10 @@
   visibility: hidden;
 }
 
+.opacity-none {
+  opacity: 0;
+}
+
 .display-none {
   display: none;
 }
@@ -52,7 +56,7 @@
 .back-btn {
   display: inline-block;
   color: #00b0b2;
-  background: rgba(#feffff, 0.6);
+  background: #fff;
   border-radius: 18px;
   width: 45px;
   height: 45px;
@@ -60,7 +64,6 @@
   top: 17px;
   left: 17px;
   z-index: 10;
-  background: #feffff;
 }
 
 .two-lines {

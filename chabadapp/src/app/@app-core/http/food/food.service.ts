@@ -10,7 +10,7 @@ export class FoodService {
   ) { }
   
   public getFoodById(id) {
-    return this.http.get<any>(`${APICONFIG.FOOD.GETFOOD(id)}`).pipe(
+    return this.http.get<any>(`${APICONFIG.FOOD.GET(id)}`).pipe(
       map(result => {
         return result;
       }),

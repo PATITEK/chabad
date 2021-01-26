@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { find } from 'rxjs/operators';
-import { ShoppingPage } from '../main/shopping/shopping.page';
 
 @Component({
   selector: 'app-food',
@@ -10,15 +8,13 @@ import { ShoppingPage } from '../main/shopping/shopping.page';
   styleUrls: ['./food.page.scss'],
 })
 export class FoodPage implements OnInit {
-  totalAmount = 0;
-  dataBasket = [];
+  dataBasket:any = [];
   currentItem: any = {
     id : 0,
     amount : 0,
   }
   listFood = [];
   anmCart = false;
-  // amount:number=0 ;
   constructor(public modalController: ModalController, private router: Router) {
     for (let i = 0; i < 10; i++) {
       this.listFood.push(
@@ -31,18 +27,17 @@ export class FoodPage implements OnInit {
         }
       )
     }
-
   }
-
   ngOnInit() {
+  
+  }
+  ionViewWillEnter() {
+    this.getDataBasket();
   }
   addItem(item){
     this.anmCart = true;
     this.currentItem = item;
     this.currentItem.amount = 1;
-    // if(this.currentItem.amount == undefined) {
-    //   this.currentItem.amount = 1;
-    // }
   }
   plusItem() {
     if(this.currentItem.amount < 99) {
@@ -67,18 +62,19 @@ export class FoodPage implements OnInit {
     if(duplicate == false) {
       this.dataBasket.push({ id: this.currentItem.id, amount: this.currentItem.amount , name: this.currentItem.name, price: this.currentItem.price});
     }
-    console.log(this.dataBasket);
-
-    this.totalAmount = 0;
-    for(let i = 0; i< this.dataBasket.length; i++) {
-      if(this.totalAmount < 99) {
-        this.totalAmount += this.dataBasket[i].amount;
-      }
-    }
-
+    this.setDataBasket();
   }
   goToFoodDetail() {
     this.router.navigate(['food/food-basket']);
-    localStorage["dataBasket"] = JSON.stringify(this.dataBasket);
+  }
+  setDataBasket() {
+    localStorage.setItem('dataBasket', JSON.stringify(this.dataBasket));
+  }
+  getDataBasket() {
+    this.dataBasket = JSON.parse(localStorage.getItem('dataBasket')) || [];
+    
+  }
+  calTotalAmount() {
+    return this.dataBasket.reduce((acc, cur) => acc + cur.amount, 0);
   }
 }

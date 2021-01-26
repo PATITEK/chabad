@@ -21,18 +21,20 @@
         <ion-label class="left-label">Your Order</ion-label>
         <ion-label (click)="addItem()" class="add-item">Add items</ion-label>
       </ion-buttons>
-      <ion-buttons *ngFor="let food of dataBasket" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
-        <span class="food-name">{{food.name}}</span>
-        <ion-buttons>
-          <img (click)="plusItem(food)" class="icon-add" src="assets/img/ion-add.svg" alt="">
-          <ion-buttons class="amount" lines="none">
-            <span>{{food.amount}}</span>
+      <ion-content class="group2-row-2-cover">
+        <ion-buttons *ngFor="let food of dataBasket" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
+          <span class="food-name">{{food.name}}</span>
+          <ion-buttons>
+            <img (click)="plusItem(food)" class="icon-add" src="assets/img/ion-add.svg" alt="">
+            <ion-buttons class="amount" lines="none">
+              <span>{{food.amount}}</span>
+            </ion-buttons>
+            <img (click)="minusItem(food)" class="icon-add" src="assets/img/ion-remove.svg" alt="">
           </ion-buttons>
-          <img (click)="minusItem(food)" class="icon-add" src="assets/img/ion-remove.svg" alt="">
+          <span class="price">${{food.price * food.amount}}</span>
+          <ion-icon (click)="removeItem(food)" class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon>
         </ion-buttons>
-        <span class="price">{{food.price * food.amount}}</span>
-        <ion-icon (click)="removeItem(food)" class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon>
-      </ion-buttons>
+      </ion-content>
       <ion-row class="group2-row-3">
         <ion-icon name="add-circle"></ion-icon>
         <ion-input placeholder="Notes"> </ion-input>
@@ -41,8 +43,8 @@
 
     <ion-list class="group3">
       <ion-row class="group3-row-1">
-        <ion-label class="group3-row1-total">Total ({{totalItem}} items)</ion-label>
-        <ion-label class="group3-row1-prices" *ngFor="let food of dataBasket">${{food.amount}}</ion-label>
+        <ion-label class="group3-row1-total">Total ({{dataBasket.length}} items)</ion-label>
+        <ion-label class="group3-row1-prices" >${{calTotalPrice()}}</ion-label>
       </ion-row>
     </ion-list>
     

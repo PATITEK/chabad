@@ -10,7 +10,6 @@ export class FoodService {
   constructor(
     private http: HttpClient
   ) { }
-  
   public getAll(id, request: IPageRequest) {
     return this.http.get<any>(`${APICONFIG.FOOD.GET(id)}?${(requestQuery(request))}`).pipe(
       map(result => {

@@ -8,28 +8,15 @@ import { Router } from '@angular/router';
 })
 export class FoodBasketPage implements OnInit {
   dataBasket = [];
-  totalItem = 0;
-  totalPrice = 0;
-
   currentItem: any = {
     id : 0,
     amount : 0,
   }
-  isDel = false;
   constructor(private router: Router) { }
 
   ngOnInit() {
-    // for(let i = 0; i<10; i++) {
-    //   this.data.push({
-    //     name: 'Food name' + i,
-    //     amount: 1 + i,
-    //     price: '$' + (60 + i),
-    //     id: i
-    //   })
-    // }
-    this.dataBasket = JSON.parse(localStorage["dataBasket"]);
-    this.totalItem = this.dataBasket.length;
-    console.log(this.dataBasket);
+    
+    this.getDataBasket();
   }
   order() {
     this.router.navigate(['food/food-checkout']);
@@ -39,24 +26,16 @@ export class FoodBasketPage implements OnInit {
     this.router.navigate(['food']);
   }
   plusItem(item) {
-    this.currentItem = item;
-    if(this.currentItem.amount < 99) {
-      this.currentItem.amount++;
+    if(item.amount < 99) {
+      item.amount++;
     }
-    this.totalPrice = 0;
-    for(let i = 0; i< this.dataBasket.length; i++) {
-      this.totalPrice += this.dataBasket[i].price;
-    }
+    this.setDataBasket();
   }
   minusItem(item) {
-    this.currentItem = item;
-    if(this.currentItem.amount > 1) {
-      this.currentItem.amount--;
+    if(item.amount > 1) {
+      item.amount--;
     }
-    this.totalPrice = 0;
-    for(let i = 0; i< this.dataBasket.length; i++) {
-      this.totalPrice += this.dataBasket[i].price;
-    }
+    this.setDataBasket();
   }
   removeItem(food) {
     for(let i = 0; i< this.dataBasket.length; i++) {
@@ -65,7 +44,17 @@ export class FoodBasketPage implements OnInit {
         break;
       }
     }
-    this.isDel = true;
+    this.setDataBasket();
   }
 
+  setDataBasket() {
+    localStorage.setItem('dataBasket', JSON.stringify(this.dataBasket));
+  }
+  getDataBasket() {
+    this.dataBasket = JSON.parse(localStorage.getItem('dataBasket')) || [];
+  }
+
+  calTotalPrice() {
+    return this.dataBasket.reduce((acc, cur) => acc + cur.amount*cur.price , 0)
+  }
 }

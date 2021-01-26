@@ -17,6 +17,7 @@ ion-header {
 }
 
 ion-content {
+    --overflow: hidden;
     ion-item-group {
         padding-top: 20px;
         padding-bottom: 50px;
@@ -56,6 +57,8 @@ ion-content {
             }
         }
         .group2 {
+            --overflow: auto;
+            overflow: visible !important;
             transform: translateY(15px);
             margin-top: 4%;
             width: 96%;
@@ -69,47 +72,51 @@ ion-content {
                     color: #02CDCF;
                 }
             }
-            .group2-row-2 {
-                max-width: 320px;
-                margin: auto;
-                border-bottom: 2px solid #F8F8F8;
-                padding: 18px 0px;
-                // margin-left: 40px;
-                // background-color: #00B0B2;
-                .food-name {
-                    margin-left: 20px;
-                    font-size: 16px;
-                    font-weight: 600;
-                    width: 125px;
-                }
-                ion-buttons {
+            .group2-row-2-cover {
+                --overflow:auto;
+                height: 200px;
+                .group2-row-2 {
+                    max-width: 320px;
                     margin: auto;
-                    .icon-add {
-                        width: 20px;
-                        display: inline-block;
-                        margin: auto;
+                    border-bottom: 2px solid #F8F8F8;
+                    padding: 18px 0px;
+                    // margin-left: 40px;
+                    // background-color: #00B0B2;
+                    .food-name {
+                        margin-left: 20px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        width: 125px;
                     }
-                    .amount {
-                        width: 30px;
-                        justify-content: center;
-                        span {
-                            font-weight: 600;
-                            // justify-content: center;
-                            transform: translateY(2px);
-                            // text-align: center;
-                            
+                    ion-buttons {
+                        margin: auto;
+                        .icon-add {
+                            width: 20px;
+                            display: inline-block;
+                            margin: auto;
+                        }
+                        .amount {
+                            width: 30px;
+                            justify-content: center;
+                            span {
+                                font-weight: 600;
+                                // justify-content: center;
+                                transform: translateY(2px);
+                                // text-align: center;
+                                
+                            }
                         }
                     }
+                    .price {
+                        margin-right: 15px;
+                        width: 80px;
+                        text-align: right;
+                    }
+                    .icon-remove {
+                        margin-right: 20px;
+                    }
+    
                 }
-                .price {
-                    margin-right: 15px;
-                    width: 80px;
-                    text-align: right;
-                }
-                .icon-remove {
-                    margin-right: 20px;
-                }
-
             }
             .group2-row-3 {
                 border-top: 2px solid #f8f8f8;
@@ -142,6 +149,7 @@ ion-content {
             }
         }
         .main-button {
+            // position: absolute;
             width: 170px;
             height: 40px;
             display: block;
@@ -153,6 +161,8 @@ ion-content {
     }
 }
 
-// .group2-row-2-deleted {
-//     // background-color: red;
-// }
+@media screen and (max-height: 731px) {
+    ion-content {
+        --overflow: auto;
+    }
+}

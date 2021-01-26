@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DonateService } from '../@app-core/http/donate';
+import { DonateService, ChabadService,EventsService } from '../@app-core/http';
 
 @Component({
   selector: 'app-pray',
@@ -53,10 +53,26 @@ export class PrayPage implements OnInit {
   source_id: any;
   id_change :any;
   clicked = false;
+  url: any;
+  event;
+  dataParams;
+  chabad = {
+    name: '',
+    thumb_image: ''
+  }
+  // pageRequestEvent: IPageEvent = {
+  //   page: 1,
+  //   per_page: 10,
+  //   cal_date: '',
+  //   chabad_id: ''
+  // }
+  
   constructor(
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
+     private eventService: EventsService,
      public donateService: DonateService,
+     public chabadService: ChabadService
   ) {
     this.frmPray = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -89,6 +105,19 @@ export class PrayPage implements OnInit {
 
   }
   ngOnInit() {
+      this.route.queryParams.subscribe(params => {
+      this.dataParams = JSON.parse(params['data']);
+      console.log(this.dataParams);
+      this.chabadService.getDetail(this.dataParams.chabad.id).subscribe(data => {
+            this.chabad = data.chabad
+      });
+      //  this.eventService.getAll(this.dataParams.chabad.id).subscribe(data => {
+      //   this.event = data.event;
+      //   console.log(this.event);
+      // })
+    
+    })
+    
   }
   ionViewWillEnter() {
     if(this.DateObj === '') {
@@ -118,9 +147,7 @@ export class PrayPage implements OnInit {
       e.target.classList.remove('btn__nameless_dis_pray');
     }
   }
-
   btnActivate(e) {
-    console.log('yeah');
     this.isChoose = true;
     let choosed = document.querySelectorAll('day');
     choosed.forEach(element => {
@@ -134,12 +161,12 @@ export class PrayPage implements OnInit {
       "donation_log" : {
         "amount": this.frmPray.get('amount').value,
         "note": this.frmPray.get('note').value,
-        "source_type": this.source_type,
-        "source_id": this.source_id
+        "source_type": this.dataParams.type,
+        "source_id":  this.dataParams.chabad.id
       }
     }
+    console.log(result);
     this.donateService.donateLog(result).subscribe((data) => {
-        console.log(data);
     })
   }
 }

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { IonContent, ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
 import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
@@ -66,15 +66,15 @@ export class ChabadPage implements OnInit {
 
   ngOnInit() {
     this.loadingService.present();
-    this.getData(true);
+    this.getData();
   }
 
-  getDataChabad(id, isDismissLoading?: boolean, func?) {
+  getDataChabad(id, func?) {
     this.chabadService.getDetail(id).subscribe(data => {
       this.chabad = data.chabad;
       func && func();
       this.loadedChabad = true;
-      isDismissLoading && this.loadingService.dismiss();
+      this.loadingService.dismiss();
     })
   }
 
@@ -106,10 +106,10 @@ export class ChabadPage implements OnInit {
     }
   }
 
-  getData(isDismissLoading?: boolean, func?) {
+  getData(func?) {
     this.route.queryParams.subscribe(params => {
       this.pageRequestEvent.chabad_id = JSON.parse(params['data']).id;
-      this.getDataChabad(JSON.parse(params['data']).id, isDismissLoading, func);
+      this.getDataChabad(JSON.parse(params['data']).id, func);
       this.getDataEvents();
     }).unsubscribe();
   }
@@ -211,7 +211,7 @@ export class ChabadPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.getData(false, () => {
+    this.getData(() => {
       event.target.complete();
     })
   }
@@ -239,7 +239,7 @@ export class ChabadPage implements OnInit {
     modal.onWillDismiss().then(data => {
       if (data.role == 'cancel') {
         this.hideDateList();
-      } else { 
+      } else {
         let eventItemId = localStorage.getItem('eventItemId');
         eventItemId && this.setJoiningEventLocal(eventItemId);
       }

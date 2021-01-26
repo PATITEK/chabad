@@ -60,15 +60,15 @@ export class EventPage implements OnInit {
 
   ngOnInit() {
     this.loadingService.present();
-    this.getData(true);
+    this.getData();
   }
 
-  getDataChabad(id, isDismissLoading?: boolean, func?) {
+  getDataChabad(id, func?) {
     this.chabadService.getDetail(id).subscribe(data => {
       this.chabad = data.chabad;
       func && func();
       this.loadedChabad = true;
-      isDismissLoading && this.loadingService.dismiss();
+      this.loadingService.dismiss();
     })
   }
 
@@ -93,10 +93,10 @@ export class EventPage implements OnInit {
     }
   }
 
-  getData(isDismissLoading?: boolean, func?) {
+  getData(func?) {
     this.route.queryParams.subscribe(params => {
       this.pageRequestEvent.chabad_id = JSON.parse(params['data']).id;
-      this.getDataChabad(JSON.parse(params['data']).id, isDismissLoading, func);
+      this.getDataChabad(JSON.parse(params['data']).id, func);
       this.getDataEvents();
     }).unsubscribe();
   }
@@ -156,7 +156,7 @@ export class EventPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.getData(false, () => {
+    this.getData(() => {
       event.target.complete();
     })
   }

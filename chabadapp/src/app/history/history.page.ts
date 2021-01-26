@@ -61,7 +61,7 @@ export class HistoryPage implements OnInit {
   changedSegment(value) {
     this.ionContent.getScrollElement().then(content => {
       const scrollTop = content.scrollTop;
-      this.ionContent.scrollToTop().then(c => {
+      this.ionContent.scrollToTop().then(() => {
         this.currentSegmentValue = value;
         this.ionContent.scrollByPoint(0, this.lastScrollTop, 0);
         this.lastScrollTop = scrollTop;

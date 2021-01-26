@@ -40,7 +40,7 @@ export class ShoppingPage implements OnInit {
     })
   }
 
-  goToChabadDetail(chabad) {
+  goToFood(chabad) {
     const data = {
       id: chabad.id
     }

@@ -10,8 +10,8 @@ import { EventDetailComponent } from '../@modular/event-detail/event-detail.comp
   styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
-  @ViewChild(IonInfiniteScroll) infiniteScrollService: IonInfiniteScroll;
-  @ViewChild(IonInfiniteScroll) infiniteScrollEvent: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  // @ViewChild(IonInfiniteScroll) infiniteScrollEvent: IonInfiniteScroll;
   @ViewChild(IonContent) ionContent: IonContent;
 
   currentSegmentValue = 'service';
@@ -39,23 +39,25 @@ export class HistoryPage implements OnInit {
           page: 1,
           per_page: 5
         },
-        array: []
+        array: [],
+        loadedData: false
       },
       events: {
         pageRequest: {
           page: 1,
           per_page: 5
         },
-        array: []
+        array: [],
+        loadedData: false
       }
     };
 
-    if (this.infiniteScrollService) {
-      this.infiniteScrollService.disabled = false;
-    }
-    if (this.infiniteScrollEvent) {
-      this.infiniteScrollEvent.disabled = false;
-    }
+    // if (this.infiniteScrollService) {
+    //   this.infiniteScrollService.disabled = false;
+    // }
+    // if (this.infiniteScrollEvent) {
+    //   this.infiniteScrollEvent.disabled = false;
+    // }
   }
 
   changedSegment(value) {
@@ -78,22 +80,22 @@ export class HistoryPage implements OnInit {
       func && func();
       events.pageRequest.page++;
 
-      if (events.array.length >= data.meta.pagination.total_objects && this.infiniteScrollEvent) {
-        this.infiniteScrollEvent.disabled = true;
+      if (events.array.length >= data.meta.pagination.total_objects) {
+        events.loadedData = true;
       }
     })
   }
 
   getDataEvents(func?) {
     let events = this.data.events;
-    this.historyService.getServices(events.pageRequest).subscribe(data => {
+    this.historyService.getEvents(events.pageRequest).subscribe(data => {
       events.array = events.array.concat(data.events);
 
       func && func();
       events.pageRequest.page++;
-
-      if (events.array.length >= data.meta.pagination.total_objects && this.infiniteScrollEvent) {
-        this.infiniteScrollEvent.disabled = true;
+      
+      if (events.array.length >= data.meta.pagination.total_objects) {
+        events.loadedData = true;
       }
     })
   }

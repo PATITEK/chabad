@@ -37,7 +37,7 @@
         </span>
         <p class="text three-dots-2 event-desc">{{ event.description }}</p>
       </ion-item-group>
-      <ion-infinite-scroll *ngIf="data.services.array.length != 0" #infiniteScrollService
+      <ion-infinite-scroll *ngIf="data.services.array.length != 0 && !data.services.loadedData"
         (ionInfinite)="loadMoreDataServices($event)">
         <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
       </ion-infinite-scroll>
@@ -57,7 +57,7 @@
         </span>
         <p class="text three-dots-2 event-desc">{{ event.description }}</p>
       </ion-item-group>
-      <ion-infinite-scroll *ngIf="data.events.array.length != 0" #infiniteScrollEvent
+      <ion-infinite-scroll *ngIf="data.events.array.length != 0 && !data.events.loadedData"
         (ionInfinite)="loadMoreDataEvents($event)">
         <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
       </ion-infinite-scroll>

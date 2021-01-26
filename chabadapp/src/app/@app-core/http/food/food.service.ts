@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { APICONFIG } from '..';
 import { map, catchError } from 'rxjs/operators';
+import { IPageRequest } from '../global';
+import { requestQuery } from '../../utils';
 
 @Injectable()
 export class FoodService {
@@ -9,8 +11,8 @@ export class FoodService {
     private http: HttpClient
   ) { }
   
-  public getFoodById(id) {
-    return this.http.get<any>(`${APICONFIG.FOOD.GETFOOD(id)}`).pipe(
+  public getAll(id, request: IPageRequest) {
+    return this.http.get<any>(`${APICONFIG.FOOD.GET(id)}?${(requestQuery(request))}`).pipe(
       map(result => {
         return result;
       }),

@@ -1,25 +1,22 @@
 
   ion-content {
-    position: relative;
-    --overflow: hidden;
+    // position: relative;
+    --overflow: scroll;
     ion-item-group {
-        position: relative;
-        height: 281px;
+        // position: relative;
+        // height: 270px;
       .img__header {
-          height: 281px;
+          height: 270px;
           width: 100%;
-         position: absolute;
-          // border-top-left-radius: 40px;
-          // border-top-right-radius: 40px;
+        //  position: absolute;
           border-bottom-left-radius: 40px;
           border-bottom-right-radius: 40px;
           background-size: cover;
           box-shadow: 0 0 6px 4px rgba(0,0,0, 0.2);
-        
       }
       .back-btn {
         display: inline-block;
-        position: absolute;
+        // position: absolute;
         color: #00b0b2;
         background: rgba(#feffff, 0.6);
         border-radius: 18px;
@@ -35,8 +32,8 @@
       width: 175px;
       z-index: 2;
       left: 50%;
-      top: 327px;
-      transform: translateX(-50%);
+      top: 0;
+      transform: translate(-50%,-50%);
       background-color: transparent;
       ion-segment-button {
         width: 86px;
@@ -54,20 +51,21 @@
       }
     }
     .title__chabad {
-    margin: 12px auto 0px auto;
-    width: 264px;
-    font-size: 20px;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+        margin: 12px auto 0px auto;
+        width: 264px;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        text-align: center;
     }
    
     ion-grid {
       background-color: #00B0B2;
-      height: 350px;
+      height: 318px;
       border-radius: 40px;
-      margin-top: 32px;
+      margin-top: 26px;
+      position: relative;
       padding: 0;
       .group__day {
         display: flex;
@@ -147,8 +145,9 @@
          height: auto !important;
         .require {
           color: #FFA5A5;
+          height: 14px;
           font-size: 11px;
-          line-height: 29px;
+          margin-left: 6%;
         }
         input {
           border-radius: 10px;
@@ -172,6 +171,12 @@
         }
        
       }
+      .require {
+        color: #FFA5A5;
+        font-size: 11px;
+        margin-left: 6%;
+        height: 34px;
+      }
       .purpose {
         position: relative;
         height: 27%;
@@ -179,6 +184,12 @@
         border-radius: 17px;
         margin-top: 14px;
         border: 1px solid #fff;
+        .require {
+          color: #FFA5A5;
+          font-size: 11px;
+          height: 14px;
+          margin-left: 6%;
+        }
         .edit__big {
           position: absolute;
           padding: 6px;
@@ -207,7 +218,7 @@
         width: 100%;
         height: auto !important;
         background-color: transparent !important;
-        bottom: 6px;
+        bottom: -41%;
         ion-row {
           ion-col{
            position: relative;
@@ -280,175 +291,173 @@
   }
 }
 
-@media screen and (max-height: 736px) {
-    ion-content {
-      ion-item-group {
-        .img__header {
-          height: 234px;
-        }
-      }
-      ion-segment {
-        top: 252px;
-      }
-      .title__chabad {
-        position: absolute;
-        color: #fff;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        top: 186px;
-      }
-      ion-grid {
-        .group__day {
-          margin-top: -44px;
-        }
-      }
-      .user {
-        &__info {
-          ion-row {
-            ion-col {
-              
-            }
-          }
-          bottom: 8px;
-        }
-      }
-    }
-}
-@media screen and (max-height: 667px) {
-  ion-content {
-    ion-item-group {
-      .img__header {
-         height: 211px;
-      }
-    }
-    .title__chabad {
-      top: 167px;
-    }
-    ion-segment {
-      top: 225px;
-    }
-    ion-grid {
-      height: 302px;
-      margin-top: 6px;
-      ion-select {
-        font-size: 10px;
-      }
-      .group__day {
-        .day {
-          margin-top: 26px;
-        }
-      }
-      .time {
-        font-size: 14px;
-      }
-    }
-    .user {
-      &__info {
-        ion-row {
-          ion-col {
-            img {
-              width: 75px !important;
-              height: 75px !important;
-            }
-            .thanks {
-              font-size: 14px;
-            }
-          }
-        }
-        bottom: 0px;
-      }
-      &__name {
-        font-size: 14px;
-      }
-    }
-  }
-}
-@media screen and (max-height: 640px) {
-  ion-content {
-    .title__chabad {
-      top: 159px;
-    }
-    ion-grid { 
-      margin-top: 0px;
-      .purpose {
-        height: 23% !important;
-      }
-    }
-    .user {
-      &__info {
-        bottom: 0;
-        ion-row {
-          ion-col {
-            img {
-              width: 70px !important;
-              height: 70px !important;
-            }
-            .btn {
-              width: 133px !important;
-              height: 33px !important;
-              font-size: 14px;
-            }
-            .thanks {
-              font-size: 12px;
-            }
-          }
-        }
-        bottom: -4px;
-      }
-      &__name {
-        font-size: 12px;
-      }
-    }
-  }
+// @media screen and (max-height: 736px) {
+//     ion-content {
+//       ion-item-group {
+//         // .img__header {
+//         //   height: 250px;
+//         // }
+//       }
+//       ion-segment {
+//         top: 252px;
+//       }
+//       // .title__chabad {
+//       //   position: absolute;
+//       //   color: #fff;
+//       //   margin-left: 50%;
+//       //   transform: translateX(-50%);
+//       //   top: 186px;
+//       // }
+//       ion-grid {
+//         // margin-top: 40px !important;
+//         .group__day {
+//           margin-top: -44px;
+//         }
+//       }
+//       .user {
+//         &__info {
+//           bottom: 4vh;
+//         }
+//       }
+//     }
+// }
+// @media screen and (max-height: 667px) {
+//   ion-content {
+//     ion-item-group {
+      
+//       // .img__header {
+//       //    height: 211px;
+//       // }
+//     }
+//     // .title__chabad {
+//     //   top: 167px;
+//     // }
+//     ion-segment {
+//       top: 225px;
+//     }
+//     ion-grid {
+//       // height: 302px;
+//       // margin-top: 6px;
+//       ion-select {
+//         font-size: 10px;
+//       }
+//       .group__day {
+//         .day {
+//           margin-top: 26px;
+//         }
+//       }
+//       .time {
+//         font-size: 14px;
+//       }
+//     }
+//     .user {
+//       &__info {
+//         ion-row {
+//           ion-col {
+//             img {
+//               width: 75px !important;
+//               height: 75px !important;
+//             }
+//             .thanks {
+//               font-size: 14px;
+//             }
+//           }
+//         }
+//         bottom: 0px;
+//       }
+//       &__name {
+//         font-size: 14px;
+//       }
+//     }
+//   }
+// }
+// @media screen and (max-height: 640px) {
+//   ion-content {
+//     // .title__chabad {
+//     //   top: 159px;
+//     // }
+//     ion-grid { 
+//       // margin-top: 0px;
+//       .purpose {
+//         height: 23% !important;
+//       }
+//     }
+//     .user {
+//       &__info {
+//         bottom: 0;
+//         ion-row {
+//           ion-col {
+//             img {
+//               width: 70px !important;
+//               height: 70px !important;
+//             }
+//             .btn {
+//               width: 133px !important;
+//               height: 33px !important;
+//               font-size: 14px;
+//             }
+//             .thanks {
+//               font-size: 12px;
+//             }
+//           }
+//         }
+//         bottom: -4px;
+//       }
+//       &__name {
+//         font-size: 12px;
+//       }
+//     }
+//   }
   
-}
+// }
 @media screen and (max-height: 568px) {
   ion-content {
-    ion-segment {
-      top: 137px;
-    }
+    // ion-segment {
+    //   top: 137px;
+    // }
     ion-item-group {
-      height: 170px;
-      .img__header {
-        z-index: -1;
-      }
+      // height: 170px;
+      // .img__header {
+      //   z-index: -1;
+      // }
     }
-    .title__chabad {
-      top: 84px;
-    }
+    // .title__chabad {
+    //   top: 84px;
+    // }
     ion-grid { 
-      margin-top: 27px;
-      .purpose {
-        height: 23% !important;
-      }
-      .textarea {
-        width: 92%;
-        height: 61%;
-      }
-      .doladonate {
-        input {
-          margin-left: 5px;
-          padding: 0;
-          width: 47px;
-        }
-        .edit {
-          left: 52px;
-        }
-        .require {
-          font-size: 9px;
-        }
-      }
-    }
+    //   margin-top: 2vh;
+    //   .purpose {
+    //     height: 23% !important;
+    //   }
+    //   .textarea {
+    //     width: 92%;
+    //     height: 61%;
+    //   }
+    //   .doladonate {
+        
+    //     input {
+    //       margin-left: 5px;
+    //       padding: 0;
+    //       width: 47px;
+    //     }
+    //     .edit {
+    //       left: 52px;
+    //     }
+    //     .require {
+    //       font-size: 9px;
+    //     }
+    //   }
+     }
     .user {
       &__info {
-        height: 290px;
-        bottom: 0;
+        // height: 290px;
+        // bottom: 0;
         ion-row {
           ion-col {
-            img {
-              width: 70px !important;
-              height: 70px !important;
-            }
+            // img {
+            //   width: 70px !important;
+            //   height: 70px !important;
+            // }
             .btn {
               width: 133px !important;
               height: 33px !important;
@@ -467,4 +476,4 @@
     }
   }
   
-}
+  }

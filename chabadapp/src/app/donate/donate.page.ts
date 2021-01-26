@@ -15,7 +15,9 @@ export class DonatePage implements OnInit {
   isChoose = false;
   source_type: any;
   required_mess  = false;
-  message = "This field must have a value!";
+  message_purpose = "";
+  required_purpose = false;
+  message = "";
   source_id: any;
   frmDonate: FormGroup;
   error_messages = {
@@ -31,7 +33,7 @@ export class DonatePage implements OnInit {
     name: '',
     thumb_image: ''
   }
-  
+
   constructor(
     private router: Router, 
     private chabadService: ChabadService,
@@ -58,9 +60,7 @@ export class DonatePage implements OnInit {
   onSubmit() {
     const getNumber = this.frmDonate.get('amount').value;
     if(getNumber%18 == 0 && getNumber>0) {
-      console.log('kk');
     }
-
     const sourceId = this.dataParams.event ? this.dataParams.event.id : this.dataParams.chabad.id;
     var result = {
       "donation_log" : {
@@ -70,12 +70,31 @@ export class DonatePage implements OnInit {
         "source_id": sourceId
       }
     }
-    if (this.frmDonate.get('amount').dirty || this.frmDonate.get('amount').touched) {
-      this.required_mess = true;
+    if (this.frmDonate.get('amount').dirty || this.frmDonate.get('amount').touched ) {
+      if(this.frmDonate.get('amount').value.length == 0) {
+        this.required_mess = true;
+        this.message = 'This field have a value!';
+      }
+      else {
+        this.required_mess = false;
+      }
     }
-    this.donateService.donateLog(result).subscribe((data) => {
-    })
-  }
+    if (this.frmDonate.get('note').dirty || this.frmDonate.get('note').touched ) {
+      if(this.frmDonate.get('note').value.length == 0) {
+        this.required_purpose = true;
+        this.message_purpose = 'This field is require!';
+      }
+      else {
+        this.required_purpose = false;
+      }
+    }
+  this.donateService.donateLog(result).subscribe((data) => {
+  console.log(data);
+  })
+}
+
+
+
   clickPray() {
     this.tab = 'pray';
   }

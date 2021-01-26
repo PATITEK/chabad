@@ -29,7 +29,7 @@ export class EventPage implements OnInit {
   activeDateItem;
   pageRequestEvent: IPageEvent = {
     page: 1,
-    per_page: 10,
+    per_page: 100,
     cal_date: '',
     chabad_id: ''
   }

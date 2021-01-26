@@ -38,7 +38,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.authService.countryCode().subscribe((data:any) => {
       this.countries = data.country_codes;
-      // console.log(this.countries)
     })
   }
   showPass(){
@@ -82,7 +81,6 @@ export class LoginPage implements OnInit {
     // this.dataLogin.email = '+84'+this.dataLogin.email.slice(1,10);
     this.dataLogin.email = this.dataLogin.email;
     this.authService.login(this.dataLogin).subscribe(data =>{
-      console.log(this.dataLogin);
       localStorage.setItem('Authorization', data.token);
       if(this.authService.checkLogin() == true) {
         this.router.navigate(['main/chabad']);

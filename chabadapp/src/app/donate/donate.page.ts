@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DonateService } from '../@app-core/http/donate';
+import { DonateService, ChabadService } from '../@app-core/http';
+
 
 @Component({
   selector: 'app-donate',
@@ -25,8 +26,15 @@ export class DonatePage implements OnInit {
     ],
   
   }
+  dataParams;
+  chabad = {
+    name: '',
+    thumb_image: ''
+  }
   
-  constructor(private router: Router, 
+  constructor(
+    private router: Router, 
+    private chabadService: ChabadService,
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
      public donateService: DonateService,
@@ -37,32 +45,35 @@ export class DonatePage implements OnInit {
       ])),
       note: new FormControl('',[]),
    });
-  
   }
   
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params.data !== undefined) {
-        this.source_type = "Event"
-        this.source_id = JSON.parse(params['data']).id;
-      }
+      this.dataParams = JSON.parse(params['data']);
+      this.chabadService.getDetail(this.dataParams.chabad.id).subscribe(data => {
+            this.chabad = data.chabad
+      })
     })
   }
   onSubmit() {
+    const getNumber = this.frmDonate.get('amount').value;
+    if(getNumber%18 == 0 && getNumber>0) {
+      console.log('kk');
+    }
+
+    const sourceId = this.dataParams.event ? this.dataParams.event.id : this.dataParams.chabad.id;
     var result = {
       "donation_log" : {
         "amount": this.frmDonate.get('amount').value,
         "note": this.frmDonate.get('note').value,
-        "source_type": this.source_type,
-        "source_id": this.source_id
+        "source_type": this.dataParams.type,
+        "source_id": sourceId
       }
     }
     if (this.frmDonate.get('amount').dirty || this.frmDonate.get('amount').touched) {
       this.required_mess = true;
     }
-    console.log(result);
     this.donateService.donateLog(result).subscribe((data) => {
-        console.log(data);
     })
   }
   clickPray() {
@@ -83,7 +94,6 @@ export class DonatePage implements OnInit {
   }
 
   btnActivate(e) {
-    console.log('yeah');
     this.isChoose = true;
     let choosed = document.querySelectorAll('day');
     choosed.forEach(element => {

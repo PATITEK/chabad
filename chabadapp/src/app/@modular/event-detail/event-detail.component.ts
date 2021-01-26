@@ -63,7 +63,13 @@ export class EventDetailComponent implements OnInit {
   goToDonate() {
     this.modalController.dismiss(null, 'cancel');
     const data = {
-      id: this.event.chabad_id
+      type: 'Event',
+      chabad: {
+        id: this.event.chabad_id
+      },
+      event: {
+        id: this.event.id
+      }
     }
     this.router.navigate(['/donate'], {
       queryParams: {

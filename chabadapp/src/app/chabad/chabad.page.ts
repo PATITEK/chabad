@@ -271,7 +271,7 @@ export class ChabadPage implements OnInit {
   }
 
   goToUserInfo() {
-    this.router.navigateByUrl('account');
+    this.router.navigateByUrl('account-setting');
     this.hideDateList();
   }
 }

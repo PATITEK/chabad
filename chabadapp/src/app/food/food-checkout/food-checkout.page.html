@@ -21,7 +21,7 @@
         <ion-label class="left-label">Your Order</ion-label>
         <!-- <ion-label (click)="addItem()" class="add-item">Add items</ion-label> -->
       </ion-item>
-      <ion-content class="group2-row-2-cover">
+      <ion-list class="group2-row-2-cover">
         <ion-buttons *ngFor="let food of dataBasket" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
           <ion-buttons class="amount" lines="none">
             <span>{{food.amount}} x</span>
@@ -35,7 +35,7 @@
           <span class="price">${{food.price * food.amount | number:'2.1-2'}}</span>
           <!-- <ion-icon (click)="removeItem(food)" class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon> -->
         </ion-buttons>
-      </ion-content>
+      </ion-list>
       <ion-row class="group2-row-3">
         <ion-icon name="add-circle"></ion-icon>
         <ion-input placeholder="Notes"> </ion-input>

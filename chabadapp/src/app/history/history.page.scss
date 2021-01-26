@@ -1,11 +1,3 @@
-ion-content {
-  // --overflow: hidden;
-}
-
-ion-infinite-scroll {
-  // background: red;
-}
-
 .fixed {
   position: fixed;
   background: #fff;
@@ -29,7 +21,6 @@ ion-infinite-scroll {
   background: #ebebeb;
   border-top-left-radius: 35px;
   border-top-right-radius: 35px;
-  // height: calc(100vh - 79px);
   position: relative;
   margin-top: 25px;
   padding-top: 35px;
@@ -70,7 +61,6 @@ ion-segment {
 
 .event-list {
   background: transparent;
-  // height: calc(100% - 25px);
   overflow-y: auto;
 }
 

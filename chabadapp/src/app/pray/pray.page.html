@@ -1,10 +1,10 @@
 
 <ion-content>
   <ion-item-group>
-    <img src="assets/img/bgnew.jpg" class="img__header" alt="">
+    <img [src]="chabad.thumb_image" class="img__header" alt="">
     <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   </ion-item-group>
-  <ion-label class="title__chabad">Chabad of Ho Chi Minh City</ion-label>
+  <ion-label class="title__chabad">{{chabad.name}}</ion-label>
   <!-- <ion-segment value="pray">
     <ion-segment-button value="pray"  (click)="clickPray()" >
       <ion-label>Pray</ion-label>

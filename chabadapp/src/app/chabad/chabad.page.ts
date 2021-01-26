@@ -52,7 +52,6 @@ export class ChabadPage implements OnInit {
     for (let i = 0; i < 7; i++) {
       let nextDay = new Date(this.currentDay);
       nextDay.setDate(nextDay.getDate() + i);
-
       this.dateList.push({
         id: i,
         day: nextDay,
@@ -189,8 +188,11 @@ export class ChabadPage implements OnInit {
   }
 
   goToPray() {
-    const data = {
-      id: this.chabad.id
+     const data = {
+      type: 'Chabad',
+      chabad: {
+        id: this.chabad.id
+      }
     }
     this.router.navigate(['/pray'], {
       queryParams: {
@@ -201,7 +203,10 @@ export class ChabadPage implements OnInit {
 
   goToDonate() {
     const data = {
-      id: this.chabad.id
+      type: 'Chabad',
+      chabad: {
+        id: this.chabad.id
+      }
     }
     this.router.navigate(['/donate'], {
       queryParams: {

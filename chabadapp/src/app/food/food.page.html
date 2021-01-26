@@ -6,27 +6,31 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-item-group class="food-group">
-    <ion-list lines="none" class="list-foods">
-      <ion-item-group *ngFor="let foodItem of listFood" class="item-food" (click)="addItem(foodItem)">
-        <ion-item lines="none" class="ion-align-items-start ion-no-padding">
-          <img [src]="fakeImg">
-          <ion-item-group class="detail-food">
-            <h1>{{foodItem.name}}</h1>
-            <p class="three-dots-4" class="three-dots-3">
-              {{foodItem.description}}
-            </p>
-          </ion-item-group>
-        </ion-item>
-        <ion-item-group class="group-add-shop">
-          <ion-label class="text-price">
-            $ {{foodItem.price | number:'2.1-2'}}
-          </ion-label>
-          <img class="icon-add" src="assets/img/ion-add.svg" alt="">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="z-index: 1;">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list lines="none" class="list-foods">
+    <ion-item-group *ngFor="let foodItem of listFood" class="item-food" (click)="addItem(foodItem)">
+      <ion-item lines="none" class="ion-align-items-start ion-no-padding">
+        <img [src]="fakeImg">
+        <ion-item-group class="detail-food">
+          <h1>{{foodItem.name}}</h1>
+          <p class="three-dots-4" class="three-dots-3">
+            {{foodItem.description}}
+          </p>
         </ion-item-group>
+      </ion-item>
+      <ion-item-group class="group-add-shop">
+        <ion-label class="text-price">
+          $ {{foodItem.price | number:'2.1-2'}}
+        </ion-label>
+        <img class="icon-add" src="assets/img/ion-add.svg" alt="">
       </ion-item-group>
-    </ion-list>
-  </ion-item-group>
+    </ion-item-group>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="listFood.length != 0 && !loadedData" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer [ngClass]="{'ion-footer-add': anmCart === true }">
@@ -47,15 +51,9 @@
         <img (click)="minusItem()" class="icon-add" src="assets/img/ion-remove.svg" alt="">
       </ion-item-group>
     </ion-item-group>
-    
-    
-    <!-- <ion-item-group *ngIf="anmCart === true" class="btn-add-group" >
-      <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>
-    </ion-item-group> -->
     <ion-item-group class="btn-add-group" >
       <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>
     </ion-item-group>
     
   </ion-item-group>
 </ion-footer>
-<!-- *ngIf="currentItem.amount !=0" -->

@@ -20,7 +20,7 @@ export class FoodCheckoutPage implements OnInit {
   }
   confirm() {
     this.router.navigate(['food']);
-    this.presentToast('Success');
+    this.presentToast('Your order is confirmed');
     localStorage.removeItem('dataBasket');
   }
   addItem() {

@@ -73,7 +73,8 @@
       </ion-item-group>
     </ion-item-group>
 
-    <ion-list *ngIf="!hiddenDateList" class="service-list" [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
+    <ion-list [ngClass]="{ 'visibility-hidden': hiddenDateList }" class="service-list"
+      [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
       <ion-item-group *ngFor="let service of dateList[activeDateItem].services" class="service"
         [style.background]="service.color" (click)="openEventDetailModal(service)">
         <ion-backdrop *ngIf="service.isLoading" class="service-backdrop"></ion-backdrop>

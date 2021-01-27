@@ -57,4 +57,7 @@ export class FoodBasketPage implements OnInit {
   calTotalPrice() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount*cur.price , 0)
   }
+  calTotalAmount() {
+    return this.dataBasket.reduce((acc, cur) => acc + cur.amount, 0);
+  }
 }

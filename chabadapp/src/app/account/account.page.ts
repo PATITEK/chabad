@@ -1,10 +1,8 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { checkAvailability } from '@ionic-native/core';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { AccountService } from '../@app-core/http';
 import {PopupComponent} from '../@modular/popup/popup.component';
-import { Camera } from '@ionic-native/camera/ngx';
 
 
 @Component({
@@ -21,8 +19,6 @@ export class AccountPage implements OnInit {
     private fb: FormBuilder,
     public popoverController: PopoverController,
     private accoutService: AccountService,
-    private alertCtrl: AlertController,
-    private camera: Camera
   ) { }
 
   ngOnInit() {
@@ -105,108 +101,5 @@ export class AccountPage implements OnInit {
    
  }
 
- async changeInfoUser(){
-  let alert = await this.alertCtrl.create({
-      message: 'Change info',
-      buttons: [
-        {
-          text: 'View Profile Picture',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Choose from Library',
-          handler: () => {
-            this.uploadAvatar();
-          }
-        },
-        {
-          text: 'Take Photo',
-          handler: () => {
-            this.takephoto();
-          }
-        },
-        {
-          text: 'Remove Current Photo',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    await alert.present();
-}
-
-  uploadAvatar(){
-    const options = {
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      correctOrientation: true
-    }
-    this.camera.getPicture(options).then(async (dataUrl) => {
-      if (dataUrl) {
-        var dataUri = "data:image/jpeg;base64," + dataUrl;
-
-        var image = dataURItoBlob(dataUri);
-        let formData = new FormData;
-        formData.append('avatar', image);
-          // this.userservice.uploadphoto(formData).then((data)=>{
-          //   // console.log(data)
-
-          //   this.image_url = data['user']['avatar'];
-          //   // console.log(this.image_url);
-          // })
-      }
-    }).catch(() => {
-      setTimeout(() => {
-      }, 500);
-    })
-  }
-
-  takephoto() {
-    const options = {
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      correctOrientation: true
-    }
-    this.camera.getPicture(options).then(async (dataUrl) => {
-
-      if (dataUrl) {
-        var dataUri = "data:image/jpeg;base64," + dataUrl;
-        var image = dataURItoBlob(dataUri);
-        let formData = new FormData;
-        formData.append('avatar', image);
-        // this.userservice.uploadphoto(formData).then(data =>{
-        //   this.image_url = data['user']['avatar'];
-        // })
-      }
-    }).catch(() => {
-      setTimeout(() => {
-        
-      }, 500);
-    })
-  }
-
-}
-
-function dataURItoBlob(dataURI) {
-  var byteString;
-  if (dataURI.split(',')[0].indexOf('base64') >= 0) {
-    byteString = atob(dataURI.split(',')[1]);
-  }
-  else {
-    byteString = encodeURI(dataURI.split(',')[1]);
-  }
-
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-  var ia = new Uint8Array(byteString.length);
-  for (var i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-  return new Blob([ia], { type: mimeString });
 }
 

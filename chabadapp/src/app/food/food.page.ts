@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FoodService, IPageFood } from '../@app-core/http';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { LoadingService } from '../@app-core/utils';
 
 @Component({
   selector: 'app-food',
@@ -9,6 +11,7 @@ import { FoodService, IPageFood } from '../@app-core/http';
   styleUrls: ['./food.page.scss'],
 })
 export class FoodPage implements OnInit {
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   pageFoodRequest: IPageFood = {
     page: 1,
     per_page: 5,
@@ -22,25 +25,17 @@ export class FoodPage implements OnInit {
   listFood = [];
   anmCart = false;
   fakeImg = 'assets/img/food.svg';
+  loadedData = false;
   constructor(
     public modalController: ModalController,
     private router: Router,
     private route: ActivatedRoute,
-    private foodService: FoodService
+    private foodService: FoodService,
+    private loadingService: LoadingService,
   ) {
-    // for (let i = 0; i < 10; i++) {
-    //   this.listFood.push(
-    //     {
-    //     url: 'assets/img/food.svg',
-    //     name: 'Food name ' + i,
-    //     desc: "Describing food is not as easy as it would seem. How many ways can you say something was really tasty? Describing food is not as easy as it would seem. How many ways can you say something was really tasty?Describing food is not as easy as it would seem. How many ways can you say something was really tasty?Describing food is not as easy as it would seem. How many ways can you say something was really tasty?",
-    //     price: 30 + i,
-    //     id: i,
-    //     }
-    //   )
-    // }
   }
   ngOnInit() {
+    this.loadingService.present();
     this.getData();
     
   }
@@ -91,12 +86,39 @@ export class FoodPage implements OnInit {
   calTotalAmount() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount, 0);
   }
-  getData() {
+  getData(func?) {
     this.route.queryParams.subscribe(params => {
       this.pageFoodRequest.chabad_id = JSON.parse(params['data']).id;
       this.foodService.getAll(this.pageFoodRequest).subscribe(data => {
-        this.listFood = data.foods;
+        this.listFood = this.listFood.concat(data.foods);
+        func && func();
+        this.loadingService.dismiss();
+        this.pageFoodRequest.page++;
+
+        if(this.listFood.length >= data.meta.pagination.total_objects) {
+          this.loadedData = true;
+        }
       })
     }).unsubscribe();
+  }
+
+  doRefresh(event) {
+    // reset
+    this.listFood = [];
+    this.loadedData = false;
+    this.pageFoodRequest.page = 1;
+    if (this.infiniteScroll) {
+      this.infiniteScroll.disabled = false;
+    }
+
+    this.getData(() => {
+      event.target.complete();
+    });
+  }
+
+  loadMoreData(event) {
+    this.getData(() => {
+      event.target.complete();
+    })
   }
 }

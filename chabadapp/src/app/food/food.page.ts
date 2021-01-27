@@ -103,7 +103,6 @@ export class FoodPage implements OnInit {
   }
 
   doRefresh(event) {
-    // reset
     this.listFood = [];
     this.loadedData = false;
     this.pageFoodRequest.page = 1;

@@ -34,7 +34,7 @@ ion-content {
         padding: 0 15px 0px 15px;
         z-index: 1;
         margin-top: 15px;
-        background-color: #F8F8F8;
+        background-color: #F2F2F2;
         .item-food {
             position: relative;
             box-shadow: 3px 0px 5px 5px rgba(0, 0, 0, 0.1);
@@ -113,7 +113,7 @@ ion-footer {
         .cart-group {
             transition: all 0.3s;
             position: absolute;
-            bottom: 0px;
+            bottom: 10px;
             left: 50%;
             transform: translate(-50%, 25%);
             .amount-cart {

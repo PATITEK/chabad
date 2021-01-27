@@ -1,7 +1,9 @@
 
 <ion-content>
+  <ion-spinner *ngIf="!chabad.thumb_image" name="lines"></ion-spinner>
   <ion-item-group>
-    <img [src]="chabad.thumb_image" class="img__header" alt="">
+    <img src= "https://i.imgur.com/Vm39DR3.jpg" class="img__header" alt="" *ngIf="!chabad.thumb_image">
+    <img [src]= "chabad.thumb_image" class="img__header" alt=""*ngIf="chabad.thumb_image">
     <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   </ion-item-group>
   <ion-label class="title__chabad">{{chabad.name}}</ion-label>
@@ -120,8 +122,8 @@
               <img *ngIf="isHidden == true" src="assets/img/avatar-people-disable.svg">
               <ion-label *ngIf="isHidden == false" class="user__name">David</ion-label>
               <ion-label *ngIf="isHidden == true" class="user__name_dis">David</ion-label>
-              <ion-button *ngIf="isHidden == false" class="btn__nameless" (click)="clickHidden($event)">Nameless</ion-button>
-              <ion-button *ngIf="isHidden == true" class="btn__nameless_dis" (click)="clickHidden($event)">Nameless</ion-button>
+              <ion-label *ngIf="isHidden == false" class="btn__nameless" (click)="clickHidden($event)">Nameless</ion-label>
+              <ion-label *ngIf="isHidden == true" class="btn__nameless_dis" (click)="clickHidden($event)">Nameless</ion-label>
               <ion-label class="thanks">Thank member!</ion-label>
             </ion-col>
             <ion-col size="7">

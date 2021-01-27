@@ -1,4 +1,5 @@
 ion-header {
+    background-color: #f2f2f2;
     .title-main{
         display: flex;
         margin-top: 27px;
@@ -17,6 +18,7 @@ ion-header {
 }
 
 ion-content {
+    --background: #f2f2f2;
     // --overflow: hidden;
     ion-item-group {
         padding-top: 20px;
@@ -131,8 +133,9 @@ ion-content {
                     margin-left: 8%;
                     transform: translateY(10px);
                 }
-                ion-input {
-                    margin-left: 5px;
+                ion-text {
+                    margin-left: 15px;
+                    color: #717171;
                 }
             }
         }

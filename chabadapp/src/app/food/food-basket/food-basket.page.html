@@ -23,7 +23,7 @@
       </ion-buttons>
       <ion-list class="group2-row-2-cover">
         <ion-buttons *ngFor="let food of dataBasket" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
-          <span class="food-name">{{food.name}}</span>
+          <span class="three-dots-2" class="food-name">{{food.name}}</span>
           <ion-buttons>
             <img (click)="plusItem(food)" class="icon-add" src="assets/img/ion-add.svg" alt="">
             <ion-buttons class="amount" lines="none">
@@ -37,7 +37,7 @@
       </ion-list>
       <ion-row class="group2-row-3">
         <ion-icon name="add-circle"></ion-icon>
-        <ion-input placeholder="Notes"> </ion-input>
+        <ion-input (keyup)="getNote($event)" placeholder="Notes"> </ion-input>
       </ion-row>
     </ion-list>
 
@@ -48,7 +48,7 @@
       </ion-row>
     </ion-list>
     
-    <ion-button (click)="order()" class="main-button">Order</ion-button>
+    <ion-button (click)="order()" class="main-button" [disabled]="dataBasket == '' ">Order</ion-button>
     <!-- <ion-list class="group4"></ion-list> -->
   </ion-item-group>
 </ion-content>

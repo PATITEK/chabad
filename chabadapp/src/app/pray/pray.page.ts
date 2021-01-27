@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DonateService, ChabadService,EventsService } from '../@app-core/http';
+import { DonateService, ChabadService,EventsService, IPageEvent } from '../@app-core/http';
+import { DateTimeService } from '../@app-core/utils';
 
 @Component({
   selector: 'app-pray',
@@ -58,25 +59,27 @@ export class PrayPage implements OnInit {
   message = "";
   clicked = false;
   url: any;
-  event;
+  events;
   dataParams;
   chabad = {
     name: '',
     thumb_image: ''
   }
-  // pageRequestEvent: IPageEvent = {
-  //   page: 1,
-  //   per_page: 10,
-  //   cal_date: '',
-  //   chabad_id: ''
-  // }
+  req: any;
+  pageRequestEvent: IPageEvent = {
+    page: 1,
+    per_page: 100,
+    cal_date: '',
+    chabad_id: ''
+  }
   
   constructor(
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
      private eventService: EventsService,
      public donateService: DonateService,
-     public chabadService: ChabadService
+     public chabadService: ChabadService,
+     public dateTimeService: DateTimeService,
   ) {
     this.frmPray = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -95,9 +98,13 @@ export class PrayPage implements OnInit {
         "date": nextDay.getDate(),
         "month": this.MONTH[this.today.getMonth()],
         "year" : this.today.getFullYear(),
+        "eventslength": 0,
+        "full": nextDay,
+       
       })
     }
   }
+ 
   displayDate(item) {
     this.fulldate = item.fullday;
       this.date = item.date;
@@ -106,21 +113,26 @@ export class PrayPage implements OnInit {
       this.DateObj = `${this.fulldate}, ${this.date} ${this.month} ${ this.year}`;
       this.id_change = item.id;
       this.clicked = true;
-
   }
   ngOnInit() {
       this.route.queryParams.subscribe(params => {
       this.dataParams = JSON.parse(params['data']);
       this.chabadService.getDetail(this.dataParams.chabad.id).subscribe(data => {
-            this.chabad = data.chabad
+            this.chabad = data.chabad;
       });
-      //  this.eventService.getAll(this.dataParams.chabad.id).subscribe(data => {
-      //   this.event = data.event;
-      //   console.log(this.event);
-      // })
-    
     })
+    this.getDataEvents();
     
+  }
+  getDataEvents() {
+    for (let i = 0; i < 7; i++) {
+      this.pageRequestEvent.cal_date = this.dateTimeService.getDateString2(this.dateList[i].full);
+      this.pageRequestEvent.chabad_id = this.dataParams.chabad.id;
+      this.eventService.getAll(this.pageRequestEvent).subscribe(data => {
+          this.dateList[i].eventslength = data.meta.pagination.total_objects;
+      })
+      
+    }
   }
   ionViewWillEnter() {
     if(this.DateObj === '') {

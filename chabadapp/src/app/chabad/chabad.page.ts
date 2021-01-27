@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IonContent, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
 import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
@@ -33,7 +33,7 @@ export class ChabadPage implements OnInit {
   hiddenDateList = true;
   pageRequestEvent: IPageEvent = {
     page: 1,
-    per_page: 10,
+    per_page: 100,
     cal_date: '',
     chabad_id: ''
   }
@@ -188,7 +188,7 @@ export class ChabadPage implements OnInit {
   }
 
   goToPray() {
-     const data = {
+    const data = {
       type: 'Chabad',
       chabad: {
         id: this.chabad.id
@@ -271,7 +271,7 @@ export class ChabadPage implements OnInit {
   }
 
   goToUserInfo() {
-    this.router.navigateByUrl('account');
+    this.router.navigateByUrl('account-setting');
     this.hideDateList();
   }
 }

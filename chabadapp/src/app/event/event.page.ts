@@ -197,6 +197,6 @@ export class EventPage implements OnInit {
   }
 
   goToUserInfo() {
-    this.router.navigateByUrl('account');
+    this.router.navigateByUrl('account-setting');
   }
 }

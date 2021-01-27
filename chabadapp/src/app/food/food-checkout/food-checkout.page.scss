@@ -17,10 +17,10 @@ ion-header {
 }
 
 ion-content {
-    --overflow: hidden;
+    // --overflow: hidden;
     ion-item-group {
         padding-top: 20px;
-        padding-bottom: 50px;
+        padding-bottom: 15px;
         background-color: rgba(0, 176, 178, 0.1);
         height: auto;
         border-radius: 40px;
@@ -79,7 +79,6 @@ ion-content {
             }
             .group2-row-2-cover {
                 --overflow:auto;
-                height: 200px;
                 .group2-row-2 {
                     max-width: 320px;
                     margin: auto;

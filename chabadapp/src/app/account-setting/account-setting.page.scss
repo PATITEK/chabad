@@ -1,74 +1,122 @@
-ion-header {
-    .btn-custom {
-        color: #ccc;
-        background-color: #fff;
-        border-radius: 50%;
-        border: 2px solid;
-    }
-    background-color: #fff;
-}
 ion-content {
-    --background:#F5F5F5;
+    --background:#fff;
     position: relative;
-    .marigin {
-    height: 204px;
-    background-color: #fff;
-    @media screen and (max-height: 569px){
-        height: 140px;
+    --overflow: hidden;
+}
+
+.header {
+    height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00b0b2;
+    font-size: 18px;
+    font-weight: 600;
+
+    @media screen and (max-width: 320px) {
+        font-size: 14px;
     }
-    }
-    .account {
-        position: relative;
-        z-index: 10;
-        //border: 5px solid #fff;
-        // border-top-left-radius: 40px;
-        // --background:#F5F5F5;
-        // border-top-right-radius: 40px;
-        &_img {
+}
+
+.body {
+    background: #F5F5F5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 155px);
+    border: 3px solid #fff;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+}
+
+.user {
+    position: absolute;
+    top: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    
+    .user-img-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+
+        .user-img {
             border-radius: 50%;
-            border: 0px solid;
-            width: 160px;
-            left: 50%;
-            transform: translateX(-50%);
-            top: -111px;
-            position: absolute;
-            height: 160px;
-            @media screen and (max-height: 569px){
-                height: 100px;
-                width: 100px;
-                top: -54px;
-
-            }
-        }
-        &_btn-edit {
-            margin-left: 64vw;
-            margin-top: 2vh;
-        }
-        &_label {
-            position: absolute;
-            margin-left: 50%;
-            margin-top: 34px;
-            transform: translateX(-50%);
-        }
-
-    }
-    .account-setting {
-        margin-top: 100px;
-        display: block;
-        ion-label {
-            display: block;
-            text-align: left;
-            padding: 8px 38px;
-            width: 300px;
-            margin: 0 auto;
-            margin-top: 10px;
             border: 1px solid #fff;
-            position: relative;
-            border-radius: 10px;
-            .img_logout {
-                position: absolute;
-                right: 10px;
+        }
+
+        .icon-edit {
+            background: #DDDDDD;
+            position: absolute;
+            top: 144px;
+            left: 50%;
+            transform: translate(25px, -50%);
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            border-radius: 7px;
+        }
+    }
+
+    .user-name {
+        color: #838383;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.5;;
+    }
+}
+
+.settings {
+    width: 80vw;
+    min-width: 300px;
+    margin: 140px auto 0;
+    background: transparent;
+    transition: .2s;
+    
+    ion-buttons {
+        border: 1px solid #FFFFFF;
+        border-radius: 10px;
+        height: 40px;
+        margin-bottom: 5px;
+        padding: 0 20px;
+        justify-content: space-between;
+
+        &:active {
+            background: #fff;
+        }
+
+        ion-label {
+            color: #666666;
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-height: 480px) {
+    .body {
+        height: calc(100vh - 120px);
+    }
+
+    .user {
+        top: -50px;
+        
+        .user-img-container {
+            width: 100px;
+            height: 100px;
+            
+            .icon-edit {
+                top: 94px;
+                transform: translate(18px, -50%);
             }
         }
+        
+    }
+
+    .settings {
+        margin-top: 88px;
     }
 }

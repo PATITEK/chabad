@@ -1,188 +1,317 @@
-.text-arlet{
-    margin: -10px 0px 10px 10px;
-    color: red;
-    font-family: "Nunito Sans",
-    sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 1.5;
-  }
 ion-content {
-    --overflow: hidden;
+    --padding-top: 79px;
+}
+
+.ion-content-activated {
+    --padding-bottom: 80px;
+}
+
+.header {
+    height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00b0b2;
+    font-size: 18px;
+    font-weight: 600;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #fff;
+    z-index: 9;
+
+    @media screen and (max-width: 320px) {
+        font-size: 14px;
+    }
+}
+
+.user {
+    width: 100%;
     position: relative;
-    .title-main{
-        display: flex;
-        margin-top: 27px;
-        justify-content: center;
-        .title-header {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 27px;
-            text-transform: uppercase;
-            color: #00b0b2;
-            z-index: 10;
+    margin-bottom: 35px;
+    
+    .user-img-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+
+        .user-img {
+            border-radius: 50%;
+            border: 1px solid #fff;
+        }
+
+        .icon-edit {
+            background: #DDDDDD;
+            position: absolute;
+            top: 144px;
+            left: 50%;
+            transform: translate(25px, -50%);
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            border-radius: 7px;
         }
     }
-    .header-account {
-        padding: 80px 30px 0 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        @media screen and (max-height: 737px) {
-           padding-top: 40px;
-        }
-        @media screen and (max-height: 668px) {
-           padding-top: 35px!important; 
-           padding-bottom: 0!important; 
-        }
-        @media screen and (max-height: 568px) {
-            padding-top: 20px!important; 
-            padding-bottom: 0!important; 
-         }
-        .content-img {
-            position: relative;
-            @media screen and (max-height: 668px) {
-                width: 35%!important;
-            }
-            .card-img {
-                box-shadow: none;
-                width: 160px;
-                height: 160px;
-                border-radius: 50%;
-                @media screen and (max-height: 737px) {
-                width: 140px;
-                height: 140px;
-                }
-                @media screen and (max-height: 668px) {
-                    width: 120px;
-                    height: 110px;
-                }
-                @media screen and (max-height: 569px) {
-                    width: 90px;
-                    height: 90px;
-                }
-            }
-            .btn-edit {
-                position: absolute;
-                --border-radius: 15px;
-                bottom: 2vh;
-                right: -15vw;
-                --border-color: #cbcbcb;
-                --border-style: solid;
-                --border-width: 1px;
-                font-size: 14px;
-                line-height: 24px;
-                text-align: center;
-                --color: #cbcbcb;
-                width: 39px;
-                --background: none;
-                overflow: visible;
-                --padding-start: 12px;
-                --padding-end: 12px;
-                --padding-top: 10.5px;
-                --padding-bottom: 10.5px;
-                height: 10px;
-                --background-activated: red;
-               
-                @media screen and (max-height: 569px) {
-                    --padding-start: 10px !important;
-                    --padding-end: 10px !important;
-                    right: -17vw !important;
-                }
-            }
-            .icon-camera {
-                position: absolute;
-                right: 8vw;
-                bottom: 1vh;
-                font-weight: bold;
-                color: #cbcbcb;
-                background: #cbcbcb;
-                font-size: 35px;
-                border-radius: 10px;
-                @media screen and (max-height: 737px) {
-                    right: 7vw;
-                }
-                @media screen and (max-height: 668px) {
-                    right: 6vw;
-                    bottom: 0.8vh;
-                }
-                @media screen and (max-height: 569px) {
-                    right: 6vw;
-                    bottom: 0.3vh;
-                }
-            }
-        }
-    }
-    .content-info {
-        padding: 0 60px;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        .content-input {
-           .group-input {
-               margin-bottom: 30px;
-               @media screen and (max-height: 737px){
-                margin-bottom: 20px;
-            }
-            @media screen and (max-height: 568px){
-                margin-bottom: 16px;
-            }
-            .title-info {
-                font-style: normal;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 17px;
-                color: #b0b0b0;
-                margin-bottom: 20px;
-                @media screen and (max-height: 641px) {
-                    font-size: 12px!important;
-                    margin: 10px 0!important;
-                }
-            }
-            .title-datetime {
-                margin-bottom: 0;
-            }
-            .input-info {
-                line-height: 24px;
-                border-bottom: 1px solid #e9e6e6;
-                --padding-bottom: 0;
-                --padding-top: 14px;
-                ion-datetime {
-                    --padding-start: 40px;
-                    --padding-end: 40px;
-                }
-                @media screen and (max-height: 641px) {
-                    font-size: 12px!important;
-                }
-            }
-            .datetime {
-                padding-top: 0;
-            }
-           }
-        }
-        .btn-update {
+
+    .edit-btn {
+        color: #CBCBCB;
+        font-size: 14px;
+        border: 1px solid #cbcbcb;
+        border-radius: 15px;
+        padding: 4px 8px;
+        position: absolute;
+        bottom: 0;
+        left: calc(50% + 75px + 10px);
+        transition: .2s;
+
+        &:active {
             background: #cbcbcb;
-            border-radius: 15px;
-            width: 168px;
-            color:#fff;
-            height: 39px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 18px;
-            margin-top: 40px;
-            @media screen and (max-height: 569px) {
-                margin-top: 5px;
-            }
-            @media screen and (max-height: 641px) {
-                margin-top: 10px;
-            }
+            color: #fff;
         }
     }
 }
-.checkUpdate{
-    background: red;
+
+.list {
+    width: 80vw;
+    min-width: 300px;
+    margin: 0 auto;
+
+    .item {
+        margin-bottom: 30px;
+        
+        .item-label {
+            color: #B0B0B0;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .item-content {
+            border-width: 1px;
+            border-style: solid;
+            border-color: transparent transparent #eeeeee transparent;
+            color: #777777;
+            font-size: 16px;
+            font-weight: 400;
+            --padding-start: 10px;
+        }
+        
+        .item-content-activated {
+            border-radius: 10px;
+            border-color: #999;
+        }
+    }
+    .change__password {
+        float: right;
+        color: #00B0B2;
+        --background: #fff;
+        --background-activated: #fff;
+        font-size: 14px;
+        text-decoration: underline ;
+    }
 }
+
+.footer {
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    justify-content: space-evenly;
+
+    .btn {
+        color: #fff;
+        text-transform: none;
+        font-size: 18px;
+        border-radius: 17px;
+        width: 150px;
+        height: 40px;
+    }
+
+    .btn-cancel {
+        background: #FBAD42;
+    }
+
+    .btn-update {
+        background: #00B0B2;
+    }
+
+    .btn-update-disabled {
+        background: #CBCBCB;
+    }
+}
+
+// .text-arlet{
+//     margin: -10px 0px 10px 10px;
+//     color: red;
+//     font-family: "Nunito Sans",
+//     sans-serif;
+//     font-size: 11px;
+//     font-weight: 400;
+//     line-height: 1.5;
+//   }
+// ion-content {
+//     .header-account {
+//         padding: 80px 30px 0 30px;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         position: relative;
+//         @media screen and (max-height: 737px) {
+//            padding-top: 40px;
+//         }
+//         @media screen and (max-height: 668px) {
+//            padding-top: 35px!important; 
+//            padding-bottom: 0!important; 
+//         }
+//         @media screen and (max-height: 568px) {
+//             padding-top: 20px!important; 
+//             padding-bottom: 0!important; 
+//          }
+//         .content-img {
+//             position: relative;
+//             @media screen and (max-height: 668px) {
+//                 width: 35%!important;
+//             }
+//             .card-img {
+//                 box-shadow: none;
+//                 width: 160px;
+//                 height: 160px;
+//                 border-radius: 50%;
+//                 @media screen and (max-height: 737px) {
+//                 width: 140px;
+//                 height: 140px;
+//                 }
+//                 @media screen and (max-height: 668px) {
+//                     width: 120px;
+//                     height: 110px;
+//                 }
+//                 @media screen and (max-height: 569px) {
+//                     width: 90px;
+//                     height: 90px;
+//                 }
+//             }
+//             .btn-edit {
+//                 position: absolute;
+//                 --border-radius: 15px;
+//                 bottom: 2vh;
+//                 right: -15vw;
+//                 --border-color: #cbcbcb;
+//                 --border-style: solid;
+//                 --border-width: 1px;
+//                 font-size: 14px;
+//                 line-height: 24px;
+//                 text-align: center;
+//                 --color: #cbcbcb;
+//                 width: 39px;
+//                 --background: none;
+//                 overflow: visible;
+//                 --padding-start: 12px;
+//                 --padding-end: 12px;
+//                 --padding-top: 10.5px;
+//                 --padding-bottom: 10.5px;
+//                 height: 10px;
+//                 --background-activated: red;
+               
+//                 @media screen and (max-height: 569px) {
+//                     --padding-start: 10px !important;
+//                     --padding-end: 10px !important;
+//                     right: -17vw !important;
+//                 }
+//             }
+//             .icon-camera {
+//                 position: absolute;
+//                 right: 8vw;
+//                 bottom: 1vh;
+//                 font-weight: bold;
+//                 color: #cbcbcb;
+//                 background: #cbcbcb;
+//                 font-size: 35px;
+//                 border-radius: 10px;
+//                 @media screen and (max-height: 737px) {
+//                     right: 7vw;
+//                 }
+//                 @media screen and (max-height: 668px) {
+//                     right: 6vw;
+//                     bottom: 0.8vh;
+//                 }
+//                 @media screen and (max-height: 569px) {
+//                     right: 6vw;
+//                     bottom: 0.3vh;
+//                 }
+//             }
+//         }
+//     }
+//     .content-info {
+//         padding: 0 60px;
+//         position: relative;
+//         display: flex;
+//         justify-content: center;
+//         .content-input {
+//            .group-input {
+//                margin-bottom: 30px;
+//                @media screen and (max-height: 737px){
+//                 margin-bottom: 20px;
+//             }
+//             @media screen and (max-height: 568px){
+//                 margin-bottom: 16px;
+//             }
+//             .title-info {
+//                 font-style: normal;
+//                 font-weight: 500;
+//                 font-size: 14px;
+//                 line-height: 17px;
+//                 color: #b0b0b0;
+//                 margin-bottom: 20px;
+//                 @media screen and (max-height: 641px) {
+//                     font-size: 12px!important;
+//                     margin: 10px 0!important;
+//                 }
+//             }
+//             .title-datetime {
+//                 margin-bottom: 0;
+//             }
+//             .input-info {
+//                 line-height: 24px;
+//                 border-bottom: 1px solid #e9e6e6;
+//                 --padding-bottom: 0;
+//                 --padding-top: 14px;
+//                 ion-datetime {
+//                     --padding-start: 40px;
+//                     --padding-end: 40px;
+//                 }
+//                 @media screen and (max-height: 641px) {
+//                     font-size: 12px!important;
+//                 }
+//             }
+//             .datetime {
+//                 padding-top: 0;
+//             }
+//            }
+//         }
+//         .btn-update {
+//             background: #cbcbcb;
+//             border-radius: 15px;
+//             width: 168px;
+//             color:#fff;
+//             height: 39px;
+//             display: block;
+//             margin-left: auto;
+//             margin-right: auto;
+//             font-size: 18px;
+//             margin-top: 40px;
+//             @media screen and (max-height: 569px) {
+//                 margin-top: 5px;
+//             }
+//             @media screen and (max-height: 641px) {
+//                 margin-top: 10px;
+//             }
+//         }
+//     }
+// }
+// .checkUpdate{
+//     background: red;
+// }

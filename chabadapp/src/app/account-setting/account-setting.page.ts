@@ -8,20 +8,24 @@ import { PopuplogoutComponent } from '../@modular/popuplogout/popuplogout.compon
   styleUrls: ['./account-setting.page.scss'],
 })
 export class AccountSettingPage implements OnInit {
+  isOpeningModal = false;
 
   constructor(
     public modalController: ModalController,
-    ) { }
+  ) { }
 
   ngOnInit() {
   }
-  async presentModal() {
+
+  async openModalLogOut() {
+    this.isOpeningModal = true;
     const modal = await this.modalController.create({
       component: PopuplogoutComponent,
       swipeToClose: true,
       cssClass: 'modal__logout'
     });
-    return await modal.present();
+    await modal.present();
+
+    modal.onWillDismiss().then(() => this.isOpeningModal = false);
   }
- 
 }

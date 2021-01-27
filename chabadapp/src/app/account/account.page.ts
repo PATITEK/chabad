@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { AccountService } from '../@app-core/http';
-import {PopupComponent} from '../@modular/popup/popup.component';
-
+import { PopupComponent } from '../@modular/popup/popup.component';
+import {ModalPasswordComponent} from '../@modular/modal-password/modal-password.component'
 
 @Component({
   selector: 'app-account',
@@ -11,40 +11,42 @@ import {PopupComponent} from '../@modular/popup/popup.component';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-  activeInput = false;
-  image_url: any = '../assets/img/user.png';
-  public form: FormGroup;
-  checkUpdate=false;
+  activatedInput = false;
+  form: FormGroup;
+  checkUpdate = false;
+
   constructor(
     private fb: FormBuilder,
     public popoverController: PopoverController,
-    private accoutService: AccountService,
+    private accountService: AccountService,
+    private passwordModal: ModalController
   ) { }
 
   ngOnInit() {
     this.addForm();
     this.getItem();
 
-    this.checfokUpdate();
+    this.checkFokUpdate();
   }
-  ngOnChanges(){
-    console.log("ahuhu");
-    
-    console.log(this.checfokUpdate());
+
+  ngOnChanges() {
+    console.log(this.checkFokUpdate());
   }
+
   get f() {
     return this.form.controls;
   }
+
   addForm() {
     this.form = this.fb.group({
-      full_name: [{value: '', disabled: this.activeInput}, [Validators.required]],
-      birthday: [{value: '', disabled: this.activeInput}, [Validators.required]],
-      phone_number: [{value: '', disabled: this.activeInput}, [Validators.required]],
-      full_address: [{value: '', disabled: this.activeInput}, [Validators.required]],
-      email: [{value: '', disabled: this.activeInput}, [Validators.required,Validators.email]]
-
+      fullName: [{ value: '' }, [Validators.required]],
+      dateOfBirth: [{ value: '' }, [Validators.required]],
+      phoneNumber: [{ value: '' }, [Validators.required]],
+      address: [{ value: '' }, [Validators.required]],
+      // email: [{ value: '', disabled: this.activeInput }, [Validators.required, Validators.email]]
     });
   }
+  
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopupComponent,
@@ -54,52 +56,51 @@ export class AccountPage implements OnInit {
     });
     return await popover.present();
   }
-
-  clickEdit() {
-    this.activeInput = true;
+  async openModalPassword(ev: any) {
+    const popover = await this.passwordModal.create({
+      component: ModalPasswordComponent,
+      cssClass: 'modalPassword',
+    });
+    return await popover.present();
   }
+
+  toggleActivatedInput(value) {
+    this.activatedInput = value;
+  }
+
   getItem() {
-    this.accoutService.getAccounts().subscribe((data:any) => {
-      
+    this.accountService.getAccounts().subscribe(data => {
       this.form.patchValue({
-        full_name: data.app_user.full_name,
-        birthday: data.app_user.birthday,
-        phone_number: data.app_user.phone_number,
-        full_address: data.app_user.full_address,
-        email:data.app_user.email
-
+        fullName: data.app_user.full_name,
+        dateOfBirth: data.app_user.birthday,
+        phoneNumber: data.app_user.phone_number,
+        address: data.app_user.full_address,
+        // email: data.app_user.email
       });
-     
-      
     });
   }
-  updadeInfo() {
-    // const data = this.formatData();
-    // const formData = this.objectJsonToFormData(data);
-    this.accoutService.updateProfile(this.form.getRawValue()).subscribe((data: any) => {
-      this.getItem();
+
+  updateInfo() {
+    const data = {
+      app_user: {
+        full_name: this.form.value['fullName'],
+        birthday: this.form.value['dateOfBirth'].substring(0, 10),
+        phone_number: this.form.value['phoneNumber'],
+        full_address: this.form.value['address']
+      }
+    }
+    this.accountService.updateProfile(data).subscribe(data => {
+     console.log(data)
     });
   }
-  checfokUpdate():boolean {
+
+  checkFokUpdate(): boolean {
     let tmp;
-    this.accoutService.getAccounts().subscribe((data:any)=>{
-     tmp=data.app_user;
+    this.accountService.getAccounts().subscribe((data: any) => {
+      tmp = data.app_user;
     })
     console.log(tmp);
-    if(tmp === this.form.getRawValue()){
-    
-      
-      return true;
-      
-    }
-    else{
-      return false;
-      
-    }
- }
- dosth(){
-   
- }
-
+    return tmp === this.form.getRawValue();
+  }
 }
 

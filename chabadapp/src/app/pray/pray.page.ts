@@ -52,6 +52,10 @@ export class PrayPage implements OnInit {
   source_type: any;
   source_id: any;
   id_change :any;
+  required_mess  = false;
+  message_purpose = "";
+  required_purpose = false;
+  message = "";
   clicked = false;
   url: any;
   event;
@@ -107,7 +111,6 @@ export class PrayPage implements OnInit {
   ngOnInit() {
       this.route.queryParams.subscribe(params => {
       this.dataParams = JSON.parse(params['data']);
-      console.log(this.dataParams);
       this.chabadService.getDetail(this.dataParams.chabad.id).subscribe(data => {
             this.chabad = data.chabad
       });
@@ -165,8 +168,26 @@ export class PrayPage implements OnInit {
         "source_id":  this.dataParams.chabad.id
       }
     }
-    console.log(result);
+    if (this.frmPray.get('amount').dirty || this.frmPray.get('amount').touched ) {
+      if(this.frmPray.get('amount').value.length == 0) {
+        this.required_mess = true;
+        this.message = 'This field have a value!';
+      }
+      else {
+        this.required_mess = false;
+      }
+    }
+    if (this.frmPray.get('note').dirty || this.frmPray.get('note').touched ) {
+      if(this.frmPray.get('note').value.length == 0) {
+        this.required_purpose = true;
+        this.message_purpose = 'This field is require!';
+      }
+      else {
+        this.required_purpose = false;
+      }
+    }
     this.donateService.donateLog(result).subscribe((data) => {
+    console.log(data);
     })
   }
 }

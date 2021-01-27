@@ -156,3 +156,10 @@
         border-top-right-radius: 30px;
     }
 }
+.modalPassword {
+  --height: 370px;
+  --width: 92%;
+    .modal-wrapper {
+      border-radius: 20px;
+   }
+}

@@ -92,9 +92,6 @@ export class DonatePage implements OnInit {
   console.log(data);
   })
 }
-
-
-
   clickPray() {
     this.tab = 'pray';
   }

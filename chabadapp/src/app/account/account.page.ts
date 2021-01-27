@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { AccountService } from '../@app-core/http';
 import { PopupComponent } from '../@modular/popup/popup.component';
-
+import {ModalPasswordComponent} from '../@modular/modal-password/modal-password.component'
 
 @Component({
   selector: 'app-account',
@@ -19,6 +19,7 @@ export class AccountPage implements OnInit {
     private fb: FormBuilder,
     public popoverController: PopoverController,
     private accountService: AccountService,
+    private passwordModal: ModalController
   ) { }
 
   ngOnInit() {
@@ -29,7 +30,6 @@ export class AccountPage implements OnInit {
   }
 
   ngOnChanges() {
-    console.log("ahuhu");
     console.log(this.checkFokUpdate());
   }
 
@@ -46,13 +46,20 @@ export class AccountPage implements OnInit {
       // email: [{ value: '', disabled: this.activeInput }, [Validators.required, Validators.email]]
     });
   }
-
+  
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopupComponent,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true
+    });
+    return await popover.present();
+  }
+  async openModalPassword(ev: any) {
+    const popover = await this.passwordModal.create({
+      component: ModalPasswordComponent,
+      cssClass: 'modalPassword',
     });
     return await popover.present();
   }
@@ -75,16 +82,15 @@ export class AccountPage implements OnInit {
 
   updateInfo() {
     const data = {
-      "app_user": {
-        "full_name": this.form.value['fullName'],
-        "birthday": this.form.value['dateOfBirth'].substring(0, 10),
-        "phone_number": this.form.value['phoneNumber'],
-        "full_address": this.form.value['address']
+      app_user: {
+        full_name: this.form.value['fullName'],
+        birthday: this.form.value['dateOfBirth'].substring(0, 10),
+        phone_number: this.form.value['phoneNumber'],
+        full_address: this.form.value['address']
       }
     }
-    console.log(data);
     this.accountService.updateProfile(data).subscribe(data => {
-      this.getItem();
+     console.log(data)
     });
   }
 

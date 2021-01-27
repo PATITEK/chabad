@@ -8,7 +8,7 @@
   <div class="user">
     <div class="user-img-container">
       <img src="assets/img/user.png" class="user-img main-box-shadow">
-      <img src="assets/img/edit2.svg" class="icon-edit">
+      <img src="assets/img/edit2.svg" class="icon-edit"(click)="presentPopover()">
     </div>
     <ion-label *ngIf="!activatedInput" class="edit-btn" (click)="toggleActivatedInput(true)">Edit</ion-label>
   </div>
@@ -33,12 +33,14 @@
       </div>
       <div class="item">
         <ion-label class="item-label">Address</ion-label>
-        <ion-textarea class="item-content" [disabled]="!activatedInput" auto-grow="true"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-textarea>
+        <ion-input class="item-content" [disabled]="!activatedInput" auto-grow="true"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-input>
       </div>
     </form>
+    <ion-button class="change__password" (click)="openModalPassword()" [disabled] ="activatedInput">
+      Change password
+    </ion-button>
   </ion-list>
-
   <ion-buttons class="footer" *ngIf="activatedInput">
     <ion-button class="btn btn-cancel" (click)="toggleActivatedInput(false)">Cancel</ion-button>
     <ion-button class="btn btn-update-disabled" (click)="updateInfo()">Update</ion-button>

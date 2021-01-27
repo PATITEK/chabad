@@ -77,9 +77,7 @@ export class EventPage implements OnInit {
       // reset
       this.dateList[i].events = [];
 
-      let nextDay = new Date();
-      nextDay.setDate(nextDay.getDate() + i);
-      this.pageRequestEvent.cal_date = this.dateTimeService.getDateString2(nextDay);
+      this.pageRequestEvent.cal_date = this.dateTimeService.getDateString2(this.dateList[i].day);
 
       this.eventService.getAll(this.pageRequestEvent).subscribe(data => {
         let eventColorIndex = 0;

@@ -34,15 +34,15 @@
 </ion-content>
 
 <ion-footer [ngClass]="{'ion-footer-add': anmCart === true }">
+  <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
+    <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
+      <span *ngIf="calTotalAmount() > 0" class="amount-cart">+{{calTotalAmount()}}</span>
+  </ion-item-group>
   <ion-item-group class="ion-no-border" class="cart-main" [ngClass]="{'add-cart-main': anmCart === true }" >
 
-    <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
-      <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
-        <span *ngIf="calTotalAmount() > 0" class="amount-cart">+{{calTotalAmount()}}</span>
-    </ion-item-group>
     
-    <ion-item-group lines="none" class="detail-cart" >
-      <h1 >{{currentItem.name}}</h1>
+    <ion-buttons lines="none" class="detail-cart" >
+      <h1 class="three-dots-2">{{currentItem.name}}</h1>
       <ion-item-group class="cart-info">
         <img (click)="plusItem()" class="icon-add" src="assets/img/ion-add.svg" alt="">
         <ion-item-group class="count" >
@@ -50,7 +50,7 @@
         </ion-item-group>
         <img (click)="minusItem()" class="icon-add" src="assets/img/ion-remove.svg" alt="">
       </ion-item-group>
-    </ion-item-group>
+    </ion-buttons>
     <ion-item-group class="btn-add-group" >
       <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>
     </ion-item-group>

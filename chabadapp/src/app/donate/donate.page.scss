@@ -152,8 +152,10 @@
           height: auto !important;
          .require {
            color: #FFA5A5;
+           position: relative;
            font-size: 11px;
            height: 14px;
+           margin-left: 6%;
          }
          input {
            border-radius: 10px;
@@ -175,12 +177,16 @@
            background-color: #03C1C3;
            border-radius: 6px;
          }
-        
        }
         .require {
           color: #FFA5A5;
           font-size: 11px;
           height: 14px;
+          margin-left: 6%;
+        }
+        .require__purpose {
+          position:absolute;
+          bottom: -1rem;
         }
        .purpose {
          position: relative;
@@ -192,6 +198,7 @@
          .require {
           color: #FFA5A5;
           font-size: 11px;
+          margin-left: 6%;
           height: 14px;
         }
          .edit__big {

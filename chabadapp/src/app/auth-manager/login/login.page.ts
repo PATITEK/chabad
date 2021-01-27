@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@app-core/http';
 import { ToastController } from '@ionic/angular';
+import { defaultCoreCipherList } from 'constants';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +41,7 @@ export class LoginPage implements OnInit {
     this.authService.countryCode().subscribe((data:any) => {
       this.countries = data.country_codes;
     })
+    document.getElementById('group2').style.display = 'none';
   }
   showPass(){
     this.showpass = !this.showpass;
@@ -53,10 +55,14 @@ export class LoginPage implements OnInit {
     }
   }
   clickBtnLogin(){
-    this.status="login";
+    // this.status="login";
+    document.getElementById('group2').style.display = 'none';
+    document.getElementById('group1').style.display = 'block';
   }
   clickBtnSign(){
-    this.status="sign";
+    // this.status="sign";
+    document.getElementById('group1').style.display = 'none';
+    document.getElementById('group2').style.display = 'block';
   }
   clickForgotPassword() {
     this.router.navigate(['auth-manager/forgot-password']);

@@ -12,6 +12,7 @@ export class FoodBasketPage implements OnInit {
     id : 0,
     amount : 0,
   }
+  note = '';
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -59,5 +60,10 @@ export class FoodBasketPage implements OnInit {
   }
   calTotalAmount() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount, 0);
+  }
+  getNote(event) {
+    this.note = event.target.value;
+    localStorage.setItem('note', JSON.stringify(this.note));
+    console.log(this.note)
   }
 }

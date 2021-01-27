@@ -1,7 +1,7 @@
 <ion-content>
   <img src="assets/img/login.png" alt="" />
-  <ion-item-group>
-    <ion-segment value="call">
+  <ion-item-group class="body">
+    <ion-segment value="call" swipeGesture="false" mode="ios">
       <ion-segment-button (click)="clickBtnLogin()" value="call">
         <ion-label>Login</ion-label>
       </ion-segment-button>
@@ -10,116 +10,127 @@
       </ion-segment-button>
     </ion-segment>
 
-    <ion-grid *ngIf="this.status==='login'">
-      <ion-row>
-        <ion-label>Enter email</ion-label>
-        <input (keyup)="getEmailSignup($event)" part="" type="text" />
-      </ion-row>
-      <ion-row>
-        <ion-label>Password</ion-label>
-        <input (keyup)="getPasswordSignup($event)" type="{{type}}" />
-        <button (click)="showPass()">
-          <ion-icon name="{{name}}"></ion-icon>
-        </button>
-      </ion-row>
-      <ion-label class="forgot__pass" routerLink="/" (click)="clickForgotPassword()"
-        >Forgot Password?</ion-label
-      >
-      <ion-button [disabled]="dataLogin.phone_number == '' && dataLogin.password == '' " type="submit" (click)="login()">
-        <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
-      </ion-button>
-    </ion-grid>
-
-    <ion-grid *ngIf="this.status==='sign'" class="select__signup">
-      <form action="">
-        <ion-row class="select__signup-row">
-          <ion-label class="select__signup-row--name">Your name</ion-label>
-          <ion-label class="select__signup-row--group">
-            <input (keyup)="getFullnameSignup($event)" part="" type="text" />
-            <ion-select placeholder="Female" class="select" id="select" [(ngModel)]="dataSignUp.sex" name="female">
-              <ion-select-option value="female">Female</ion-select-option>
-              <ion-select-option value="male">Male</ion-select-option>
-              <ion-select-option value="other">Other</ion-select-option>
-            </ion-select>
-          </ion-label>
+    <ion-item-group class="group" id="group1" >
+      <ion-grid>
+        <ion-row>
+          <ion-label>Enter email</ion-label>
+          <input (keyup)="getEmailSignup($event)" part="" type="text" />
         </ion-row>
-        <ion-row class="select__signup-row">
-          <ion-label class="select__signup-row--name">Your email</ion-label>
-          <input  (keyup)="getEmailSignup($event)" part="" type="text" style="margin-bottom: 12px;"/>
+        <ion-row>
+          <ion-label>Password</ion-label>
+          <input (keyup)="getPasswordSignup($event)" type="{{type}}" />
+          <button (click)="showPass()">
+            <ion-icon name="{{name}}"></ion-icon>
+          </button>
         </ion-row>
-        <ion-row class="select__signup-row">
-          <ion-label class="select__signup-row--name">Phone number</ion-label>
-          <ion-label class="select__signup-row--label">Age</ion-label>
-          <ion-label class="select__signup-row--group select__signup-row--flag">
-            <ion-label class="your__select your__select-notmr">
-              <ion-label class="your__select-flat">
-                <img src="assets/img/flag-400.png" alt="" class="" />
-                <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
-                  <!-- <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
-                  <ion-select-option value="Nine">Nine</ion-select-option> -->
-                </ion-select>
-              </ion-label>
-            </ion-label>
-            <ion-label class="your__select-notmr your__select-padding"
-              >+84</ion-label
-            >
-            <input (keyup)="getPhonenumberSignup($event)" part="" type="text" placeholder="636 873 393" />
-          </ion-label>
-          <ion-label class="your__select-flat-thinder">
-            <!-- <ion-select class="select" placeholder="1991">
-              <ion-select-option value="f">1989</ion-select-option>
-            </ion-select> -->
-            <input class="select" (keyup)="getAgeSignup($event)" style="width: 80px; margin-left: 5px;" />
-          </ion-label>
-          
-        </ion-row>
-        <ion-row class="select__signup-row">
-          <ion-label class="select__signup-row--name">Your address</ion-label>
-          <ion-label class="select__signup-row--group display-sp-around">
-            <ion-label class="your__select your__select-notmr">
-              <ion-label class="your__select-flat" >
-                <img src="assets/img/flag-400.png" alt="" class="" />
-                <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.country_code" name="Viet Nam">
-                  <ion-select-option [value]="country.iso_country" *ngFor="let country of countries">{{country.country}}</ion-select-option>
-                </ion-select>
-              </ion-label>
-            </ion-label>
-            <ion-select placeholder="Ho Chi Minh" class="select" [(ngModel)]="dataSignUp.province" name="Ho Chi Minh">
-              <ion-select-option value="Ho Chi Minh">Ho Chi Minh</ion-select-option>
-              <ion-select-option value="Singapore">Singapore</ion-select-option>
-            </ion-select>
-            <ion-select placeholder="Binh Thanh" class="select" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
-              <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
-              <ion-select-option value="Nine">Nine</ion-select-option>
-            </ion-select>
-          </ion-label>
-          <input (keyup)="getFulladdressSignup($event)"
-            type="text"
-            class="select__signup-row--input"
-            placeholder="123 Pham Van Dong St, ward 12"/>
-        </ion-row>
-        <ion-row class="select__signup-row">
-          <ion-label class="select__signup-row--name">Password</ion-label>
-          <input (keyup)="getPasswordSignup($event)"  type="password"/>
-        </ion-row>
-        <ion-row class="select__signup-row">
-          <ion-label class="select__signup-row--name input-mr">Confirm password</ion-label>
-          <input (keyup)="getConfirmPasswordSignup($event)" type="password"/>
-        </ion-row>
-        <ion-button [disabled]="this.dataSignUp.full_name === '' || 
-                                this.dataSignUp.email === '' ||
-                                 this.dataSignUp.sex === '' || 
-                                this.dataSignUp.age == 0 || 
-                                this.dataSignUp.province === '' || 
-                                this.dataSignUp.district === '' ||
-                                this.dataSignUp.full_address === '' ||
-                                this.dataSignUp.phone_number === '' || 
-                                this.dataSignUp.password === '' || 
-                                this.confirmPassword === '' " 
-                                type="submit" class="submit__signup" (click)="signUp()">
+        <ion-label class="forgot__pass" (click)="clickForgotPassword()"
+          >Forgot Password?</ion-label
+        >
+      </ion-grid>
+      <ion-item-group class="ion-text-right">
+        <ion-button [disabled]="dataLogin.email == '' && dataLogin.password == '' " type="submit" class="submit__signup" (click)="login()">
           <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
         </ion-button>
-      </form>
-    </ion-grid>
+      </ion-item-group>
+    </ion-item-group>
+
+    <ion-item-group class="group" id="group2" >
+      <ion-grid>
+        <form action="">
+          <ion-row class="select__signup-row">
+            <ion-label class="select__signup-row--name">Your name</ion-label>
+            <ion-label class="select__signup-row--group">
+              <input (keyup)="getFullnameSignup($event)" part="" type="text" />
+              <ion-select placeholder="Female" class="select" id="select" [(ngModel)]="dataSignUp.sex" name="female">
+                <ion-select-option value="female">Female</ion-select-option>
+                <ion-select-option value="male">Male</ion-select-option>
+                <ion-select-option value="other">Other</ion-select-option>
+              </ion-select>
+            </ion-label>
+          </ion-row>
+          <ion-row class="select__signup-row">
+            <ion-label class="select__signup-row--name">Your email</ion-label>
+            <input  (keyup)="getEmailSignup($event)" part="" type="text" style="margin-bottom: 12px;"/>
+          </ion-row>
+          <ion-row class="select__signup-row">
+            <ion-buttons class="select__signup-row-inside">
+              <ion-label class="select__signup-row-inside--name">Phone number</ion-label>
+              <ion-label class="select__signup-row-inside--label">Age</ion-label>
+            </ion-buttons>
+            <ion-label class="select__signup-row--group select__signup-row--flag">
+              <ion-label class="your__select your__select-notmr">
+                <!-- <ion-label class="your__select-flat">
+                  <img src="assets/img/flag-400.png" alt="" class="" />
+                  <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
+                    <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
+                    <ion-select-option value="Nine">Nine</ion-select-option>
+                  </ion-select>
+                </ion-label> -->
+              </ion-label>
+              <ion-label class="your__select-notmr your__select-padding"
+                >+84</ion-label
+              >
+              <input (keyup)="getPhonenumberSignup($event)" part="" type="text" placeholder="636 873 393" />
+            </ion-label>
+            <ion-label class="your__select-flat-thinder">
+              <!-- <ion-select class="select" placeholder="1991">
+                <ion-select-option value="f">1989</ion-select-option>
+              </ion-select> -->
+              <input class="select" (keyup)="getAgeSignup($event)" style="width: 50px; margin-left: 5px;" />
+            </ion-label>
+            
+          </ion-row>
+          <ion-row class="select__signup-row">
+            <ion-label class="select__signup-row--name">Your address</ion-label>
+            <ion-label class="select__signup-row--group display-sp-around">
+              <ion-label class="your__select your__select-notmr">
+                <ion-label class="your__select-flat" >
+                  <!-- <img src="assets/img/flag-400.png" alt="" class="" /> -->
+                  <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.country_code" name="Viet Nam" placeholder="Viet Nam">
+                    <ion-select-option [value]="country.iso_country" *ngFor="let country of countries">{{country.country}}</ion-select-option>
+                  </ion-select>
+                </ion-label>
+              </ion-label>
+              <ion-select placeholder="Ho Chi Minh" class="select" [(ngModel)]="dataSignUp.province" name="Ho Chi Minh">
+                <ion-select-option value="Ho Chi Minh">Ho Chi Minh</ion-select-option>
+                <ion-select-option value="Singapore">Singapore</ion-select-option>
+              </ion-select>
+              <ion-select placeholder="Binh Thanh" class="select" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
+                <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
+                <ion-select-option value="Nine">Nine</ion-select-option>
+              </ion-select>
+            </ion-label>
+            <input (keyup)="getFulladdressSignup($event)"
+              type="text"
+              class="select__signup-row--input"
+              placeholder="123 Pham Van Dong St, ward 12"/>
+          </ion-row>
+          <ion-row class="select__signup-row">
+            <ion-label class="select__signup-row--name">Password</ion-label>
+            <input (keyup)="getPasswordSignup($event)"  type="password"/>
+          </ion-row>
+          <ion-row class="select__signup-row">
+            <ion-label class="select__signup-row--name input-mr">Confirm password</ion-label>
+            <input (keyup)="getConfirmPasswordSignup($event)" type="password"/>
+          </ion-row>
+          
+        </form>
+      </ion-grid>
+      <ion-item-group class="ion-text-right">
+        <ion-button [disabled]="this.dataSignUp.full_name === '' || 
+                                  this.dataSignUp.email === '' ||
+                                   this.dataSignUp.sex === '' || 
+                                  this.dataSignUp.age == 0 || 
+                                  this.dataSignUp.province === '' || 
+                                  this.dataSignUp.district === '' ||
+                                  this.dataSignUp.full_address === '' ||
+                                  this.dataSignUp.phone_number === '' || 
+                                  this.dataSignUp.password === '' || 
+                                  this.confirmPassword === '' " 
+                                  type="submit" class="submit__signup" (click)="signUp()">
+            <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
+          </ion-button>
+      </ion-item-group>
+    </ion-item-group>
   </ion-item-group>
 </ion-content>

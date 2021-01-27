@@ -12,19 +12,20 @@ export class FoodCheckoutPage implements OnInit {
     id : 0,
     amount : 0,
   }
+  note = '';
   constructor(private router: Router, public toastController: ToastController) { }
 
   ngOnInit() {
-    
     this.getDataBasket();
   }
+  ionViewWillEnter() {
+    this.note = JSON.parse(localStorage.getItem('note'));
+    console.log(this.note);
+  }
   confirm() {
-    this.router.navigate(['food']);
+    this.router.navigate(['main/shopping']);
     this.presentToast('Your order is confirmed');
     localStorage.removeItem('dataBasket');
-  }
-  addItem() {
-    this.router.navigate(['food']);
   }
   plusItem(item) {
     if(item.amount < 99) {

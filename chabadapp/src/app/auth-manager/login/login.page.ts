@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
   private dataLogin = {
     email: '',
     password: '',
+    phone_number: ''
   }
   countries:any;
   constructor(private router: Router, private authService: AuthService, public toastController: ToastController) { }

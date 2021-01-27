@@ -74,9 +74,7 @@ export class VerificationPage implements OnInit {
     var c6 = this.inputCode.get('code6').value;
     var inputstring = `${c1}${c2}${c3}${c4}${c5}${c6}`;
   }
-  back() {
-    this.router.navigateByUrl('auth-manager/forgot-password');
-  }
+
   confirmCode() {
     this.router.navigateByUrl('auth-manager/new-password');
   }

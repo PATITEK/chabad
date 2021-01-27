@@ -63,8 +63,4 @@ export class NewPasswordPage implements OnInit {
       this.router.navigateByUrl('/page-noti');
     }    
   }
-
-  back() {
-    this.router.navigateByUrl('/auth-manager/login');
-  }
 }

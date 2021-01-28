@@ -160,7 +160,6 @@ export class ChabadPage implements OnInit {
       });
     }
   }
-
   toggleJoiningEvent(eventItem) {
     event.stopPropagation();
     eventItem.isLoading = true;

@@ -1,9 +1,10 @@
 
 <ion-content>
-  <ion-spinner *ngIf="!chabad.thumb_image" name="lines"></ion-spinner>
+  <!-- <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner> -->
   <ion-item-group>
-    <img src= "https://i.imgur.com/Vm39DR3.jpg" class="img__header" alt="" *ngIf="!chabad.thumb_image">
-    <img [src]= "chabad.thumb_image" class="img__header" alt=""*ngIf="chabad.thumb_image">
+    
+    <div class="img__header" [style.background-image]="getUrl()">
+    </div>
     <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   </ion-item-group>
   <ion-label class="title__chabad">{{chabad.name}}</ion-label>
@@ -97,11 +98,11 @@
           <ion-img src="assets/img/pen.svg" class="edit"></ion-img>
           <ion-img src="assets/img/dola.svg"></ion-img>
         <input type="number" formControlName="amount">
-        <ion-select value="dola">
+        <!-- <ion-select value="dola">
           <ion-select-option value="dola">USD</ion-select-option>
           <ion-select-option value="vn">VNĐ</ion-select-option>
           <ion-select-option value="vn">EURO</ion-select-option>
-        </ion-select>
+        </ion-select> -->
         <ion-label class="require" *ngIf="required_mess">
             {{message}}
         </ion-label>
@@ -127,7 +128,7 @@
               <ion-label class="thanks">Thank member!</ion-label>
             </ion-col>
             <ion-col size="7">
-              <ion-button class="btn"type="submit"  >
+              <ion-button class="btn"type="submit"  [disabled] ="frmDonate.invalid" >
                 Confirm
               </ion-button>
             </ion-col>

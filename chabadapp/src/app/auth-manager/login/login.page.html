@@ -55,7 +55,7 @@
           <ion-row class="select__signup-row">
             <ion-buttons class="select__signup-row-inside">
               <ion-label class="select__signup-row-inside--name">Phone number</ion-label>
-              <ion-label class="select__signup-row-inside--label">Age</ion-label>
+              <ion-label class="select__signup-row-inside--label ">Age</ion-label>
             </ion-buttons>
             <ion-label class="select__signup-row--group select__signup-row--flag">
               <ion-label class="your__select your__select-notmr">
@@ -67,16 +67,15 @@
                   </ion-select>
                 </ion-label> -->
               </ion-label>
-              <ion-label class="your__select-notmr your__select-padding"
-                >+84</ion-label
-              >
-              <input (keyup)="getPhonenumberSignup($event)" part="" type="text" placeholder="636 873 393" />
+              <ion-label class="your__select-notmr mr__phone-sm your__select-padding"
+                >+84</ion-label>
+              <input class="mr__phone-input--sm" (keyup)="getPhonenumberSignup($event)" part="" type="text" placeholder="636 873 393" />
             </ion-label>
             <ion-label class="your__select-flat-thinder">
               <!-- <ion-select class="select" placeholder="1991">
                 <ion-select-option value="f">1989</ion-select-option>
               </ion-select> -->
-              <input class="select" (keyup)="getAgeSignup($event)" style="width: 50px; margin-left: 5px;" />
+              <input class="select select__age" (keyup)="getAgeSignup($event)" style="width: 50px; margin-left: 5px;" />
             </ion-label>
             
           </ion-row>

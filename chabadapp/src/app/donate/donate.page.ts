@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DonateService, ChabadService } from '../@app-core/http';
+import { LoadingService } from '../@app-core/utils';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -40,6 +42,8 @@ export class DonatePage implements OnInit {
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
      public donateService: DonateService,
+     public loadingService: LoadingService,
+     public toastController: ToastController
      ) {
     this.frmDonate = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -48,14 +52,25 @@ export class DonatePage implements OnInit {
       note: new FormControl('',[]),
    });
   }
-  
   ngOnInit() {
+    this.loadingService.present()
     this.route.queryParams.subscribe(params => {
       this.dataParams = JSON.parse(params['data']);
       this.chabadService.getDetail(this.dataParams.chabad.id).subscribe(data => {
             this.chabad = data.chabad
+            this.loadingService.dismiss()
       })
     })
+  }
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500
+    });
+    toast.present();
+  }
+  getUrl() {
+    return `url(${this.chabad.thumb_image})`
   }
   onSubmit() {
     const getNumber = this.frmDonate.get('amount').value;
@@ -75,6 +90,10 @@ export class DonatePage implements OnInit {
         this.required_mess = true;
         this.message = 'This field have a value!';
       }
+      else if(this.frmDonate.get('amount').value %18 !==0){
+        this.required_mess = true;
+        this.message = 'The number must be divisible by 18!';
+      }
       else {
         this.required_mess = false;
       }
@@ -88,9 +107,14 @@ export class DonatePage implements OnInit {
         this.required_purpose = false;
       }
     }
-  this.donateService.donateLog(result).subscribe((data) => {
-  console.log(data);
-  })
+    if(this.frmDonate.get('amount').value %18 ===0) {
+      this.donateService.donateLog(result).subscribe((data) => {
+        console.log(data);
+        this.presentToast('Pray successfully!');
+    })
+    }
+    else {
+    }
 }
   clickPray() {
     this.tab = 'pray';

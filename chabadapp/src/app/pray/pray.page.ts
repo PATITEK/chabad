@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DonateService, ChabadService,EventsService, IPageEvent } from '../@app-core/http';
-import { DateTimeService } from '../@app-core/utils';
+import { DateTimeService, LoadingService } from '../@app-core/utils';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pray',
@@ -62,7 +63,7 @@ export class PrayPage implements OnInit {
   events;
   dataParams;
   chabad = {
-    name: '',
+    name: ' ',
     thumb_image: ''
   }
   req: any;
@@ -80,6 +81,8 @@ export class PrayPage implements OnInit {
      public donateService: DonateService,
      public chabadService: ChabadService,
      public dateTimeService: DateTimeService,
+     public loadingService: LoadingService,
+     public toastController: ToastController
   ) {
     this.frmPray = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -104,7 +107,13 @@ export class PrayPage implements OnInit {
       })
     }
   }
- 
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500
+    });
+    toast.present();
+  }
   displayDate(item) {
     this.fulldate = item.fullday;
       this.date = item.date;
@@ -115,10 +124,12 @@ export class PrayPage implements OnInit {
       this.clicked = true;
   }
   ngOnInit() {
+    this.loadingService.present();
       this.route.queryParams.subscribe(params => {
       this.dataParams = JSON.parse(params['data']);
       this.chabadService.getDetail(this.dataParams.chabad.id).subscribe(data => {
             this.chabad = data.chabad;
+            this.loadingService.dismiss();
       });
     })
     this.getDataEvents();
@@ -145,6 +156,9 @@ export class PrayPage implements OnInit {
     else {
       return
     }
+  }
+  getUrl() {
+    return `url(${this.chabad.thumb_image})`
   }
   clickPray() {
     this.tab = 'pray';
@@ -185,6 +199,10 @@ export class PrayPage implements OnInit {
         this.required_mess = true;
         this.message = 'This field have a value!';
       }
+      else if(this.frmPray.get('amount').value %18 !==0){
+        this.required_mess = true;
+        this.message = 'The number must be divisible by 18.';
+      }
       else {
         this.required_mess = false;
       }
@@ -192,14 +210,19 @@ export class PrayPage implements OnInit {
     if (this.frmPray.get('note').dirty || this.frmPray.get('note').touched ) {
       if(this.frmPray.get('note').value.length == 0) {
         this.required_purpose = true;
-        this.message_purpose = 'This field is require!';
+        this.message_purpose = 'This field is require.';
       }
       else {
         this.required_purpose = false;
       }
     }
-    this.donateService.donateLog(result).subscribe((data) => {
-    console.log(data);
+    if(this.frmPray.get('amount').value %18 ===0) {
+      this.donateService.donateLog(result).subscribe((data) => {
+        console.log(data);
+        this.presentToast('Pray successfully!');
     })
+    }
+    else {
+    }
   }
 }

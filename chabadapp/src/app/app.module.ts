@@ -12,6 +12,7 @@ import { CoreModule } from './@app-core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './@app-core/auth-guard.service';
 import { Camera } from '@ionic-native/camera/ngx';
+import { SlideService } from './@modular/slide/slide.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +28,7 @@ import { Camera } from '@ionic-native/camera/ngx';
   ],
   providers: [
     StatusBar,
+    SlideService,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthGuard,

@@ -16,12 +16,23 @@ export class FoodBasketPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    
     this.getDataBasket();
   }
+  // ionViewWillEnter() {
+  //   localStorage.setItem('note', this.note);
+  // }
+  ionViewWillEnter() {
+    // localStorage.setItem('note', JSON.stringify(this.note));
+  }
   order() {
-    this.router.navigate(['food/food-checkout']);
-    localStorage["dataBasket"] = JSON.stringify(this.dataBasket);
+    const data = {
+      note: this.note
+    }
+    this.router.navigate(['food/food-checkout'], {
+      queryParams: {
+        data: JSON.stringify(data)
+      }
+    })
   }
   addItem() {
     this.router.navigate(['food']);
@@ -61,9 +72,7 @@ export class FoodBasketPage implements OnInit {
   calTotalAmount() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount, 0);
   }
-  getNote(event) {
-    this.note = event.target.value;
-    localStorage.setItem('note', JSON.stringify(this.note));
-    console.log(this.note)
-  }
+  // getNote(event) {
+  //   this.note = event.target.value;
+  // }
 }

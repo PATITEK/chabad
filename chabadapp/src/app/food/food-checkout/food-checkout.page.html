@@ -36,10 +36,13 @@
           <!-- <ion-icon (click)="removeItem(food)" class="icon-remove" src="assets/icon/remove-icon.svg"></ion-icon> -->
         </ion-buttons>
       </ion-list>
-      <ion-row class="group2-row-3">
+      <ion-col class="group2-row-3" lines="none">
         <!-- <ion-icon name="add-circle"></ion-icon> -->
-        <ion-text>Notes: {{note}}</ion-text>
-      </ion-row>
+        <ion-label *ngIf="note !== '' ">Notes: </ion-label>
+        <ion-item *ngIf="note !== '' " lines="none">
+          <span>{{note}}</span>
+        </ion-item>
+      </ion-col>
     </ion-list>
 
     <ion-list class="group3">

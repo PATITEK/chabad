@@ -15,9 +15,7 @@
         <img [src]="fakeImg">
         <ion-item-group class="detail-food">
           <h1 class="three-dots-2">{{foodItem.name}}</h1>
-          <p class="three-dots-4" class="three-dots-3">
-            {{foodItem.description}}
-          </p>
+          <p class="three-dots-4" class="three-dots-3" [innerHTML]="foodItem.description"></p>
         </ion-item-group>
       </ion-item>
       <ion-item-group class="group-add-shop">

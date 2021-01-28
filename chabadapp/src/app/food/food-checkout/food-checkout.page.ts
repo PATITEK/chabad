@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ModalFoodComponent } from 'src/app/@modular/modal-food/modal-food.component';
 @Component({
   selector: 'app-food-checkout',
   templateUrl: './food-checkout.page.html',
@@ -13,19 +14,18 @@ export class FoodCheckoutPage implements OnInit {
     amount : 0,
   }
   note = '';
-  constructor(private router: Router, public toastController: ToastController) { }
+  constructor(private router: Router, private modalCtrl: ModalController, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      console.log(JSON.parse(params['data']).note )
+      this.note = JSON.parse(params['data']).note;
+    })
     this.getDataBasket();
   }
-  ionViewWillEnter() {
-    this.note = JSON.parse(localStorage.getItem('note'));
-    console.log(this.note);
-  }
   confirm() {
-    this.router.navigate(['main/shopping']);
-    this.presentToast('Your order is confirmed');
     localStorage.removeItem('dataBasket');
+    this.openModalSuccess();
   }
   plusItem(item) {
     if(item.amount < 99) {
@@ -59,13 +59,11 @@ export class FoodCheckoutPage implements OnInit {
   calTotalPrice() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount*cur.price , 0)
   }
-
-  async presentToast(message) {
-    const toast = await this.toastController.create({
-      message: message,
-      color: 'success',
-      duration: 2000
+  async openModalSuccess() {
+    const popover = await this.modalCtrl.create({
+      component: ModalFoodComponent,
+      cssClass: 'modalFood',
     });
-    toast.present();
+    return await popover.present();
   }
 }

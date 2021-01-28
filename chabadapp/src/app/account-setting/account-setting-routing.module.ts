@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: AccountSettingPage
+  },  {
+    path: 'orders-history',
+    loadChildren: () => import('./orders-history/orders-history.module').then( m => m.OrdersHistoryPageModule)
   }
+
 ];
 
 @NgModule({

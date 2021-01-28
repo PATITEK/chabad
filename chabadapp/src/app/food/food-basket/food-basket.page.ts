@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/@app-core/http';
 
 @Component({
   selector: 'app-food-basket',
@@ -8,21 +9,18 @@ import { Router } from '@angular/router';
 })
 export class FoodBasketPage implements OnInit {
   dataBasket = [];
+  data_BasketToCreate = [];
   currentItem: any = {
     id : 0,
     amount : 0,
   }
   note = '';
-  constructor(private router: Router) { }
+  full_address = '';
+  constructor(private router: Router, private accountService: AccountService) { }
 
   ngOnInit() {
     this.getDataBasket();
-  }
-  // ionViewWillEnter() {
-  //   localStorage.setItem('note', this.note);
-  // }
-  ionViewWillEnter() {
-    // localStorage.setItem('note', JSON.stringify(this.note));
+    this.getUserData();
   }
   order() {
     const data = {
@@ -34,9 +32,7 @@ export class FoodBasketPage implements OnInit {
       }
     })
   }
-  addItem() {
-    this.router.navigate(['food']);
-  }
+
   plusItem(item) {
     if(item.amount < 99) {
       item.amount++;
@@ -53,6 +49,7 @@ export class FoodBasketPage implements OnInit {
     for(let i = 0; i< this.dataBasket.length; i++) {
       if(food.id === this.dataBasket[i].id) {
         this.dataBasket.splice(i,1);
+        this.data_BasketToCreate.splice(i,1);
         break;
       }
     }
@@ -61,9 +58,11 @@ export class FoodBasketPage implements OnInit {
 
   setDataBasket() {
     localStorage.setItem('dataBasket', JSON.stringify(this.dataBasket));
+    
   }
   getDataBasket() {
     this.dataBasket = JSON.parse(localStorage.getItem('dataBasket')) || [];
+    this.data_BasketToCreate = JSON.parse(localStorage.getItem('data_BasketToCreate')) || [];
   }
 
   calTotalPrice() {
@@ -72,7 +71,9 @@ export class FoodBasketPage implements OnInit {
   calTotalAmount() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount, 0);
   }
-  // getNote(event) {
-  //   this.note = event.target.value;
-  // }
+  getUserData() {
+    this.accountService.getAccounts().subscribe(data => {
+      this.full_address = data.app_user.full_address + ', district ' + data.app_user.district + ', ' + data.app_user.province + ', ' + data.app_user.country_code;
+    });
+  }
 }

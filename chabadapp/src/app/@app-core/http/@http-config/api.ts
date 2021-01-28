@@ -46,6 +46,12 @@ export const APICONFIG = {
   HISTORY: {
     GET_SERVICES: `/app/attention_logs/service_history`,
     GET_EVENTS: `/app/attention_logs/event_history`
+  },
+  ORDER: {
+    GET_ALL: `/app/orders`,
+    GET: (id) => `/app/orders/${id}`,
+    CREATE: `/app/orders`,
+    DELETE: (id) => `/app/orders/${id}`,
   }
 };
 

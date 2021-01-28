@@ -13,7 +13,7 @@
   <ion-backdrop *ngIf="!loadedChabad" class="backdrop-chabad"></ion-backdrop>
 
   <div class="img-container img-wrapper main-box-shadow"
-    [style.background-image]="sanitizer.bypassSecurityTrustStyle(getChabadImageString())">
+    [style.background-image]="getChabadImageString()">
     <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
   </div>
 

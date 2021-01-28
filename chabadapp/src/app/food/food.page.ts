@@ -37,11 +37,11 @@ export class FoodPage implements OnInit {
   ngOnInit() {
     this.loadingService.present();
     this.getData();
-    
   }
   ionViewWillEnter() {
     this.getDataBasket();
     this.anmCart = false;
+    localStorage.removeItem('note');
   }
   addItem(item) {
     this.anmCart = true;

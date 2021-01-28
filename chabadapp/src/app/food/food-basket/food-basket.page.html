@@ -19,7 +19,7 @@
     <ion-list class="group2">
       <ion-buttons class="group2-row-1">
         <ion-label class="left-label">Your Order</ion-label>
-        <ion-label (click)="addItem()" class="add-item">Add items</ion-label>
+        <!-- <ion-label (click)="addItem()" class="add-item">Add items</ion-label> -->
       </ion-buttons>
       <ion-list class="group2-row-2-cover">
         <ion-buttons *ngFor="let food of dataBasket" class="group2-row-2" [ngClass]="{'group2-row-2-deleted': isDel === true }">
@@ -36,8 +36,12 @@
         </ion-buttons>
       </ion-list>
       <ion-row class="group2-row-3">
-        <ion-icon name="add-circle"></ion-icon>
-        <ion-input (keyup)="getNote($event)" placeholder="Notes"> </ion-input>
+        <!-- <ion-icon name="add-circle"></ion-icon> -->
+        <ion-icon name="create-outline"></ion-icon>
+        <!-- <ion-input (keyup)="getNote($event)" placeholder="Notes"> </ion-input> -->
+        <ion-item lines="none">
+          <ion-textarea [(ngModel)]="note" placeholder="Enter more note here..."></ion-textarea>
+        </ion-item>
       </ion-row>
     </ion-list>
 

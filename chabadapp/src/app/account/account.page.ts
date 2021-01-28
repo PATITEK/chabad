@@ -78,7 +78,6 @@ export class AccountPage implements OnInit {
     });
     return await popover.present();
   }
-
   activateInput() {
     this.activatedInput = true;
     this.lastForm = {
@@ -88,7 +87,6 @@ export class AccountPage implements OnInit {
       address: this.form.value['address']
     }
   }
-
   deactivateInput() {
     this.activatedInput = false;
     this.form.patchValue(this.lastForm);
@@ -96,9 +94,19 @@ export class AccountPage implements OnInit {
 
   getData() {
     this.accountService.getAccounts().subscribe(data => {
+      // console.log(data);
+      // if (data.app_user.birthday == null) {
+      //   this.form.patchValue({
+      //     dateOfBirth: '',
+      //   })
+      // }
+      // else {
+      //   this.form.patchValue({
+      //     dateOfBirth: data.app_user.birthday.substring(0, 10),
+      //   })
+      // }
       this.form.patchValue({
         fullName: data.app_user.full_name,
-        dateOfBirth: data.app_user.birthday.substring(0, 10),
         phoneNumber: data.app_user.phone_number,
         address: data.app_user.full_address,
         // email: data.app_user.email
@@ -106,8 +114,8 @@ export class AccountPage implements OnInit {
       this.loadedData = true;
       this.loadingService.dismiss();
     });
+    console.log(this.form.value)
   }
-
   updateInfo() {
     this.loadingService.present();
     const data = {

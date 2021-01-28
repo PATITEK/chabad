@@ -47,8 +47,8 @@
       </div>
       <div class="item">
         <ion-label class="item-label">Address</ion-label>
-        <ion-textarea class="item-content" [readonly]="!activatedInput" auto-grow="true"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-textarea>
+        <ion-input class="item-content" [readonly]="!activatedInput" auto-grow="true"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-input>
         <ng-container *ngFor="let validation of validationMessages.address">
           <div class="error-message"
             *ngIf="form.get('address').hasError(validation.type) && (form.get('address').dirty || form.get('address').touched)">

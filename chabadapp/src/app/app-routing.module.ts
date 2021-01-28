@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './@app-core/auth-guard.service';
+import {SlideComponent} from './@modular/slide/slide.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
+  },
+  {
+    path: 'slide', component: SlideComponent,
+    
   },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/chabad' },

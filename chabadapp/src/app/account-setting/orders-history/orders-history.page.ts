@@ -55,11 +55,10 @@ export class OrdersHistoryPage implements OnInit {
 
   doRefresh(event) {
     this.init();
-
     let count = 0;
     this.getDataOrders(() => {
       count++;
-      count == 2 && event.target.complete();
+      count == 1 && event.target.complete();
     })
   }
 

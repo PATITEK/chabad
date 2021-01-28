@@ -20,7 +20,7 @@ export class PageNotiComponent implements OnInit {
   ngOnInit() {
     this.pageNotiService.dataStatusNoti.subscribe((data: IDataNoti) => {
       this.title = data.title;
-      this.des = data.description;
+      // this.des = data.description;
       this.routerLink = data.routerLink;
     })
   }

@@ -164,10 +164,11 @@
           height: 34px;
           font-size: 11px;
           margin-left: 6%;
+          padding-top: 2%;
         }
         input {
           border-radius: 10px;
-          width: 56px;
+          width: 84px !important;
           height: 28px;
           outline: none;
           border: 1px solid #fff;
@@ -180,7 +181,7 @@
         .edit {
           position: absolute;
           top: -7px;
-          left: 66px;
+          left: 93px;
           padding: 4px;
           background-color: #03C1C3;
           border-radius: 6px;
@@ -219,7 +220,7 @@
         }
       }
       .textarea {
-        width: 97%;
+        width: 94%;
         margin: 4px auto 0 auto;
         outline: none;
         border: none;

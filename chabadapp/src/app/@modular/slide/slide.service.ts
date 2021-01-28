@@ -4,22 +4,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PageNotiService {
-
-  private data: BehaviorSubject<IDataNoti> = new BehaviorSubject<IDataNoti>({ title: '', image: '', routerLink: '' });
-
+export class SlideService {
+  private data: BehaviorSubject<IDataNoti> = new BehaviorSubject<IDataNoti>({
+    title: '',
+    image: '',
+    routerLink: ''
+  })
   constructor() { }
-
-  public get dataStatusNoti(): Observable<IDataNoti> {
+  public get datafrom(): Observable<IDataNoti> {
     return this.data.asObservable();
   }
-  
-  public setdataStatusNoti(value: IDataNoti) {
+  public setdataSlide(value: IDataNoti) {
     this.data.next(value);
   }
 }
 export interface IDataNoti {
+  image: any;
   title: string;
-  image: string;
   routerLink: string;
 }

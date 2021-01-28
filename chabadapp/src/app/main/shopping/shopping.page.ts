@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { IPageRequest, ChabadService } from 'src/app/@app-core/http';
@@ -20,8 +19,7 @@ export class ShoppingPage implements OnInit {
 
   constructor(
     private router: Router,
-    private chabadService: ChabadService,
-    public sanitizer: DomSanitizer,
+    private chabadService: ChabadService
   ) { }
 
   ngOnInit() {

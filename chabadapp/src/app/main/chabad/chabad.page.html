@@ -11,7 +11,7 @@
   <ion-list class="chabad-list">
     <ion-item-group *ngFor="let chabad of chabads" class="chabad" (click)="goToChabadDetail(chabad)">
       <div class="chabad-img-container img-wrapper main-box-shadow"
-        [style.background-image]="sanitizer.bypassSecurityTrustStyle(getChabadImageString(chabad))">
+        [style.background-image]="getChabadImageString(chabad)">
         <span class="chabad-distance">{{ 2.4 }}km</span>
       </div>
   

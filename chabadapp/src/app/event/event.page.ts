@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
@@ -39,7 +38,6 @@ export class EventPage implements OnInit {
     private router: Router,
     private chabadService: ChabadService,
     private loadingService: LoadingService,
-    public sanitizer: DomSanitizer,
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController

@@ -1,5 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
@@ -43,7 +42,6 @@ export class ChabadPage implements OnInit {
     private route: ActivatedRoute,
     private chabadService: ChabadService,
     private loadingService: LoadingService,
-    public sanitizer: DomSanitizer,
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController

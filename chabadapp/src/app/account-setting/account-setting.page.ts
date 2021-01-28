@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { PopupComponent } from '../@modular/popup/popup.component';
 import { PopuplogoutComponent } from '../@modular/popuplogout/popuplogout.component';
 
 @Component({
@@ -12,6 +13,7 @@ export class AccountSettingPage implements OnInit {
 
   constructor(
     public modalController: ModalController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -27,5 +29,15 @@ export class AccountSettingPage implements OnInit {
     await modal.present();
 
     modal.onWillDismiss().then(() => this.isOpeningModal = false);
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopupComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 }

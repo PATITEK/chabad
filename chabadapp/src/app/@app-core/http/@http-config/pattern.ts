@@ -8,4 +8,5 @@ export const PATTERN = {
     symbol: /[!“§$%&/(){},:;/_#+*<> -]/,
     minCharacters: /(?=.{8,})/,
     CODE: /^([A-Z0-9]{1,})$/,
+    PHONE_NUMBER_VIETNAM: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g
 };

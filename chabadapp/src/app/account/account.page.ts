@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { AccountService } from '../@app-core/http';
+import { AccountService, PATTERN } from '../@app-core/http';
 import { PopupComponent } from '../@modular/popup/popup.component';
-import {ModalPasswordComponent} from '../@modular/modal-password/modal-password.component'
+import { ModalPasswordComponent } from '../@modular/modal-password/modal-password.component'
+import { LoadingService, ToastService } from '../@app-core/utils';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-account',
@@ -12,41 +14,53 @@ import {ModalPasswordComponent} from '../@modular/modal-password/modal-password.
 })
 export class AccountPage implements OnInit {
   activatedInput = false;
+  loadedData = false;
   form: FormGroup;
-  checkUpdate = false;
+
+  lastForm = {};
+  isUpdating = false;
+
+  validationMessages = {
+    fullName: [
+      { type: 'required', message: 'Name is required.' }
+    ],
+    phoneNumber: [
+      { type: 'required', message: 'Phone number is required.' },
+      { type: 'pattern', message: 'Phone number is invalid.' },
+    ],
+    address: [
+      { type: 'required', message: 'Address is required.' }
+    ]
+  }
 
   constructor(
     private fb: FormBuilder,
     public popoverController: PopoverController,
     private accountService: AccountService,
-    private passwordModal: ModalController
+    private passwordModal: ModalController,
+    private loadingService: LoadingService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
-    this.addForm();
-    this.getItem();
-
-    this.checkFokUpdate();
+    this.loadingService.present();
+    this.initForm();
+    this.getData();
   }
 
-  ngOnChanges() {
-    console.log(this.checkFokUpdate());
-  }
-
-  get f() {
-    return this.form.controls;
-  }
-
-  addForm() {
+  initForm() {
     this.form = this.fb.group({
-      fullName: [{ value: '' }, [Validators.required]],
-      dateOfBirth: [{ value: '' }, [Validators.required]],
-      phoneNumber: [{ value: '' }, [Validators.required]],
-      address: [{ value: '' }, [Validators.required]],
+      fullName: new FormControl('', Validators.required),
+      dateOfBirth: new FormControl('', Validators.required),
+      phoneNumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(PATTERN.PHONE_NUMBER_VIETNAM)
+      ])),
+      address: new FormControl('', Validators.required),
       // email: [{ value: '', disabled: this.activeInput }, [Validators.required, Validators.email]]
     });
   }
-  
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopupComponent,
@@ -56,6 +70,7 @@ export class AccountPage implements OnInit {
     });
     return await popover.present();
   }
+
   async openModalPassword(ev: any) {
     const popover = await this.passwordModal.create({
       component: ModalPasswordComponent,
@@ -64,43 +79,54 @@ export class AccountPage implements OnInit {
     return await popover.present();
   }
 
-  toggleActivatedInput(value) {
-    this.activatedInput = value;
+  activateInput() {
+    this.activatedInput = true;
+    this.lastForm = {
+      fullName: this.form.value['fullName'],
+      dateOfBirth: this.form.value['dateOfBirth'],
+      phoneNumber: this.form.value['phoneNumber'],
+      address: this.form.value['address']
+    }
   }
 
-  getItem() {
+  deactivateInput() {
+    this.activatedInput = false;
+    this.form.patchValue(this.lastForm);
+  }
+
+  getData() {
     this.accountService.getAccounts().subscribe(data => {
       this.form.patchValue({
         fullName: data.app_user.full_name,
-        dateOfBirth: data.app_user.birthday,
+        dateOfBirth: data.app_user.birthday.substring(0, 10),
         phoneNumber: data.app_user.phone_number,
         address: data.app_user.full_address,
         // email: data.app_user.email
       });
+      this.loadedData = true;
+      this.loadingService.dismiss();
     });
   }
 
   updateInfo() {
+    this.loadingService.present();
     const data = {
       app_user: {
         full_name: this.form.value['fullName'],
-        birthday: this.form.value['dateOfBirth'].substring(0, 10),
+        birthday: this.form.value['dateOfBirth'],
         phone_number: this.form.value['phoneNumber'],
         full_address: this.form.value['address']
       }
     }
-    this.accountService.updateProfile(data).subscribe(data => {
-     console.log(data)
+    this.accountService.updateProfile(data).subscribe(() => {
+      this.activatedInput = false;
+      this.loadingService.dismiss();
+      this.toastService.present('Updated successfully!');
     });
   }
 
-  checkFokUpdate(): boolean {
-    let tmp;
-    this.accountService.getAccounts().subscribe((data: any) => {
-      tmp = data.app_user;
-    })
-    console.log(tmp);
-    return tmp === this.form.getRawValue();
+  canUpdate() {
+    return JSON.stringify(this.lastForm) !== JSON.stringify(this.form.value) && this.form.valid;
   }
 }
 

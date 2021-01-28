@@ -8,109 +8,62 @@
   <div class="user">
     <div class="user-img-container">
       <img src="assets/img/user.png" class="user-img main-box-shadow">
-      <img src="assets/img/edit2.svg" class="icon-edit"(click)="presentPopover()">
+      <img src="assets/img/edit2.svg" class="icon-edit" (click)="presentPopover()">
     </div>
-    <ion-label *ngIf="!activatedInput" class="edit-btn" (click)="toggleActivatedInput(true)">Edit</ion-label>
+    <ion-label *ngIf="!activatedInput" class="edit-btn" (click)="activateInput()">Edit</ion-label>
   </div>
 
   <ion-list class="list">
+    <ion-backdrop *ngIf="!loadedData" class="backdrop-list"></ion-backdrop>
+
     <form [formGroup]="form" (ngSubmit)="updateInfo()">
       <div class="item">
         <ion-label class="item-label">Your name</ion-label>
-        <ion-input class="item-content" [disabled]="!activatedInput"
+        <ion-input class="item-content" maxlength="30" [readonly]="!activatedInput"
           [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="fullName"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.fullName">
+          <div class="error-message"
+            *ngIf="form.get('fullName').hasError(validation.type) && (form.get('fullName').dirty || form.get('fullName').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
       </div>
       <div class="item">
         <ion-label class="item-label">Date of birth</ion-label>
-        <ion-datetime class="item-content" [disabled]="!activatedInput"
+        <ion-datetime class="item-content" [readonly]="!activatedInput"
           [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="dateOfBirth" display-timezone="utc">
         </ion-datetime>
       </div>
       <div class="item">
         <ion-label class="item-label">Phone number</ion-label>
-        <ion-input class="item-content" [disabled]="!activatedInput"
+        <ion-input autocomplete="off" type="text" class="item-content" [readonly]="!activatedInput"
           [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="phoneNumber"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.phoneNumber">
+          <div class="error-message"
+            *ngIf="form.get('phoneNumber').hasError(validation.type) && (form.get('phoneNumber').dirty || form.get('phoneNumber').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
       </div>
       <div class="item">
         <ion-label class="item-label">Address</ion-label>
-        <ion-input class="item-content" [disabled]="!activatedInput" auto-grow="true"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-input>
+        <ion-textarea class="item-content" [readonly]="!activatedInput" auto-grow="true"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-textarea>
+        <ng-container *ngFor="let validation of validationMessages.address">
+          <div class="error-message"
+            *ngIf="form.get('address').hasError(validation.type) && (form.get('address').dirty || form.get('address').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
       </div>
     </form>
-    <ion-button class="change__password" (click)="openModalPassword()" [disabled] ="activatedInput">
+    <ion-label *ngIf="!activatedInput" class="change__password" (click)="openModalPassword()">
       Change password
-    </ion-button>
+    </ion-label>
   </ion-list>
   <ion-buttons class="footer" *ngIf="activatedInput">
-    <ion-button class="btn btn-cancel" (click)="toggleActivatedInput(false)">Cancel</ion-button>
-    <ion-button class="btn btn-update-disabled" (click)="updateInfo()">Update</ion-button>
+    <ion-button class="btn btn-cancel" (click)="deactivateInput()">Cancel</ion-button>
+    <ion-button class="btn btn-update-disabled" [ngClass]="{'btn-update': canUpdate()}" (click)="updateInfo()"
+      [disabled]="!canUpdate()">Update</ion-button>
   </ion-buttons>
-
-  <!-- <ion-item-group class="header-account">
-
-    <ion-item-group class="content-img">
-      <img class="card-img" 
-      [src]="image_url" >
-      
-      <ion-img src="assets/img/icon-camera.svg" class="icon-camera"(click)="presentPopover()"></ion-img>
-      <ion-img src="assets/img/icon-camera.svg" class="icon-camera" (click)="presentPopover()" ></ion-img>
-
-      <ion-label (click)="clickEdit()"  *ngIf="activeInput===false"class="btn-edit">Edit</ion-label>
-    </ion-item-group>
-  </ion-item-group>
-  <ion-item-group class="content-info">
-    <form [formGroup]="form" (ngSubmit)="updadeInfo()">
-      <ion-item-group class="content-input">
-        <ion-item-group class="group-input">
-          <ion-label class="title-info " position="floating">Your name</ion-label>
-          <ion-input class="input-info" formControlName="full_name" ></ion-input>
-          <div class="text-arlet">
-            <span *ngIf="f.full_name.errors?.required && f.full_name.touched">
-              Please enter your Name.
-            </span>
-          </div>
-        </ion-item-group>
-        <ion-item-group class="group-input">
-          <ion-label class="title-info title-datetime">Date of birth</ion-label>
-          <ion-datetime class="input-info datetime" formControlName="birthday"
-            display-timezone="utc">
-          </ion-datetime>
-          <div class="text-arlet">
-            <span *ngIf="f.birthday.errors?.required && f.birthday.touched">
-              Please enter your Birthday.
-            </span>
-          </div>
-        </ion-item-group>
-        <ion-item-group class="group-input">
-          <ion-label type="tel" position="floating" class="title-info">Email</ion-label>
-          <ion-input class="input-info"  formControlName="email"></ion-input>
-          <div class="text-arlet">
-            <span *ngIf="f.email.errors?.required && f.email.touched">
-              Please enter your Email.
-            </span>
-            <span *ngIf="f.email.errors?.email && f.email.touched">
-              Not Email.
-            </span>
-          </div>
-        </ion-item-group>
-        <ion-item-group class="group-input">
-          <ion-label type="tel" position="floating" class="title-info">Phone number</ion-label>
-          <ion-input class="input-info"  formControlName="phone_number"></ion-input>
-        </ion-item-group>
-        <ion-item-group class="group-input">
-          <ion-label class="title-info" position="floating">Address</ion-label>
-          <ion-input class="input-info"  formControlName="full_address">
-          </ion-input>
-        </ion-item-group>
-        <div class="text-arlet">
-          <span *ngIf="f.full_address.errors?.required && f.full_address.touched">
-
-            Please enter your Address
-          </span>
-
-        </div>
-      </ion-item-group>
-      <button *ngIf="activeInput===true" [ngClass]="{'checkUpdate':!checkUpdate}" class="btn-update" ion-button type="submit" block>Update</button>
-    </form>
-  </ion-item-group> -->
 </ion-content>

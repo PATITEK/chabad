@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { ModalFoodComponent } from 'src/app/@modular/modal-food/modal-food.component';
+import { AccountService } from 'src/app/@app-core/http';
+import { OrderService } from 'src/app/@app-core/http/order/order.service';
+
 @Component({
   selector: 'app-food-checkout',
   templateUrl: './food-checkout.page.html',
@@ -9,23 +10,45 @@ import { ModalFoodComponent } from 'src/app/@modular/modal-food/modal-food.compo
 })
 export class FoodCheckoutPage implements OnInit {
   dataBasket = [];
+  dataBaketToCreat = [];
   currentItem: any = {
     id : 0,
     amount : 0,
   }
   note = '';
-  constructor(private router: Router, private modalCtrl: ModalController, private route: ActivatedRoute) { }
+  order = {
+    long: 0.5,
+    lat: 0.5,
+    note: this.note,
+    full_address: '',
+    phone_number_receiver: '',
+    order_details_attributes: this.dataBaketToCreat
+  }
+  constructor( 
+    private route: ActivatedRoute,
+    private orderService: OrderService,
+    private accountService: AccountService) { 
+      this.getUserData();
+      this.route.queryParams.subscribe(params => {
+        if( JSON.parse(params['data']).note == '') {
+          this.note = 'No note so far!'
+        }
+        else {
+          this.note = JSON.parse(params['data']).note;
+        }
+        this.order.note = this.note;
+      })
+      this.getDataBasket();
+    }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      console.log(JSON.parse(params['data']).note )
-      this.note = JSON.parse(params['data']).note;
-    })
-    this.getDataBasket();
   }
   confirm() {
     localStorage.removeItem('dataBasket');
-    this.openModalSuccess();
+    this.orderService.creat(this.order).subscribe(data => {
+      console.log(data);
+      localStorage.setItem('idRecentOrder', JSON.stringify(data));
+    })
   }
   plusItem(item) {
     if(item.amount < 99) {
@@ -54,16 +77,20 @@ export class FoodCheckoutPage implements OnInit {
   }
   getDataBasket() {
     this.dataBasket = JSON.parse(localStorage.getItem('dataBasket')) || [];
+    for(let i = 0; i< this.dataBasket.length; i++) {
+      this.dataBaketToCreat.push({food_id: this.dataBasket[i].id, amount: this.dataBasket[i].amount});
+    }
+    this.order.order_details_attributes = this.dataBaketToCreat;
   }
 
   calTotalPrice() {
     return this.dataBasket.reduce((acc, cur) => acc + cur.amount*cur.price , 0)
   }
-  async openModalSuccess() {
-    const popover = await this.modalCtrl.create({
-      component: ModalFoodComponent,
-      cssClass: 'modalFood',
+
+  getUserData() {
+    this.accountService.getAccounts().subscribe(data => {
+      this.order.full_address = data.app_user.full_address + ', district ' + data.app_user.district + ', ' + data.app_user.province + ', ' + data.app_user.country_code;
+      this.order.phone_number_receiver = data.app_user.phone_number;
     });
-    return await popover.present();
   }
 }

@@ -53,7 +53,7 @@ export class NewPasswordPage implements OnInit {
   confirmPassword() {
     const datapasing: IDataNoti = {
       title: 'SUCCESSFUL!',
-      description: 'Change Password successful!',
+      image: 'Change Password successful!',
       routerLink: '/main/synagogue'
     }
     this.invalidPassword = this.checkValidPassword('Password', this.passwordValue);

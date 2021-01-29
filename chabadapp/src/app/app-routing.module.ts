@@ -60,7 +60,11 @@ const routes: Routes = [
     
   },
   { path: '', redirectTo: 'main/chabad', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main/chabad' },
+  { path: '**', redirectTo: 'main/chabad' },  {
+    path: 'modal-detail-order',
+    loadChildren: () => import('./@modular/modal-detail-order/modal-detail-order.module').then( m => m.ModalDetailOrderPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

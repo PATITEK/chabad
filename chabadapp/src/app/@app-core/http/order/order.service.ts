@@ -6,6 +6,7 @@ import { ModalFoodComponent } from 'src/app/@modular/modal-food/modal-food.compo
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { IPageRequest } from '../global';
+import { requestQuery } from '../../utils';
 
 @Injectable()
 export class OrderService {
@@ -27,6 +28,16 @@ export class OrderService {
       })
     )
   }
+
+  // public getAll(request: IPageRequest) {
+  //   return this.http.get(`${APICONFIG.ORDER.GET_ALL}?${(requestQuery(request))}`).pipe(
+  //     map((result: any) => {
+  //       return result;
+  //     }),
+  //     catchError((errorRes) => {
+  //       throw errorRes.error;
+  //     }));
+  // }
 
   public getAll(request: IPageRequest) {
     return this.http.get(`${APICONFIG.ORDER.GET_ALL}`).pipe(

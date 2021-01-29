@@ -31,7 +31,7 @@ export class FoodCheckoutPage implements OnInit {
       this.getUserData();
       this.route.queryParams.subscribe(params => {
         if( JSON.parse(params['data']).note == '') {
-          this.note = 'No note so far!'
+          this.note = 'No note for this order!'
         }
         else {
           this.note = JSON.parse(params['data']).note;

@@ -21,7 +21,6 @@ import { SlideService } from './@modular/slide/slide.service';
     IonicModule.forRoot(), 
     AppRoutingModule,
     CoreModule.forRoot(),
-    BrowserModule, 
     FormsModule, 
     ReactiveFormsModule,
    

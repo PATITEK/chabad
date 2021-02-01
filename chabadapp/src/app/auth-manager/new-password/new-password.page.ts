@@ -50,17 +50,17 @@ export class NewPasswordPage implements OnInit {
     return '';
   }
 
-  confirmPassword() {
-    const datapasing: IDataNoti = {
-      title: 'SUCCESSFUL!',
-      description: 'Change Password successful!',
-      routerLink: '/main/synagogue'
-    }
-    this.invalidPassword = this.checkValidPassword('Password', this.passwordValue);
-    this.invalidConfirmedPassword = this.checkValidPassword('Confirmed password', this.confirmedPasswordValue);
-    if (this.invalidPassword == '' && this.invalidConfirmedPassword == '') {
-      this.pageNotiService.setdataStatusNoti(datapasing);
-      this.router.navigateByUrl('/page-noti');
-    }    
-  }
+  // confirmPassword() {
+  //   const datapasing: IDataNoti = {
+  //     title: 'SUCCESSFUL!',
+  //     description: 'Change Password successful!',
+  //     routerLink: '/main/synagogue'
+  //   }
+  //   this.invalidPassword = this.checkValidPassword('Password', this.passwordValue);
+  //   this.invalidConfirmedPassword = this.checkValidPassword('Confirmed password', this.confirmedPasswordValue);
+  //   if (this.invalidPassword == '' && this.invalidConfirmedPassword == '') {
+  //     this.pageNotiService.setdataStatusNoti(datapasing);
+  //     this.router.navigateByUrl('/page-noti');
+  //   }    
+  // }
 }

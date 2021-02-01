@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/@app-core/storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+import { LoadingService, ToastService } from '../../utils';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,9 @@ export class AuthService {
     // private toastr: ToastrService,
     private router: Router,
     private storage: StorageService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private loadingService: LoadingService,
+    private toastService: ToastService
   ) { }
 
   public get receiveData(): Observable<any> {
@@ -29,10 +32,12 @@ export class AuthService {
   }
   public forgotPassword(req) {
     return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD_EMAIL}`, req).pipe(
-      map((result) => {
+      map((result: any) => {
         return result;
       }),
       catchError((errorRes: any) => {
+        this.toastService.present(errorRes.error.messages, 'top')
+        this.loadingService.dismiss();
         throw errorRes.error;
       }));
 
@@ -43,6 +48,9 @@ export class AuthService {
         return result;
       }),
       catchError((errorRes: any) => {
+        // this.toastService.present('Your code has expired, please resend!', 'top');
+        this.toastService.present(errorRes.error.errors, 'top')
+        this.loadingService.dismiss();
         throw errorRes.error;
       }
       ));
@@ -53,6 +61,7 @@ export class AuthService {
         return result;
       }),
       catchError((errorRes: any) => {
+        this.toastService.present(errorRes.error.errors, 'top')
         throw errorRes.error;
       }
       ));

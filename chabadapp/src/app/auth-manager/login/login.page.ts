@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@app-core/http';
 import { ToastController } from '@ionic/angular';
 import { defaultCoreCipherList } from 'constants';
+import { LoadingService } from 'src/app/@app-core/utils';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginPage implements OnInit {
     phone_number: ''
   }
   countries:any;
-  constructor(private router: Router, private authService: AuthService, public toastController: ToastController) { }
+  constructor(private router: Router, private authService: AuthService, public toastController: ToastController, private loadingService: LoadingService) { }
   ngOnInit() {
     this.authService.countryCode().subscribe((data:any) => {
       this.countries = data.country_codes;
@@ -69,6 +70,7 @@ export class LoginPage implements OnInit {
   }
 
   signUp() {
+    this.loadingService.present();
     if(this.dataSignUp.phone_number.length == 10) {
       this.dataSignUp.phone_number = '+84'+this.dataSignUp.phone_number.slice(1,10);
     } 
@@ -77,19 +79,23 @@ export class LoginPage implements OnInit {
     }
     if(this.dataSignUp.password == this.confirmPassword) {
       this.authService.signup(this.dataSignUp).subscribe((data:any) =>{
+        this.loadingService.dismiss();
         localStorage.setItem('Authorization', data.token);
       })
     } else {
+      this.loadingService.dismiss();
       this.presentToast('Password and confirm password does not match');
     }
   }
 
   login() {
+    this.loadingService.present();
     // this.dataLogin.email = '+84'+this.dataLogin.email.slice(1,10);
     this.dataLogin.email = this.dataLogin.email;
     this.authService.login(this.dataLogin).subscribe(data =>{
       localStorage.setItem('Authorization', data.token);
       if(this.authService.checkLogin() == true) {
+        this.loadingService.dismiss();
         this.router.navigate(['main/chabad']);
       }
     });

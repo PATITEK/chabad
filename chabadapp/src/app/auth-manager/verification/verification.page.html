@@ -11,7 +11,8 @@
 
   <ion-buttons class="bottom-block">
     <p class="label-bottom">Code</p>
-      <form [formGroup]="inputCode"(ngSubmit)="onSubmit()">
+      <!-- <form [formGroup]="inputCode"(ngSubmit)="onSubmit()"> -->
+      <form [formGroup]="inputCode">
         <ion-label class="block-input">
         <input id="code1" class="input-tel" (keyup)="keytab($event,'code1', 'code1', 'code2')" type="number" formControlName="code1">
         <input id="code2" class="input-tel" (keyup)="keytab($event,'code1', 'code2', 'code3')" type="number" formControlName="code2">

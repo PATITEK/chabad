@@ -12,7 +12,7 @@
       <ion-label class="group1-label">Destination:</ion-label>
       <ion-item lines="none" class="group1-item">
         <ion-icon src="assets/icon/location.svg"></ion-icon>
-        <span>5a (villa) Nguyen Dinh Chieu, Dakao, District 1, Ho Chi Minh</span>
+        <span>{{order.full_address}}</span>
       </ion-item>
     </ion-list>
 
@@ -51,8 +51,23 @@
         <ion-label class="group3-row1-prices" >${{calTotalPrice() | number:'2.1-2'}}</ion-label>
       </ion-row>
     </ion-list>
-    
+    <ion-list class="group3">
+      <ion-row class="group3-row-1">
+        <ion-label class="group3-row1-total">Total payment</ion-label>
+      </ion-row>
+        <ion-row class="group3-row-1 group3-row1--modif">
+          <ion-label class="group3-row1-prices--modify">
+            <form  (ngSubmit)="showStripe()"  id="payment-form">
+              <div class="form-row">
+                <div id="card-element"> 
+                 </div>
+                <div id="card-errors" role="alert"></div>
+              </div>
+              <ion-button type="submit" color="success"  expand="full">Make Payment</ion-button>
+            </form>
+          </ion-label>
+      </ion-row>
+    </ion-list>
     <ion-button (click)="confirm()" class="main-button">Confirm</ion-button>
-    <!-- <ion-list class="group4"></ion-list> -->
   </ion-item-group>
 </ion-content>

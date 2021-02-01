@@ -55,6 +55,8 @@ ion-content {
                     margin-top: 10px;
                     font-size: 15px;
                     height: 60px;
+                    font-weight: 600;
+                    color: #515151;
                 }
             }
         }
@@ -145,6 +147,7 @@ ion-content {
                     }
                 }
             }
+           
         }
         .group3 {   
             margin-top: 10%;
@@ -161,6 +164,16 @@ ion-content {
                     padding: 20px 0;
                     margin: auto;
                     margin-right: 25px;
+                }
+                .group3-row1-prices--modify {
+                    width: 100% !important;
+                    margin: 0 ;
+                    padding: 20px;
+                    ion-button {
+                        width: 80%;
+                        margin: 0 auto;
+                        --border-radius: 10px;
+                    }
                 }
             }
         }

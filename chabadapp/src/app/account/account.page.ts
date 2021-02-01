@@ -114,7 +114,6 @@ export class AccountPage implements OnInit {
       this.loadedData = true;
       this.loadingService.dismiss();
     });
-    console.log(this.form.value)
   }
   updateInfo() {
     this.loadingService.present();

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PATTERN } from 'src/app/@app-core/http';
-import { ToastService } from 'src/app/@app-core/utils';
+import { catchError } from 'rxjs/operators';
+import { AuthService, PATTERN } from 'src/app/@app-core/http';
+import { LoadingService, ToastService } from 'src/app/@app-core/utils';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,21 +10,39 @@ import { ToastService } from 'src/app/@app-core/utils';
   styleUrls: ['./forgot-password.page.scss'],
 })
 export class ForgotPasswordPage implements OnInit {
-  input = '';
+  email: any = {
+    email : ''
+  }
 
   constructor(
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
   }
 
   goToVerification() {
-    if (PATTERN.PHONE_NUMBER_VIETNAM.test(this.input)) {
-      this.router.navigateByUrl('auth-manager/verification');
+    if (PATTERN.EMAIL.test(this.email.email)) {
+      this.loadingService.present();
+      this.authService.forgotPassword({email: this.email.email}).subscribe((data) => {
+        this.toastService.present('Complete! Check the OTP code in your email', 'top');
+        this.loadingService.dismiss();
+        this.router.navigateByUrl('auth-manager/verification');
+      })
     } else {
-      this.toastService.present('Phone number is invalid!', 'top');
+      if(this.email.email == '') {
+        this.toastService.present('Please type your email!', 'top', 2000);
+      }
+      else {
+        this.toastService.present('Email is invalid!', 'top', 2000);
+      }
     }
+  }
+
+  getEmail(event) {
+    this.email.email = event.target.value;
   }
 }

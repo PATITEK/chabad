@@ -47,7 +47,6 @@ export class FoodCheckoutPage implements OnInit {
     localStorage.removeItem('dataBasket');
     this.orderService.creat(this.order).subscribe(data => {
       console.log(data);
-      localStorage.setItem('idRecentOrder', JSON.stringify(data));
     })
   }
   plusItem(item) {

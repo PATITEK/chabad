@@ -10,6 +10,7 @@ import { PopuplogoutComponent } from '../@modular/popuplogout/popuplogout.compon
 })
 export class AccountSettingPage implements OnInit {
   isOpeningModal = false;
+  name = localStorage.getItem('fullname') || '';
 
   constructor(
     public modalController: ModalController,

@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
-import { DateTimeService, LoadingService } from '../@app-core/utils';
+import { DateTimeService } from '../@app-core/utils';
 import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
 
 @Component({
@@ -41,7 +41,6 @@ export class ChabadPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private chabadService: ChabadService,
-    private loadingService: LoadingService,
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController
@@ -62,7 +61,6 @@ export class ChabadPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingService.present();
     this.getData();
   }
 
@@ -71,7 +69,6 @@ export class ChabadPage implements OnInit {
       this.chabad = data.chabad;
       func && func();
       this.loadedChabad = true;
-      this.loadingService.dismiss();
     })
   }
 

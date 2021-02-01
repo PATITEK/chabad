@@ -81,12 +81,6 @@
               {{ validation.message }}
             </div>
           </ng-container>
-          <ng-container>
-            <div class="error-message"
-              *ngIf="formSignUp.get('password').value.length > 0 && formSignUp.get('password').value.length < 6 && (formSignUp.get('password').dirty || formSignUp.get('password').touched)">
-              {{ validationSignUpMessages.password[1].message }}
-            </div>
-          </ng-container>
         </div>
 
         <div class="margin-bottom">
@@ -105,7 +99,7 @@
             </div>
             <div class="age-box">
               <ion-label class="label">Age</ion-label>
-              <input class="input" formControlName="age">
+              <ion-datetime formControlName="birthday" class="input" displayFormat="YYYY" min="1900" max="2021"></ion-datetime>
             </div>
           </ion-buttons>
 
@@ -115,9 +109,9 @@
               {{ validation.message }}
             </div>
           </ng-container>
-          <ng-container *ngFor="let validation of validationSignUpMessages.age">
+          <ng-container *ngFor="let validation of validationSignUpMessages.birthday">
             <div class="error-message"
-              *ngIf="formSignUp.get('age').hasError(validation.type) && (formSignUp.get('age').dirty || formSignUp.get('age').touched)">
+              *ngIf="formSignUp.get('birthday').hasError(validation.type) && (formSignUp.get('birthday').dirty || formSignUp.get('birthday').touched)">
               {{ validation.message }}
             </div>
           </ng-container>

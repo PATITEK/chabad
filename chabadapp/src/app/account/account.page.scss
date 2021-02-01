@@ -95,6 +95,10 @@ ion-content {
             font-size: 16px;
             font-weight: 400;
             --padding-start: 10px;
+
+            &:focus {
+                border-color: #00b0b2 !important;
+            }
         }
         
         .item-content-activated {
@@ -152,4 +156,5 @@ ion-content {
     opacity: 1;
     background: #fff;
     z-index: 10;
+    outline: none;
 }

@@ -38,7 +38,7 @@ export class EventDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingService.present();
+    // this.loadingService.present();
     this.getData(this.data.event.id);
     this.btnJoinElement = document.querySelectorAll('.btn-join-with-us');
     this.data.event.joined && this.disableButtons();
@@ -56,7 +56,7 @@ export class EventDetailComponent implements OnInit {
     this.eventService.getDetail(id).subscribe(data => {
       this.event = data.event;
       this.loadedData = true;
-      this.loadingService.dismiss();
+      // this.loadingService.dismiss();
     })
   }
 

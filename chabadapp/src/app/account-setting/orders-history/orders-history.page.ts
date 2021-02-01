@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { OrderService } from 'src/app/@app-core/http';
 import { LoadingService } from 'src/app/@app-core/utils';
+import { ModalDetailOrderPage } from 'src/app/@modular/modal-detail-order/modal-detail-order.page';
+// import { ModalOrderDetailComponent } from 'src/app/@modular/modal-order-detail/modal-order-detail.component';
 
 @Component({
   selector: 'app-orders-history',
@@ -9,8 +12,10 @@ import { LoadingService } from 'src/app/@app-core/utils';
 })
 export class OrdersHistoryPage implements OnInit {
   data: any;
+  lastedData: any;
   constructor(private orderService: OrderService,
-    private loadingService: LoadingService,) { 
+    private loadingService: LoadingService,
+    private modalController: ModalController,) { 
       this.init();
     }
 
@@ -24,7 +29,7 @@ export class OrdersHistoryPage implements OnInit {
       orders: {
         pageRequest: {
           page: 1,
-          per_page: 5
+          per_page: 6,
         },
         array: [],
         loadedData: false
@@ -36,11 +41,12 @@ export class OrdersHistoryPage implements OnInit {
     let orders = this.data.orders;
     this.orderService.getAll(orders.pageRequest).subscribe(data => {
       orders.array = orders.array.concat(data.orders);
+      this.lastedData = orders.array[orders.array.length - 1];
+      console.log(this.lastedData);
+      // orders.array = orders.array.reverse();
       this.loadingService.dismiss();
-
       func && func();
       orders.pageRequest.page++;
-
       if (orders.array.length >= data.meta.pagination.total_objects) {
         orders.loadedData = true;
       }
@@ -60,6 +66,22 @@ export class OrdersHistoryPage implements OnInit {
       count++;
       count == 1 && event.target.complete();
     })
+  }
+
+  async openOrderDetailModal(order) {
+    const modal = await this.modalController.create({
+      component: ModalDetailOrderPage,
+      cssClass: 'event-detail-modal',
+      swipeToClose: true,
+      componentProps: {
+        data: {
+          order: {
+            id: order.id
+          }
+        }
+      }
+    });
+    await modal.present();
   }
 
 }

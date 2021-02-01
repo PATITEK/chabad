@@ -1,135 +1,195 @@
 <ion-content>
   <img src="assets/img/login.png" alt="" />
-  <ion-item-group class="body">
-    <ion-segment value="call" swipeGesture="false" mode="ios">
-      <ion-segment-button (click)="clickBtnLogin()" value="call">
+
+  <div class="body">
+    <ion-segment (ionChange)="changedSegment($event)" value="login" swipeGesture="false" mode="ios">
+      <ion-segment-button value="login">
         <ion-label>Login</ion-label>
       </ion-segment-button>
-      <ion-segment-button (click)="clickBtnSign()" value="favorite">
+      <ion-segment-button value="signUp">
         <ion-label>Sign up</ion-label>
       </ion-segment-button>
     </ion-segment>
 
-    <ion-item-group class="group" id="group1" >
-      <ion-grid>
-        <ion-row>
-          <ion-label>Enter email</ion-label>
-          <input (keyup)="getEmailSignup($event)" part="" type="text" />
-        </ion-row>
-        <ion-row>
-          <ion-label>Password</ion-label>
-          <input (keyup)="getPasswordSignup($event)" type="{{type}}" />
-          <button (click)="showPass()">
-            <ion-icon name="{{name}}"></ion-icon>
-          </button>
-        </ion-row>
-        <ion-label class="forgot__pass" (click)="clickForgotPassword()"
-          >Forgot Password?</ion-label
-        >
-      </ion-grid>
-      <ion-item-group class="ion-text-right">
-        <ion-button [disabled]="dataLogin.email == '' && dataLogin.password == '' " type="submit" class="submit__signup" (click)="login()">
+    <div class="group" [ngClass]="{'display-none': segmentValue != 'login'}">
+      <form class="form" [formGroup]="formLogin" (onSubmit)="submitLogin()">
+        <div class="margin-bottom">
+          <ion-label class="label">Enter email or phone number</ion-label>
+          <input class="input" type="text" formControlName="email">
+          <ng-container *ngFor="let validation of validationLoginMessages.email">
+            <div class="error-message"
+              *ngIf="formLogin.get('email').hasError(validation.type) && (formLogin.get('email').dirty || formLogin.get('email').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="margin-bottom">
+          <ion-label class="label">Password</ion-label>
+          <input class="input" type="password" formControlName="password">
+          <ng-container *ngFor="let validation of validationLoginMessages.password">
+            <div class="error-message"
+              *ngIf="formLogin.get('password').hasError(validation.type) && (formLogin.get('password').dirty || formLogin.get('password').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="ion-text-right">
+          <ion-label class="forgot-password-btn" (click)="clickForgotPassword()">Forgot Password?</ion-label>
+        </div>
+      </form>
+      <div class="ion-text-right">
+        <ion-button class="submit-btn" (click)="submitLogin()">
           <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
         </ion-button>
-      </ion-item-group>
-    </ion-item-group>
+      </div>
+    </div>
 
-    <ion-item-group class="group" id="group2" >
-      <ion-grid>
-        <form action="">
-          <ion-row class="select__signup-row">
-            <ion-label class="select__signup-row--name">Your name</ion-label>
-            <ion-label class="select__signup-row--group">
-              <input (keyup)="getFullnameSignup($event)" part="" type="text" />
-              <ion-select placeholder="Female" class="select" id="select" [(ngModel)]="dataSignUp.sex" name="female">
-                <ion-select-option value="female">Female</ion-select-option>
+    <div class="group" [ngClass]="{'display-none': segmentValue != 'signUp'}">
+      <form class="form" [formGroup]="formSignUp" (onSubmit)="submitSignUp()">
+        <div class="margin-bottom">
+          <ion-buttons class="row-1">
+            <div class="name-box">
+              <ion-label class="label">Your name</ion-label>
+              <input class="input" formControlName="full_name">
+            </div>
+            <div class="gender-box">
+              <ion-label class="label">Gender</ion-label>
+              <ion-select class="input" formControlName="sex" value="male">
                 <ion-select-option value="male">Male</ion-select-option>
+                <ion-select-option value="female">Female</ion-select-option>
                 <ion-select-option value="other">Other</ion-select-option>
               </ion-select>
-            </ion-label>
-          </ion-row>
-          <ion-row class="select__signup-row">
-            <ion-label class="select__signup-row--name">Your email</ion-label>
-            <input  (keyup)="getEmailSignup($event)" part="" type="text" style="margin-bottom: 12px;"/>
-          </ion-row>
-          <ion-row class="select__signup-row">
-            <ion-buttons class="select__signup-row-inside">
-              <ion-label class="select__signup-row-inside--name">Phone number</ion-label>
-              <ion-label class="select__signup-row-inside--label ">Age</ion-label>
-            </ion-buttons>
-            <ion-label class="select__signup-row--group select__signup-row--flag">
-              <ion-label class="your__select your__select-notmr">
-                <!-- <ion-label class="your__select-flat">
-                  <img src="assets/img/flag-400.png" alt="" class="" />
-                  <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
-                    <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
-                    <ion-select-option value="Nine">Nine</ion-select-option>
-                  </ion-select>
-                </ion-label> -->
-              </ion-label>
-              <ion-label class="your__select-notmr mr__phone-sm your__select-padding"
-                >+84</ion-label>
-              <input class="mr__phone-input--sm" (keyup)="getPhonenumberSignup($event)" part="" type="text" placeholder="636 873 393" />
-            </ion-label>
-            <ion-label class="your__select-flat-thinder">
-              <!-- <ion-select class="select" placeholder="1991">
-                <ion-select-option value="f">1989</ion-select-option>
-              </ion-select> -->
-              <input class="select select__age" (keyup)="getAgeSignup($event)" style="width: 50px; margin-left: 5px;" />
-            </ion-label>
-            
-          </ion-row>
-          <ion-row class="select__signup-row">
-            <ion-label class="select__signup-row--name">Your address</ion-label>
-            <ion-label class="select__signup-row--group display-sp-around">
-              <ion-label class="your__select your__select-notmr">
-                <ion-label class="your__select-flat" >
-                  <!-- <img src="assets/img/flag-400.png" alt="" class="" /> -->
-                  <ion-select class="your__select-flat--country" [(ngModel)]="dataSignUp.country_code" name="Viet Nam" placeholder="Viet Nam">
-                    <ion-select-option [value]="country.iso_country" *ngFor="let country of countries">{{country.country}}</ion-select-option>
-                  </ion-select>
-                </ion-label>
-              </ion-label>
-              <ion-select placeholder="Ho Chi Minh" class="select" [(ngModel)]="dataSignUp.province" name="Ho Chi Minh">
-                <ion-select-option value="Ho Chi Minh">Ho Chi Minh</ion-select-option>
-                <ion-select-option value="Singapore">Singapore</ion-select-option>
-              </ion-select>
-              <ion-select placeholder="Binh Thanh" class="select" [(ngModel)]="dataSignUp.district" name="Binh Thanh">
-                <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
-                <ion-select-option value="Nine">Nine</ion-select-option>
-              </ion-select>
-            </ion-label>
-            <input (keyup)="getFulladdressSignup($event)"
-              type="text"
-              class="select__signup-row--input"
-              placeholder="123 Pham Van Dong St, ward 12"/>
-          </ion-row>
-          <ion-row class="select__signup-row">
-            <ion-label class="select__signup-row--name">Password</ion-label>
-            <input (keyup)="getPasswordSignup($event)"  type="password"/>
-          </ion-row>
-          <ion-row class="select__signup-row">
-            <ion-label class="select__signup-row--name input-mr">Confirm password</ion-label>
-            <input (keyup)="getConfirmPasswordSignup($event)" type="password"/>
-          </ion-row>
-          
-        </form>
-      </ion-grid>
-      <ion-item-group class="ion-text-right">
-        <ion-button [disabled]="this.dataSignUp.full_name === '' || 
-                                  this.dataSignUp.email === '' ||
-                                   this.dataSignUp.sex === '' || 
-                                  this.dataSignUp.age == 0 || 
-                                  this.dataSignUp.province === '' || 
-                                  this.dataSignUp.district === '' ||
-                                  this.dataSignUp.full_address === '' ||
-                                  this.dataSignUp.phone_number === '' || 
-                                  this.dataSignUp.password === '' || 
-                                  this.confirmPassword === '' " 
-                                  type="submit" class="submit__signup" (click)="signUp()">
-            <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
-          </ion-button>
-      </ion-item-group>
-    </ion-item-group>
-  </ion-item-group>
+            </div>
+          </ion-buttons>
+
+          <ng-container *ngFor="let validation of validationSignUpMessages.full_name">
+            <div class="error-message"
+              *ngIf="formSignUp.get('full_name').hasError(validation.type) && (formSignUp.get('full_name').dirty || formSignUp.get('password').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="margin-bottom">
+          <ion-label class="label">Email</ion-label>
+          <input class="input" type="email" formControlName="email">
+          <ng-container *ngFor="let validation of validationSignUpMessages.email">
+            <div class="error-message"
+              *ngIf="formSignUp.get('email').hasError(validation.type) && (formSignUp.get('email').dirty || formSignUp.get('email').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container>
+            <div class="error-message"
+              *ngIf="formSignUp.get('password').value.length > 0 && formSignUp.get('password').value.length < 6 && (formSignUp.get('password').dirty || formSignUp.get('password').touched)">
+              {{ validationSignUpMessages.password[1].message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="margin-bottom">
+          <ion-buttons class="row-1">
+            <div class="phone-number-box">
+              <ion-label class="label">Phone number</ion-label>
+              <ion-buttons class="phone-number-body">
+                <ion-select class="select country-code-select" formControlName="country_code" value="84">
+                  <!-- <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
+                    {{country.country}}</ion-select-option> -->
+                  <ion-select-option value="84">Viet Nam</ion-select-option>
+                </ion-select>
+                <ion-label class="country-code">+{{ formSignUp.value.country_code }}</ion-label>
+                <input class="input" formControlName="phone_number">
+              </ion-buttons>
+            </div>
+            <div class="age-box">
+              <ion-label class="label">Age</ion-label>
+              <input class="input" formControlName="age">
+            </div>
+          </ion-buttons>
+
+          <ng-container *ngFor="let validation of validationSignUpMessages.phone_number">
+            <div class="error-message"
+              *ngIf="formSignUp.get('phone_number').hasError(validation.type) && (formSignUp.get('phone_number').dirty || formSignUp.get('phone_number').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let validation of validationSignUpMessages.age">
+            <div class="error-message"
+              *ngIf="formSignUp.get('age').hasError(validation.type) && (formSignUp.get('age').dirty || formSignUp.get('age').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="margin-bottom">
+          <ion-label class="label">Your address</ion-label>
+          <ion-buttons>
+            <ion-select class="select country-code-select" formControlName="country_code" value="84">
+              <!-- <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
+                {{country.country}}</ion-select-option> -->
+              <ion-select-option value="84">Viet Nam</ion-select-option>
+            </ion-select>
+            <ion-select class="select province-select" formControlName="province" value="Ho Chi Minh">
+              <ion-select-option value="Ho Chi Minh">Ho Chi Minh</ion-select-option>
+            </ion-select>
+            <ion-select class="select" formControlName="district" value="Thu Duc">
+              <ion-select-option value="Thu Duc">Thu Duc</ion-select-option>
+              <ion-select-option value="Tan Binh">Tan Binh</ion-select-option>
+              <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>
+            </ion-select>
+          </ion-buttons>
+
+          <input class="input address-input" type="text" formControlName="full_address">
+
+          <ng-container *ngFor="let validation of validationSignUpMessages.province">
+            <div class="error-message"
+              *ngIf="formSignUp.get('province').hasError(validation.type) && (formSignUp.get('province').dirty || formSignUp.get('province').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let validation of validationSignUpMessages.district">
+            <div class="error-message"
+              *ngIf="formSignUp.get('district').hasError(validation.type) && (formSignUp.get('district').dirty || formSignUp.get('district').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let validation of validationSignUpMessages.full_address">
+            <div class="error-message"
+              *ngIf="formSignUp.get('full_address').hasError(validation.type) && (formSignUp.get('full_address').dirty || formSignUp.get('full_address').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="margin-bottom">
+          <ion-label class="label">Password</ion-label>
+          <input class="input" type="password" formControlName="password">
+          <ng-container *ngFor="let validation of validationSignUpMessages.password">
+            <div class="error-message"
+              *ngIf="formSignUp.get('password').hasError(validation.type) && (formSignUp.get('password').dirty || formSignUp.get('password').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container>
+            <div class="error-message"
+              *ngIf="formSignUp.get('password').value.length > 0 && formSignUp.get('password').value.length < 6 && (formSignUp.get('password').dirty || formSignUp.get('password').touched)">
+              {{ validationSignUpMessages.password[1].message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="margin-bottom">
+          <ion-label class="label">Confirm password</ion-label>
+          <input class="input" type="password" formControlName="confirmed_password">
+        </div>
+      </form>
+      <div class="ion-text-right">
+        <ion-button class="submit-btn" (click)="submitSignUp()">
+          <ion-icon name="chevron-forward-outline" class="ion__next"> </ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

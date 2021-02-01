@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/@app-core/http';
+import { AuthService, PATTERN } from 'src/app/@app-core/http';
 import { ToastController } from '@ionic/angular';
-import { defaultCoreCipherList } from 'constants';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from 'src/app/@app-core/utils';
 
 @Component({
   selector: 'app-login',
@@ -10,133 +12,216 @@ import { defaultCoreCipherList } from 'constants';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  public type = 'password';
-  public showpass = false;
-  public name = 'eye-outline';
-  public status='login';
-  private dataSignUp = {
-    full_name: '',
-    email: '',
-    sex: '',
-    age: 0,
-    country_code: '',
-    province: '',
-    district: '',
-    full_address: '',
-    phone_number: '',
-    password: '',
-    
+  // public type = 'password';
+  // public showpass = false;
+  // public name = 'eye-outline';
+  // public status = 'login';
+  
+  country_codes: any;
 
+  segmentValue = 'login';
+  matchPassword = false;
+
+  formLogin: FormGroup;
+  formSignUp: FormGroup;
+
+  validationLoginMessages = {
+    email: [
+      { type: 'required', message: 'Email or phone number is required' },
+    ],
+    password: [
+      { type: 'required', message: 'Password is required' }
+    ],
   }
-  checkSignUpVar = false;
-  confirmPassword = '';
-  private dataLogin = {
-    email: '',
-    password: '',
-    phone_number: ''
+
+  validationSignUpMessages = {
+    full_name: [
+      { type: 'required', message: 'Name is required' },
+      { type: 'pattern', message: "Name can't not contain special letters" },
+    ],
+    email: [
+      { type: 'required', message: 'Email is required' },
+      { type: 'pattern', message: 'Email is invalid' },
+    ],
+    phone_number: [
+      { type: 'required', message: 'Phone number is required' },
+      { type: 'pattern', message: 'Phone number is invalid' },
+    ],
+    age: [
+      { type: 'required', message: 'Age is required' },
+      { type: 'min', message: 'Age is invalid' },
+    ],
+    country_code: [
+      { type: 'required', message: 'Country is required' },
+    ],
+    province: [
+      { type: 'required', message: 'Province is required' },
+    ],
+    district: [
+      { type: 'required', message: 'District is required' },
+    ],
+    full_address: [
+      { type: 'required', message: 'Address is required' },
+    ],
+    password: [
+      { type: 'required', message: 'Password is required' },
+      { type: 'minLength', message: 'Password must be at least 6 letters' },
+    ],
   }
-  countries:any;
-  constructor(private router: Router, private authService: AuthService, public toastController: ToastController) { }
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    public toastController: ToastController,
+    private formBuilder: FormBuilder,
+    private toastService: ToastService
+  ) { }
+
   ngOnInit() {
-    this.authService.countryCode().subscribe((data:any) => {
-      this.countries = data.country_codes;
+    this.authService.countryCode().subscribe((data: any) => {
+      this.country_codes = data.country_codes;
     })
-    document.getElementById('group2').style.display = 'none';
+
+    this.initForm();
   }
-  showPass(){
-    this.showpass = !this.showpass;
-    if (this.showpass) {
-      this.type = 'text';
-      this.name = 'eye-off-outline'
+
+  initForm() {
+    this.formLogin = this.formBuilder.group({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    })
+
+    this.formSignUp = this.formBuilder.group({
+      full_name: new FormControl('', Validators.compose([
+        Validators.required,
+        // Validators.pattern(PATTERN.NAME)
+      ])),
+      sex: new FormControl('male'),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(PATTERN.EMAIL)
+      ])),
+      phone_number: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(PATTERN.PHONE_NUMBER_VIETNAM)
+      ])),
+      age: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.min(1)
+      ])),
+      country_code: new FormControl('84'),
+      province: new FormControl('Ho Chi Minh'),
+      district: new FormControl('Thu Duc'),
+      full_address: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(6)
+      ])),
+      confirmed_password: new FormControl('')
+    })
+  }
+
+  changedSegment(event) {
+    this.segmentValue = event.target.value;
+  }
+
+  canSubmitLogin() {
+    return this.formLogin.valid;
+  }
+
+  canSubmitSignUp() {
+    return this.formSignUp.valid;
+  }
+
+  submitLogin() {
+    if (!this.canSubmitLogin()) {
+      this.markFormGroupTouched(this.formLogin);
+    } else {
+      this.authService.login(this.formLogin.value).subscribe(data => {
+        localStorage.setItem('Authorization', data.token);
+        this.router.navigate(['main/chabad']);
+      });
     }
-    else {
-      this.type = 'password';
-      this.name = 'eye-outline'
+  }
+
+  submitSignUp() {
+    if (!this.canSubmitSignUp()) {
+      this.markFormGroupTouched(this.formSignUp);
+    } else if (!this.checkMatchConfirmedPassword()) {
+      this.toastService.present('Confirmed password not match');
+    } else {
+      let data = this.formSignUp.value;
+      data.phone_number = data.phone_number.length == 10 ? data.phone_number.substring(1, 10) : data.phone_number;
+      data.phone_number = `+${this.formSignUp.value.country_code}${data.phone_number}`;
+      this.authService.signup(this.formSignUp.value).subscribe();
     }
   }
-  clickBtnLogin(){
-    // this.status="login";
-    document.getElementById('group2').style.display = 'none';
-    document.getElementById('group1').style.display = 'block';
-  }
-  clickBtnSign(){
-    // this.status="sign";
-    document.getElementById('group1').style.display = 'none';
-    document.getElementById('group2').style.display = 'block';
-  }
+
+  // showPass() {
+  //   this.showpass = !this.showpass;
+  //   if (this.showpass) {
+  //     this.type = 'text';
+  //     this.name = 'eye-off-outline'
+  //   }
+  //   else {
+  //     this.type = 'password';
+  //     this.name = 'eye-outline'
+  //   }
+  // }
+
   clickForgotPassword() {
     this.router.navigate(['auth-manager/forgot-password']);
   }
 
-  signUp() {
-    if(this.dataSignUp.phone_number.length == 10) {
-      this.dataSignUp.phone_number = '+84'+this.dataSignUp.phone_number.slice(1,10);
-    } 
-    else {
-      this.dataSignUp.phone_number = '+84'+this.dataSignUp.phone_number.slice(0,9);
-    }
-    if(this.dataSignUp.password == this.confirmPassword) {
-      this.authService.signup(this.dataSignUp).subscribe((data:any) =>{
-        localStorage.setItem('Authorization', data.token);
-      })
-    } else {
-      this.presentToast('Password and confirm password does not match');
-    }
+  // signUp() {
+  //   if (this.dataSignUp.phone_number.length == 10) {
+  //     this.dataSignUp.phone_number = '+84' + this.dataSignUp.phone_number.slice(1, 10);
+  //   }
+  //   else {
+  //     this.dataSignUp.phone_number = '+84' + this.dataSignUp.phone_number.slice(0, 9);
+  //   }
+  //   if (this.dataSignUp.password == this.confirmPassword) {
+  //     this.authService.signup(this.dataSignUp).subscribe((data: any) => {
+  //       localStorage.setItem('Authorization', data.token);
+  //     })
+  //   } else {
+  //     this.presentToast('Password and confirm password does not match');
+  //   }
+  // }
+
+  // login() {
+  //   // this.dataLogin.email = '+84'+this.dataLogin.email.slice(1,10);
+  //   this.dataLogin.email = this.dataLogin.email;
+  //   this.authService.login(this.dataLogin).subscribe(data => {
+  //     localStorage.setItem('Authorization', data.token);
+  //     if (this.authService.checkLogin() == true) {
+  //       this.router.navigate(['main/chabad']);
+  //     }
+  //   });
+  // }
+
+  checkMatchConfirmedPassword() {
+    return this.formSignUp.get('password').value == this.formSignUp.get('confirmed_password').value;
   }
 
-  login() {
-    // this.dataLogin.email = '+84'+this.dataLogin.email.slice(1,10);
-    this.dataLogin.email = this.dataLogin.email;
-    this.authService.login(this.dataLogin).subscribe(data =>{
-      localStorage.setItem('Authorization', data.token);
-      if(this.authService.checkLogin() == true) {
-        this.router.navigate(['main/chabad']);
+  // async presentToast(message) {
+  //   const toast = await this.toastController.create({
+  //     message: message,
+  //     duration: 1500
+  //   });
+  //   toast.present();
+  // }
+  // showSelectValue = function (mySelect) {
+  //   console.log(mySelect);
+  // }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
       }
     });
-  }
-
-  async presentToast(message) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 1500
-    });
-    toast.present();
-  }
-  showSelectValue = function(mySelect) {
-    console.log(mySelect);
-  }
-
-  getFullnameSignup(event) {
-    this.dataSignUp.full_name = event.target.value;
-  }
-  getSexSignup(event) {
-    this.dataSignUp.sex = event.target.value;
-  }
-  getAgeSignup(event) {
-    this.dataSignUp.age = event.target.value;
-  }
-  getProvinceSignup(event) {
-    this.dataSignUp.province = event.target.value;
-  }
-  getDistrictSignup(event) {
-    this.dataSignUp.district = event.target.value;
-  }
-  getFulladdressSignup(event) {
-    this.dataSignUp.full_address = event.target.value;
-  }
-  getPhonenumberSignup(event) {
-    this.dataSignUp.phone_number = event.target.value;
-    this.dataLogin.email = event.target.value;
-  }
-  getPasswordSignup(event) {
-    this.dataSignUp.password = event.target.value;
-    this.dataLogin.password = event.target.value;
-  }
-  getConfirmPasswordSignup(event) {
-    this.confirmPassword = event.target.value;
-  }
-  getEmailSignup(event) {
-    this.dataSignUp.email = event.target.value;
-    this.dataLogin.email = event.target.value;
   }
 }

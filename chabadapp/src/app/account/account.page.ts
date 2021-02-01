@@ -5,7 +5,6 @@ import { AccountService, PATTERN } from '../@app-core/http';
 import { PopupComponent } from '../@modular/popup/popup.component';
 import { ModalPasswordComponent } from '../@modular/modal-password/modal-password.component'
 import { LoadingService, ToastService } from '../@app-core/utils';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-account',

@@ -18,6 +18,9 @@ export class PageNotiComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.router.navigate(['main/chabad']);
+    }, 2000);
     this.pageNotiService.dataStatusNoti.subscribe((data: IDataNoti) => {
       this.title = data.title;
       // this.des = data.description;

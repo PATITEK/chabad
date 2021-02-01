@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { API_URL, AuthService } from 'src/app/@app-core/http';
+import { LoadingService, ToastService } from 'src/app/@app-core/utils';
+import { Inject } from '@angular/core';
+import { HttpHeaders } from "@angular/common/http";
 
 @Component({
   selector: 'app-verification',
@@ -32,9 +35,16 @@ export class VerificationPage implements OnInit {
       { type: 'required', message: 'Password is required.' },
     ],
   }
+
+  httpOptions: any;
+
   constructor(
+    @Inject(API_URL) private apiUrl: string,
     public formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService,
+    private authService: AuthService,
+    private loadingService: LoadingService
   ) {
     this.inputCode = this.formBuilder.group({
       code1: ['',[Validators.required]],
@@ -49,7 +59,7 @@ export class VerificationPage implements OnInit {
   ngOnInit() {
   }
   resendCode() {
-
+    this.router.navigateByUrl('auth-manager/forgot-password');
   }
   keytab($event,prevInput, fieldInput, nextInput) {
     if(this.inputCode.value[fieldInput] !== null && this.inputCode.value[fieldInput] !== '' && this.inputCode.value[fieldInput].toString().length > 1) {
@@ -65,17 +75,33 @@ export class VerificationPage implements OnInit {
       document.getElementById(prevInput).focus()
     }
   }
-  onSubmit() {
+  // onSubmit() {
+  //   var c1 = this.inputCode.get('code1').value;
+  //   var c2 = this.inputCode.get('code2').value;
+  //   var c3 = this.inputCode.get('code3').value;
+  //   var c4 = this.inputCode.get('code4').value;
+  //   var c5 = this.inputCode.get('code5').value;
+  //   var c6 = this.inputCode.get('code6').value;
+  //   var inputstring = `${c1}${c2}${c3}${c4}${c5}${c6}`;
+  // }
+
+  confirmCode() {
+
     var c1 = this.inputCode.get('code1').value;
     var c2 = this.inputCode.get('code2').value;
     var c3 = this.inputCode.get('code3').value;
     var c4 = this.inputCode.get('code4').value;
     var c5 = this.inputCode.get('code5').value;
     var c6 = this.inputCode.get('code6').value;
-    var inputstring = `${c1}${c2}${c3}${c4}${c5}${c6}`;
-  }
+    var inputstring = (`${c1}${c2}${c3}${c4}${c5}${c6}`).toString();
 
-  confirmCode() {
-    this.router.navigateByUrl('auth-manager/new-password');
+    this.loadingService.present();
+
+    this.authService.checkcodePassword({code: inputstring}).subscribe((data:any)=> {
+      this.loadingService.dismiss();
+      localStorage.setItem('Authorization', data.token);
+      this.router.navigateByUrl("/auth-manager/new-password");
+      this.toastService.present('Code confirmed, present your new password!', 'top', 2000);
+    })
   }
 }

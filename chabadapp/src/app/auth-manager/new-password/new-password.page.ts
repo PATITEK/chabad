@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
+import { AuthService } from 'src/app/@app-core/http';
+import { LoadingService } from 'src/app/@app-core/utils';
 import { IDataNoti, PageNotiService } from 'src/app/@modular/page-noti/page-noti.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class NewPasswordPage implements OnInit {
   invalidConfirmedPassword = '';
   constructor(
     private pageNotiService: PageNotiService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private loadingService: LoadingService
     ) { }
 
   ngOnInit() {}
@@ -39,8 +42,8 @@ export class NewPasswordPage implements OnInit {
     if (value == '') {
       return `${name} can't not be empty`;
     }
-    if (value.length < 8) {
-      return `${name} can't not be less than 8 letters`;
+    if (value.length < 6) {
+      return `${name} can't not be less than 6 letters`;
     }
     if (name == 'Confirmed password') {
       if (this.passwordValue != this.confirmedPasswordValue) {
@@ -51,16 +54,21 @@ export class NewPasswordPage implements OnInit {
   }
 
   confirmPassword() {
+    this.loadingService.present();
     const datapasing: IDataNoti = {
       title: 'SUCCESSFUL!',
       image: 'Change Password successful!',
-      routerLink: '/main/synagogue'
+      routerLink: '/main/chabad'
     }
     this.invalidPassword = this.checkValidPassword('Password', this.passwordValue);
     this.invalidConfirmedPassword = this.checkValidPassword('Confirmed password', this.confirmedPasswordValue);
     if (this.invalidPassword == '' && this.invalidConfirmedPassword == '') {
-      this.pageNotiService.setdataStatusNoti(datapasing);
-      this.router.navigateByUrl('/page-noti');
+      this.loadingService.dismiss();
+      this.authService.newPassword({ password: this.passwordValue }).subscribe((data) => {
+        console.log(data);
+        this.pageNotiService.setdataStatusNoti(datapasing);
+        this.router.navigateByUrl('/page-noti');
+      })
     }    
   }
 }

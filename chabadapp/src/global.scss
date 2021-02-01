@@ -172,6 +172,9 @@
   }
 }
 
-.ion-backdrop {
-  outline: none;
-}
+.modalEditAvatar {
+  --height: 200px;
+  --width: 90%;
+  .modal-wrapper {
+    border-radius: 20px;
+  }

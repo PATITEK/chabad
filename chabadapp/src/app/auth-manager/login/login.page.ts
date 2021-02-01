@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, PATTERN } from 'src/app/@app-core/http';
 import { ToastController } from '@ionic/angular';
+import { defaultCoreCipherList } from 'constants';
+import { LoadingService } from 'src/app/@app-core/utils';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from 'src/app/@app-core/utils';
+
 
 @Component({
   selector: 'app-login',
@@ -68,14 +71,15 @@ export class LoginPage implements OnInit {
     ],
   }
 
+  countries:any;
   constructor(
     private router: Router,
     private authService: AuthService,
     public toastController: ToastController,
     private formBuilder: FormBuilder,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private loadingService: LoadingService
   ) { }
-
   ngOnInit() {
     this.authService.countryCode().subscribe((data: any) => {
       this.country_codes = data.country_codes;
@@ -130,7 +134,6 @@ export class LoginPage implements OnInit {
   canSubmitSignUp() {
     return this.formSignUp.valid;
   }
-
   submitLogin() {
     if (!this.canSubmitLogin()) {
       this.markFormGroupTouched(this.formLogin);

@@ -22,7 +22,7 @@
   <ion-item-group class="event-list-container">
     <ion-list class="event-list">
       <ion-item-group class="event" (click)="openOrderDetailModal(lastedData)" *ngIf="lastedData != null">
-        <ion-label>Your lasted order:</ion-label>
+        <ion-label style="color: #00b0b2;">Your lasted order</ion-label>
         <ion-buttons class="ion-align-items-start ion-justify-content-between">
           <h3 class="event-name">Order ID Number: {{lastedData.id}}</h3>
           <img class="triangle" src="assets/icon/triangle.svg">

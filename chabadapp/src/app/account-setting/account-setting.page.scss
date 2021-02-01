@@ -73,9 +73,11 @@ ion-content {
 .settings {
     width: 80vw;
     min-width: 300px;
-    margin: 140px auto 0;
+    margin: 150px auto 0;
     background: transparent;
     transition: .2s;
+    overflow-y: auto;
+    height: calc(100% - 148px);
     
     ion-buttons {
         border: 1px solid #FFFFFF;
@@ -117,6 +119,7 @@ ion-content {
     }
 
     .settings {
-        margin-top: 88px;
+        margin-top: 120px;
+        height: calc(100% - 118px);
     }
 }

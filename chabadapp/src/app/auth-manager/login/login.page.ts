@@ -47,9 +47,8 @@ export class LoginPage implements OnInit {
       { type: 'required', message: 'Phone number is required' },
       { type: 'pattern', message: 'Phone number is invalid' },
     ],
-    age: [
-      { type: 'required', message: 'Age is required' },
-      { type: 'min', message: 'Age is invalid' },
+    birthday: [
+      { type: 'required', message: 'Age is required' }
     ],
     country_code: [
       { type: 'required', message: 'Country is required' },
@@ -105,9 +104,8 @@ export class LoginPage implements OnInit {
         Validators.required,
         Validators.pattern(PATTERN.PHONE_NUMBER_VIETNAM)
       ])),
-      age: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.min(1)
+      birthday: new FormControl('', Validators.compose([
+        Validators.required
       ])),
       country_code: new FormControl('84'),
       province: new FormControl('Ho Chi Minh'),
@@ -138,7 +136,6 @@ export class LoginPage implements OnInit {
       this.markFormGroupTouched(this.formLogin);
     } else {
       this.authService.login(this.formLogin.value).subscribe(data => {
-        localStorage.setItem('Authorization', data.token);
         this.router.navigate(['main/chabad']);
       });
     }
@@ -172,33 +169,6 @@ export class LoginPage implements OnInit {
   clickForgotPassword() {
     this.router.navigate(['auth-manager/forgot-password']);
   }
-
-  // signUp() {
-  //   if (this.dataSignUp.phone_number.length == 10) {
-  //     this.dataSignUp.phone_number = '+84' + this.dataSignUp.phone_number.slice(1, 10);
-  //   }
-  //   else {
-  //     this.dataSignUp.phone_number = '+84' + this.dataSignUp.phone_number.slice(0, 9);
-  //   }
-  //   if (this.dataSignUp.password == this.confirmPassword) {
-  //     this.authService.signup(this.dataSignUp).subscribe((data: any) => {
-  //       localStorage.setItem('Authorization', data.token);
-  //     })
-  //   } else {
-  //     this.presentToast('Password and confirm password does not match');
-  //   }
-  // }
-
-  // login() {
-  //   // this.dataLogin.email = '+84'+this.dataLogin.email.slice(1,10);
-  //   this.dataLogin.email = this.dataLogin.email;
-  //   this.authService.login(this.dataLogin).subscribe(data => {
-  //     localStorage.setItem('Authorization', data.token);
-  //     if (this.authService.checkLogin() == true) {
-  //       this.router.navigate(['main/chabad']);
-  //     }
-  //   });
-  // }
 
   checkMatchConfirmedPassword() {
     return this.formSignUp.get('password').value == this.formSignUp.get('confirmed_password').value;

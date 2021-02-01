@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
+  name = localStorage.getItem('fullname') || '';
 
   constructor(
     private router: Router

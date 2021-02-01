@@ -20,14 +20,18 @@ export class AccountPage implements OnInit {
   isUpdating = false;
 
   validationMessages = {
-    fullName: [
+    full_name: [
       { type: 'required', message: 'Name is required.' }
     ],
-    phoneNumber: [
+    phone_number: [
       { type: 'required', message: 'Phone number is required.' },
       { type: 'pattern', message: 'Phone number is invalid.' },
     ],
-    address: [
+    email: [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Email is invalid.' },
+    ],
+    full_address: [
       { type: 'required', message: 'Address is required.' }
     ]
   }
@@ -42,21 +46,23 @@ export class AccountPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingService.present();
     this.initForm();
     this.getData();
   }
 
   initForm() {
     this.form = this.fb.group({
-      fullName: new FormControl('', Validators.required),
-      dateOfBirth: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', Validators.compose([
+      full_name: new FormControl('', Validators.required),
+      birthday: new FormControl(''),
+      phone_number: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern(PATTERN.PHONE_NUMBER_VIETNAM)
+        Validators.pattern(PATTERN.PHONE_NUMBER_VIETNAM_FULL)
       ])),
-      address: new FormControl('', Validators.required),
-      // email: [{ value: '', disabled: this.activeInput }, [Validators.required, Validators.email]]
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(PATTERN.EMAIL)
+      ])),
+      full_address: new FormControl('', Validators.required),
     });
   }
 
@@ -77,14 +83,10 @@ export class AccountPage implements OnInit {
     });
     return await popover.present();
   }
+  
   activateInput() {
     this.activatedInput = true;
-    this.lastForm = {
-      fullName: this.form.value['fullName'],
-      dateOfBirth: this.form.value['dateOfBirth'],
-      phoneNumber: this.form.value['phoneNumber'],
-      address: this.form.value['address']
-    }
+    this.lastForm = this.form.value;
   }
   deactivateInput() {
     this.activatedInput = false;
@@ -93,38 +95,16 @@ export class AccountPage implements OnInit {
 
   getData() {
     this.accountService.getAccounts().subscribe(data => {
-      // console.log(data);
-      // if (data.app_user.birthday == null) {
-      //   this.form.patchValue({
-      //     dateOfBirth: '',
-      //   })
-      // }
-      // else {
-      //   this.form.patchValue({
-      //     dateOfBirth: data.app_user.birthday.substring(0, 10),
-      //   })
-      // }
-      this.form.patchValue({
-        fullName: data.app_user.full_name,
-        phoneNumber: data.app_user.phone_number,
-        address: data.app_user.full_address,
-        // email: data.app_user.email
-      });
+      data.app_user.birthday;
+      this.form.patchValue(data.app_user);
       this.loadedData = true;
       this.loadingService.dismiss();
     });
-    console.log(this.form.value)
   }
+
   updateInfo() {
     this.loadingService.present();
-    const data = {
-      app_user: {
-        full_name: this.form.value['fullName'],
-        birthday: this.form.value['dateOfBirth'],
-        phone_number: this.form.value['phoneNumber'],
-        full_address: this.form.value['address']
-      }
-    }
+    let data = this.form.value;
     this.accountService.updateProfile(data).subscribe(() => {
       this.activatedInput = false;
       this.loadingService.dismiss();

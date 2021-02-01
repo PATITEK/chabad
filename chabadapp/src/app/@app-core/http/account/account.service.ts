@@ -28,7 +28,10 @@ export class AccountService {
   }
   
   public updateProfile(data) {
-    return this.http.put(`${APICONFIG.ACCOUNT.UPDATE_PROFILE}`, data).pipe(
+    const req = {
+      app_user: data
+    }
+    return this.http.put(`${APICONFIG.ACCOUNT.UPDATE_PROFILE}`, req).pipe(
       map((result:any) => {
       
         return result;

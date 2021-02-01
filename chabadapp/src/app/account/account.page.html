@@ -10,7 +10,7 @@
       <img src="assets/img/user.png" class="user-img main-box-shadow">
       <img src="assets/img/edit2.svg" class="icon-edit" (click)="presentPopover()">
     </div>
-    <ion-label *ngIf="!activatedInput" class="edit-btn" (click)="activateInput()">Edit</ion-label>
+    <ion-label *ngIf="loadedData && !activatedInput" class="edit-btn" (click)="activateInput()">Edit</ion-label>
   </div>
 
   <ion-list class="list">
@@ -20,27 +20,37 @@
       <div class="item">
         <ion-label class="item-label">Your name</ion-label>
         <ion-input class="item-content" maxlength="30" [readonly]="!activatedInput"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="fullName"></ion-input>
-        <ng-container *ngFor="let validation of validationMessages.fullName">
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="full_name"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.full_name">
           <div class="error-message"
-            *ngIf="form.get('fullName').hasError(validation.type) && (form.get('fullName').dirty || form.get('fullName').touched)">
+            *ngIf="form.get('full_name').hasError(validation.type) && (form.get('full_name').dirty || form.get('full_name').touched)">
             {{ validation.message }}
           </div>
         </ng-container>
       </div>
       <div class="item">
-        <ion-label class="item-label">Date of birth</ion-label>
-        <ion-datetime class="item-content" [readonly]="!activatedInput"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="dateOfBirth" display-timezone="utc">
-        </ion-datetime>
+        <ion-label class="item-label">Year of birth</ion-label>
+        <ion-datetime class="item-content" [readonly]="!activatedInput" [ngClass]="{ 'item-content-activated': activatedInput}"
+          formControlName="birthday" displayFormat="YYYY" min="1900" max="2021"></ion-datetime>
       </div>
       <div class="item">
         <ion-label class="item-label">Phone number</ion-label>
         <ion-input autocomplete="off" type="text" class="item-content" [readonly]="!activatedInput"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="phoneNumber"></ion-input>
-        <ng-container *ngFor="let validation of validationMessages.phoneNumber">
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="phone_number"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.phone_number">
           <div class="error-message"
-            *ngIf="form.get('phoneNumber').hasError(validation.type) && (form.get('phoneNumber').dirty || form.get('phoneNumber').touched)">
+            *ngIf="form.get('phone_number').hasError(validation.type) && (form.get('phone_number').dirty || form.get('phone_number').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <div class="item">
+        <ion-label class="item-label">Email</ion-label>
+        <ion-input autocomplete="off" type="text" class="item-content" [readonly]="!activatedInput"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="email"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.email">
+          <div class="error-message"
+            *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
             {{ validation.message }}
           </div>
         </ng-container>
@@ -48,10 +58,10 @@
       <div class="item">
         <ion-label class="item-label">Address</ion-label>
         <ion-input class="item-content" [readonly]="!activatedInput" auto-grow="true"
-          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="address"></ion-input>
-        <ng-container *ngFor="let validation of validationMessages.address">
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="full_address"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.full_address">
           <div class="error-message"
-            *ngIf="form.get('address').hasError(validation.type) && (form.get('address').dirty || form.get('address').touched)">
+            *ngIf="form.get('full_address').hasError(validation.type) && (form.get('full_address').dirty || form.get('full_address').touched)">
             {{ validation.message }}
           </div>
         </ng-container>

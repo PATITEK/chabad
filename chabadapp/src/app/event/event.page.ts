@@ -37,7 +37,6 @@ export class EventPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private chabadService: ChabadService,
-    private loadingService: LoadingService,
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController
@@ -57,7 +56,6 @@ export class EventPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingService.present();
     this.getData();
   }
 
@@ -66,7 +64,6 @@ export class EventPage implements OnInit {
       this.chabad = data.chabad;
       func && func();
       this.loadedChabad = true;
-      this.loadingService.dismiss();
     })
   }
 

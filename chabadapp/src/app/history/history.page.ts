@@ -27,7 +27,7 @@ export class HistoryPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingService.present();
+    // this.loadingService.present();
     this.getDataServices();
     this.getDataEvents();
   }
@@ -75,7 +75,7 @@ export class HistoryPage implements OnInit {
     let events = this.data.services;
     this.historyService.getServices(events.pageRequest).subscribe(data => {
       events.array = events.array.concat(data.events);
-      this.loadingService.dismiss();
+      // this.loadingService.dismiss();
 
       func && func();
       events.pageRequest.page++;

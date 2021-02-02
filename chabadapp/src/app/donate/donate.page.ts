@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DonateService, ChabadService } from '../@app-core/http';
+import { DonateService, ChabadService, AccountService } from '../@app-core/http';
 import { LoadingService } from '../@app-core/utils';
 import { ToastController } from '@ionic/angular';
 
@@ -22,6 +22,7 @@ export class DonatePage implements OnInit {
   message = "";
   source_id: any;
   frmDonate: FormGroup;
+  email = '';
   error_messages = {
     'amount': [
       { 
@@ -43,7 +44,8 @@ export class DonatePage implements OnInit {
      private route: ActivatedRoute,
      public donateService: DonateService,
      public loadingService: LoadingService,
-     public toastController: ToastController
+     public toastController: ToastController,
+     private accountService: AccountService
      ) {
     this.frmDonate = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -61,6 +63,11 @@ export class DonatePage implements OnInit {
             this.loadingService.dismiss()
       })
     })
+    this.loadingService.present()
+    this.accountService.getAccounts().subscribe(data => {
+      this.email = data.app_user.email;
+      this.loadingService.dismiss();
+    });
   }
   async presentToast(message) {
     const toast = await this.toastController.create({
@@ -73,12 +80,15 @@ export class DonatePage implements OnInit {
     return `url(${this.chabad.thumb_image})`
   }
   onSubmit() {
+    this.loadingService.present();
     const getNumber = this.frmDonate.get('amount').value;
     if(getNumber%18 == 0 && getNumber>0) {
     }
     const sourceId = this.dataParams.event ? this.dataParams.event.id : this.dataParams.chabad.id;
     var result = {
-      "donation_log" : {
+      "donation" : {
+        "email": this.email,
+        "token": localStorage.getItem('Authorization'),
         "amount": this.frmDonate.get('amount').value,
         "note": this.frmDonate.get('note').value,
         "source_type": this.dataParams.type,
@@ -89,22 +99,27 @@ export class DonatePage implements OnInit {
       if(this.frmDonate.get('amount').value.length == 0) {
         this.required_mess = true;
         this.message = 'This field have a value!';
+        this.loadingService.dismiss();
       }
       else if(this.frmDonate.get('amount').value %18 !==0){
         this.required_mess = true;
         this.message = 'The number must be divisible by 18!';
+        this.loadingService.dismiss();
       }
       else {
         this.required_mess = false;
+        this.loadingService.dismiss();
       }
     }
     if (this.frmDonate.get('note').dirty || this.frmDonate.get('note').touched ) {
       if(this.frmDonate.get('note').value.length == 0) {
         this.required_purpose = true;
         this.message_purpose = 'This field is require!';
+        this.loadingService.dismiss();
       }
       else {
         this.required_purpose = false;
+        this.loadingService.dismiss();
       }
     }
     if(this.frmDonate.get('amount').value %18 ===0) {

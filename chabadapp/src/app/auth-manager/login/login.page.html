@@ -89,9 +89,9 @@
               <ion-label class="label">Phone number</ion-label>
               <ion-buttons class="phone-number-body">
                 <ion-select class="select country-code-select" formControlName="country_code" value="84">
-                  <!-- <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
-                    {{country.country}}</ion-select-option> -->
-                  <ion-select-option value="84">Viet Nam</ion-select-option>
+                  <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
+                    {{country.phone_code}}</ion-select-option>
+                  <!-- <ion-select-option value="84">Viet Nam</ion-select-option> -->
                 </ion-select>
                 <ion-label class="country-code">+{{ formSignUp.value.country_code }}</ion-label>
                 <input class="input" formControlName="phone_number">
@@ -121,9 +121,9 @@
           <ion-label class="label">Your address</ion-label>
           <ion-buttons>
             <ion-select class="select country-code-select" formControlName="country_code" value="84">
-              <!-- <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
-                {{country.country}}</ion-select-option> -->
-              <ion-select-option value="84">Viet Nam</ion-select-option>
+              <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
+                {{country.country}}</ion-select-option>
+              <!-- <ion-select-option value="84">Viet Nam</ion-select-option> -->
             </ion-select>
             <ion-select class="select province-select" formControlName="province" value="Ho Chi Minh">
               <ion-select-option value="Ho Chi Minh">Ho Chi Minh</ion-select-option>

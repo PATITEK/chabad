@@ -114,7 +114,7 @@ export class AuthService {
         return result;
       }),
       catchError((errorRes: any) => {
-        this.presentToast('Error, please try again!');
+        this.presentToast(errorRes.error);
         throw errorRes.error;
       }));
   }

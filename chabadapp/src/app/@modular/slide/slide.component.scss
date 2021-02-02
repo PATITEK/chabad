@@ -78,32 +78,44 @@ ion-content {
                     }
                 }
             }
-        }
-    }
-    .slide__image {
-        display: inline-block;
-        background-size: cover;
-        margin: 0 auto;
-        height: 300px;
-        width: 100%;
-        @media screen and (max-height: 667px) {
-            height: 217px;
-        }
-    }
-    .slide__title {
-        font-size: 22px;
-        color: #353535;
-        display: block;
-        margin-top: 17%;
-        @media screen and (max-height: 667px) {
-            margin-top: 14%;
-        }
-    }
-    .slide__btn-next {
-        font-size: 16px;
-        text-transform: uppercase;
-    }
-    ion-button {
+
+    ion-slides {
+        height: 100%;
+        position: relative;
+      }
+      ion-button {
+                display: block;
+                margin: 30px auto;
+                --background: #00b0b2;
+                height: 33px;
+                width: 80px;
+                --border-radius: 20px;
+                text-transform: capitalize;
+            }
+      // ion-item-group {
+      //           display: flex;
+      //           justify-content: center;
+      //           ion-label {
+      //               width: 13px;
+      //               height: 13px;
+      //               margin: 0 7px;
+      //               border-radius: 50%;
+      //               background-color: #DBDBDB;
+      //           }
+      //           .activebg {
+      //               background-color: #00B0B2;
+      //           }
+      //       }
+      .slide__title {
+                font-size: 22px;
+                color: #353535;
+                display: block;
+                margin-top: 17%;
+                @media screen and (max-height: 667px) {
+                    margin-top: 14%;
+                }
+            }
+      .swiper-slide {
         display: block;
       }
       .swiper-slide--none {

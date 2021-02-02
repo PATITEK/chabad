@@ -23,3 +23,9 @@ export interface IDataNoti {
   image: string;
   routerLink: string;
 }
+export interface IDataSlide {
+  title: string;
+  image: string;
+  label: string;
+  routerLink: string;
+}

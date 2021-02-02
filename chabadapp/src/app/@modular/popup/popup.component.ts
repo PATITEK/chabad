@@ -25,11 +25,11 @@ export class PopupComponent implements OnInit {
       if (dataUrl) {
         var dataUri = "data:image/jpeg;base64," + dataUrl;
         var image = this.dataURItoBlob(dataUri);
-        console.log(image)
+        // console.log(image)
         let formData = new FormData;
         formData.append('files[]', image);
           this.accountService.uploadPhoto(formData).subscribe((data)=>{
-            console.log(data)
+            // console.log(data)
             this.image_url = data['data'][0];
             localStorage.setItem('img_url', this.image_url);
             this.loadingService.dismiss();
@@ -58,7 +58,7 @@ export class PopupComponent implements OnInit {
         let formData = new FormData;
         formData.append('files[]', image);
         this.accountService.uploadPhoto(formData).subscribe((data)=>{
-          console.log(data)
+          // console.log(data)
           this.image_url = data['data'][0];
           localStorage.setItem('img_url', this.image_url);
           this.loadingService.dismiss();

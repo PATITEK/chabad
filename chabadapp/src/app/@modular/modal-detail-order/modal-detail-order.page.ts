@@ -2,6 +2,7 @@ import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { OrderService } from 'src/app/@app-core/http';
 import { DateTimeService, LoadingService } from 'src/app/@app-core/utils';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-modal-detail-order',
   templateUrl: './modal-detail-order.page.html',
@@ -34,7 +35,8 @@ export class ModalDetailOrderPage implements OnInit {
     private orderService: OrderService,
     private dateTimeService: DateTimeService,
     public modalController: ModalController,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -61,6 +63,33 @@ export class ModalDetailOrderPage implements OnInit {
       this.loadingService.dismiss();
     })
   }
+
+  async reallyWantCancelOrder(id) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Do you really want to <strong>cancel</strong> this order?',
+      mode: 'ios',
+      backdropDismiss: true,
+      buttons: [
+        {
+          text: 'No, thank!',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.cancelOrder(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   cancelOrder(id) {
     this.loadingService.present();
     this.order.status = 'failed';

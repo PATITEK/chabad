@@ -56,11 +56,11 @@ const routes: Routes = [
     loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
   },
   {
-    path: 'slide', component: SlideComponent,
-    
+    path: 'slide',
+    loadChildren: () => import('./@modular/slide/slide.module').then( m => m.SlideModule)
   },
   { path: '', redirectTo: 'slide', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main/chabad' },
+  { path: '**', redirectTo: 'slide' },
   {
     path: 'modal-detail-order',
     loadChildren: () => import('./@modular/modal-detail-order/modal-detail-order.module').then( m => m.ModalDetailOrderPageModule)

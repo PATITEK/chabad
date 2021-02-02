@@ -29,7 +29,7 @@
       Skip
     </ion-label>
   </ion-buttons>  
-  <ion-slides>
+  <ion-slides #mySlider pager="true" [options]="slideOpts">
     <ion-slide id="slide1">
         <img src="assets/img/slide1.svg"/>
         <ion-label class="slide__title">
@@ -38,17 +38,7 @@
          <ion-button class="slide__btn-next"(click)="goNext()">
           NEXT
       </ion-button>
-      <ion-item-group class="slide__group-circle">
-        <ion-label [style.background]="clicked == 0? '#00B0B2': '#DBDBDB'" (click)="gotoSlide1()">
-         
-        </ion-label>
-        <ion-label [style.background]="clicked == 1? '#00B0B2': '#DBDBDB'" (click)="gotoSlide2()">
-          
-        </ion-label>
-        <ion-label [style.background]="clicked == 2? '#00B0B2': '#DBDBDB'" (click)="gotoSlide3()">
-          
-        </ion-label>
-      </ion-item-group>
+      
     </ion-slide>
     <ion-slide id="slide2">
       <img src="assets/img/slide2.svg"/>
@@ -58,7 +48,7 @@
        <ion-button class="slide__btn-next"(click)="goNext()">
         NEXT
     </ion-button>
-    <ion-item-group class="slide__group-circle">
+    <!-- <ion-item-group class="slide__group-circle">
       <ion-label [style.background]="clicked == 0? '#00B0B2': '#DBDBDB'" (click)="gotoSlide1()">
        
       </ion-label>
@@ -68,7 +58,7 @@
       <ion-label [style.background]="clicked == 2? '#00B0B2': '#DBDBDB'" (click)="gotoSlide3()">
         
       </ion-label>
-    </ion-item-group>
+    </ion-item-group> -->
   </ion-slide>
 
   <ion-slide id="slide3">
@@ -77,22 +67,23 @@
       <!-- {{title}} -->
       Find your Chabad
      </ion-label>
-     <ion-button class="slide__btn-next"(click)="goNext()">
+     <ion-button class="slide__btn-next"(click)="Skip()">
       <!-- {{label}} -->
       START
   </ion-button>
-  <ion-item-group class="slide__group-circle">
-    <ion-label [style.background]="clicked == 0? '#00B0B2': '#DBDBDB'" (click)="gotoSlide1()">
-     
-    </ion-label>
-    <ion-label [style.background]="clicked == 1? '#00B0B2': '#DBDBDB'" (click)="gotoSlide2()">
-      
-    </ion-label>
-    <ion-label [style.background]="clicked == 2? '#00B0B2': '#DBDBDB'" (click)="gotoSlide3()">
-      
-    </ion-label>
-  </ion-item-group>
+  
+  
 </ion-slide>
-
+<!-- <ion-item-group class="slide__group-circle">
+  <ion-label [style.background]="clicked == 0? '#00B0B2': '#DBDBDB'" (click)="goNext()">
+   
+  </ion-label>
+  <ion-label [style.background]="clicked == 1? '#00B0B2': '#DBDBDB'"(click)="goNext()">
+    
+  </ion-label>
+  <ion-label [style.background]="clicked == 2? '#00B0B2': '#DBDBDB'" (click)="goNext()">
+    
+  </ion-label>
+</ion-item-group> -->
   </ion-slides>
 </ion-content>

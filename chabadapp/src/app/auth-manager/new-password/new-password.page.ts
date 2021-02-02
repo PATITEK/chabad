@@ -40,12 +40,15 @@ export class NewPasswordPage implements OnInit {
 
   checkValidPassword(name: string, value: string) {
     if (value == '') {
+      this.loadingService.dismiss();
       return `${name} can't not be empty`;
     }
     if (value.length < 6) {
+      this.loadingService.dismiss();
       return `${name} can't not be less than 6 letters`;
     }
     if (name == 'Confirmed password') {
+      this.loadingService.dismiss();
       if (this.passwordValue != this.confirmedPasswordValue) {
         return 'Confirmed password not match with password';
       }

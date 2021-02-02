@@ -109,7 +109,7 @@ export class AuthService {
         // this.toastr.success(SUCCESS.AUTH.LOGIN);
         localStorage.setItem('Authorization', result.token);
         localStorage.setItem('fullname', result.full_name);
-        console.log('auth-signup');
+        // console.log('auth-signup');
         this.router.navigate(['main/chabad']);
         return result;
       }),

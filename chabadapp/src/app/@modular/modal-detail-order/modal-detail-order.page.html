@@ -32,7 +32,7 @@
       <ion-label class="group3-row1-prices" >${{calTotalPrice() | number:'2.1-2'}}</ion-label>
     </ion-row>
     <ion-col>
-      <ion-button mode="ios" (click)="cancelOrder(order.id)" [disabled]="isCanceled == 'The order is canceled' ">{{isCanceled}}</ion-button>
+      <ion-button mode="ios" (click)="reallyWantCancelOrder(order.id)" [disabled]="isCanceled == 'The order is canceled' ">{{isCanceled}}</ion-button>
     </ion-col>
   </ion-item-group>
 </ion-content>

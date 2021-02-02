@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './@app-core/auth-guard.service';
 import { Camera } from '@ionic-native/camera/ngx';
 import { SlideService } from './@modular/slide/slide.service';
+import { Stripe } from '@ionic-native/stripe/ngx';
+import {enableProdMode} from '@angular/core';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,6 +31,7 @@ import { SlideService } from './@modular/slide/slide.service';
   providers: [
     StatusBar,
     SlideService,
+    Stripe,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthGuard,

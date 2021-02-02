@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SlideService {
   private data: BehaviorSubject<IDataNoti> = new BehaviorSubject<IDataNoti>({
     title: '',
+    label:'',
     image: '',
     routerLink: ''
   })
@@ -21,5 +22,6 @@ export class SlideService {
 export interface IDataNoti {
   image: any;
   title: string;
+  label: string,
   routerLink: string;
 }

@@ -56,7 +56,7 @@
             </div>
             <div class="gender-box">
               <ion-label class="label">Gender</ion-label>
-              <ion-select class="input" formControlName="sex" value="male">
+              <ion-select mode='ios' class="input" formControlName="sex" value="male">
                 <ion-select-option value="male">Male</ion-select-option>
                 <ion-select-option value="female">Female</ion-select-option>
                 <ion-select-option value="other">Other</ion-select-option>
@@ -88,7 +88,7 @@
             <div class="phone-number-box">
               <ion-label class="label">Phone number</ion-label>
               <ion-buttons class="phone-number-body">
-                <ion-select class="select country-code-select" formControlName="country_code" value="84">
+                <ion-select mode='ios' class="select country-code-select" formControlName="country_code" value="84">
                   <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
                     {{country.phone_code}}</ion-select-option>
                   <!-- <ion-select-option value="84">Viet Nam</ion-select-option> -->
@@ -120,15 +120,15 @@
         <div class="margin-bottom">
           <ion-label class="label">Your address</ion-label>
           <ion-buttons>
-            <ion-select class="select country-code-select" formControlName="country_code" value="84">
+            <ion-select mode='ios' class="select country-code-select" formControlName="country_code" value="84">
               <ion-select-option [value]="country.phone_code" *ngFor="let country of country_codes">
                 {{country.country}}</ion-select-option>
               <!-- <ion-select-option value="84">Viet Nam</ion-select-option> -->
             </ion-select>
-            <ion-select class="select province-select" formControlName="province" value="Ho Chi Minh">
+            <ion-select mode='ios' class="select province-select" formControlName="province" value="Ho Chi Minh">
               <ion-select-option value="Ho Chi Minh">Ho Chi Minh</ion-select-option>
             </ion-select>
-            <ion-select class="select" formControlName="district" value="Thu Duc">
+            <ion-select mode='ios' class="select" formControlName="district" value="Thu Duc">
               <ion-select-option value="Thu Duc">Thu Duc</ion-select-option>
               <ion-select-option value="Tan Binh">Tan Binh</ion-select-option>
               <ion-select-option value="Binh Thanh">Binh Thanh</ion-select-option>

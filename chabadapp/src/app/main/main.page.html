@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-buttons class="user-container">
-    <span>Hi {{ name }}!</span>
+    <span *ngIf="name.length != '' ">Hi {{ name }}!</span>
     <ion-avatar class="main-box-shadow active-effect" (click)="goToUserInfo()">
       <img src="assets/icon/person.svg" alt="">
     </ion-avatar>

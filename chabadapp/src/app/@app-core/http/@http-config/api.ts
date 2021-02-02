@@ -13,6 +13,7 @@ export const APICONFIG = {
     CHECK_CODE_RESET: `/app/reset_password/check_code`,
     RESET_PASSWORD: `/app/reset_password/reset_password`,
     COUNTRY_CODE: `/app/country_codes`,
+    UPDATE_AVATAR: `/app/app_users/update_avatar`
   },
   ACCOUNT: {
     PROFILE_USER: `/app/app_users/profile`,

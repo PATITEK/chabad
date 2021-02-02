@@ -11,6 +11,7 @@ import { PopuplogoutComponent } from '../@modular/popuplogout/popuplogout.compon
 export class AccountSettingPage implements OnInit {
   isOpeningModal = false;
   name = localStorage.getItem('fullname') || '';
+  img_url = 'assets/img/user.png';
 
   constructor(
     public modalController: ModalController,
@@ -18,6 +19,11 @@ export class AccountSettingPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter() {
+    if(localStorage.getItem('img_url')) {
+      this.img_url = localStorage.getItem('img_url');
+    }
   }
 
   async openModalLogOut() {

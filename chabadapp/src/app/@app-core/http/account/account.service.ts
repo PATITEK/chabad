@@ -96,4 +96,29 @@ export class AccountService {
     )
   }
 
+  public uploadPhoto(req) {
+    return this.http.post('http://image-service.patitek.com/api/v1/images/upload', req).pipe(
+      map((result) => {
+        return result
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      })
+    )
+  }
+
+  public updateAvatar(req) {
+    return this.http.put(`${APICONFIG.AUTH.UPDATE_AVATAR}`, req).pipe(
+      map((result) => {
+        return result
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      })
+    )
+  }
+
 }

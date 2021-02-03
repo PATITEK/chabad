@@ -56,15 +56,27 @@ const routes: Routes = [
     loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
   },
   {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
+  },
+
+  {
+    path: 'paymentmethods',
+    loadChildren: () => import('./paymentmethods/paymentmethods.module').then( m => m.PaymentmethodsPageModule)
+  },
+  {
     path: 'slide',
     loadChildren: () => import('./@modular/slide/slide.module').then( m => m.SlideModule)
   },
   { path: '', redirectTo: 'slide', pathMatch: 'full' },
-  { path: '**', redirectTo: 'slide' },
+  { path: '**', redirectTo: 'main/chabad' },
   {
     path: 'modal-detail-order',
     loadChildren: () => import('./@modular/modal-detail-order/modal-detail-order.module').then( m => m.ModalDetailOrderPageModule)
   },
+  
+
+
 
 ];
 @NgModule({

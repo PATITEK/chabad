@@ -54,10 +54,10 @@ export class PrayPage implements OnInit {
   source_type: any;
   source_id: any;
   id_change :any;
-  required_mess  = false;
+  // required_mess  = false;
   message_purpose = "";
   required_purpose = false;
-  message = "";
+  // message = "";
   clicked = false;
   url: any;
   events;
@@ -86,9 +86,12 @@ export class PrayPage implements OnInit {
   ) {
     this.frmPray = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
+        // Validators.required,
+      ])),
+      note: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      note: new FormControl('',[])
+      // note: new FormControl('',[])
    });
     this.today = new Date();
     for (let i = 0; i < 7; i++) {
@@ -194,19 +197,19 @@ export class PrayPage implements OnInit {
         "source_id":  this.dataParams.chabad.id
       }
     }
-    if (this.frmPray.get('amount').dirty || this.frmPray.get('amount').touched ) {
-      if(this.frmPray.get('amount').value.length == 0) {
-        this.required_mess = true;
-        this.message = 'This field have a value!';
-      }
-      else if(this.frmPray.get('amount').value %18 !==0){
-        this.required_mess = true;
-        this.message = 'The number must be divisible by 18.';
-      }
-      else {
-        this.required_mess = false;
-      }
-    }
+    // if (this.frmPray.get('amount').dirty || this.frmPray.get('amount').touched ) {
+    //   if(this.frmPray.get('amount').value.length == 0) {
+    //     this.required_mess = true;
+    //     this.message = 'This field have a value!';
+    //   }
+    //   else if(this.frmPray.get('amount').value %18 !==0){
+    //     this.required_mess = true;
+    //     this.message = 'The number must be divisible by 18.';
+    //   }
+    //   else {
+    //     this.required_mess = false;
+    //   }
+    // }
     if (this.frmPray.get('note').dirty || this.frmPray.get('note').touched ) {
       if(this.frmPray.get('note').value.length == 0) {
         this.required_purpose = true;
@@ -216,13 +219,10 @@ export class PrayPage implements OnInit {
         this.required_purpose = false;
       }
     }
-    if(this.frmPray.get('amount').value %18 ===0) {
+      console.log(this.frmPray.get('amount').value)
       this.donateService.donateLog(result).subscribe((data) => {
         console.log(data);
         this.presentToast('Pray successfully!');
-    })
-    }
-    else {
-    }
+   })
   }
 }

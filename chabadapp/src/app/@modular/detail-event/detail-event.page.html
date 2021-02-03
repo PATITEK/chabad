@@ -6,7 +6,7 @@
     <span class="line"></span>
   </ion-item-group>
 
-  <ion-item-group class="body" [style.height]="data.event.joined == false ? 'calc(100% - 291px)' : 'calc(100% - 291px + 110px)'">
+  <ion-item-group class="body" [style.height]="calBodyHeight()">
     <ion-buttons class="ion-align-items-start ion-justify-content-between">
       <h3 class="title">{{ event.name }}</h3>
     </ion-buttons>
@@ -25,23 +25,25 @@
   </ion-item-group>
 
   <ion-item-group class="fixed-bottom">
-    <ion-item-group class="donate">
-      <h3 class="title">Donate</h3>
-      <ion-buttons class="donate-body">
-        <ion-item-group class="avatar">
-          <div class="avatar-inner active-effect">
-            <img src="assets/icon/person.svg">
-          </div>
-          <ion-label class="avatar-name">David</ion-label>
-        </ion-item-group>
-        <ion-item-group class="info">
-          <ion-label class="info-title">Purpose</ion-label>
-          <p class="info-text">The Temple in Jerusalem was any of structures which were located</p>
-          <span class="dollar">$</span>
-          <span class="money">18 USD</span>
-          <span class="thank-sentence">Thank member!</span>
-        </ion-item-group>
-      </ion-buttons>
+    <ion-item-group class="donate" *ngIf="donors.length != 0">
+      <h3 class="title">Donors</h3>
+      <ion-list class="donors-list">
+        <ion-buttons class="donors-item" *ngFor="let donor of donors">
+          <ion-item-group class="avatar">
+            <div class="avatar-inner active-effect">
+              <img [src]="donor.thumbImage">
+            </div>
+            <ion-label class="avatar-name">{{ donor.name }}</ion-label>
+          </ion-item-group>
+          <ion-item-group class="info">
+            <ion-label class="info-title">Purpose</ion-label>
+            <p class="purpose-text">{{ donor.purpose }}</p>
+            <span class="dollar">$</span>
+            <span class="money">{{ donor.money }} {{ donor.unitPrice }}</span>
+            <span class="thank-sentence">{{ donor.thankSentence }}</span>
+          </ion-item-group>
+        </ion-buttons>
+      </ion-list>
     </ion-item-group>
   
     <ion-item-group [style.display]="data.event.joined == false ? 'block' : 'none'" class="join">

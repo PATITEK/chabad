@@ -148,13 +148,18 @@
 }
 .modal__logout {
     --height: 200px;
-
     .modal-wrapper {
         position: absolute;
         bottom: 0;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
     }
+}
+.modal__payment {
+  --height: 380px;
+  .modal-wrapper {
+    border-radius: 17px;
+}
 }
 .modalPassword {
   --height: 370px;

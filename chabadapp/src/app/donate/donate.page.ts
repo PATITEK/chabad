@@ -38,20 +38,21 @@ export class DonatePage implements OnInit {
   }
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private chabadService: ChabadService,
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
      public donateService: DonateService,
      public loadingService: LoadingService,
-     public toastController: ToastController,
      private accountService: AccountService
      ) {
     this.frmDonate = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      note: new FormControl('',[]),
+      note: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
    });
   }
   ngOnInit() {
@@ -69,26 +70,17 @@ export class DonatePage implements OnInit {
       this.loadingService.dismiss();
     });
   }
-  async presentToast(message) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 1500
-    });
-    toast.present();
-  }
+ 
   getUrl() {
     return `url(${this.chabad.thumb_image})`
   }
   onSubmit() {
     this.loadingService.present();
-    const getNumber = this.frmDonate.get('amount').value;
-    if(getNumber%18 == 0 && getNumber>0) {
-    }
     const sourceId = this.dataParams.event ? this.dataParams.event.id : this.dataParams.chabad.id;
     var result = {
       "donation" : {
         "email": this.email,
-        "token": localStorage.getItem('Authorization'),
+        "token": '',
         "amount": this.frmDonate.get('amount').value,
         "note": this.frmDonate.get('note').value,
         "source_type": this.dataParams.type,
@@ -96,15 +88,18 @@ export class DonatePage implements OnInit {
       }
     }
     if (this.frmDonate.get('amount').dirty || this.frmDonate.get('amount').touched ) {
-      if(this.frmDonate.get('amount').value.length == 0) {
+      if(this.frmDonate.get('amount').value < 12000 ) {
         this.required_mess = true;
-        this.message = 'This field have a value!';
+        this.message = 'The number must be greater than 0.5$';
         this.loadingService.dismiss();
+        return;
       }
       else if(this.frmDonate.get('amount').value %18 !==0){
         this.required_mess = true;
         this.message = 'The number must be divisible by 18!';
         this.loadingService.dismiss();
+        return;
+
       }
       else {
         this.required_mess = false;
@@ -122,14 +117,12 @@ export class DonatePage implements OnInit {
         this.loadingService.dismiss();
       }
     }
-    if(this.frmDonate.get('amount').value %18 ===0) {
-      this.donateService.donateLog(result).subscribe((data) => {
-        // console.log(data);
-        this.presentToast('Pray successfully!');
+
+    this.router.navigate(['paymentmethods'], {
+      queryParams: {
+        data: JSON.stringify(result)
+      }
     })
-    }
-    else {
-    }
 }
   clickPray() {
     this.tab = 'pray';

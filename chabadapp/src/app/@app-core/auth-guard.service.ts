@@ -21,8 +21,10 @@ export class AuthGuard implements CanActivate {
       // this.storage.setInfoAccount(localStorage.getItem('Authorization'));
       return of(true);
     } else {
-      // console.log('login');
-      this.router.navigateByUrl('/auth-manager/login', { queryParams: { returnUrl: window.location.pathname } });
+
+      console.log('login');
+      this.router.navigateByUrl('/auth-manager/login',
+       { queryParams: { returnUrl: window.location.pathname } });
       return of(false);
     }
     // const tempToken = (localStorage.getItem('token') == null) ? '' : localStorage.getItem('token').replace('Bearer ', '');

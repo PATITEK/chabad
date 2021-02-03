@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/@app-core/http';
 import { OrderService } from 'src/app/@app-core/http/order/order.service';
-declare var Stripe;
 
 @Component({
   selector: 'app-food-checkout',
@@ -10,8 +9,7 @@ declare var Stripe;
   styleUrls: ['./food-checkout.page.scss'],
 })
 export class FoodCheckoutPage implements OnInit {
-  stripe = Stripe('pk_test_51IFwpWCpBejooWZYsmTcqPL7wfAcx58B6lQNiE3K8XEueAbjRJCRzczedDQO3LbJ1afIh6oln6VT6SZXOZYtiL6G00Ow7S9qTG');
-  card: any;
+ 
   dataBasket = [];
   dataBaketToCreat = [];
   currentItem: any = {
@@ -45,13 +43,12 @@ export class FoodCheckoutPage implements OnInit {
     }
 
   ngOnInit() {
-      this.setupStripe()
+      
    
   }
   confirm() {
     localStorage.removeItem('dataBasket');
     this.orderService.creat(this.order).subscribe(data => {
-      // console.log(data);
     })
   }
   plusItem(item) {
@@ -97,47 +94,5 @@ export class FoodCheckoutPage implements OnInit {
       this.order.phone_number_receiver = data.app_user.phone_number;
     });
   }
-setupStripe() {
-  let elements = this.stripe.elements();
-  var style = {
-    base: {
-      color: '#32325d',
-      lineHeight: '24px',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-        color: '#aab7c4'
-      }
-    },
-    invalid: {
-      color: '#fa755a',
-      iconColor: '#fa755a'
-    }
-  };
 
-  this.card = elements.create('card', { style: style });
-  this.card.mount('#card-element');
-  this.card.addEventListener('change', event => {
-    var displayError = document.getElementById('card-errors');
-    if (event.error) {
-      displayError.textContent = event.error.message;
-    } else {
-      displayError.textContent = '';
-    }
-  });
-
-  var form = document.getElementById('payment-form');
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    this.stripe.createSource(this.card).then(result => {
-      if (result.error) {
-        var errorElement = document.getElementById('card-errors');
-        errorElement.textContent = result.error.message;
-      } else {
-        console.log(result);
-      }
-    });
-  });
-}
 }

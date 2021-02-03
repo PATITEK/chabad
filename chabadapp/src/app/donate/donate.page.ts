@@ -117,6 +117,7 @@ export class DonatePage implements OnInit {
         this.loadingService.dismiss();
       }
     }
+
     this.router.navigate(['paymentmethods'], {
       queryParams: {
         data: JSON.stringify(result)

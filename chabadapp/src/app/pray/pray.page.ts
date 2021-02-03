@@ -221,7 +221,7 @@ export class PrayPage implements OnInit {
     }
       console.log(this.frmPray.get('amount').value)
       this.donateService.donateLog(result).subscribe((data) => {
-        console.log(data);
+        // console.log(data);
         this.presentToast('Pray successfully!');
    })
   }

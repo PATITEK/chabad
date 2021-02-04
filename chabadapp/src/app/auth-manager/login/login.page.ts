@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, PATTERN } from 'src/app/@app-core/http';
 import { ToastController } from '@ionic/angular';
-import { defaultCoreCipherList } from 'constants';
 import { LoadingService } from 'src/app/@app-core/utils';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from 'src/app/@app-core/utils';
 
 
@@ -19,7 +17,7 @@ export class LoginPage implements OnInit {
   // public showpass = false;
   // public name = 'eye-outline';
   // public status = 'login';
-  
+
   country_codes: any;
 
   segmentValue = 'login';
@@ -71,7 +69,7 @@ export class LoginPage implements OnInit {
     ],
   }
 
-  countries:any;
+  countries: any;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -138,7 +136,7 @@ export class LoginPage implements OnInit {
     if (!this.canSubmitLogin()) {
       this.markFormGroupTouched(this.formLogin);
     } else {
-      this.authService.login(this.formLogin.value).subscribe(data => {
+      this.authService.login(this.formLogin.value).subscribe(() => {
         this.router.navigate(['main/chabad']);
       });
     }

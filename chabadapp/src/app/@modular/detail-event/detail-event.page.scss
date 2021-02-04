@@ -106,63 +106,72 @@ ion-content {
 .donate {
   padding: 6px 28px 20px 28px;
   background: #eee;
+  height: 195px;
 
   @media screen and (max-width: 320px) {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  .donate-body {
-    font-size: 14px;
-    align-items: flex-start;
+  .donors-list {
+    background: transparent;
+    height: calc(100% - 20px);
+    overflow-y: auto;
 
-    .avatar {
-      margin-right: 15px;
-      width: 70px;
-
-      .avatar-inner {
+    .donors-item {
+      font-size: 14px;
+      align-items: flex-start;
+      
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+  
+      .avatar {
+        margin-right: 15px;
         width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  
+        .avatar-inner {
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+  
+        .avatar-name {
+          color: #434141;
+          font-weight: 700;
+          text-align: center;
+          margin-top: 5px;
+        }
       }
-
-      .avatar-name {
-        color: #434141;
-        font-weight: 700;
-        text-align: center;
-        margin-top: 5px;
-      }
-    }
-
-    .info {
-      .info-title {
-        color: #797777;
-        font-weight: 500;
-      }
-
-      .info-text {
-        color: #797777;
-        margin: 6px 0;
-        height: 32px;
-        overflow: hidden;
-      }
-
-      .dollar {
-        color: #faae42;
-        font-size: 23px;
-      }
-
-      .money {
-        color: #797777;
-        font-weight: 500;
-      }
-
-      .thank-sentence {
-        color: #00b0b2;
-        display: block;
+  
+      .info {
+        .info-title {
+          color: #797777;
+          font-weight: 500;
+        }
+  
+        .purpose-text {
+          color: #797777;
+          margin: 6px 0;
+        }
+  
+        .dollar {
+          color: #faae42;
+          font-size: 23px;
+        }
+  
+        .money {
+          color: #797777;
+          font-weight: 500;
+        }
+  
+        .thank-sentence {
+          color: #00b0b2;
+          display: block;
+        }
       }
     }
   }

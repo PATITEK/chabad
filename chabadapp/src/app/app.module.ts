@@ -14,7 +14,7 @@ import { AuthGuard } from './@app-core/auth-guard.service';
 import { Camera } from '@ionic-native/camera/ngx';
 import { SlideService } from './@modular/slide/slide.service';
 import { Stripe } from '@ionic-native/stripe/ngx';
-import {enableProdMode} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +26,7 @@ import {enableProdMode} from '@angular/core';
     CoreModule.forRoot(),
     FormsModule, 
     ReactiveFormsModule,
-   
+    CommonModule
   ],
   providers: [
     StatusBar,

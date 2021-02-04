@@ -26,6 +26,7 @@ export class AccountService {
           localStorage.setItem('avatar', result.app_user.avatar);
         }
         localStorage.setItem('avatar', result.app_user.avatar);
+        
         return result;
       }),
       catchError((errorRes) => { 

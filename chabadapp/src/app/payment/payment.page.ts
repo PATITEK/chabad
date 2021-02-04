@@ -32,6 +32,7 @@ export class PaymentPage implements OnInit {
     })
     this.amount = this.data.donation.amount;
     this.purpose = this.data.donation.note;
+    
   }
   async presentToast(message, color) {
     const toast = await this.toastController.create({

@@ -19,9 +19,14 @@ export class ChabadPage implements OnInit {
   constructor(
     private router: Router,
     private chabadService: ChabadService,
+    private accountService: AccountService
+
   ) { }
   ngOnInit() {
     this.getData();
+    this.accountService.getAccounts().subscribe(data => {
+      localStorage.setItem('email',data.app_user.email) 
+    });
   }
 
   getData(func?) {

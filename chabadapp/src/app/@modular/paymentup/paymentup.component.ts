@@ -105,22 +105,5 @@ export class PaymentupComponent implements OnInit {
     });
     toast.present();
   }
-  
-  // showStripe() {
-  //   console.log(this.data)
-  //   this.loadingService.present();
-  //     this.donateService.donateLog(this.data).subscribe(
-  //       (data:any) => {
-  //         this.loadingService.dismiss()
-  //         this.presentToast('Donate successfully!','success');
-  //         this.router.navigateByUrl('/main/chabad');
-  //     },
-  //       (data:any) => {
-  //         if(data.errors) {
-  //           this.loadingService.dismiss()
-  //           this.presentToast('Cannot process your payment, Please check again!','danger');
-  //           }
-  //       }
-  //     )
-  // }
+
 }

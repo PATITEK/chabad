@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DonateService, ChabadService,EventsService, IPageEvent } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
 import { ToastController } from '@ionic/angular';
@@ -54,13 +54,14 @@ export class PrayPage implements OnInit {
   source_type: any;
   source_id: any;
   id_change :any;
-  // required_mess  = false;
+   required_mess  = false;
   message_purpose = "";
   required_purpose = false;
-  // message = "";
+   message = "";
   clicked = false;
   url: any;
   events;
+  setamount :any;
   dataParams;
   chabad = {
     name: ' ',
@@ -80,6 +81,7 @@ export class PrayPage implements OnInit {
      private eventService: EventsService,
      public donateService: DonateService,
      public chabadService: ChabadService,
+     private router: Router,
      public dateTimeService: DateTimeService,
      public loadingService: LoadingService,
      public toastController: ToastController
@@ -189,40 +191,52 @@ export class PrayPage implements OnInit {
     e.target.classList.add('active-button');
   }
   onSubmit() {
+   
+    let amount = this.frmPray.get('amount')
+    if (amount.dirty || amount.touched ) {
+      if(amount.value!= "" && amount.value < 18) {
+        this.required_mess = true;
+        this.message = 'The number must be greater than 18$';
+        return;
+      }
+      else if(amount.value!= "" && amount.value %18 !==0){
+        this.required_mess = true;
+        this.message = 'The number must be divisible by 18.';
+        return;
+      }
+      else {
+        this.required_mess = false;
+      }
+    }
+    if(amount.value == "") {
+      this.setamount = 0;
+    }
+    else {
+      this.setamount = amount.value;
+    }
+    console.log( this.setamount)
     var result = {
-      "donation_log" : {
-        "amount": this.frmPray.get('amount').value,
+      "donation" : {
+        "amount": this.setamount,
         "note": this.frmPray.get('note').value,
         "source_type": this.dataParams.type,
         "source_id":  this.dataParams.chabad.id
       }
     }
-    // if (this.frmPray.get('amount').dirty || this.frmPray.get('amount').touched ) {
-    //   if(this.frmPray.get('amount').value.length == 0) {
-    //     this.required_mess = true;
-    //     this.message = 'This field have a value!';
-    //   }
-    //   else if(this.frmPray.get('amount').value %18 !==0){
-    //     this.required_mess = true;
-    //     this.message = 'The number must be divisible by 18.';
-    //   }
-    //   else {
-    //     this.required_mess = false;
-    //   }
-    // }
-    if (this.frmPray.get('note').dirty || this.frmPray.get('note').touched ) {
-      if(this.frmPray.get('note').value.length == 0) {
-        this.required_purpose = true;
-        this.message_purpose = 'This field is require.';
-      }
-      else {
-        this.required_purpose = false;
-      }
+    if(amount.value == "") {
+          this.donateService.donateLog(result).subscribe((data) => { 
+            console.log(data);
+          this.presentToast('Pray successfully!');
+      })
+     }
+    else {
+     result.donation['email'] = localStorage.getItem('email');
+     result.donation['token'] = '';
+      this.router.navigate(['paymentmethods'], {
+        queryParams: {
+          data: JSON.stringify(result)
+        }
+      })
     }
-      console.log(this.frmPray.get('amount').value)
-      this.donateService.donateLog(result).subscribe((data) => {
-        // console.log(data);
-        this.presentToast('Pray successfully!');
-   })
   }
 }

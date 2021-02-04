@@ -19,11 +19,11 @@ export class AccountSettingPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
   }
+  avatar:any;
   ionViewWillEnter() {
-    if(localStorage.getItem('img_url')) {
-      this.img_url = localStorage.getItem('img_url');
-    }
+    this.avatar = localStorage.getItem('avatar')
   }
 
   async openModalLogOut() {

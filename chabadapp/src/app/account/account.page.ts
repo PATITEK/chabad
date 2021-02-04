@@ -15,7 +15,7 @@ export class AccountPage implements OnInit {
   activatedInput = false;
   loadedData = false;
   form: FormGroup;
-
+  avatar:any;
   lastForm = {};
   isUpdating = false;
 
@@ -35,7 +35,6 @@ export class AccountPage implements OnInit {
       { type: 'required', message: 'Address is required.' }
     ]
   }
-
   constructor(
     private fb: FormBuilder,
     public popoverController: PopoverController,
@@ -44,18 +43,24 @@ export class AccountPage implements OnInit {
     private loadingService: LoadingService,
     private toastService: ToastService
   ) { }
-  img_url = 'assets/img/user.png';
   ngOnInit() {
     this.initForm();
     this.getData();
+    this.avatar = localStorage.getItem('avatar')
   }
 
   ionViewWillEnter() {
-    if(localStorage.getItem('img_url')) {
-      this.img_url = localStorage.getItem('img_url');
-    }
+    this.avatar = localStorage.getItem('avatar')
   }
-
+  ionViewWillLeave() {
+    this.accountService.getAccounts().subscribe(data=>{
+      if(data.app_user.avatar == null) {
+        data.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
+        localStorage.setItem('avatar', data.app_user.avatar);
+      }
+      localStorage.setItem('avatar', data.app_user.avatar);
+    })
+  }
   initForm() {
     this.form = this.fb.group({
       full_name: new FormControl('', Validators.required),
@@ -98,7 +103,6 @@ export class AccountPage implements OnInit {
     this.activatedInput = false;
     this.form.patchValue(this.lastForm);
   }
-
   getData() {
     this.accountService.getAccounts().subscribe(data => {
       data.app_user.birthday;

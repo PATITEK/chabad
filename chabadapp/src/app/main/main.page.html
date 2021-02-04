@@ -2,7 +2,9 @@
   <ion-buttons class="user-container">
     <span *ngIf="name.length != '' ">Hi {{ name }}!</span>
     <ion-avatar class="main-box-shadow active-effect" (click)="goToUserInfo()">
-      <img src="assets/icon/person.svg" alt="">
+      <img src="{{avatar}}" alt="">
+    <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
+
     </ion-avatar>
   </ion-buttons>
 </ion-header>

@@ -158,22 +158,29 @@
            height: 14px;
            margin-left: 6%;
          }
+         .currency {
+            margin-top: 6px;
+            font-size: 14px;
+            margin-left: 10px;
+            font-weight: 700;
+            color: #FAAE41;
+         }
          input {
            border-radius: 10px;
-           width: 84px;
+           width: 64px;
            height: 28px;
            outline: none;
            border: 1px solid #fff;
            color: #fff;
-           margin-left: 11px;
+           margin-left: 5px;
            background-color: #00b0b2;
            text-align: center;
-           padding: 0 10px;
+           padding: 0 6px;
          }
          .edit {
            position: absolute;
            top: -7px;
-           left: 93px;
+           left: 73px;
            padding: 4px;
            background-color: #03C1C3;
            border-radius: 6px;

@@ -44,7 +44,6 @@ export class DonatePage implements OnInit {
      private route: ActivatedRoute,
      public donateService: DonateService,
      public loadingService: LoadingService,
-     private accountService: AccountService
      ) {
     this.frmDonate = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -64,12 +63,7 @@ export class DonatePage implements OnInit {
             this.loadingService.dismiss()
       })
     })
-    this.loadingService.present()
-    this.accountService.getAccounts().subscribe(data => {
-      console.log(data)
-      this.email = data.app_user.email;
-      this.loadingService.dismiss();
-    });
+    this.email = localStorage.getItem('email');
   }
  
   getUrl() {
@@ -89,9 +83,9 @@ export class DonatePage implements OnInit {
       }
     }
     if (this.frmDonate.get('amount').dirty || this.frmDonate.get('amount').touched ) {
-      if(this.frmDonate.get('amount').value < 12000 ) {
+      if(this.frmDonate.get('amount').value < 18 ) {
         this.required_mess = true;
-        this.message = 'The number must be greater than 0.5$';
+        this.message = 'The number must be greater than 18$';
         this.loadingService.dismiss();
         return;
       }

@@ -3,36 +3,27 @@
     <ion-label class="title" (click)="presentImage()">
       View Profile Picture
     </ion-label>
-    <ion-label >
-    </ion-label>
+   
   </ion-item-group>
   <ion-item-group>
   <ion-label (click)="uploadAvatar()"class="title">
     Choose from Library
   </ion-label>
-  <ion-label  >
+  <!-- <ion-label  >
     <ion-button  [disabled]="!image_avatar"   class="label" (click)="updateAvatar()" [ngClass]="{'color':!image_avatar}">
       Update avatar
     </ion-button>
-   </ion-label>
+   </ion-label> -->
 </ion-item-group>
 <ion-item-group>
   <ion-label (click)="takephoto()"class="title">
     Take Photo
   </ion-label>
-  <ion-label>
-    <ion-button  (click)="updateTakePhoto()" [disabled]="!image_url" class="label" [ngClass]="{'color':!image_url}">
-      Update avatar
-     </ion-button>
-  </ion-label>
- 
 </ion-item-group>
 <ion-item-group>
   <ion-label class="title" (click)="removeAvatar()">
     Remove Current Photo
   </ion-label>
-<ion-label>
-  {{remove_label}}
-</ion-label>
+
 </ion-item-group>
   

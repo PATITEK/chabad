@@ -63,6 +63,7 @@ export class PopupComponent implements OnInit {
               }
           }
             this.loadingService.dismiss();
+            this.updateAvatar();
           })
       }
       else {
@@ -72,7 +73,7 @@ export class PopupComponent implements OnInit {
       this.loadingService.dismiss();
     })
   }
-  updateAvatar () {
+  updateAvatar() {
     this.accountService.updateAvatar(this.image_avatar).subscribe(data => {
        this.dismissPopover();
     })
@@ -101,6 +102,7 @@ export class PopupComponent implements OnInit {
             }
         }
           this.loadingService.dismiss();
+          this.updateTakePhoto()
         },
         (data)=> {
         }

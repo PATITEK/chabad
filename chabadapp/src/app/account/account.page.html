@@ -8,7 +8,7 @@
   <div class="user">
     <div class="user-img-container">
       <img src="{{avatar}}" class="user-img main-box-shadow">
-      <button (click)="presentPopover()"class="icon-edit" >
+      <button (click)="presentPopover()"class="icon-edit" *ngIf="!activatedInput">
         <img src="assets/img/edit2.svg"  >
       </button>
     </div>

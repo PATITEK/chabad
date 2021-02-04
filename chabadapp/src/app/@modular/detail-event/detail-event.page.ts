@@ -1,16 +1,34 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { EventsService } from 'src/app/@app-core/http';
 import { DateTimeService, LoadingService } from 'src/app/@app-core/utils';
 
 @Component({
-  selector: 'app-event-detail',
-  templateUrl: './event-detail.component.html',
-  styleUrls: ['./event-detail.component.scss'],
+  selector: 'app-detail-event',
+  templateUrl: './detail-event.page.html',
+  styleUrls: ['./detail-event.page.scss'],
 })
-export class EventDetailComponent implements OnInit {
+export class DetailEventPage implements OnInit {
   @Input() data;
+  donors = [
+    {
+      thumbImage: 'assets/icon/person.svg',
+      name: 'David',
+      purpose: 'The Temple in Jerusalem was any of structures which were located',
+      money: '18',
+      unitPrice: 'USD',
+      thankSentence: 'Thank member!'
+    },
+    {
+      thumbImage: 'assets/icon/person.svg',
+      name: 'David',
+      purpose: 'The Temple in Jerusalem was any of structures which were located',
+      money: '18',
+      unitPrice: 'USD',
+      thankSentence: 'Thank member!'
+    }
+  ]
 
   setEventItemId() {
     localStorage.setItem('eventItemId', this.data.event.id);
@@ -38,7 +56,6 @@ export class EventDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.loadingService.present();
     this.getData(this.data.event.id);
     this.btnJoinElement = document.querySelectorAll('.btn-join-with-us');
     this.data.event.joined && this.disableButtons();
@@ -56,7 +73,6 @@ export class EventDetailComponent implements OnInit {
     this.eventService.getDetail(id).subscribe(data => {
       this.event = data.event;
       this.loadedData = true;
-      // this.loadingService.dismiss();
     })
   }
 
@@ -95,6 +111,14 @@ export class EventDetailComponent implements OnInit {
       this.eventService.joinEvent(this.event).subscribe(() => {
         this.loadingService.dismiss();
       });
+    }
+  }
+
+  calBodyHeight() {
+    if (this.data.event.joined == false) {
+      return this.donors.length == 0 ? 'calc(100% - 110px)' : 'calc(100% - 195px - 110px)';
+    } else {
+      return this.donors.length == 0 ? 'calc(100%)' : 'calc(100% - 195px)';
     }
   }
 }

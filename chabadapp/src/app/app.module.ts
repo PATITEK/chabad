@@ -16,6 +16,8 @@ import { SlideService } from './@modular/slide/slide.service';
 import { Stripe } from '@ionic-native/stripe/ngx';
 import {enableProdMode} from '@angular/core';
 import { PopupComponent } from './@modular/popup/popup.component'
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent, PopupComponent],
   entryComponents: [],
@@ -26,7 +28,7 @@ import { PopupComponent } from './@modular/popup/popup.component'
     CoreModule.forRoot(),
     FormsModule, 
     ReactiveFormsModule,
-   
+    CommonModule
   ],
   providers: [
     StatusBar,

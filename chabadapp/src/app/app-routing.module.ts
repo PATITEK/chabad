@@ -59,7 +59,6 @@ const routes: Routes = [
     path: 'payment',
     loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
   },
-
   {
     path: 'paymentmethods',
     loadChildren: () => import('./paymentmethods/paymentmethods.module').then( m => m.PaymentmethodsPageModule)
@@ -74,10 +73,10 @@ const routes: Routes = [
     path: 'modal-detail-order',
     loadChildren: () => import('./@modular/modal-detail-order/modal-detail-order.module').then( m => m.ModalDetailOrderPageModule)
   },
-  
-
-
-
+  {
+    path: 'detail-event',
+    loadChildren: () => import('./@modular/detail-event/detail-event.module').then( m => m.DetailEventPageModule)
+  },
 ];
 @NgModule({
   imports: [

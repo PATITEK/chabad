@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+
 import { IPageEvent, ChabadService, EventsService, AccountService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
 import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
@@ -164,7 +165,7 @@ export class EventPage implements OnInit {
 
   async openEventDetailModal(event) {
     const modal = await this.modalController.create({
-      component: EventDetailComponent,
+      component: DetailEventPage,
       cssClass: 'event-detail-modal',
       swipeToClose: true,
       componentProps: {

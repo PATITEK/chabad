@@ -14,9 +14,15 @@ ion-header {
     }
 
     ion-avatar {
+      position: relative;
       width: 70px;
       height: 70px;
       box-shadow: 0 4px 4px rgba(84, 84, 84, 0.25);
+      ion-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
     }
   }
 }

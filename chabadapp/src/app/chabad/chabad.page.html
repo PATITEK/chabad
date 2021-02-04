@@ -1,11 +1,12 @@
 <ion-content>
+  <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   <ion-avatar class="avatar active-effect" (click)="goToUserInfo()">
-    <img src="assets/img/avatar-people.svg">
+    <img src="{{avatar}}">
     <span class="circle avatar-note"></span>
   </ion-avatar>
 

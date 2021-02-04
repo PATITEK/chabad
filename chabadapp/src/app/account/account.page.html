@@ -7,8 +7,10 @@
 
   <div class="user">
     <div class="user-img-container">
-      <img src="{{img_url}}" class="user-img main-box-shadow">
-      <img src="assets/img/edit2.svg" class="icon-edit" (click)="presentPopover()">
+      <img src="{{avatar}}" class="user-img main-box-shadow">
+      <button (click)="presentPopover()"class="icon-edit" >
+        <img src="assets/img/edit2.svg"  >
+      </button>
     </div>
     <ion-label *ngIf="loadedData && !activatedInput" class="edit-btn" (click)="activateInput()">Edit</ion-label>
   </div>

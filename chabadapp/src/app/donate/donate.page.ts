@@ -66,6 +66,7 @@ export class DonatePage implements OnInit {
     })
     this.loadingService.present()
     this.accountService.getAccounts().subscribe(data => {
+      console.log(data)
       this.email = data.app_user.email;
       this.loadingService.dismiss();
     });

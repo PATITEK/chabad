@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, PATTERN } from 'src/app/@app-core/http';
+import { AccountService, AuthService, PATTERN } from 'src/app/@app-core/http';
 import { ToastController } from '@ionic/angular';
 import { defaultCoreCipherList } from 'constants';
 import { LoadingService } from 'src/app/@app-core/utils';
@@ -78,13 +78,14 @@ export class LoginPage implements OnInit {
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     private toastService: ToastService,
+    private accountService: AccountService,
     private loadingService: LoadingService
   ) { }
   ngOnInit() {
     this.authService.countryCode().subscribe((data: any) => {
       this.country_codes = data.country_codes;
     })
-
+  
     this.initForm();
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { IPageEvent, ChabadService, EventsService } from '../@app-core/http';
+import { IPageEvent, ChabadService, EventsService, AccountService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
 import { EventDetailComponent } from '../@modular/event-detail/event-detail.component';
 
@@ -39,7 +39,8 @@ export class EventPage implements OnInit {
     private chabadService: ChabadService,
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public accountService: AccountService
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {
@@ -58,7 +59,10 @@ export class EventPage implements OnInit {
   ngOnInit() {
     this.getData();
   }
-
+  avatar:any;
+  ionViewWillEnter() {
+    this.avatar = localStorage.getItem('avatar')
+  }
   getDataChabad(id, func?) {
     this.chabadService.getDetail(id).subscribe(data => {
       this.chabad = data.chabad;

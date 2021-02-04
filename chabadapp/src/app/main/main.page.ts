@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from '../@app-core/http';
 
 @Component({
   selector: 'app-main',
@@ -12,10 +13,13 @@ export class MainPage implements OnInit {
   constructor(
     private router: Router
   ) { }
-
-  ngOnInit() {
+  avatar:any;
+  ionViewWillEnter() {
+    this.avatar = localStorage.getItem('avatar')
   }
-
+  ngOnInit() {
+    this.avatar;
+  }
   goToUserInfo() {
     this.router.navigateByUrl('account-setting');
   }

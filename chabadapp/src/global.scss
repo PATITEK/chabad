@@ -184,3 +184,16 @@
     border-radius: 20px;
   }
 }
+.my-custom-class {
+  --backdrop-opacity: 0.49 !important;
+  .popover-content {
+    --min-width: 80%;
+}
+}
+.image_popover_css {
+  --backdrop-opacity: 1 !important;
+  .popover-content {
+    --min-width: 100%;
+    --min-height: 100%;
+ }
+}

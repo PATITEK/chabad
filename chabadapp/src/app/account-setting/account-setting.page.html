@@ -1,19 +1,15 @@
 <ion-content>
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
-
   <div class="header">
     <ion-label>ACCOUNT INFORMATION</ion-label>
   </div>
-
   <div class="body">
     <div class="user">
       <div class="user-img-container">
-        <img src="{{img_url}}" class="user-img main-box-shadow">
-        <img src="assets/img/edit2.svg" class="icon-edit" (click)="presentPopover()">
+        <img src="{{avatar}}" class="user-img main-box-shadow">
       </div>
       <ion-label class="user-name three-dots-2">{{ name }}</ion-label>
     </div>
-
     <ion-list class="settings">
       <ion-buttons routerLink="/account">
         <ion-label>Account information</ion-label>

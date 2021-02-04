@@ -15,9 +15,9 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { SlideService } from './@modular/slide/slide.service';
 import { Stripe } from '@ionic-native/stripe/ngx';
 import {enableProdMode} from '@angular/core';
-
+import { PopupComponent } from './@modular/popup/popup.component'
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PopupComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 

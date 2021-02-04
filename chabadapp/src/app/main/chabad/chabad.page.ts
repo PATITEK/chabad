@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { IPageRequest, ChabadService } from 'src/app/@app-core/http';
+import { IPageRequest, ChabadService, AccountService } from 'src/app/@app-core/http';
 
 @Component({
   selector: 'app-chabad',
@@ -16,12 +16,10 @@ export class ChabadPage implements OnInit {
     page: 1,
     per_page: 3
   }
-
   constructor(
     private router: Router,
     private chabadService: ChabadService,
   ) { }
-
   ngOnInit() {
     this.getData();
   }
@@ -37,7 +35,6 @@ export class ChabadPage implements OnInit {
       }
     })
   }
-
   goToChabadDetail(chabad) {
     const data = {
       id: chabad.id
@@ -48,7 +45,6 @@ export class ChabadPage implements OnInit {
       }
     })
   }
-
   goToMap() {
     event.stopPropagation();
   }

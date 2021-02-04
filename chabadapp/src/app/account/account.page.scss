@@ -33,9 +33,12 @@ ion-content {
     
     .user-img-container {
         width: 150px;
+        position: relative;
         height: 150px;
         margin: 0 auto;
-
+        ion-button {
+            position: absolute;
+        }
         .user-img {
             border-radius: 50%;
             border: 1px solid #fff;

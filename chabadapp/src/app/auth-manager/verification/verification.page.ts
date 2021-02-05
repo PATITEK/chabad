@@ -5,6 +5,7 @@ import { API_URL, AuthService } from 'src/app/@app-core/http';
 import { LoadingService, ToastService } from 'src/app/@app-core/utils';
 import { Inject } from '@angular/core';
 import { HttpHeaders } from "@angular/common/http";
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-verification',
@@ -14,6 +15,7 @@ import { HttpHeaders } from "@angular/common/http";
 export class VerificationPage implements OnInit {
   wrongCode = false;
   inputCode: FormGroup;
+  inputstring = '';
 
   error_messages = {
     'code1': [
@@ -86,22 +88,25 @@ export class VerificationPage implements OnInit {
   // }
 
   confirmCode() {
-
     var c1 = this.inputCode.get('code1').value;
     var c2 = this.inputCode.get('code2').value;
     var c3 = this.inputCode.get('code3').value;
     var c4 = this.inputCode.get('code4').value;
     var c5 = this.inputCode.get('code5').value;
     var c6 = this.inputCode.get('code6').value;
-    var inputstring = (`${c1}${c2}${c3}${c4}${c5}${c6}`).toString();
-
+    this.inputstring = (`${c1}${c2}${c3}${c4}${c5}${c6}`).toString();
     this.loadingService.present();
 
-    this.authService.checkcodePassword({code: inputstring}).subscribe((data:any)=> {
+    if(this.inputstring == '') {
       this.loadingService.dismiss();
-      localStorage.setItem('Authorization', data.token);
-      this.router.navigateByUrl("/auth-manager/new-password");
-      this.toastService.present('Code confirmed, present your new password!', 'top', 2000);
-    })
+      this.toastService.present('Please type the OTP code!')
+    } else {
+      this.authService.checkcodePassword({code: this.inputstring}).subscribe((data:any)=> {
+        this.loadingService.dismiss();
+        localStorage.setItem('Authorization', data.token);
+        this.router.navigateByUrl("/auth-manager/new-password");
+        this.toastService.present('Code confirmed, present your new password!', 'top', 2000);
+      })
+    }
   }
 }

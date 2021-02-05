@@ -76,7 +76,11 @@ const routes: Routes = [
   {
     path: 'detail-event',
     loadChildren: () => import('./@modular/detail-event/detail-event.module').then( m => m.DetailEventPageModule)
+  },  {
+    path: 'changepassword',
+    loadChildren: () => import('./@modular/changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
   },
+
 ];
 @NgModule({
   imports: [

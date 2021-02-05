@@ -9,6 +9,7 @@ import { StorageService } from 'src/app/@app-core/storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { LoadingService, ToastService } from '../../utils';
+import { AccountService } from '../account';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +22,8 @@ export class AuthService {
     private storage: StorageService,
     public toastController: ToastController,
     private loadingService: LoadingService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private accountService: AccountService
   ) { }
 
   public get receiveData(): Observable<any> {
@@ -58,6 +60,7 @@ export class AuthService {
   public newPassword(req) {
     return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD}`, req).pipe(
       map((result) => {
+        this.setLocalStoredata();
         return result;
       }),
       catchError((errorRes: any) => {
@@ -65,6 +68,20 @@ export class AuthService {
         throw errorRes.error;
       }
       ));
+  }
+   public setLocalStoredata() {
+    this.accountService.getAccounts().subscribe(result => {
+      
+      localStorage.setItem('full_name', result.app_user.full_name);
+      localStorage.setItem('email',result.app_user.email) 
+      if(result.app_user.avatar == null) {
+        result.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
+        localStorage.setItem('avatar', result.app_user.avatar);
+      }
+      else {
+        localStorage.setItem('avatar', result.app_user.avatar);
+      }
+    });
   }
   public resetPassword(req) {
     return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD}`, req).pipe(
@@ -99,8 +116,8 @@ export class AuthService {
     localStorage.clear();
     this.storage.clear();
     this.storage.setInfoAccount();
-    // this.router.navigateByUrl('/main/product-categories');
-    window.location.assign('/');
+     this.router.navigateByUrl('/main/chabad');
+    // window.location.assign('/');
   }
   public signup(req) {
     return this.http.post(`${APICONFIG.AUTH.SIGNUP}`, req).pipe(

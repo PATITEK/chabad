@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalPasswordComponent } from './modal-password.component';
+import { ChangepasswordPage } from './changepassword.page';
 
-describe('ModalPasswordComponent', () => {
-  let component: ModalPasswordComponent;
-  let fixture: ComponentFixture<ModalPasswordComponent>;
+describe('ChangepasswordPage', () => {
+  let component: ChangepasswordPage;
+  let fixture: ComponentFixture<ChangepasswordPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalPasswordComponent ],
+      declarations: [ ChangepasswordPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalPasswordComponent);
+    fixture = TestBed.createComponent(ChangepasswordPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

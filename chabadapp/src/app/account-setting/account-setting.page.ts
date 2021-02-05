@@ -11,8 +11,6 @@ import { PopuplogoutComponent } from '../@modular/popuplogout/popuplogout.compon
 export class AccountSettingPage implements OnInit {
   isOpeningModal = false;
   name = localStorage.getItem('fullname') || '';
-  img_url = 'assets/img/user.png';
-
   constructor(
     public modalController: ModalController,
     private popoverController: PopoverController

@@ -12,6 +12,7 @@ export class ChabadPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   chabads = [];
+  avatar;
   pageRequest: IPageRequest = {
     page: 1,
     per_page: 3
@@ -19,16 +20,13 @@ export class ChabadPage implements OnInit {
   constructor(
     private router: Router,
     private chabadService: ChabadService,
-    private accountService: AccountService
 
   ) { }
   ngOnInit() {
     this.getData();
-    this.accountService.getAccounts().subscribe(data => {
-      localStorage.setItem('email',data.app_user.email) 
-    });
   }
-
+  
+  
   getData(func?) {
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
       this.chabads = this.chabads.concat(data.chabads);

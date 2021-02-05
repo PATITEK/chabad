@@ -222,9 +222,7 @@ export class ChabadPage implements OnInit {
   getChabadImageString() {
     return `url(${this.chabad.thumb_image})`;
   }
-  getAvatar() {
-    return `url(${this.avatar})`;
-  }
+  
 
   async openEventDetailModal(event) {
     const modal = await this.modalController.create({

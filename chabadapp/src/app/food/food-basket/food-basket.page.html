@@ -12,7 +12,12 @@
       <ion-label class="group1-label">Destination:</ion-label>
       <ion-item lines="none" class="group1-item">
         <ion-icon src="assets/icon/location.svg"></ion-icon>
-        <span>{{full_address}}</span>
+        <img src="assets/img/edit2.svg" class="edit__big" (click)="editText()" />
+        <textarea readonly id="full_address" (mouseleave)="aleart()">
+          {{full_address}}
+
+        </textarea >
+        <!-- <span>{{full_address}}</span> -->
       </ion-item>
     </ion-list>
 

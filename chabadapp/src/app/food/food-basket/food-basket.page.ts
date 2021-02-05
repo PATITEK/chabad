@@ -23,6 +23,7 @@ export class FoodBasketPage implements OnInit {
     this.getUserData();
   }
   order() {
+    
     const data = {
       note: this.note
     }
@@ -32,6 +33,15 @@ export class FoodBasketPage implements OnInit {
       }
     })
   }
+  aleart() {
+    console.log('hihi')
+  }
+  editText() {
+    var fd = document.getElementById("full_address");
+    fd.removeAttribute('readonly')
+    // document.getElementById
+  }
+
 
   plusItem(item) {
     if(item.amount < 99) {

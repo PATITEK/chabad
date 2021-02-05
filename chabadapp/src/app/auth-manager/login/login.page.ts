@@ -138,9 +138,22 @@ export class LoginPage implements OnInit {
       this.markFormGroupTouched(this.formLogin);
     } else {
       this.authService.login(this.formLogin.value).subscribe(() => {
+        this.setLocalStore()
         this.router.navigate(['main/chabad']);
       });
     }
+  }
+  setLocalStore() {
+    this.accountService.getAccounts().subscribe(result => {
+      localStorage.setItem('email',result.app_user.email) 
+      if(result.app_user.avatar == null) {
+        result.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
+        localStorage.setItem('avatar', result.app_user.avatar);
+      }
+      else {
+        localStorage.setItem('avatar', result.app_user.avatar);
+      }
+    });
   }
 
   submitSignUp() {

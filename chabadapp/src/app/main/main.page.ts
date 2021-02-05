@@ -8,18 +8,25 @@ import { AccountService } from '../@app-core/http';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-  name = localStorage.getItem('fullname') || '';
-
+  name = localStorage.getItem('full_name') || '';
+  avatar: any;
   constructor(
-    private router: Router
+    private router: Router,
+    private accountService: AccountService
   ) { }
-  avatar:any;
-  ionViewWillEnter() {
-    this.avatar = localStorage.getItem('avatar')
-  }
+ 
   ngOnInit() {
-    this.avatar;
   }
+  ionViewWillEnter() {
+    this.accountService.getAccounts().subscribe(result => {
+      this.avatar = result.app_user.avatar;
+    })
+  }
+  
+  getImage() {
+    return `url(${this.avatar})`;
+  }
+  
   goToUserInfo() {
     this.router.navigateByUrl('account-setting');
   }

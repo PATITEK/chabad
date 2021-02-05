@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { AuthService } from 'src/app/@app-core/http';
 
 @Component({
   selector: 'app-popuplogout',
@@ -9,7 +10,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class PopuplogoutComponent implements OnInit {
 
-  constructor(  public modalController: ModalController, private router: Router) { }
+  constructor(  public modalController: ModalController, private router: Router,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {}
   async presentModal() {
@@ -24,7 +27,6 @@ export class PopuplogoutComponent implements OnInit {
     }
     logout() {
       this.modalController.dismiss(null, 'cancel');
-      localStorage.clear();
-      this.router.navigate(['auth-manager/login']);
+      this.authService.logout();
     }
 }

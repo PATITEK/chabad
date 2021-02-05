@@ -21,12 +21,7 @@ export class AccountService {
   public getAccounts() {
     return this.http.get(`${APICONFIG.ACCOUNT.PROFILE_USER}`).pipe(
       map((result: any) => {
-        if(result.app_user.avatar == null) {
-          result.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
-          localStorage.setItem('avatar', result.app_user.avatar);
-        }
-        localStorage.setItem('avatar', result.app_user.avatar);
-        
+    
         return result;
       }),
       catchError((errorRes) => { 

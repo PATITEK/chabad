@@ -46,6 +46,11 @@ export class FoodCheckoutPage implements OnInit {
       
    
   }
+  editText() {
+    var fd = document.getElementById("full_address");
+    fd.removeAttribute('readonly')
+  }
+
   confirm() {
     localStorage.removeItem('dataBasket');
     this.orderService.creat(this.order).subscribe(data => {

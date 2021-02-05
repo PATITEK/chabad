@@ -191,9 +191,9 @@
 }
 }
 .image_popover_css {
-  --backdrop-opacity: 1 !important;
+  // --backdrop-opacity: 1 !important;
   .popover-content {
-    --min-width: 100%;
-    --min-height: 100%;
+    --min-width: 90%;
+    --min-height: 30%;
  }
 }

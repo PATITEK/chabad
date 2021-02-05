@@ -25,22 +25,22 @@
   </ion-item-group>
 
   <ion-item-group class="fixed-bottom">
-    <ion-item-group class="donate" *ngIf="donors.length != 0">
+    <ion-item-group class="donate" *ngIf="donation_logs.length != 0">
       <h3 class="title">Donors</h3>
       <ion-list class="donors-list">
-        <ion-buttons class="donors-item" *ngFor="let donor of donors">
+        <ion-buttons class="donors-item" *ngFor="let donor of donation_logs">
           <ion-item-group class="avatar">
             <div class="avatar-inner active-effect">
-              <img [src]="donor.thumbImage">
+              <img onerror="this.src='../../assets/img/avatar-account.svg';" [src]="donor.app_user.avatar">
             </div>
-            <ion-label class="avatar-name">{{ donor.name }}</ion-label>
+            <ion-label class="avatar-name">{{ donor.app_user.full_name }}</ion-label>
           </ion-item-group>
           <ion-item-group class="info">
             <ion-label class="info-title">Purpose</ion-label>
-            <p class="purpose-text">{{ donor.purpose }}</p>
+            <p class="purpose-text">{{ donor.note }}</p>
             <span class="dollar">$</span>
-            <span class="money">{{ donor.money }} {{ donor.unitPrice }}</span>
-            <span class="thank-sentence">{{ donor.thankSentence }}</span>
+            <span class="money">{{ donor.amount | number:'2.1-2' }} {{ donor.unitPrice }}</span>
+            <span class="thank-sentence">Thank member!</span>
           </ion-item-group>
         </ion-buttons>
       </ion-list>

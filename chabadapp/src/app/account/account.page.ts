@@ -81,7 +81,8 @@ export class AccountPage implements OnInit {
       component: PopupComponent,
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true
+      translucent: true,
+      mode: 'md'
     });
     return await popover.present();
   }

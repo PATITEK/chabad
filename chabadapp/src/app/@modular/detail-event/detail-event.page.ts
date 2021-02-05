@@ -11,27 +11,29 @@ import { DateTimeService, LoadingService } from 'src/app/@app-core/utils';
 })
 export class DetailEventPage implements OnInit {
   @Input() data;
-  donors = [
-    {
-      thumbImage: 'assets/icon/person.svg',
-      name: 'David',
-      purpose: 'The Temple in Jerusalem was any of structures which were located',
-      money: '18',
-      unitPrice: 'USD',
-      thankSentence: 'Thank member!'
-    },
-    {
-      thumbImage: 'assets/icon/person.svg',
-      name: 'David',
-      purpose: 'The Temple in Jerusalem was any of structures which were located',
-      money: '18',
-      unitPrice: 'USD',
-      thankSentence: 'Thank member!'
-    }
-  ]
+  donation_logs = [];
+  // donors = [
+  //   {
+  //     thumbImage: 'assets/icon/person.svg',
+  //     name: 'David',
+  //     purpose: 'The Temple in Jerusalem was any of structures which were located',
+  //     money: '18',
+  //     unitPrice: 'USD',
+  //     thankSentence: 'Thank member!'
+  //   },
+  //   {
+  //     thumbImage: 'assets/icon/person.svg',
+  //     name: 'David',
+  //     purpose: 'The Temple in Jerusalem was any of structures which were located',
+  //     money: '18',
+  //     unitPrice: 'USD',
+  //     thankSentence: 'Thank member!'
+  //   }
+  // ]
 
   setEventItemId() {
     localStorage.setItem('eventItemId', this.data.event.id);
+
   }
 
   event = {
@@ -73,6 +75,9 @@ export class DetailEventPage implements OnInit {
     this.eventService.getDetail(id).subscribe(data => {
       this.event = data.event;
       this.loadedData = true;
+      this.donation_logs = data.event.donation_logs
+      // console.log(this.donation_logs);
+      
     })
   }
 
@@ -116,9 +121,9 @@ export class DetailEventPage implements OnInit {
 
   calBodyHeight() {
     if (this.data.event.joined == false) {
-      return this.donors.length == 0 ? 'calc(100% - 110px)' : 'calc(100% - 195px - 110px)';
+      return this.donation_logs.length == 0 ? 'calc(100% - 110px)' : 'calc(100% - 195px - 110px)';
     } else {
-      return this.donors.length == 0 ? 'calc(100%)' : 'calc(100% - 195px)';
+      return this.donation_logs.length == 0 ? 'calc(100%)' : 'calc(100% - 195px)';
     }
   }
 }

@@ -6,12 +6,12 @@
   </div>
 
   <div class="user">
-    <div class="user-img-container">
+    <ion-avatar class="user-img-container">
       <img src="{{avatar}}" class="user-img main-box-shadow">
       <button (click)="presentPopover()"class="icon-edit" *ngIf="!activatedInput">
         <img src="assets/img/edit2.svg"  >
       </button>
-    </div>
+    </ion-avatar>
     <ion-label *ngIf="loadedData && !activatedInput" class="edit-btn" (click)="activateInput()">Edit</ion-label>
   </div>
 

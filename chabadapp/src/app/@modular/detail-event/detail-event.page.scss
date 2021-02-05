@@ -137,6 +137,10 @@ ion-content {
           display: flex;
           align-items: center;
           justify-content: center;
+          object-fit: cover;
+          img {
+            height: 70px;
+          }
         }
   
         .avatar-name {

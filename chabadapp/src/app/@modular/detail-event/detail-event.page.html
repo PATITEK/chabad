@@ -30,10 +30,10 @@
       <ion-list class="donors-list">
         <ion-buttons class="donors-item" *ngFor="let donor of donation_logs">
           <ion-item-group class="avatar">
-            <div class="avatar-inner active-effect">
+            <ion-avatar class="avatar-inner active-effect">
               <img onerror="this.src='../../assets/img/avatar-account.svg';" [src]="donor.app_user.avatar">
-            </div>
-            <ion-label class="avatar-name">{{ donor.app_user.full_name }}</ion-label>
+            </ion-avatar>
+            <span class="avatar-name">{{ donor.app_user.full_name }}</span>
           </ion-item-group>
           <ion-item-group class="info">
             <ion-label class="info-title">Purpose</ion-label>

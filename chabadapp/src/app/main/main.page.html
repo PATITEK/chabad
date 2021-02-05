@@ -6,7 +6,8 @@
     [style.background-image]="getImage()">
     <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
   </div> -->
-      <img src="{{avatar}}" alt="">
+      <img src="{{avatar}}" alt=""*ngIf="avatar">
+      <img src="assets/img/user.png" alt=""*ngIf="!avatar">
     <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
     </ion-avatar>
   </ion-buttons>

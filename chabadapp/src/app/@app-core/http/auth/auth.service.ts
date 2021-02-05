@@ -72,8 +72,7 @@ export class AuthService {
   }
    public setLocalStoredata() {
     this.accountService.getAccounts().subscribe(result => {
-      
-      localStorage.setItem('full_name', result.app_user.full_name);
+      localStorage.setItem('fullname', result.app_user.full_name);
       localStorage.setItem('email',result.app_user.email) 
       if(result.app_user.avatar == null) {
         result.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
@@ -157,7 +156,7 @@ export class AuthService {
   }
   private setLocalStore(data) {
     localStorage.setItem('Authorization', data.token);
-    localStorage.setItem('fullname', data.fullname);
+    localStorage.setItem('fullname', data.full_name);
     localStorage.setItem('exp', data.exp);
   }
 

@@ -8,7 +8,7 @@ import { AccountService } from '../@app-core/http';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-  name = localStorage.getItem('full_name') || '';
+  name = localStorage.getItem('fullname') || '';
   avatar: any;
   constructor(
     private router: Router,

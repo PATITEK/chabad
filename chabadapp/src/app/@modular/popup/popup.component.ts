@@ -37,7 +37,8 @@ export class PopupComponent implements OnInit {
       component: PopoverimageComponent,
       cssClass: 'image_popover_css',
       event: ev,
-      translucent: true
+      translucent: true,
+      mode: 'md'
     });
     return await popover.present();
   }

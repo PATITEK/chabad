@@ -36,7 +36,8 @@ export class AuthService {
         return result;
       }),
       catchError((errorRes: any) => {
-        this.toastService.present("Email is not available!")
+        this.toastService.present(errorRes.error.messages[0]);
+        console.log()
         this.loadingService.dismiss();
         throw errorRes.error;
       }));

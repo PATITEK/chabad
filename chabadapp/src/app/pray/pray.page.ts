@@ -214,7 +214,6 @@ export class PrayPage implements OnInit {
     else {
       this.setamount = amount.value;
     }
-    console.log( this.setamount)
     var result = {
       "donation" : {
         "amount": this.setamount,

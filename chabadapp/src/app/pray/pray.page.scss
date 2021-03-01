@@ -178,6 +178,14 @@
           text-align: center;
           padding: 0 10px;
         }
+        .currency {
+          margin-top: 6px;
+          font-size: 14px;
+          margin-left: 10px;
+          color: #FAAE41;
+          font-weight: 700;
+          color: #FAAE41;
+       }
         .edit {
           position: absolute;
           top: -7px;
@@ -191,7 +199,7 @@
       .require {
         color: #FFA5A5;
         font-size: 11px;
-        margin-left: 6%;
+        margin-left: 3%;
         height: 14px;
       }
       .purpose {
@@ -314,174 +322,11 @@
     }
   }
 }
-
-// @media screen and (max-height: 736px) {
-//     ion-content {
-//       ion-item-group {
-//         // .img__header {
-//         //   height: 250px;
-//         // }
-//       }
-//       ion-segment {
-//         top: 252px;
-//       }
-//       // .title__chabad {
-//       //   position: absolute;
-//       //   color: #fff;
-//       //   margin-left: 50%;
-//       //   transform: translateX(-50%);
-//       //   top: 186px;
-//       // }
-//       ion-grid {
-//         // margin-top: 40px !important;
-//         .group__day {
-//           margin-top: -44px;
-//         }
-//       }
-//       .user {
-//         &__info {
-//           bottom: 4vh;
-//         }
-//       }
-//     }
-// }
-// @media screen and (max-height: 667px) {
-//   ion-content {
-//     ion-item-group {
-      
-//       // .img__header {
-//       //    height: 211px;
-//       // }
-//     }
-//     // .title__chabad {
-//     //   top: 167px;
-//     // }
-//     ion-segment {
-//       top: 225px;
-//     }
-//     ion-grid {
-//       // height: 302px;
-//       // margin-top: 6px;
-//       ion-select {
-//         font-size: 10px;
-//       }
-//       .group__day {
-//         .day {
-//           margin-top: 26px;
-//         }
-//       }
-//       .time {
-//         font-size: 14px;
-//       }
-//     }
-//     .user {
-//       &__info {
-//         ion-row {
-//           ion-col {
-//             img {
-//               width: 75px !important;
-//               height: 75px !important;
-//             }
-//             .thanks {
-//               font-size: 14px;
-//             }
-//           }
-//         }
-//         bottom: 0px;
-//       }
-//       &__name {
-//         font-size: 14px;
-//       }
-//     }
-//   }
-// }
-// @media screen and (max-height: 640px) {
-//   ion-content {
-//     // .title__chabad {
-//     //   top: 159px;
-//     // }
-//     ion-grid { 
-//       // margin-top: 0px;
-//       .purpose {
-//         height: 23% !important;
-//       }
-//     }
-//     .user {
-//       &__info {
-//         bottom: 0;
-//         ion-row {
-//           ion-col {
-//             img {
-//               width: 70px !important;
-//               height: 70px !important;
-//             }
-//             .btn {
-//               width: 133px !important;
-//               height: 33px !important;
-//               font-size: 14px;
-//             }
-//             .thanks {
-//               font-size: 12px;
-//             }
-//           }
-//         }
-//         bottom: -4px;
-//       }
-//       &__name {
-//         font-size: 12px;
-//       }
-//     }
-//   }
-  
-// }
 @media screen and (max-height: 568px) {
-  ion-content {
-    // ion-segment {
-    //   top: 137px;
-    // }
-    ion-item-group {
-      // height: 170px;
-      // .img__header {
-      //   z-index: -1;
-      // }
-    }
-    // .title__chabad {
-    //   top: 84px;
-    // }
-    ion-grid { 
-    //   margin-top: 2vh;
-    //   .purpose {
-    //     height: 23% !important;
-    //   }
-    //   .textarea {
-    //     width: 92%;
-    //     height: 61%;
-    //   }
-    //   .doladonate {
-        
-    //     input {
-    //       margin-left: 5px;
-    //       padding: 0;
-    //       width: 47px;
-    //     }
-    //     .edit {
-    //       left: 52px;
-    //     }
-    //     .require {
-    //       font-size: 9px;
-    //     }
-    //   }
-     }
     .user {
       &__info {
-        // height: 290px;
-        // bottom: 0;
         ion-row {
           ion-col {
-            // img {
-            //   width: 70px !important;
-            //   height: 70px !important;
-            // }
             .btn {
               width: 133px !important;
               height: 33px !important;
@@ -498,6 +343,4 @@
         font-size: 12px;
       }
     }
-  }
-  
   }

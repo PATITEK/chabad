@@ -39,7 +39,7 @@
     </ion-buttons>
 
     <ion-label class="label">Introduction</ion-label>
-    <p class="text chabad-introduction">{{ chabad.description }}</p>
+    <p class="text chabad-introduction" [innerHTML]="chabad.description"></p>
   </ion-item-group>
 </ion-content>
 

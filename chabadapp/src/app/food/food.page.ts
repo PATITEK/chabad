@@ -14,7 +14,7 @@ export class FoodPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   pageFoodRequest: IPageFood = {
     page: 1,
-    per_page: 5,
+    per_page: 6,
     chabad_id: ''
   }
   dataBasket: any = [];
@@ -90,6 +90,7 @@ export class FoodPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.pageFoodRequest.chabad_id = JSON.parse(params['data']).id;
       this.foodService.getAll(this.pageFoodRequest).subscribe(data => {
+        console.log(data);
         this.listFood = this.listFood.concat(data.foods);
         func && func();
         this.loadingService.dismiss();

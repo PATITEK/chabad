@@ -12,7 +12,7 @@
   <ion-list lines="none" class="list-foods">
     <ion-item-group *ngFor="let foodItem of listFood" class="item-food" (click)="addItem(foodItem)">
       <ion-item lines="none" class="ion-align-items-start ion-no-padding">
-        <img [src]="fakeImg">
+        <img [src]="foodItem.thumb_image">
         <ion-item-group class="detail-food">
           <h1 class="three-dots-2">{{foodItem.name}}</h1>
           <p class="three-dots-4" class="three-dots-3" [innerHTML]="foodItem.description"></p>
@@ -34,7 +34,9 @@
 <ion-footer [ngClass]="{'ion-footer-add': anmCart === true }">
   <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
     <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
-      <span *ngIf="calTotalAmount() > 0" class="amount-cart">+{{calTotalAmount()}}</span>
+      <span *ngIf="calTotalAmount() > 0" class="amount-cart">
+        <span> +{{calTotalAmount()}}</span>
+       </span>
   </ion-item-group>
   <ion-item-group class="ion-no-border" class="cart-main" [ngClass]="{'add-cart-main': anmCart === true }" >
 

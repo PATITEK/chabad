@@ -37,14 +37,19 @@ ion-content {
         background-color: #F2F2F2;
         .item-food {
             position: relative;
-            box-shadow: 3px 0px 5px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 3px 0px 5px 1px rgba(0, 0, 0, 0.1);
             border: 1px solid #d2d2d2;
             border-radius: 10px;
             overflow: visible;
             z-index: 1;
             margin-bottom: 15px;
-            padding: 3px;
+            padding: 2px;
             ion-item {
+                img {
+                    width: 130px;
+                    height: 130px;
+                    border-radius: 10px;
+                }
                 .detail-food {
                     padding-left: 4vw;
                     position: relative;
@@ -97,7 +102,6 @@ ion-footer {
     transition: height 0.3s;
     height: 90px;
     background-color: #ffffff;
-
     .cart-main {
         transition: all 0.3s;
         background-color: rgba(0, 0, 0, 0);
@@ -120,7 +124,7 @@ ion-footer {
             width: 45%;
             h1 {
                 margin: 5px 0;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 600;
                 text-align: center;
             }
@@ -175,19 +179,24 @@ ion-footer {
     transform: translate(-50%, 0);
     .amount-cart {
         position: absolute;
-        width: 20px;
-        height: 20px;
-        top: -5px;
+        width: 25px;
+        height: 24px;
+        top: -10px;
         background: #ffffff;
         border: 1.0869px solid #fbae42;
         border-radius: 50%;
-        right: 0;
+        right: -1px;
         text-align: center;
         font-style: normal;
         font-weight: bold;
         font-size: 10px;
         align-items: center;
         justify-content: center;
+        span {
+            position: absolute;
+            top: 4px;
+            right: 3.5px;
+        }
     }
 }
 

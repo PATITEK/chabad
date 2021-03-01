@@ -43,23 +43,26 @@
       <ion-img src="assets/img/pen.svg" class="edit"></ion-img>
       <ion-img src="assets/img/dola.svg"></ion-img>
     <input type="number" formControlName="amount">
+    <ion-label class="currency">
+      USD
+    </ion-label>
     <!-- <ion-select value="dola">
       <ion-select-option value="dola">USD</ion-select-option>
       <ion-select-option value="vn">VNĐ</ion-select-option>
       <ion-select-option value="vn">EURO</ion-select-option>
     </ion-select> -->
-    <ion-label class="require" *ngIf="required_mess">
+    <span class="require" *ngIf="required_mess">
       {{message}}
-  </ion-label>
+  </span>
     </ion-item-group>
     <ion-item-group class="time purpose">
       <ion-img src="assets/img/edit2.svg" class="edit__big"></ion-img>
       <ion-label class="purpose__label">Purpose:</ion-label>
       <textarea class="textarea" placeholder="Enter more information here..." formControlName="note"></textarea>
     </ion-item-group>
-    <ion-label class="require" *ngIf="required_purpose">
+    <span class="require" *ngIf="required_purpose">
       {{message_purpose}}
-    </ion-label>
+    </span>
     <ion-grid class="user__info">
       <ion-row>
         <ion-col size= "5">

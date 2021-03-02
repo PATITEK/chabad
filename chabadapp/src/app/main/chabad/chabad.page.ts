@@ -52,7 +52,8 @@ export class ChabadPage implements OnInit {
   }
   goToChabadDetail(chabad) {
     const data = {
-      id: chabad.id
+      id: chabad.id,
+      distance: chabad.distance
     }
     this.router.navigate(['chabad'], {
       queryParams: {

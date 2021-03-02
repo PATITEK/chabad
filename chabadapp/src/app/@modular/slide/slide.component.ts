@@ -39,7 +39,11 @@ export class SlideComponent implements OnInit {
    
   }
   Skip() {
+    if (localStorage.getItem('Authorization') == null)
     this.router.navigate(['auth-manager/login']);
+    else{
+      this.router.navigate(['main']);
+    }
   }
   goNext(){
     this.slides.slideNext();

@@ -38,7 +38,7 @@ export class GeolocationService {
 
     getCurrentLocation() {
         this.PlatForm.ready().then(() => {
-            this.loadingService.present('Hãy đợi trong giây lát...');
+            this.loadingService.present('Wait a minute...');
             this.geolocation.getCurrentPosition().then((resp) => {
                 this.centerService.lat = resp.coords.latitude;
                 this.centerService.lng = resp.coords.longitude;

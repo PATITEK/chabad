@@ -96,7 +96,6 @@ export class PopupComponent implements OnInit {
         formData.append('files[]', image);
         this.accountService.uploadPhoto(formData).subscribe(
         (data)=>{
-          console.log(data)
           this.image_url = {
             "app_user": {
                 "avatar": data['data'][0]

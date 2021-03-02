@@ -52,7 +52,6 @@ export class PaymentPage implements OnInit {
       this.donateService.donateLog(this.data).subscribe(
         (data:any) => {
           this.loadingService.dismiss()
-          console.log(this.data)
           this.pageNotiService.setdataStatusNoti(datapasing);
           this.router.navigateByUrl('/page-noti');
       },

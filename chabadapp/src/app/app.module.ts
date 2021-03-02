@@ -1,3 +1,4 @@
+import { CameraService } from './@app-core/utils/camera.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -38,6 +39,7 @@ import { CommonModule } from '@angular/common';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthGuard,
     Camera,
+    CameraService
   ],
   bootstrap: [AppComponent]
 })

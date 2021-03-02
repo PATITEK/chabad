@@ -39,7 +39,6 @@ export class AuthService {
       }),
       catchError((errorRes: any) => {
         this.toastService.present(errorRes.error.messages[0]);
-        console.log()
         this.loadingService.dismiss();
         throw errorRes.error;
       }));
@@ -127,7 +126,6 @@ export class AuthService {
         // this.toastr.success(SUCCESS.AUTH.LOGIN);
         localStorage.setItem('Authorization', result.token);
         localStorage.setItem('fullname', result.full_name);
-        // console.log('auth-signup');
         this.router.navigate(['main/chabad']);
         return result;
       }),

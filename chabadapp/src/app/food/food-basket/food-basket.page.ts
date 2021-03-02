@@ -34,7 +34,6 @@ export class FoodBasketPage implements OnInit {
     })
   }
   aleart() {
-    console.log('hihi')
   }
   editText() {
     var fd = document.getElementById("full_address");

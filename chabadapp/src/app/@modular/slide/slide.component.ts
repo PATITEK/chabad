@@ -10,24 +10,24 @@ import { IDataSlide } from '../page-noti/page-noti.service';
   styleUrls: ['./slide.component.scss'],
 })
 export class SlideComponent implements OnInit {
-  @ViewChild ('mySlider',{ static: true })  
+  @ViewChild('mySlider', { static: true })
   slides: IonSlides;
   slideOpts = {
     initialSlide: 1,
     speed: 400
   };
-  constructor(  
+  constructor(
     // private slideService: SlideService,
-    private router: Router ) {
-    
-   }
-  
+    private router: Router) {
 
-   public title;
-   public image;
-   public routerLink = '';
-   public label = '';
-   clicked = 0;
+  }
+
+
+  public title;
+  public image;
+  public routerLink = '';
+  public label = '';
+  clicked = 0;
 
   ngOnInit() {
     // if(this.clicked == 0) {
@@ -35,8 +35,10 @@ export class SlideComponent implements OnInit {
     //   this.image = "assets/img/slide1.svg";
     //   this.label = 'NEXT';
     // }
-   
-   
+    if (localStorage.getItem('Authorization')) {
+      this.router.navigate(['main/chabad']);
+    }
+
   }
   Skip() {
     if (localStorage.getItem('Authorization') == null)
@@ -45,7 +47,7 @@ export class SlideComponent implements OnInit {
       this.router.navigate(['main']);
     }
   }
-  goNext(){
+  goNext() {
     this.slides.slideNext();
   }
 

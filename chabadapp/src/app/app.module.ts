@@ -1,3 +1,6 @@
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { GeolocationService } from './@app-core/utils/geolocation.service';
 import { CameraService } from './@app-core/utils/camera.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,7 +42,10 @@ import { CommonModule } from '@angular/common';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthGuard,
     Camera,
-    CameraService
+    CameraService,
+    GeolocationService,
+    NativeGeocoder,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })

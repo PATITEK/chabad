@@ -49,7 +49,8 @@ export class EventPage implements OnInit {
     })
   }
 
-  goToMap() {
+  goToMap(chabad) {
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + chabad.location.lat + ',' + chabad.location.long);
     event.stopPropagation();
   }
 

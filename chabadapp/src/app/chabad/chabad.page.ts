@@ -16,7 +16,11 @@ export class ChabadPage implements OnInit {
     name: '',
     address: '',
     description: '',
-    thumb_image: ''
+    thumb_image: '',
+    location: {
+      lat: '',
+      long: ''
+    }
   };
   loadedChabad = false;
 
@@ -74,6 +78,10 @@ export class ChabadPage implements OnInit {
       func && func();
       this.loadedChabad = true;
     })
+  }
+
+  goToMap() {
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + this.chabad.location.lat + ',' + this.chabad.location.long);
   }
 
   getDataEvents() {

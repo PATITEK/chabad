@@ -38,6 +38,11 @@ export class ShoppingPage implements OnInit {
     })
   }
 
+  goToMap(chabad) {
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + chabad.location.lat + ',' + chabad.location.long);
+    event.stopPropagation();
+  }
+
   goToFood(chabad) {
     const data = {
       id: chabad.id
@@ -47,10 +52,6 @@ export class ShoppingPage implements OnInit {
         data: JSON.stringify(data)
       }
     })
-  }
-
-  goToMap() {
-    event.stopPropagation();
   }
 
   doRefresh(event) {

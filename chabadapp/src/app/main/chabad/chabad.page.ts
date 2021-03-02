@@ -1,3 +1,5 @@
+import { GeolocationService } from './../../@app-core/utils/geolocation.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
@@ -20,10 +22,16 @@ export class ChabadPage implements OnInit {
   constructor(
     private router: Router,
     private chabadService: ChabadService,
+    private GeolocationService: GeolocationService
 
   ) { }
   ngOnInit() {
     this.getData();
+  }
+
+  goToMap(chabad) {
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + chabad.location.lat + ',' + chabad.location.long);
+    event.stopPropagation();
   }
   
   
@@ -47,9 +55,6 @@ export class ChabadPage implements OnInit {
         data: JSON.stringify(data)
       }
     })
-  }
-  goToMap() {
-    event.stopPropagation();
   }
 
   doRefresh(event) {

@@ -35,16 +35,12 @@ export class SlideComponent implements OnInit {
     //   this.image = "assets/img/slide1.svg";
     //   this.label = 'NEXT';
     // }
+  }
+  skip() {
     if (localStorage.getItem('Authorization')) {
       this.router.navigate(['main/chabad']);
-    }
-
-  }
-  Skip() {
-    if (localStorage.getItem('Authorization') == null)
-    this.router.navigate(['auth-manager/login']);
-    else{
-      this.router.navigate(['main']);
+    } else {
+      this.router.navigate(['auth-manager/login']);
     }
   }
   goNext() {

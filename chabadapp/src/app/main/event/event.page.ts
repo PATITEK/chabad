@@ -29,6 +29,7 @@ export class EventPage implements OnInit {
   }
 
   getData(func?) {
+    this.GeolocationService.getCurrentLocation();
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
       for(let chabad of data.chabads) {
         chabad.distance = this.GeolocationService.distanceFromUserToPoint(this.GeolocationService.centerService.lat, this.GeolocationService.centerService.lng, chabad.location.lat, chabad.location.long);

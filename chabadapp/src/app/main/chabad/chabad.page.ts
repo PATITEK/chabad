@@ -36,6 +36,7 @@ export class ChabadPage implements OnInit {
   }
   
   getData(func?) {
+    this.GeolocationService.getCurrentLocation();
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
       for(let chabad of data.chabads) {
         chabad.distance = this.GeolocationService.distanceFromUserToPoint(this.GeolocationService.centerService.lat, this.GeolocationService.centerService.lng, chabad.location.lat, chabad.location.long);
@@ -51,7 +52,8 @@ export class ChabadPage implements OnInit {
   }
   goToChabadDetail(chabad) {
     const data = {
-      id: chabad.id
+      id: chabad.id,
+      distance: chabad.distance
     }
     this.router.navigate(['chabad'], {
       queryParams: {

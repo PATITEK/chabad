@@ -20,8 +20,9 @@ export class ChabadPage implements OnInit {
     location: {
       lat: '',
       long: ''
-    }
+    },
   };
+  distance: ''
   loadedChabad = false;
 
   SERVICE_COLOR = [
@@ -115,6 +116,7 @@ export class ChabadPage implements OnInit {
   getData(func?) {
     this.route.queryParams.subscribe(params => {
       this.pageRequestEvent.chabad_id = JSON.parse(params['data']).id;
+      this.distance = JSON.parse(params['data']).distance;
       this.getDataChabad(JSON.parse(params['data']).id, func);
       this.getDataEvents();
     }).unsubscribe();

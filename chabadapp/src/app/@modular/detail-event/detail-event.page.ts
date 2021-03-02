@@ -76,7 +76,6 @@ export class DetailEventPage implements OnInit {
       this.event = data.event;
       this.loadedData = true;
       this.donation_logs = data.event.donation_logs
-      // console.log(this.donation_logs);
       
     })
   }

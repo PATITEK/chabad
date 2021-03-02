@@ -10,7 +10,7 @@
     <ion-item-group *ngFor="let chabad of chabads" class="chabad" (click)="goToFood(chabad)">
       <div class="chabad-img-container img-wrapper main-box-shadow"
         [style.background-image]="getChabadImageString(chabad)">
-        <span class="chabad-distance">{{ 2.4 }}km</span>
+        <span class="chabad-distance">{{ chabad.distance }}km</span>
       </div>
 
       <ion-item-group class="chabad-info">

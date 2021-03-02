@@ -26,6 +26,7 @@ export class ChabadPage implements OnInit {
 
   ) { }
   ngOnInit() {
+    this.GeolocationService.getCurrentLocation();
     this.getData();
   }
 
@@ -34,9 +35,11 @@ export class ChabadPage implements OnInit {
     event.stopPropagation();
   }
   
-  
   getData(func?) {
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
+      for(let chabad of data.chabads) {
+        chabad.distance = this.GeolocationService.distanceFromUserToPoint(this.GeolocationService.centerService.lat, this.GeolocationService.centerService.lng, chabad.location.lat, chabad.location.long);
+      }
       this.chabads = this.chabads.concat(data.chabads);
       func && func();
       this.pageRequest.page++;

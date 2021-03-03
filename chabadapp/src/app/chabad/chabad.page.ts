@@ -1,3 +1,4 @@
+import { GeolocationService } from './../@app-core/utils/geolocation.service';
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -49,7 +50,7 @@ export class ChabadPage implements OnInit {
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController,
-    private accountService: AccountService,
+    private GeolocationService: GeolocationService
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {
@@ -82,7 +83,7 @@ export class ChabadPage implements OnInit {
   }
 
   goToMap() {
-    window.open('https://www.google.com/maps/dir/?api=1&destination=' + this.chabad.location.lat + ',' + this.chabad.location.long);
+    this.GeolocationService.goToMap(this.chabad.location.lat, this.chabad.location.long);
   }
 
   getDataEvents() {

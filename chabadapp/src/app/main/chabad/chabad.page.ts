@@ -31,8 +31,7 @@ export class ChabadPage implements OnInit {
   }
 
   goToMap(chabad) {
-    window.open('https://www.google.com/maps/dir/?api=1&destination=' + chabad.location.lat + ',' + chabad.location.long);
-    event.stopPropagation();
+    this.GeolocationService.goToMap(chabad.location.lat, chabad.location.long);
   }
   
   getData(func?) {

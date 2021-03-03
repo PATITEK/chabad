@@ -13,7 +13,7 @@ export class SlideComponent implements OnInit {
   @ViewChild('mySlider', { static: true })
   slides: IonSlides;
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400
   };
   constructor(

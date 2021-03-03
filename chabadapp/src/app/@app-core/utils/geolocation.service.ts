@@ -89,7 +89,8 @@ export class GeolocationService {
         return Math.round(d / 1000);
     }
 
-    goToMap() {
-        // window.open('https://www.google.com/maps/dir/?api=1&destination=' + mapMarkerInfo.lat + ',' + mapMarkerInfo.lng);
+    goToMap(lat, lng) {
+        window.open('https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng);
+        event.stopPropagation();
     }
 }

@@ -60,7 +60,7 @@ export class NewPasswordPage implements OnInit {
     this.loadingService.present();
     const datapasing: IDataNoti = {
       title: 'SUCCESSFUL!',
-      image: 'Change Password successful!',
+      des: 'Change Password successful!',
       routerLink: '/main/chabad'
     }
     this.invalidPassword = this.checkValidPassword('Password', this.passwordValue);

@@ -71,7 +71,14 @@ export class ChabadPage implements OnInit {
   }
   avatar:any;
   ionViewWillEnter() {
-    this.avatar = localStorage.getItem('avatar')
+    this.accountService.getAccounts().subscribe(result => {
+      if(result.app_user.avatar == null || result.app_user.avatar == '') {
+        this.avatar = "https://i.imgur.com/edwXSJa.png";
+      }
+      else {
+        this.avatar = result.app_user.avatar;
+      }
+    })
   }
   getDataChabad(id, func?) {
     this.chabadService.getDetail(id).subscribe(data => {

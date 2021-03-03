@@ -23,7 +23,7 @@ export class PageNotiComponent implements OnInit {
     }, 2000);
     this.pageNotiService.dataStatusNoti.subscribe((data: IDataNoti) => {
       this.title = data.title;
-      // this.des = data.description;
+      this.des = data.des;
       this.routerLink = data.routerLink;
     })
   }

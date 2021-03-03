@@ -58,8 +58,8 @@ export class ChangepasswordPage implements OnInit {
     else {
       this.check = false;
       const datapasing: IDataNoti = {
-        title: 'DONATE SUCCESSFUL!',
-        image: 'Change Password successful!',
+        title: 'SUCCESSFUL!',
+        des: 'Change Password successful!',
         routerLink: '/main/chabad'
       }
       var ps = {

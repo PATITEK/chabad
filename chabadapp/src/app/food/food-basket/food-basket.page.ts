@@ -9,7 +9,22 @@ import { AccountService } from 'src/app/@app-core/http';
 })
 export class FoodBasketPage implements OnInit {
   dataBasket = [];
+  hasPaymentModal = false;
   data_BasketToCreate = [];
+  paymentSelectElement: any;
+  paymentMethods = [
+    {
+      srcIcon: 'assets/icon/dollar.svg',
+      name: 'Cash',
+      id: 0
+    },
+    {
+      srcIcon: 'assets/icon/visa.svg',
+      name: 'VISA/MASTER',
+      id: 1
+    }
+  ];
+  currentPaymentMethodId = 1;
   currentItem: any = {
     id : 0,
     amount : 0,
@@ -41,7 +56,9 @@ export class FoodBasketPage implements OnInit {
     // document.getElementById
   }
 
-
+  ionViewDidEnter() {
+    this.paymentSelectElement = document.querySelector('.payment-method-container');
+  }
   plusItem(item) {
     if(item.amount < 99) {
       item.amount++;
@@ -84,5 +101,13 @@ export class FoodBasketPage implements OnInit {
     this.accountService.getAccounts().subscribe(data => {
       this.full_address = data.app_user.full_address + ', district ' + data.app_user.district + ', ' + data.app_user.province + ', ' + data.app_user.country_code;
     });
+  }
+  toggleHasPaymentModal() {
+    this.hasPaymentModal=!this.hasPaymentModal;
+  }
+  onCheckClickOutsidePaymentSelect(e) {
+    if (this.paymentSelectElement && !this.paymentSelectElement.contains(e.target)) {
+      this.toggleHasPaymentModal();
+    }
   }
 }

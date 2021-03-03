@@ -68,7 +68,6 @@ export class NewPasswordPage implements OnInit {
     if (this.invalidPassword == '' && this.invalidConfirmedPassword == '') {
       this.loadingService.dismiss();
       this.authService.newPassword({ password: this.passwordValue }).subscribe((data) => {
-         console.log(data);
         this.pageNotiService.setdataStatusNoti(datapasing);
         this.router.navigateByUrl('/page-noti');
       })

@@ -1,3 +1,5 @@
+import { GeolocationService } from './../../@app-core/utils/geolocation.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
@@ -19,7 +21,8 @@ export class ShoppingPage implements OnInit {
 
   constructor(
     private router: Router,
-    private chabadService: ChabadService
+    private chabadService: ChabadService,
+    private GeolocationService: GeolocationService
   ) { }
 
   ngOnInit() {
@@ -27,7 +30,11 @@ export class ShoppingPage implements OnInit {
   }
 
   getData(func?) {
+    this.GeolocationService.getCurrentLocation();
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
+      for(let chabad of data.chabads) {
+        chabad.distance = this.GeolocationService.distanceFromUserToPoint(this.GeolocationService.centerService.lat, this.GeolocationService.centerService.lng, chabad.location.lat, chabad.location.long);
+      }
       this.chabads = this.chabads.concat(data.chabads);
       func && func();
       this.pageRequest.page++;
@@ -36,6 +43,11 @@ export class ShoppingPage implements OnInit {
         this.infiniteScroll.disabled = true;
       }
     })
+  }
+
+  goToMap(chabad) {
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + chabad.location.lat + ',' + chabad.location.long);
+    event.stopPropagation();
   }
 
   goToFood(chabad) {
@@ -47,10 +59,6 @@ export class ShoppingPage implements OnInit {
         data: JSON.stringify(data)
       }
     })
-  }
-
-  goToMap() {
-    event.stopPropagation();
   }
 
   doRefresh(event) {

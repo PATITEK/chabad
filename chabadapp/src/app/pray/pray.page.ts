@@ -224,7 +224,6 @@ export class PrayPage implements OnInit {
     }
     if(amount.value == "") {
           this.donateService.donateLog(result).subscribe((data) => { 
-            console.log(data);
           this.presentToast('Pray successfully!');
       })
      }

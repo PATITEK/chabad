@@ -197,7 +197,6 @@ export class LoginPage implements OnInit {
   //   toast.present();
   // }
   // showSelectValue = function (mySelect) {
-  //   console.log(mySelect);
   // }
 
   private markFormGroupTouched(formGroup: FormGroup) {

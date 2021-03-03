@@ -12,13 +12,13 @@
     <ion-item-group *ngFor="let chabad of chabads" class="chabad" (click)="goToChabadDetail(chabad)">
       <div class="chabad-img-container img-wrapper main-box-shadow"
         [style.background-image]="getChabadImageString(chabad)">
-        <span class="chabad-distance">{{ 2.4 }}km</span>
+        <span class="chabad-distance">{{ chabad.distance }}km</span>
       </div>
   
       <ion-item-group class="chabad-info">
-        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between" (click)="goToMap(chabad)">
           <h3 class="chabad-name">{{ chabad.name }}</h3>
-          <span class="btn-go active-effect" (click)="goToMap()">Go</span>
+          <span class="btn-go active-effect">Go</span>
         </ion-buttons>
         <ion-buttons class="ion-align-items-start">
           <img src="assets/icon/location-lite.svg">

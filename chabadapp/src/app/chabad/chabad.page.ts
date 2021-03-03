@@ -16,8 +16,13 @@ export class ChabadPage implements OnInit {
     name: '',
     address: '',
     description: '',
-    thumb_image: ''
+    thumb_image: '',
+    location: {
+      lat: '',
+      long: ''
+    },
   };
+  distance: ''
   loadedChabad = false;
 
   SERVICE_COLOR = [
@@ -76,6 +81,10 @@ export class ChabadPage implements OnInit {
     })
   }
 
+  goToMap() {
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + this.chabad.location.lat + ',' + this.chabad.location.long);
+  }
+
   getDataEvents() {
     for (let i = 0; i < 7; i++) {
       // reset
@@ -107,6 +116,7 @@ export class ChabadPage implements OnInit {
   getData(func?) {
     this.route.queryParams.subscribe(params => {
       this.pageRequestEvent.chabad_id = JSON.parse(params['data']).id;
+      this.distance = JSON.parse(params['data']).distance;
       this.getDataChabad(JSON.parse(params['data']).id, func);
       this.getDataEvents();
     }).unsubscribe();

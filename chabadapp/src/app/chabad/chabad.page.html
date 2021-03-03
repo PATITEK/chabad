@@ -46,9 +46,7 @@
 <ion-footer class="ion-no-border" [ngClass]="{'high-footer': !hiddenDateList}">
   <ion-item-group class="segment">
     <div *ngIf="!hiddenDateList" class="background-high"></div>
-
     <span *ngIf="hiddenDateList" class="line"></span>
-
     <ion-buttons class="date-list">
       <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
         [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}"

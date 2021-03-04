@@ -33,26 +33,13 @@ export class AuthService {
     this.data.next(value);
   }
   public forgotPassword(req) {
-    // return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD_EMAIL}`, req).pipe(
-    //   map((result: any) => {
-    //     console.log("ok");
-        
-    //     return result;
-    //   }),
-    //   catchError((errorRes: any) => {
-    //     console.log("np");
-        
-    //     this.toastService.present(errorRes.error.messages[0]);
-    //     this.loadingService.dismiss();
-    //     throw errorRes.error;
-    //   }));
     return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD_EMAIL}`, req).pipe(
       map((result: any) => {
-       
+
         return result;
       }),
       catchError((errorRes: any) => {
-       
+
         throw errorRes.error;
       })
     );
@@ -83,12 +70,12 @@ export class AuthService {
       }
       ));
   }
-   public setLocalStoredata() {
+  public setLocalStoredata() {
     this.accountService.getAccounts().subscribe(result => {
-      
+
       localStorage.setItem('full_name', result.app_user.full_name);
-      localStorage.setItem('email',result.app_user.email) 
-      if(result.app_user.avatar == null) {
+      localStorage.setItem('email', result.app_user.email)
+      if (result.app_user.avatar == null) {
         result.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
         localStorage.setItem('avatar', result.app_user.avatar);
       }
@@ -123,19 +110,19 @@ export class AuthService {
         this.presentToast('Password or Email is invalid!');
         throw errorRes.error;
       })
-      );
+    );
   }
- 
+
   logout() {
     localStorage.clear();
     this.storage.clear();
     this.storage.setInfoAccount();
-     this.router.navigateByUrl('/main/chabad');
+    this.router.navigateByUrl('/main/chabad');
     // window.location.assign('/');
   }
   public signup(req) {
     return this.http.post(`${APICONFIG.AUTH.SIGNUP}`, req).pipe(
-      
+
       map((result: any) => {
         // this.toastr.success(SUCCESS.AUTH.LOGIN);
         localStorage.setItem('Authorization', result.token);
@@ -158,7 +145,7 @@ export class AuthService {
         throw errorRes.error;
       }))
   }
- 
+
   checkLogin() {
     const token = localStorage.getItem('Authorization');
     if (!token) {

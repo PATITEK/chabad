@@ -154,7 +154,15 @@ export class AccountPage implements OnInit {
       this.activatedInput = false;
       this.loadingService.dismiss();
       this.toastService.present('Updated sucessfully !');
-    });
+    },
+      (
+        data => {
+
+          this.loadingService.dismiss();
+          this.toastService.present('Please check your information is valid!', 'top', 2000);
+        }
+      )
+    );
   }
 
   canUpdate() {

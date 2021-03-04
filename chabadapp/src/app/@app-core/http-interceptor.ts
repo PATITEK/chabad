@@ -50,6 +50,7 @@ export class IntercepterService implements HttpInterceptor {
             }
             if(err.status===422)
             {
+              
               return throwError(err);
             }
             

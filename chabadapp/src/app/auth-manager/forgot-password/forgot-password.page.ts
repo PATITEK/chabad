@@ -32,8 +32,8 @@ export class ForgotPasswordPage implements OnInit {
         this.toastService.present('Complete! Check the OTP code in your email', 'top');
         this.router.navigateByUrl('auth-manager/verification');
       },
-      (
-        data=>{
+      ((data) =>{
+        console.log(data)
           this.loadingService.dismiss();
           this.toastService.present('Email is invalid!', 'top', 2000);
         }
@@ -41,7 +41,6 @@ export class ForgotPasswordPage implements OnInit {
     } else {
       if(this.email.email == '') {
         this.loadingService.dismiss();
-
         this.toastService.present('Please type your email!', 'top', 2000);
 
       }

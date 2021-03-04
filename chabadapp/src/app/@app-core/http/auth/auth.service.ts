@@ -33,15 +33,29 @@ export class AuthService {
     this.data.next(value);
   }
   public forgotPassword(req) {
+    // return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD_EMAIL}`, req).pipe(
+    //   map((result: any) => {
+    //     console.log("ok");
+        
+    //     return result;
+    //   }),
+    //   catchError((errorRes: any) => {
+    //     console.log("np");
+        
+    //     this.toastService.present(errorRes.error.messages[0]);
+    //     this.loadingService.dismiss();
+    //     throw errorRes.error;
+    //   }));
     return this.http.post(`${APICONFIG.AUTH.RESET_PASSWORD_EMAIL}`, req).pipe(
       map((result: any) => {
+       
         return result;
       }),
       catchError((errorRes: any) => {
-        this.toastService.present(errorRes.error.messages[0]);
-        this.loadingService.dismiss();
+       
         throw errorRes.error;
-      }));
+      })
+    );
 
   }
   public checkcodePassword(req) {

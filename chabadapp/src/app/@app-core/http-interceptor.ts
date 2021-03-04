@@ -48,7 +48,13 @@ export class IntercepterService implements HttpInterceptor {
               return throwError(err);
 
             }
+            if(err.status===422)
+            {
+              return throwError(err);
+            }
+            
           }
+          return throwError(err);
         }));
   }
 

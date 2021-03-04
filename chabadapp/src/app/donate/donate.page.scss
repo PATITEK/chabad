@@ -1,4 +1,33 @@
-
+ion-header {
+  .img__header {
+    height: 280px;
+    width: 100%;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    }
+    .back-btn {
+      display: inline-block;
+      position: absolute;
+      color: #00b0b2;
+      background: rgba(#feffff, 0.6);
+      border-radius: 18px;
+      width: 45px;
+      height: 45px;
+      z-index: 2;
+      top: 17px !important;
+    }
+    ion-label {
+      font-weight: 700;
+      display: flex;
+      line-height: 33px;
+      color: #434141;
+      font-size: 19px;
+      justify-content: center;
+    }
+}
+.header-md::after {
+  height: 0;
+}
   ion-content {
      position: relative;
     ion-spinner {
@@ -6,30 +35,6 @@
       left: 50%;
       z-index: 2;
       top: 50%;
-    }
-    ion-item-group {
-     
-      .img__header {
-          height: 270px;
-          width: 100%;
-          border-bottom-left-radius: 40px;
-          border-bottom-right-radius: 40px;
-          background-size: cover;
-          box-shadow: 0 0 6px 4px rgba(0,0,0, 0.2);
-        
-      }
-      .back-btn {
-        display: inline-block;
-        position: absolute;
-        color: #00b0b2;
-        background: rgba(#feffff, 0.6);
-        border-radius: 18px;
-        width: 45px;
-        height: 45px;
-        z-index: 2;
-        top: 17px !important;
-      }
-      
     }
     ion-segment {
       position: absolute;
@@ -84,7 +89,7 @@
       }
       .info {
         position: absolute;
-        top: 68px;
+        top: 55px;
         left: 20px;
         font-size: 16px;
         color: #fff;
@@ -166,9 +171,9 @@
          }
          input {
            border-radius: 10px;
-           width: 64px;
            height: 28px;
            outline: none;
+           width: calc(100% - 30px);
            border: 1px solid #fff;
            color: #fff;
            margin-left: 5px;
@@ -179,7 +184,7 @@
          .edit {
            position: absolute;
            top: -7px;
-           left: 73px;
+           right: 38px;
            padding: 4px;
            background-color: #03C1C3;
            border-radius: 6px;
@@ -187,7 +192,7 @@
        }
         .require {
           color: #FFA5A5;
-          font-size: 11px;
+          font-size: 12px;
           height: 14px;
           margin-left: 6%;
         }
@@ -204,7 +209,7 @@
          border: 1px solid #fff;
          .require {
           color: #FFA5A5;
-          font-size: 11px;
+          font-size: 12px;
           margin-left: 6%;
           height: 14px;
         }
@@ -327,9 +332,6 @@
           margin-left: 5px;
           padding: 0;
           width: 47px;
-        }
-        .edit {
-          left: 52px;
         }
         .require {
           font-size: 9px;

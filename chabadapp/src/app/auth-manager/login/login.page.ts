@@ -86,9 +86,7 @@ export class LoginPage implements OnInit {
   
     this.initForm();
   }
-  ionViewWillEnter(){
-    this.formLogin.controls['email'].setValue("ahihi");
-  }
+   
   initForm() {
     this.formLogin = this.formBuilder.group({
       email: new FormControl('', Validators.required),

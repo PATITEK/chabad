@@ -1,14 +1,10 @@
-
-<ion-content>
-  <!-- <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner> -->
-  <ion-item-group>
-    
-    <div class="img__header" [style.background-image]="getUrl()">
+<ion-header>
+    <div class="img__header img-wrapper main-box-shadow" [style.background-image]="getUrl()">
     </div>
     <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
-  </ion-item-group>
   <ion-label class="title__chabad">{{chabad.name}}</ion-label>
-
+</ion-header>
+<ion-content>
   <ion-grid>
     <form [formGroup] ="frmDonate" (ngSubmit)="onSubmit()" >
       <ion-label class="label__donate">
@@ -25,10 +21,10 @@
         <ion-label class="currency">
           USD
         </ion-label>
-        <span class="require" *ngIf="required_mess">
-            {{message}}
-        </span>
         </ion-item-group>
+        <span class="require" *ngIf="required_mess">
+          {{message}}
+      </span>
         <ion-item-group class="time purpose">
           <ion-img src="assets/img/edit2.svg" class="edit__big"></ion-img>
           <ion-label class="purpose__label">Purpose:</ion-label>

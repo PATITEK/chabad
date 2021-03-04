@@ -6,9 +6,12 @@
 
   <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
   <ion-avatar class="avatar active-effect" (click)="goToUserInfo()">
-    <img src="{{avatar}}">
+    <!-- <div 
+    [style.background-image]="getUrl()">
+  </div> -->
+    <img src="{{avatar}}" *ngIf = "avatar">
+    <img src="{{avatarReplace}}" alt=""*ngIf = "!avatar">
     <span class="circle avatar-note"></span>
-    <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
   </ion-avatar>
 
   <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hideDateList()"></ion-backdrop>

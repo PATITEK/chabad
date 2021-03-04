@@ -121,5 +121,16 @@ export class AccountService {
       })
     )
   }
+  public changePass(req) {
+    return this.http.post(`${APICONFIG.AUTH.CHANGE_PASS}`, req).pipe(
+      map((result) => {
+        return result
+      }),
+      catchError((errorRes: any) => {
+        throw errorRes.error;
+      }),
+     
+    )
+  }
 
 }

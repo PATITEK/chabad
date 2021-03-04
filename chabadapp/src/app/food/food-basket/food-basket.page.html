@@ -6,6 +6,8 @@
 </ion-header>
 
 <ion-content>
+  <div class="backdrop-payment-modal" [ngClass]="{ 'display-none': !hasPaymentModal }"
+    (click)="toggleHasPaymentModal(false)"></div>
   <ion-item-group>
     <!-- <ion-list class="group0"></ion-list> -->
     <ion-list class="group1">
@@ -52,12 +54,53 @@
 
     <ion-list class="group3">
       <ion-row class="group3-row-1">
-        <ion-label class="group3-row1-total">Total ({{calTotalAmount()}} items)</ion-label>
+        <ion-label class="group3-row1-total">Subtotal </ion-label>
         <ion-label class="group3-row1-prices" >${{calTotalPrice() | number:'2.1-2'}}</ion-label>
+        
+      </ion-row>
+      <ion-row class="group3-row-1">
+        <ion-label class="group3-row1-total">Applicable Fees </ion-label>
+        <ion-label class="group3-row1-prices">${{calTotalPrice() | number:'2.1-2'}}</ion-label>
+      
+      </ion-row>
+      <ion-row class="group3-row-1">
+        <ion-label class="group3-row1-total">Total </ion-label>
+        <ion-label class="group3-row1-prices price-total">${{calTotalPrice() | number:'2.1-2'}}</ion-label>
+      
       </ion-row>
     </ion-list>
     
-    <ion-button (click)="order()" class="main-button" [disabled]="dataBasket == '' ">Order</ion-button>
+    
     <!-- <ion-list class="group4"></ion-list> -->
   </ion-item-group>
+ 
 </ion-content>
+<ion-footer (click)="onCheckClickOutsidePaymentSelect($event)">
+  <ion-buttons class="ion-justify-content-around">
+    <div class="payment-method-container" (click)="toggleHasPaymentModal(true)">
+      <ng-container *ngFor="let paymentMethod of paymentMethods">
+        <ion-buttons class="payment-method" *ngIf="currentPaymentMethodId == paymentMethod.id">
+          <img class="payment-method-icon" [src]="paymentMethod.srcIcon">
+          <span class="payment-method-name three-dots-1">{{ paymentMethod.name }}</span>
+          <img src="assets/icon/up.svg">
+        </ion-buttons>
+      </ng-container>
+    </div>
+
+        <ion-button (click)="order()" class="btn-add-promo" [disabled]="dataBasket == '' ">Add a Promo</ion-button>
+
+  </ion-buttons>
+  <ion-button (click)="order()" class="main-button" [disabled]="dataBasket == '' ">Order</ion-button>
+
+  <div class="payment-method-modal" *ngIf="hasPaymentModal" (click)="onClickPaymentModal()">
+    <ion-label class="payment-method-modal__title">Phương thức thanh toán</ion-label>
+
+    <ion-list style="padding: 0;">
+      <ion-buttons *ngFor="let paymentMethod of paymentMethods" class="payment-method"
+        (click)="changePayment(paymentMethod)">
+        <img class="payment-method-icon" [src]="paymentMethod.srcIcon">
+        <span class="payment-method-name">{{ paymentMethod.name }}</span>
+      </ion-buttons>
+    </ion-list>
+  </div>
+</ion-footer>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { AccountService } from '../@app-core/http';
 import { PopupComponent } from '../@modular/popup/popup.component';
 import { PopuplogoutComponent } from '../@modular/popuplogout/popuplogout.component';
 
@@ -13,7 +14,8 @@ export class AccountSettingPage implements OnInit {
   name = localStorage.getItem('fullname') || '';
   constructor(
     public modalController: ModalController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
@@ -21,7 +23,14 @@ export class AccountSettingPage implements OnInit {
   }
   avatar:any;
   ionViewWillEnter() {
-    this.avatar = localStorage.getItem('avatar')
+    this.accountService.getAccounts().subscribe(result => {
+      if(result.app_user.avatar == null || result.app_user.avatar == '') {
+        this.avatar = "https://i.imgur.com/edwXSJa.png";
+      }
+      else {
+        this.avatar = result.app_user.avatar;
+      }
+    })
   }
 
   async openModalLogOut() {

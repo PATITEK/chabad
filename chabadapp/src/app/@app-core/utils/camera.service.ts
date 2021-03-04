@@ -8,9 +8,6 @@ import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class CameraService {
-
-    image_null: any;
-
     constructor(
         public camera: Camera,
         public loadingService: LoadingService,
@@ -40,19 +37,24 @@ export class CameraService {
                             "avatar": data['data'][0]
                         }
                     }
-                    localStorage.setItem('avatar', image_avatar.app_user.avatar)
+                   
                     this.accountService.updateAvatar(image_avatar).subscribe(data => {
+                        if(localStorage.getItem('avatar') != null ){
+                            localStorage.removeItem('avatar');
+                            localStorage.setItem('avatar', image_avatar.app_user.avatar);
+                            this.loadingService.dismiss();
+                            this.toastService.present('Updated sucessfully !', 'top', 2000);
+                        }
                     })
-                    this.loadingService.dismiss();
                     this.accountService.getAccounts().subscribe();
-                    this.toastService.present('Cập nhật ảnh thành công !', 'top', 2000);
+                    
                 })
             } else {
             }
         }).catch((err) => {
             console.error(err)
             this.loadingService.dismiss();
-            this.toastService.present('Xảy ra lỗi, vui lòng thử lại sau !', 'top', 2000);
+            this.toastService.present('Not success, Please try Again !', 'top', 2000);
         })
     }
     public getAvatarTake(image_avatar) {
@@ -78,21 +80,19 @@ export class CameraService {
                     }
                     localStorage.setItem('avatar', image_avatar.app_user.avatar)
                     this.accountService.updateAvatar(image_avatar).subscribe(data => {
+                         this.loadingService.dismiss();
+                        this.toastService.present('Updated sucessfully!', 'top', 2000);
                     })
-                    this.loadingService.dismiss();
                     this.accountService.getAccounts().subscribe();
-                    this.toastService.present('Cập nhật ảnh thành công !', 'top', 2000);
                 })
             } else {
             }
         }).catch((err) => {
             console.error(err)
             this.loadingService.dismiss();
-            this.toastService.present('Xảy ra lỗi, vui lòng thử lại sau !', 'top', 2000);
-
+            this.toastService.present('Not success, Please try again!', 'top', 2000);
         })
     }
-
     dataURItoBlob(dataURI) {
         var byteString;
         if (dataURI.split(',')[0].indexOf('base64') >= 0) {
@@ -121,20 +121,29 @@ export class CameraService {
 
     removeAvatar() {
         this.loadingService.present();
-        this.image_null = {
-            "thumb_image": {
-                "url": null
+        let image_null = {
+            "app_user": {
+                "avatar": null
             }
         }
-        this.accountService.updateAvatar(this.image_null).subscribe(
+        this.accountService.updateAvatar(image_null).subscribe(
             (data: any) => {
+                if(!localStorage.getItem('avatar')) {
+                    console.log(1)
+                    localStorage.removeItem('avatar');
+                    localStorage.setItem('avatar', 'https://i.imgur.com/edwXSJa.png')
+                }
+                else {
+                    console.log(`1`)
+                    localStorage.setItem('avatar', 'https://i.imgur.com/edwXSJa.png')
+                }
                 this.loadingService.dismiss();
-                this.toastService.present('Xóa ảnh thành công !', 'top', 2000);
+                this.toastService.present('Remove sucessfully !', 'top', 2000);
             },
             (data: any) => {
                 this.loadingService.dismiss();
                 if (data.error) {
-                    this.toastService.present('Lỗi rồi !', 'top', 2000);
+                    this.toastService.present('Not success, Please try again !', 'top', 2000);
                 }
             }
         )

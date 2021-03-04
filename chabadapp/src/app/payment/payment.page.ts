@@ -46,7 +46,7 @@ export class PaymentPage implements OnInit {
     this.loadingService.present();
     const datapasing: IDataNoti = {
       title: 'DONATE SUCCESSFUL!',
-      image: 'Change Password successful!',
+      des: 'Thanks for your donation!',
       routerLink: '/main/chabad'
     }
       this.donateService.donateLog(this.data).subscribe(

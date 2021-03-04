@@ -76,6 +76,10 @@ export class VerificationPage implements OnInit {
     if (this.inputCode.value[fieldInput] === null || this.inputCode.value[fieldInput] === '') {
       document.getElementById(prevInput).focus()
     }
+    if (fieldInput==='code6')
+    {
+      this.confirmCode();
+    }
   }
   // onSubmit() {
   //   var c1 = this.inputCode.get('code1').value;

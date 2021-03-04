@@ -10,19 +10,20 @@ import { APICONFIG, API_URL } from './http/@http-config';
 
 @Injectable()
 export class IntercepterService implements HttpInterceptor {
+  number=0;
 
   constructor(
     @Inject(API_URL) private apiUrl: string,
     private router: Router,
-  ) {}
+  ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+
     var request = req.clone({
       url: this.prepareUrl(req.url)
 
     });
-    if(localStorage.getItem('Authorization') !== null){
+    if (localStorage.getItem('Authorization') !== null) {
       request = req.clone({
         url: this.prepareUrl(req.url),
         // withCredentials: false,
@@ -32,18 +33,26 @@ export class IntercepterService implements HttpInterceptor {
     else {
 
     }
-   
+
     return next.handle(request)
-    .pipe(
-      catchError((err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigateByUrl('/auth/login', { queryParams: { returnUrl: window.location.pathname } });
-            localStorage.clear();
+      .pipe(
+        catchError((err) => {
+         
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+             this.number++;
+             console.log(this.number);
+             
+             if(this.number>2)
+              {
+               this.router.navigateByUrl('/auth/login', { queryParams: { returnUrl: window.location.pathname } });
+               localStorage.clear();
+              }
+              return throwError(err);
+
+            }
           }
-          return throwError(err);
-        }
-    }));
+        }));
   }
 
   private isAbsoluteUrl(url: string): boolean {

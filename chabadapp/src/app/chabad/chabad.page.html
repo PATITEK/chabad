@@ -8,6 +8,7 @@
   <ion-avatar class="avatar active-effect" (click)="goToUserInfo()">
     <img src="{{avatar}}">
     <span class="circle avatar-note"></span>
+    <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
   </ion-avatar>
 
   <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hideDateList()"></ion-backdrop>
@@ -15,7 +16,6 @@
 
   <div class="img-container img-wrapper main-box-shadow"
     [style.background-image]="getChabadImageString()">
-    <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
   </div>
 
   <ion-item-group class="chabad-info-container">

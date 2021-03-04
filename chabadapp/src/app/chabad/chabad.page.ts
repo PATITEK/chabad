@@ -50,7 +50,8 @@ export class ChabadPage implements OnInit {
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController,
-    private GeolocationService: GeolocationService
+    private GeolocationService: GeolocationService,
+    private accountService: AccountService
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {

@@ -99,6 +99,7 @@ export class FoodBasketPage implements OnInit {
   }
   getUserData() {
     this.accountService.getAccounts().subscribe(data => {
+      console.log(data)
       this.full_address = data.app_user.full_address + ', district ' + data.app_user.district + ', ' + data.app_user.province + ', ' + data.app_user.country_code;
     });
   }

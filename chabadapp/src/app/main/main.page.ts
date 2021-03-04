@@ -26,8 +26,6 @@ export class MainPage implements OnInit {
       else {
         return;
       }})
-
-      console.log(this.getImage());
   }
   async presentAlert() {
     const alert = await this.alertController.create({

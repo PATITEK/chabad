@@ -108,7 +108,6 @@ export class PrayPage implements OnInit {
         "year" : this.today.getFullYear(),
         "eventslength": 0,
         "full": nextDay,
-       
       })
     }
   }
@@ -138,7 +137,6 @@ export class PrayPage implements OnInit {
       });
     })
     this.getDataEvents();
-    
   }
   getDataEvents() {
     for (let i = 0; i < 7; i++) {

@@ -147,8 +147,7 @@ export class LoginPage implements OnInit {
     this.accountService.getAccounts().subscribe(result => {
       localStorage.setItem('email',result.app_user.email) 
       if(result.app_user.avatar == null) {
-        result.app_user['avatar'] = "https://i.imgur.com/edwXSJa.png";
-        localStorage.setItem('avatar', result.app_user.avatar);
+        localStorage.setItem('avatar', "https://i.imgur.com/edwXSJa.png");
       }
       else {
         localStorage.setItem('avatar', result.app_user.avatar);

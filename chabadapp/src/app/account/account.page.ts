@@ -83,36 +83,36 @@ export class AccountPage implements OnInit {
 
   async avatarSetting() {
     let alertAvatarSetting = await this.alertCtrl.create({
-      message: 'Cài đặt ảnh đại diện',
+      message: 'Setting your photo',
       mode: 'ios',
       buttons: [
         {
-          text: 'Xem ảnh đại diện',
+          text: 'View your photo',
           handler: () => {
             this.cameraService.viewAvatar();
           }
         },
         {
-          text: 'Tải ảnh lên',
+          text: 'Choose from library',
           handler: () => {
 
             this.cameraService.getAvatarUpload(this.image_avatar);
           }
         },
         {
-          text: 'Chụp ảnh mới',
+          text: 'Take photo',
           handler: () => {
             this.cameraService.getAvatarTake(this.image_avatar);
           }
         },
         {
-          text: 'Xóa ảnh đại diện',
+          text: 'Remove current photo',
           handler: () => {
             this.cameraService.removeAvatar();
           }
         },
         {
-          text: 'Hủy',
+          text: 'Cancel',
           role: 'destructive',
         },
       ]
@@ -153,7 +153,7 @@ export class AccountPage implements OnInit {
       localStorage.setItem('fullname', data.app_user.full_name);
       this.activatedInput = false;
       this.loadingService.dismiss();
-      this.toastService.present('Cập nhật thành công !');
+      this.toastService.present('Updated sucessfully !');
     });
   }
 

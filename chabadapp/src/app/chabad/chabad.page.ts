@@ -50,7 +50,8 @@ export class ChabadPage implements OnInit {
     private eventService: EventsService,
     public dateTimeService: DateTimeService,
     public modalController: ModalController,
-    private GeolocationService: GeolocationService
+    private GeolocationService: GeolocationService,
+    private accountService: AccountService
   ) {
     this.currentDay = new Date();
     for (let i = 0; i < 7; i++) {
@@ -72,7 +73,14 @@ export class ChabadPage implements OnInit {
   }
   avatar:any;
   ionViewWillEnter() {
-    this.avatar = localStorage.getItem('avatar')
+    this.accountService.getAccounts().subscribe(result => {
+      if(result.app_user.avatar == null || result.app_user.avatar == '') {
+        this.avatar = "https://i.imgur.com/edwXSJa.png";
+      }
+      else {
+        this.avatar = result.app_user.avatar;
+      }
+    })
   }
   getDataChabad(id, func?) {
     this.chabadService.getDetail(id).subscribe(data => {

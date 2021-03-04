@@ -6,6 +6,8 @@
 </ion-header>
 
 <ion-content>
+  <div class="backdrop-payment-modal" [ngClass]="{ 'display-none': !hasPaymentModal }"
+    (click)="toggleHasPaymentModal(false)"></div>
   <ion-item-group>
     <!-- <ion-list class="group0"></ion-list> -->
     <ion-list class="group1">

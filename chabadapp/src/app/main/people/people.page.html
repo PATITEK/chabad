@@ -11,7 +11,10 @@
     <ion-row *ngFor="let row of users">
       <ion-col *ngFor="let col of row" size="4">
         <ion-item-group class="col-inner main-box-shadow active-effect">
-          <img src="assets/img/avatar-people.svg">
+          <ion-avatar>
+            <img *ngIf="col.avatar == null" src="assets/img/avatar-people.svg">
+            <img *ngIf="col.avatar" src="{{col.avatar}}">
+          </ion-avatar>
           <p class="person-name">{{ col.full_name }}</p>
         </ion-item-group>
       </ion-col>

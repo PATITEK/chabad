@@ -93,6 +93,7 @@ export class PeoplePage implements OnInit {
  
    getData(func?) {
       this.matchUsersService.getAll(this.pageRequest).subscribe(data => {
+         console.log(data)
          data.app_users.forEach((d, i) => {
             if (i % 3 == 0) {
                this.users.push([d]);

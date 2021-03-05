@@ -7,6 +7,7 @@
     <div class="user">
       <ion-avatar class="user-img-container">
         <img src="{{avatar}}" class="user-img main-box-shadow">
+        <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
       </ion-avatar>
       <ion-label class="user-name three-dots-2">{{ name }}</ion-label>
     </div>

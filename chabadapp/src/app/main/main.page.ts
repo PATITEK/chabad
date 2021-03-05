@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { AccountService } from '../@app-core/http';
 
 @Component({
@@ -10,22 +10,48 @@ import { AccountService } from '../@app-core/http';
 })
 export class MainPage implements OnInit {
   name = localStorage.getItem('fullname') || '';
-  avatar = localStorage.getItem('avatar')
+  avatar = localStorage.getItem('avatar');
+  avatarReplace = 'https://i.imgur.com/edwXSJa.png';
+  subscribe: any;
   constructor(
     private router: Router,
     private accountService: AccountService,
     private platform: Platform,
-    private alertController: AlertController
-  ) { }
+    private alertController: AlertController,
+    private navController: NavController
+  ) { 
+   
+    // if(this.router.url === '/main/chabad') {
+    //   console.log('1')
+    //     document.addEventListener("backbutton", function(e) {
+    //       console.log('2')
+    //       e.preventDefault();
+    //       this.presentAlert();
+    //               // if(confirm("Exit App?")) {
+    //               //     navigator["app"].exitApp();
+    //               // }
+    //   }, false);
+    // }
+    // this.subscribe = this.platform.backButton.subscribe(() => {
+    //   // do something here
+    //   if(this.router.url === '/main/chabad') {
+    //     if(window.confirm("Do you want exit app")) {
+    //       navigator["app"].exitApp();
+    //     }
+    //     // if(window.)
+    //   }
+    // });
+  }
  
   ngOnInit() {
-    this.platform.backButton.subscribe(() => {
-      if (this.router.url === '/main/chabad') {
+    this.subscribe = this.platform.backButton.subscribeWithPriority(99999,()=>{
+      if(this.router.url === '/main/chabad') {
         this.presentAlert();
       }
       else {
-        return;
-      }})
+        this.navController.back();
+      }    })
+   
   }
   async presentAlert() {
     const alert = await this.alertController.create({

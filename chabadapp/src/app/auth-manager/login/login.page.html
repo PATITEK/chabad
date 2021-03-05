@@ -15,7 +15,7 @@
       <form class="form" [formGroup]="formLogin" (onSubmit)="submitLogin()">
         <div class="margin-bottom">
           <ion-label class="label">Enter email or phone number</ion-label>
-          <input class="input" type="text" formControlName="email">
+          <ion-input class="input" type="text" formControlName="email"></ion-input>
           <ng-container *ngFor="let validation of validationLoginMessages.email">
             <div class="error-message"
               *ngIf="formLogin.get('email').hasError(validation.type) && (formLogin.get('email').dirty || formLogin.get('email').touched)">
@@ -26,7 +26,7 @@
 
         <div class="margin-bottom">
           <ion-label class="label">Password</ion-label>
-          <input class="input" type="password" formControlName="password">
+          <ion-input class="input" type="password" formControlName="password"></ion-input>
           <ng-container *ngFor="let validation of validationLoginMessages.password">
             <div class="error-message"
               *ngIf="formLogin.get('password').hasError(validation.type) && (formLogin.get('password').dirty || formLogin.get('password').touched)">

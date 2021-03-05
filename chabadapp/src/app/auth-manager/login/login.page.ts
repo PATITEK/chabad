@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
   
     this.initForm();
   }
-
+   
   initForm() {
     this.formLogin = this.formBuilder.group({
       email: new FormControl('', Validators.required),

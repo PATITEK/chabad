@@ -37,12 +37,9 @@ export class IntercepterService implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((err) => {
-         
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
              this.number++;
-             console.log(this.number);
-             
              if(this.number>2)
               {
                this.router.navigateByUrl('/auth/login', { queryParams: { returnUrl: window.location.pathname } });
@@ -51,7 +48,14 @@ export class IntercepterService implements HttpInterceptor {
               return throwError(err);
 
             }
+            if(err.status===422)
+            {
+              
+              return throwError(err);
+            }
+            
           }
+          return throwError(err);
         }));
   }
 

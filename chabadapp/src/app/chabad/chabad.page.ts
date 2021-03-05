@@ -36,6 +36,9 @@ export class ChabadPage implements OnInit {
   dateList = [];
   activeDateItem;
   hiddenDateList = true;
+  avatar :any;
+  avatarReplace = 'https://i.imgur.com/edwXSJa.png';
+
   pageRequestEvent: IPageEvent = {
     page: 1,
     per_page: 100,
@@ -71,7 +74,6 @@ export class ChabadPage implements OnInit {
   ngOnInit() {
     this.getData();
   }
-  avatar:any;
   ionViewWillEnter() {
     this.accountService.getAccounts().subscribe(result => {
       if(result.app_user.avatar == null || result.app_user.avatar == '') {
@@ -93,7 +95,9 @@ export class ChabadPage implements OnInit {
   goToMap() {
     this.GeolocationService.goToMap(this.chabad.location.lat, this.chabad.location.long);
   }
-
+  getUrl() {
+    return `url(${this.avatar})`
+  }
   getDataEvents() {
     for (let i = 0; i < 7; i++) {
       // reset
@@ -130,17 +134,14 @@ export class ChabadPage implements OnInit {
       this.getDataEvents();
     }).unsubscribe();
   }
-
   changeDateItem(dateItem) {
     this.activeDateItem = dateItem.id;
     this.hiddenDateList = false;
     this.currentDay = dateItem.day;
   }
-
   joinedAll(dateItem) {
     return dateItem.services.every(service => service.joined == true) && dateItem.events.every(event => event.joined == true);
   }
-
   isSomeLoading(dateItem) {
     return dateItem.events.some(event => event.isLoading == true) || dateItem.services.some(event => event.isLoading == true);
   }

@@ -21,33 +21,40 @@ export class AccountService {
   public getAccounts() {
     return this.http.get(`${APICONFIG.ACCOUNT.PROFILE_USER}`).pipe(
       map((result: any) => {
-    
+
         return result;
       }),
-      catchError((errorRes) => { 
-        throw errorRes.error; }));
+      catchError((errorRes) => {
+        throw errorRes.error;
+      }));
   }
-  
+
   public updateProfile(data) {
     const req = {
       app_user: data
     }
     return this.http.put(`${APICONFIG.ACCOUNT.UPDATE_PROFILE}`, req).pipe(
-      map((result:any) => {
-      
+      map((result: any) => {
+
         return result;
       }),
-      catchError((errorRes) => { 
-        throw errorRes.error; }));
+      catchError((errorRes) => {
+       
+        
+        throw errorRes.error;
+      }
+
+      ));
   }
   public updatePassword(pass) {
     return this.http.put(`${APICONFIG.ACCOUNT.UPDATE_PASS}`, pass).pipe(
       map((result) => {
-     
+
         return result;
       }),
-      catchError((errorRes) => { 
-        throw errorRes.error; }));
+      catchError((errorRes) => {
+        throw errorRes.error;
+      }));
   }
   public getAccountDetail(id: string) {
     return this.http.get<any>(`${APICONFIG.ACCOUNT.GETDETAIL(id)}`).pipe(
@@ -78,7 +85,7 @@ export class AccountService {
   }
   public ContactAdmin(req) {
     return this.http.post(`${APICONFIG.ACCOUNT.CONTACT_ADMIN}`, req).pipe(
-      map((result)=> {
+      map((result) => {
         return result;
       }),
       catchError((errorRes: any) => {
@@ -129,7 +136,7 @@ export class AccountService {
       catchError((errorRes: any) => {
         throw errorRes.error;
       }),
-     
+
     )
   }
 

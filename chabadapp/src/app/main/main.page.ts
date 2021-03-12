@@ -20,29 +20,7 @@ export class MainPage implements OnInit {
     private alertController: AlertController,
     private navController: NavController
   ) { 
-   
-    // if(this.router.url === '/main/chabad') {
-    //   console.log('1')
-    //     document.addEventListener("backbutton", function(e) {
-    //       console.log('2')
-    //       e.preventDefault();
-    //       this.presentAlert();
-    //               // if(confirm("Exit App?")) {
-    //               //     navigator["app"].exitApp();
-    //               // }
-    //   }, false);
-    // }
-    // this.subscribe = this.platform.backButton.subscribe(() => {
-    //   // do something here
-    //   if(this.router.url === '/main/chabad') {
-    //     if(window.confirm("Do you want exit app")) {
-    //       navigator["app"].exitApp();
-    //     }
-    //     // if(window.)
-    //   }
-    // });
   }
- 
   ngOnInit() {
     this.subscribe = this.platform.backButton.subscribeWithPriority(99999,()=>{
       if(this.router.url === '/main/chabad') {
@@ -50,8 +28,8 @@ export class MainPage implements OnInit {
       }
       else {
         this.navController.back();
-      }    })
-   
+      }
+    })
   }
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -70,7 +48,6 @@ export class MainPage implements OnInit {
             return;
           }
         },
-
       ]
     });
     await alert.present();

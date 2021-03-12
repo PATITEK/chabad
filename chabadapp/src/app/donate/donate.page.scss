@@ -4,6 +4,9 @@ ion-header {
     width: 100%;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
+    @media screen and (max-height: 641px) {
+      height: 200px;
+    }
     }
     .back-btn {
       display: inline-block;
@@ -105,7 +108,7 @@ ion-header {
           width: 52px;
           height: 66px;
           border-radius: 25px;
-          margin-top: 16px;
+          margin-top: 21px;
           margin-left: 5px;
           font-size: 14px;
           text-align: center;
@@ -244,11 +247,14 @@ ion-header {
          ion-row {
            ion-col{
             position: relative;
+           
              img {
                width: 88px;
                margin-left: 50%;
                transform: translateX(-50%);
                height: 88px;
+               background-size: cover;
+               background-position: center center;
                border-radius: 50%;
              }
              .btn {

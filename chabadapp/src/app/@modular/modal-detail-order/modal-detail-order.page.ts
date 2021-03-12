@@ -29,7 +29,7 @@ export class ModalDetailOrderPage implements OnInit {
 
   isCanceled = '';
 
-  fakeImg = 'assets/img/food.svg';
+  // fakeImg = 'assets/img/food.svg';
   
   constructor(
     private orderService: OrderService,

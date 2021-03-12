@@ -43,7 +43,9 @@ ion-content {
         width: 150px;
         height: 150px;
         margin: 0 auto;
-
+        ion-spinner {
+            top: 40%;
+        }
         .user-img {
             border-radius: 50%;
             border: 1px solid #fff;
@@ -111,7 +113,7 @@ ion-content {
         .user-img-container {
             width: 100px;
             height: 100px;
-            
+          
             .icon-edit {
                 top: 94px;
                 transform: translate(18px, -50%);

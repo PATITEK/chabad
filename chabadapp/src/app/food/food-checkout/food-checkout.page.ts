@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { AccountService } from 'src/app/@app-core/http';
 import { OrderService } from 'src/app/@app-core/http/order/order.service';
+import { ModalFoodComponent } from 'src/app/@modular/modal-food/modal-food.component';
 
 @Component({
   selector: 'app-food-checkout',
@@ -28,6 +30,7 @@ export class FoodCheckoutPage implements OnInit {
   constructor( 
     private route: ActivatedRoute,
     private orderService: OrderService,
+    private modalCtrl: ModalController, 
     private accountService: AccountService) { 
       this.getUserData();
       this.route.queryParams.subscribe(params => {
@@ -43,9 +46,8 @@ export class FoodCheckoutPage implements OnInit {
     }
 
   ngOnInit() {
-      
-   
   }
+  
   editText() {
     var fd = document.getElementById("full_address");
     fd.removeAttribute('readonly')
@@ -54,7 +56,20 @@ export class FoodCheckoutPage implements OnInit {
   confirm() {
     localStorage.removeItem('dataBasket');
     this.orderService.creat(this.order).subscribe(data => {
+      this.openModalSuccess();
     })
+  }
+  async openModalSuccess() {
+    const popover = await this.modalCtrl.create({
+      component: ModalFoodComponent,
+      cssClass: 'modalFood',
+    });
+    return await popover.present();
+  }
+  ionViewWillLeave() {
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
   }
   plusItem(item) {
     if(item.amount < 99) {
@@ -77,7 +92,7 @@ export class FoodCheckoutPage implements OnInit {
     }
     this.setDataBasket();
   }
-
+ 
   setDataBasket() {
     localStorage.setItem('dataBasket', JSON.stringify(this.dataBasket));
   }

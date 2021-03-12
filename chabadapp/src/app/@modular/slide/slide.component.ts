@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+import { AccountService } from 'src/app/@app-core/http';
 import { SlideService } from 'src/app/@modular/slide/slide.service';
 import { IDataSlide } from '../page-noti/page-noti.service';
 
@@ -17,12 +18,11 @@ export class SlideComponent implements OnInit {
     speed: 400
   };
   constructor(
-    // private slideService: SlideService,
-    private router: Router) {
+    private router: Router,
+    private accountService: AccountService
+    ) {
 
   }
-
-
   public title;
   public image;
   public routerLink = '';
@@ -30,13 +30,9 @@ export class SlideComponent implements OnInit {
   clicked = 0;
 
   ngOnInit() {
-    // if(this.clicked == 0) {
-    //   this.title = "Service and Event";
-    //   this.image = "assets/img/slide1.svg";
-    //   this.label = 'NEXT';
-    // }
   }
   skip() {
+    this.accountService.getAccounts().subscribe();
     if (localStorage.getItem('Authorization')) {
       this.router.navigate(['main/chabad']);
     } else {

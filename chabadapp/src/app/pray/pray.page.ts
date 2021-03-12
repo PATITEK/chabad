@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DonateService, ChabadService,EventsService, IPageEvent } from '../@app-core/http';
+import { DonateService, ChabadService,EventsService, IPageEvent, AccountService } from '../@app-core/http';
 import { DateTimeService, LoadingService } from '../@app-core/utils';
 import { ToastController } from '@ionic/angular';
 
@@ -74,7 +74,8 @@ export class PrayPage implements OnInit {
     cal_date: '',
     chabad_id: ''
   }
-  
+  avatar:any;
+  x: any;
   constructor(
     public formBuilder: FormBuilder,
      private route: ActivatedRoute,
@@ -84,7 +85,8 @@ export class PrayPage implements OnInit {
      private router: Router,
      public dateTimeService: DateTimeService,
      public loadingService: LoadingService,
-     public toastController: ToastController
+     public toastController: ToastController,
+     public accountService: AccountService
   ) {
     this.frmPray = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -149,6 +151,15 @@ export class PrayPage implements OnInit {
     }
   }
   ionViewWillEnter() {
+    this.avatar = localStorage.getItem('avatar')
+    // this.accountService.getAccounts().subscribe(data=> {
+    //   if(data.app_user.avatar == null) {
+    //     this.avatar = 
+    //   }
+    //   this.avatar = data.app_user.avatar;
+
+    //   console.log( = )
+    // })
     if(this.DateObj === '') {
       this.fulldate = `${this.dateList[0].fullday}`;
       this.date = `${this.dateList[0].date}`;
@@ -158,6 +169,16 @@ export class PrayPage implements OnInit {
     }
     else {
       return
+    }
+  }
+  call() {
+    this.x = this.frmPray.get('amount').value;
+    this.x = this.x.replace(/\,/g,'');
+    if(this.x != '')  {
+      this.x = this.x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    else {
+
     }
   }
   getUrl() {
@@ -189,15 +210,24 @@ export class PrayPage implements OnInit {
     e.target.classList.add('active-button');
   }
   onSubmit() {
-   
-    let amount = this.frmPray.get('amount')
-    if (amount.dirty || amount.touched ) {
-      if(amount.value!= "" && amount.value < 18) {
+    var amount = this.frmPray.get('amount').value;
+    if(amount != "") {
+      amount  = amount.replace(/\,/g,'')
+      console.log(amount);
+    }
+    if (this.frmPray.get('amount').dirty || this.frmPray.get('amount').touched ) {
+      if(!amount.match(/\d+/g)) {
+        this.required_mess = true;
+        this.message = 'The value must a number!';
+        this.loadingService.dismiss();
+        return; 
+      }
+      else if(amount!= "" && amount < 18) {
         this.required_mess = true;
         this.message = 'The number must be greater than 18$';
         return;
       }
-      else if(amount.value!= "" && amount.value %18 !==0){
+      else if(amount!= "" && amount %18 !==0){
         this.required_mess = true;
         this.message = 'The number must be divisible by 18.';
         return;
@@ -206,12 +236,12 @@ export class PrayPage implements OnInit {
         this.required_mess = false;
       }
     }
-    if(amount.value == "") {
-      this.setamount = 0;
-    }
-    else {
-      this.setamount = amount.value;
-    }
+    // if(amount.value == "") {
+    //   this.setamount = 0;
+    // }
+    // else {
+    //   this.setamount = amount.value;
+    // }
     var result = {
       "donation" : {
         "amount": this.setamount,

@@ -50,8 +50,6 @@ ion-content {
     .food-detail-cover {
         background-color: #eee;
         .food-detail {
-            max-width: 320px;
-            margin: auto;
             border-bottom: 2px solid #F8F8F8;
             padding: 18px 0px;
             &:last-child {
@@ -80,29 +78,27 @@ ion-content {
             }
             
             .price {
-                margin-right: 15px;
                 width: 80px;
+                flex: 1;
                 text-align: right;
             }
             .icon-remove {
                 margin-right: 20px;
             }
-    
         }
     }
     .group3-row-1 {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 16px;
         .group3-row1-total {
-            padding: 20px 0;
-            margin-left: 30px;
-            font-weight: 600;
-            font-size: 16px;
+            margin-left: 20px;
+            width: auto;
         }
         .group3-row1-prices {
-            padding: 20px 0;
-            margin: auto;
-            margin-right: 25px;
-            font-weight: 600;
-            font-size: 16px;
+            flex: 1;
+            text-align: end;
         }
     }
     ion-button {

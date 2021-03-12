@@ -34,7 +34,7 @@
     <ion-item-group class="time doladonate">
       <ion-img src="assets/img/pen.svg" class="edit"></ion-img>
       <ion-img src="assets/img/dola.svg"></ion-img>
-    <input type="number" formControlName="amount">
+    <input formControlName="amount" (keyup)="call()"[(ngModel)] ="x">
     <ion-label class="currency">
       USD
     </ion-label>
@@ -53,7 +53,7 @@
     <ion-grid class="user__info">
       <ion-row>
         <ion-col size= "5">
-          <img *ngIf="isHidden == false" src="assets/img/d1.jpg">
+          <img *ngIf="isHidden == false" src="{{avatar}}">
           <img *ngIf="isHidden == true" src="assets/img/avatar-people-disable.svg">
           <ion-label *ngIf="isHidden == false" class="user__name">David</ion-label>
           <ion-label *ngIf="isHidden == true" class="user__name_dis">David</ion-label>

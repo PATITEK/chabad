@@ -71,6 +71,7 @@ export class PaymentupComponent implements OnInit {
   
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', event => {
+      this.loadingService.present();
       event.preventDefault();
       this.stripe.createSource(this.card).then(result => {
         if (result.error) {
@@ -78,6 +79,7 @@ export class PaymentupComponent implements OnInit {
           errorElement.textContent = result.error.message;
         } else {
           this.data.donation.token = result.source.id;
+          this.loadingService.dismiss();
           this.router.navigate(['/payment'], {
             queryParams: {
               data: JSON.stringify(this.data)

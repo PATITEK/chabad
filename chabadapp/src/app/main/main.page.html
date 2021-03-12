@@ -1,13 +1,13 @@
 <ion-header class="ion-no-border">
   <ion-buttons class="user-container">
-    <span *ngIf="name.length != '' ">Hi {{ name }}!</span>
+    <span *ngIf="name">Hi {{ name }}!</span>
     <ion-avatar class="main-box-shadow active-effect" (click)="goToUserInfo()">
     <!-- <div 
     [style.background-image]="getImage()">
     <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
   </div> -->
       <img src="{{avatar}}" alt="">
-    <img src="{{avatarReplace}}" alt=""*ngIf = "!avatar">
+    <!-- <img src="{{avatarReplace}}" alt=""*ngIf = "!avatar"> -->
     <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
     </ion-avatar>
   </ion-buttons>

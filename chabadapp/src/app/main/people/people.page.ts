@@ -2,7 +2,7 @@ import { GeolocationService } from './../../@app-core/utils/geolocation.service'
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { IPageRequest, MatchUsersService } from 'src/app/@app-core/http';
-import { DateTimeService } from 'src/app/@app-core/utils';
+import { DateTimeService, LoadingService } from 'src/app/@app-core/utils';
 
 @Component({
    selector: 'app-people',
@@ -60,10 +60,12 @@ export class PeoplePage implements OnInit {
    constructor(
       public dateTimeService: DateTimeService,
       private matchUsersService: MatchUsersService,
-      private GeolocationService: GeolocationService
+      private GeolocationService: GeolocationService,
+      private laodingService: LoadingService
    ) { }
 
    ngOnInit() {
+      this.laodingService.present();
       this.getData();
       // this.showPeopleNearBy();
    }
@@ -93,6 +95,7 @@ export class PeoplePage implements OnInit {
  
    getData(func?) {
       this.matchUsersService.getAll(this.pageRequest).subscribe(data => {
+         this.laodingService.dismiss();
          data.app_users.forEach((d, i) => {
             if (i % 3 == 0) {
                this.users.push([d]);

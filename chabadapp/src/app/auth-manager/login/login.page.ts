@@ -83,7 +83,6 @@ export class LoginPage implements OnInit {
     this.authService.countryCode().subscribe((data: any) => {
       this.country_codes = data.country_codes;
     })
-  
     this.initForm();
   }
    

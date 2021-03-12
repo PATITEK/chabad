@@ -42,7 +42,6 @@ export class OrdersHistoryPage implements OnInit {
     this.orderService.getAll(orders.pageRequest).subscribe(data => {
       orders.array = orders.array.concat(data.orders);
       this.lastedData = orders.array[orders.array.length - 1];
-      // orders.array = orders.array.reverse();
       this.loadingService.dismiss();
       func && func();
       orders.pageRequest.page++;
@@ -66,7 +65,9 @@ export class OrdersHistoryPage implements OnInit {
       count == 1 && event.target.complete();
     })
   }
-
+  ionViewWillLeave() {
+    this.modalController.dismiss();
+  }
   async openOrderDetailModal(order) {
     const modal = await this.modalController.create({
       component: ModalDetailOrderPage,

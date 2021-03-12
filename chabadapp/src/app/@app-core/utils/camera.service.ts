@@ -17,7 +17,7 @@ export class CameraService {
 
     ) { }
     public getAvatarUpload(image_avatar) {
-        this.loadingService.present();
+        this.loadingService.present('Please wait a minute...');
         const options = {
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
@@ -37,7 +37,6 @@ export class CameraService {
                             "avatar": data['data'][0]
                         }
                     }
-                   
                     this.accountService.updateAvatar(image_avatar).subscribe(data => {
                         if(localStorage.getItem('avatar') != null ){
                             localStorage.removeItem('avatar');
@@ -58,7 +57,7 @@ export class CameraService {
         })
     }
     public getAvatarTake(image_avatar) {
-        this.loadingService.present();
+        this.loadingService.present('Please wait a minute...');
         const options = {
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
@@ -120,7 +119,7 @@ export class CameraService {
     }
 
     removeAvatar() {
-        this.loadingService.present();
+        this.loadingService.present('Please wait a minute...');
         let image_null = {
             "app_user": {
                 "avatar": null

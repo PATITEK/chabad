@@ -76,7 +76,7 @@ export class VerificationPage implements OnInit {
     if (this.inputCode.value[fieldInput] === null || this.inputCode.value[fieldInput] === '') {
       document.getElementById(prevInput).focus()
     }
-    if (fieldInput==='code6')
+    if (fieldInput === 'code6')
     {
       this.confirmCode();
     }
@@ -106,10 +106,17 @@ export class VerificationPage implements OnInit {
       this.toastService.present('Please type the OTP code!')
     } else {
       this.authService.checkcodePassword({code: this.inputstring}).subscribe((data:any)=> {
+        this.wrongCode = false;
         this.loadingService.dismiss();
         localStorage.setItem('Authorization', data.token);
         this.router.navigateByUrl("/auth-manager/new-password");
         this.toastService.present('Code confirmed, present your new password!', 'top', 2000);
+      },
+      (data: any) =>{
+        console.log(data)
+        this.toastService.present(data.errors, 'top');
+        this.wrongCode = true;
+        this.loadingService.dismiss();
       })
     }
   }

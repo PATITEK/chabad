@@ -36,7 +36,9 @@ export class DonatePage implements OnInit {
     name: '',
     thumb_image: ''
   }
-
+  avatar: any;
+  x: any;
+  avatarReplace = 'https://i.imgur.com/edwXSJa.png';
   constructor(
     private router: Router,
     private chabadService: ChabadService,
@@ -44,6 +46,7 @@ export class DonatePage implements OnInit {
      private route: ActivatedRoute,
      public donateService: DonateService,
      public loadingService: LoadingService,
+     public accountService: AccountService
      ) {
     this.frmDonate = this.formBuilder.group({
       amount: new FormControl('', Validators.compose([
@@ -64,6 +67,7 @@ export class DonatePage implements OnInit {
       })
     })
     this.email = localStorage.getItem('email');
+   
   }
  
   getUrl() {
@@ -72,6 +76,7 @@ export class DonatePage implements OnInit {
   onSubmit() {
     this.loadingService.present();
     const sourceId = this.dataParams.event ? this.dataParams.event.id : this.dataParams.chabad.id;
+   
     var result = {
       "donation" : {
         "email": this.email,
@@ -82,14 +87,21 @@ export class DonatePage implements OnInit {
         "source_id": sourceId
       }
     }
+    const amount = this.frmDonate.get('amount').value.replace(/\,/g,'');
     if (this.frmDonate.get('amount').dirty || this.frmDonate.get('amount').touched ) {
-      if(this.frmDonate.get('amount').value < 18 ) {
+      if(!amount.match(/\d+/g)) {
+        this.required_mess = true;
+        this.message = 'The value must a number!';
+        this.loadingService.dismiss();
+        return; 
+      }
+      else if(amount < 18 ) {
         this.required_mess = true;
         this.message = 'The number must be greater than 18$';
         this.loadingService.dismiss();
-        return;
+        return; 
       }
-      else if(this.frmDonate.get('amount').value %18 !==0){
+      else if(amount %18 !== 0){
         this.required_mess = true;
         this.message = 'The number must be divisible by 18!';
         this.loadingService.dismiss();
@@ -135,7 +147,14 @@ export class DonatePage implements OnInit {
       e.target.classList.remove('btn__nameless_dis_pray');
     }
   }
-
+  ionViewWillEnter() {
+    this.avatar = localStorage.getItem('avatar')
+  }
+  call() {
+    this.x = this.frmDonate.get('amount').value;
+    this.x = this.x.replace(/\,/g,'');
+    this.x = this.x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
   btnActivate(e) {
     this.isChoose = true;
     let choosed = document.querySelectorAll('day');

@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { IPageRequest, ChabadService, AccountService } from 'src/app/@app-core/http';
+import { LoadingService } from 'src/app/@app-core/utils';
 
 @Component({
   selector: 'app-chabad',
@@ -22,10 +23,12 @@ export class ChabadPage implements OnInit {
   constructor(
     private router: Router,
     private chabadService: ChabadService,
-    private GeolocationService: GeolocationService
+    private GeolocationService: GeolocationService,
+    private loadingServie: LoadingService
 
   ) { }
   ngOnInit() {
+    this.loadingServie.present();
     this.GeolocationService.getCurrentLocation();
     this.getData();
   }
@@ -37,6 +40,7 @@ export class ChabadPage implements OnInit {
   getData(func?) {
     this.GeolocationService.getCurrentLocation();
     this.chabadService.getAll(this.pageRequest).subscribe(data => {
+      this.loadingServie.dismiss();
       for(let chabad of data.chabads) {
         chabad.distance = this.GeolocationService.distanceFromUserToPoint(this.GeolocationService.centerService.lat, this.GeolocationService.centerService.lng, chabad.location.lat, chabad.location.long);
       }

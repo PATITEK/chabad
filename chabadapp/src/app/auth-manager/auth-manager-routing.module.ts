@@ -21,9 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./new-password/new-password.module').then( m => m.NewPasswordPageModule)
   },
   {
-    path: 'sign-up',
-    loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    path: 'verification',
+    loadChildren: () => import('./verification/verification.module').then( m => m.VerificationPageModule)
   },
+
 ];
 
 @NgModule({
